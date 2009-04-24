@@ -1,0 +1,8 @@
+log/*.log
+db/*.db
+tmp/*/*
+config/database.yml
+config/deploy.rb
+config/initializers/site_keys.rb
+*.DS_Store
+./Capfile

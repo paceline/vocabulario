@@ -1,0 +1,21 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'manage' %>
+  <div class="content">
+    <h1>By Language</h1>
+    <p><%= vocabulary_links %></p>
+  </div>
+  <div class="content">
+    <h1>By Tag</h1>
+    <%= render :partial => 'shared/tagcloud', :object => @tags %>
+  </div>
+<% end %>
+
+<div class="content">
+  <h1>Explore</h1>
+  <ul>
+    <% @vocabularies.each do |vocabulary| %>
+    <li><%= link_to(vocabulary.name, vocabulary) %></li>
+    <% end %>
+  </ul>
+  <%= will_paginate @vocabularies %>
+</div>

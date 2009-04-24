@@ -1,0 +1,22 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'vocabularies/manage' %>
+<% end %>
+
+<div class="content">
+  <h1>New vocabulary</h1>
+  <p>Fill out the form below to submit a new vocabulary.</p>
+  
+  <%= error_messages_for :vocabulary %>
+  <% form_for :vocabulary, :url => vocabularies_path do |f| -%>
+    <p><%= label_tag 'word' %>
+    <%= f.text_field :word %></p>
+    
+    <p><%= label_tag 'article' %>
+    <%= f.text_field :gender %></p>
+
+    <p><%= label_tag 'Language' %>
+    <%= f.select :language_id, Vocabulary.languages.collect {|p| [ p.word, p.id ] } %></p>
+
+    <p><%= submit_tag 'Save' %></p>
+  <% end -%>
+</div>

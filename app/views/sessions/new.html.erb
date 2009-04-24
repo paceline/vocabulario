@@ -1,0 +1,17 @@
+<div class="content">
+  <h1>Please log in to continue.</h1>
+  <p>Don't have an account yet? Click here to <%= link_to "sign up", "/signup" %>.</p>
+  
+  <% form_tag session_path do -%>
+    <p><%= label_tag 'login' %>
+    <%= text_field_tag 'login', @login %></p>
+
+    <p><%= label_tag 'password' %>
+    <%= password_field_tag 'password', nil %></p>
+
+    <p><%= label_tag 'remember_me', 'Remember me' %>
+    <%= check_box_tag 'remember_me', '1', @remember_me %></p>
+
+    <p><%= submit_tag 'Log in' %></p>
+  <% end -%>
+</div>

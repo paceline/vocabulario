@@ -1,0 +1,6 @@
+<h1>Score</h1>
+<% if score.new_record? %>
+  <p>Fill out form on the left to get started.</p>
+<% else %>
+  <p><%= number_to_percentage(score.ratio, :precision => 0) %> (<%= score.points %> / <%= score.questions %>)</p>
+<% end %>

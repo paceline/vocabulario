@@ -1,0 +1,5 @@
+<% if taglist_detail.tag_list.empty? %>
+  This vocabulary is currently untagged.
+<% else %>
+  <%= taglist_detail.tags.collect { |tag| link_to(tag.name, vocabulary_path(:id => tag.permalink)) }.join(' | ') %>
+<% end %>

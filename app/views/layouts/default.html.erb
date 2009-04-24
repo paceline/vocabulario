@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Vocabulario - A lo-fi vocabulary trainer</title>
+    <%= javascript_include_tag :defaults %>
+    <%= stylesheet_link_tag "default" %>
+  </head>
+  <body <% if flash[:notice] %>onLoad="highlight()"<% end %>>
+    <div id="content">
+      <div id="header">
+        <ul id="navigation">
+          <li><%= link_to "Home", "/" %></li>
+          <li><%= link_to "Scores", scores_path %></li>
+          <li><%= link_to "Vocabularies", vocabularies_path %></li>
+          <li><%= link_to "About", "http://github.com/paceline/vocabulario/tree/master" %></li>
+          <li><%= render :partial => 'users/user_bar' %></li>
+        </ul>
+        <%= link_to image_tag("logo.png"), "/" %>
+      </div>
+      <div id="notice" style="display:none;"><%= flash[:notice] %></div>
+      <div id="error" style="display:none;"><%= flash[:error] %></div>
+      <% if @content_for_sidebar %>
+        <div id="sidebar">
+          <%= yield :sidebar %>
+        </div>
+      <% end %>
+      <div id="main<%= "_wide" unless @content_for_sidebar %>">
+        <%= yield %>
+      </div>
+      <div id="footer">
+        Powered by <a href="http://github.com/paceline/vocabulario/tree/master">Vocabulario</a>
+      </div>
+    </div>
+  </body>
+</html>

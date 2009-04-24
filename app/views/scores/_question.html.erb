@@ -1,0 +1,9 @@
+<h1>Question <%= question.current + 1 %> / <%= question.limit %></h1>
+
+<h2><%= question.current_question.word %><%= ", #{question.current_question.gender}" unless question.current_question.gender == "N/A" %></h2>
+
+<% form_remote_for @score do %>
+  <%= hidden_field 'test', 'score_id', :value => @score.id %>
+  <p><%= text_field 'test', 'answer' %>
+  <%= submit_tag 'Go' %></p>
+<% end %>

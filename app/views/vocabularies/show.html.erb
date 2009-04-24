@@ -1,0 +1,29 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'vocabularies/manage' %>
+<% end %>
+
+<div class="content">
+  <h1><%= in_place_editor_field :vocabulary, :word %></h1>
+  <p>
+    <b>Language:</b>
+    <%= in_place_select_field :vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Vocabulary.languages.collect {|p| [ p.word, p.id ] } %>
+  </p>
+  <p>
+    <b>Article:</b>
+    <%= in_place_editor_field(:vocabulary, :gender) %>
+  </p>
+</div>
+
+<%= render :partial => 'shared/taglist', :object => @vocabulary %>
+
+<% unless @vocabulary.translations.empty? %>
+<div class="content">
+  <h1>Translations</h1>
+  <ul>
+    <% @vocabulary.translations.each do |translation| %>
+      <li><%= link_to(translation.word, vocabulary_path(translation)) %> (in <%= translation.language.word %>)</li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
