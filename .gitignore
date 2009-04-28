@@ -1,3 +1,4 @@
+.rsync_cache
 *.DS_Store
 Capfile
 config/database.yml
