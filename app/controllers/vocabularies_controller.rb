@@ -27,6 +27,13 @@ class VocabulariesController < ApplicationController
     @translation = Vocabulary.find(params[:id])
   end
   
+  def destroy
+    @vocabulary = Vocabulary.find(params[:id])
+    @vocabulary.destroy
+    flash[:notice] = "Vocabulary has been deleted from to the database."
+    redirect_to vocabularies_path
+  end
+  
   def new
   end
   

@@ -1,8 +1,10 @@
+*.DS_Store
+Capfile
+config/database.yml
+config/deploy.rb
+config/deploy/*
+config/initializers/site_keys.rb
 log/*.log
 db/*.db
 tmp/*/*
-config/database.yml
-config/deploy.rb
-config/initializers/site_keys.rb
-*.DS_Store
-./Capfile
+vendor/plugins/viget_deployment

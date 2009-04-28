@@ -24,6 +24,12 @@ class Vocabulary < ActiveRecord::Base
   # Validations
   validates_uniqueness_of :word, :scope => 'language_id'
   
+  # Make sure no dead references are left
+  def destroy
+    Translation.delete_all(['vocabulary1_id = ? OR vocabulary2_id = ?', self.id, self.id])
+    super
+  end
+  
   # Alias for word
   def name
     return word
