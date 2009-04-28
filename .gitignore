@@ -7,4 +7,5 @@ config/initializers/site_keys.rb
 log/*.log
 db/*.db
 tmp/*/*
+vendor/plugins/restful_authentication
 vendor/plugins/viget_deployment
