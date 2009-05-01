@@ -1,0 +1,7 @@
+h1. "Vocabulario":http://tuvocabulario.com
+
+Vocabulario is a very lo-fi vocabulary trainer I more or less wrote for personal use only. Feel free to try it!
+
+I'll try and add some documentation soon...
+
+Ulf <ulf@pacelinegroup.com>

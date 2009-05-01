@@ -1,7 +1,7 @@
 class VocabulariesController < ApplicationController
   layout 'default'
   
-  before_filter :login_required, :except => [:index, :by_language, :by_tag]
+  before_filter :login_required, :except => [:index, :by_language, :by_tag, :show]
   before_filter :admin_required, :only => [:create, :edit, :destroy, :new, :import]
   
   in_place_edit_for :vocabulary, :word

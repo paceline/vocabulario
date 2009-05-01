@@ -18,7 +18,7 @@
     I'm up for <%= select :test, :limit, VocabularyTest.limits %> questions.</p>
     
     <p><h2>3. Topic</h2>
-    I only want to be tested on vocabularies tagged with:</p>
+    I only want to be tested on vocabularies tagged with:<br />
     <p><%= select :test, :tags, Tag.find(:all, :order => 'name').collect {|t| [ t.name, t.id ] }, { }, { :multiple => true, :size => 5 } %></p>
     
     <p><h2>4. Ready?</h2>

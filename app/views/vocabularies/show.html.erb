@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <% if authorized? %>
+  <% if logged_in? && authorized? %>
   <div class="content">
     <ul>
       <li><%= link_to('Add vocabulary', new_vocabulary_path) %></li>
@@ -11,7 +11,7 @@
 <% end %>
 
 <div class="content">
-  <h1><%= authorized? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word %></h1>
+  <h1><%= logged_in? && authorized? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word %></h1>
   <%= render :partial => 'shared/taglist', :object => @vocabulary %>
 </div>  
 
@@ -19,11 +19,11 @@
   <h2>Attributes</h2>
   <p>
     <b>Language:</b>
-    <%= authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Vocabulary.languages.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word %>
+    <%= logged_in? && authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Vocabulary.languages.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word %>
   </p>
   <p>
     <b>Article:</b>
-    <%= authorized? ? in_place_editor_field(:vocabulary, :gender) : @vocabulary.gender %>
+    <%= logged_in? && authorized? ? in_place_editor_field(:vocabulary, :gender) : @vocabulary.gender %>
   </p>
 </div>
 

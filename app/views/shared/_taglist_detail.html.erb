@@ -2,6 +2,10 @@
   <em class="tag">This vocabulary is currently untagged.</em>
 <% else %>
   <% taglist_detail.tags.each do |tag| %>
-    <em class="tag"><%= link_to_function(tag.name, "$('taglist','tag_form').invoke('toggle')", :class => "edit") %></em>
+    <% if logged_in? %>
+      <em class="tag"><%= link_to_function(tag.name, "$('taglist','tag_form').invoke('toggle')", :class => "edit") %></em>
+    <% else %>
+      <em class="tag"><%= tag.name %></em>
+    <% end %>
   <% end %>
 <% end %>

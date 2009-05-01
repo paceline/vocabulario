@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.vocabularies_with_page '/vocabularies/page/:page', :controller => 'vocabularies', :action => 'index' 
   map.vocabularies_by_tag '/vocabularies/by_tag/:id', :controller => 'vocabularies', :action => 'by_tag'
   map.vocabularies_by_language '/vocabularies/by_language/:id', :controller => 'vocabularies', :action => 'by_language'
   
