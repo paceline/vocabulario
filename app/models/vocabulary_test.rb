@@ -21,7 +21,7 @@ class VocabularyTest
   
   # (Re-)generate test questions
   def generate_test
-    words = @from.vocabularies.find(:all, :conditions => "taggings.tag_id IN (#{@tags})", :include => [ :taggings ])
+    words = @tags ? @from.vocabularies.find(:all, :conditions => "taggings.tag_id IN (#{@tags})", :include => [ :taggings ]) : @from.vocabularies
     @limit = @limit <= words.size ? @limit : words.size
     @test = []
     @current = 0
