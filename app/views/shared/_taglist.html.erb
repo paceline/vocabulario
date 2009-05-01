@@ -1,5 +1,4 @@
 <div class="content">
-  <h1>Tags <%= link_to_function("(edit)", "$('taglist','tag_form').invoke('toggle')", :class => "edit") %></h1>
   <p id="taglist">
     <%= render :partial => 'shared/taglist_detail', :object => taglist %>
   </p>

@@ -1,5 +1,7 @@
 <% if taglist_detail.tag_list.empty? %>
-  This vocabulary is currently untagged.
+  <em class="tag">This vocabulary is currently untagged.</em>
 <% else %>
-  <%= taglist_detail.tags.collect { |tag| link_to(tag.name, vocabulary_path(:id => tag.permalink)) }.join(' | ') %>
+  <% taglist_detail.tags.each do |tag| %>
+    <em class="tag"><%= link_to_function(tag.name, "$('taglist','tag_form').invoke('toggle')", :class => "edit") %></em>
+  <% end %>
 <% end %>

@@ -1,6 +1,8 @@
-<h1>Score</h1>
 <% if score.new_record? %>
-  <p>Fill out form on the left to get started.</p>
+  <h1>What's this?</h1>
+  <p>Vocabulario is a very lo-fi vocabulary trainer I more or less wrote for personal use only.</p>
+  <p>Feel free to use it and/or <a href="http://github.com/paceline/vocabulario/tree/master">get your own copy</a>. Patches are always welcome!</p>
 <% else %>
+  <h1>Score</h1>
   <p><%= number_to_percentage(score.ratio, :precision => 0) %> (<%= score.points %> / <%= score.questions %>)</p>
 <% end %>

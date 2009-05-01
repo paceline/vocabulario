@@ -1,21 +1,28 @@
 <% content_for :sidebar do %>
   <%= render :partial => 'manage' %>
   <div class="content">
-    <h1>By Language</h1>
+    <h1>Language</h1>
     <p><%= vocabulary_links %></p>
   </div>
   <div class="content">
-    <h1>By Tag</h1>
+    <h1>Tag</h1>
     <%= render :partial => 'shared/tagcloud', :object => @tags %>
   </div>
 <% end %>
 
 <div class="content">
   <h1>Explore</h1>
-  <ul>
+  <p>Below is a lit of vocabularies currently in the database. Use the tools on the right to navigate around. Access to editing functions is currently limit to admins (i.e. me).</p>
+</div>
+
+<div class="content">
+  <ul class="inline">
     <% @vocabularies.each do |vocabulary| %>
     <li><%= link_to(vocabulary.name, vocabulary) %></li>
     <% end %>
   </ul>
+</div>
+
+<div class="content">
   <%= will_paginate @vocabularies %>
 </div>

@@ -1,12 +1,10 @@
+<% if logged_in? && authorized? %>
 <div class="content">
-  <h1>Menu</h1>
+  <h1>Actions</h1>
   <ul>
     <li><%= link_to('List vocabularies', vocabularies_path) %></li>
     <li><%= link_to('Add vocabulary', new_vocabulary_path) %></li>
     <li><%= link_to('Import CSV file', import_vocabularies_path) %></li>
-    <% if @vocabulary && !@translation %>
-    <li><%= link_to('Add translation', edit_vocabulary_path(@vocabulary)) %></li>
-    <li><%= link_to('Delete vocabulary', vocabulary_path(@vocabulary), :confirm => 'Are you sure?', :method => :delete) %></li>
-    <% end %>
   </ul>
 </div>
+<% end %>

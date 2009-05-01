@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090419154707) do
+ActiveRecord::Schema.define(:version => 20090501154048) do
 
   create_table "scores", :force => true do |t|
     t.integer  "user_id"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20090419154707) do
     t.datetime "activated_at"
     t.string   "state",                                    :default => "passive"
     t.datetime "deleted_at"
+    t.boolean  "admin",                                    :default => false
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
@@ -74,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20090419154707) do
     t.integer  "user_id"
     t.integer  "language_id"
     t.string   "word"
-    t.string   "gender",      :limit => 10, :default => "N/A "
+    t.string   "gender",      :limit => 10, :default => "N/A"
     t.boolean  "language",                  :default => false
     t.string   "permalink"
     t.datetime "created_at"

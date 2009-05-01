@@ -4,20 +4,24 @@
   </div>
 <% end %>
 
-<div id="test_pane" class="content">
+<div id="intro_pane" class="content">
   <h1>Welcome!</h1>
-  <p>Just a tiny vocabulary trainer I more or less wrote for personal use only. Feel free to try it! Start your first test:</p>
+  <p>Fill out the form below to get started and test your foreign language skills:</p>
+</div>
+
+<div id="test_pane" class="content">
   <% form_remote_for @score do %>
-    <p><%= label_tag 'Languages' %>
-    From <%= select :test, :from, Vocabulary.languages.collect {|p| [ p.word, p.id ] } %> to <%= select :test, :to, Vocabulary.languages.collect {|p| [ p.word, p.id ] }, { :selected => Vocabulary.languages[1].id } %></p>
+    <p><h2>1. Languages</h2>
+    Show me vocabularies in <%= select :test, :from, Vocabulary.languages.collect {|p| [ p.word, p.id ] } %> and I'll translate them into <%= select :test, :to, Vocabulary.languages.collect {|p| [ p.word, p.id ] }, { :selected => Vocabulary.languages[1].id } %></p>
     
-    <p><%= label_tag 'Number of Questions' %>
-    <%= select :test, :limit, VocabularyTest.limits %></p>
+    <p><h2>2. Number of questions</h2>
+    I'm up for <%= select :test, :limit, VocabularyTest.limits %> questions.</p>
     
-    <p><%= label_tag 'Tagged with' %>
-    <%= select :test, :tags, Tag.find(:all, :order => 'name').collect {|t| [ t.name, t.id ] }, { }, { :multiple => true, :size => 5 } %></p>
+    <p><h2>3. Topic</h2>
+    I only want to be tested on vocabularies tagged with:</p>
+    <p><%= select :test, :tags, Tag.find(:all, :order => 'name').collect {|t| [ t.name, t.id ] }, { }, { :multiple => true, :size => 5 } %></p>
     
-    <p><%= label_tag 'Ready?' %>
-    <%= submit_tag 'Start the test' %></p>
+    <p><h2>4. Ready?</h2>
+    <%= submit_tag "Let's go!" %></p>
   <% end %>
 </div>

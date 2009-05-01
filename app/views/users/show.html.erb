@@ -1,0 +1,15 @@
+<div class="content">
+  <h1><%= @user.login %></h1>
+  <p>Member since <%= @user.created_at.to_s(:long) %></p>
+</div>
+
+<div class="content">
+  <h2>Test stats</h2>
+  <ul>
+    <li>Took a <b>total</b> of <%= @user.number_of_tests %> <b>tests</b></li>
+    <li>Got <b>100%</b> right on <%= @user.number_of_tests(1) %> <b>tests</b></li>
+    <li>Got <b>75%</b> or more right on <%= @user.number_of_tests(0.75) %> <b>tests</b></li>
+    <li>Got <b>50%</b> or more right on <%= @user.number_of_tests(0.5) %> <b>tests</b></li>
+    <li>Got <b>25%</b> or more right on <%= @user.number_of_tests(0.25) %> <b>tests</b></li>
+  <ul>
+</div>

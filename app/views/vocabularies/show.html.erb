@@ -1,24 +1,35 @@
 <% content_for :sidebar do %>
-  <%= render :partial => 'vocabularies/manage' %>
+  <% if authorized? %>
+  <div class="content">
+    <ul>
+      <li><%= link_to('Add vocabulary', new_vocabulary_path) %></li>
+      <li><%= link_to('Add translation', edit_vocabulary_path(@vocabulary)) %></li>
+      <li><%= link_to('Delete vocabulary', vocabulary_path(@vocabulary), :confirm => 'Are you sure?', :method => :delete) %></li>
+    </ul>
+  </div>
+  <% end %>
 <% end %>
 
 <div class="content">
-  <h1><%= in_place_editor_field :vocabulary, :word %></h1>
+  <h1><%= authorized? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word %></h1>
+  <%= render :partial => 'shared/taglist', :object => @vocabulary %>
+</div>  
+
+<div class="content">
+  <h2>Attributes</h2>
   <p>
     <b>Language:</b>
-    <%= in_place_select_field :vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Vocabulary.languages.collect {|p| [ p.word, p.id ] } %>
+    <%= authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Vocabulary.languages.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word %>
   </p>
   <p>
     <b>Article:</b>
-    <%= in_place_editor_field(:vocabulary, :gender) %>
+    <%= authorized? ? in_place_editor_field(:vocabulary, :gender) : @vocabulary.gender %>
   </p>
 </div>
 
-<%= render :partial => 'shared/taglist', :object => @vocabulary %>
-
 <% unless @vocabulary.translations.empty? %>
 <div class="content">
-  <h1>Translations</h1>
+  <h2>Translations</h2>
   <ul>
     <% @vocabulary.translations.each do |translation| %>
       <li><%= link_to(translation.word, vocabulary_path(translation)) %> (in <%= translation.language.word %>)</li>

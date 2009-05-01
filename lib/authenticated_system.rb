@@ -32,7 +32,7 @@ module AuthenticatedSystem
     #  end
     #
     def authorized?(action = action_name, resource = nil)
-      logged_in?
+      current_user.admin
     end
 
     # Filter method to enforce a login requirement.
@@ -50,6 +50,10 @@ module AuthenticatedSystem
     #   skip_before_filter :login_required
     #
     def login_required
+      logged_in? || access_denied
+    end
+    
+    def admin_required
       authorized? || access_denied
     end
 
@@ -64,6 +68,7 @@ module AuthenticatedSystem
     def access_denied
       respond_to do |format|
         format.html do
+          flash[:notice] = "Sorry but you don't have access to this page." if logged_in?
           store_location
           redirect_to new_session_path
         end

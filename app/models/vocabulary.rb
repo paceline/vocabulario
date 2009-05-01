@@ -4,7 +4,7 @@ class Vocabulary < ActiveRecord::Base
   acts_as_taggable
   has_permalink :word, :update => true
   cattr_reader :per_page
-  @@per_page = 25
+  @@per_page = 100
   
   # Associations - Determine language for every vocabulary
   belongs_to :language, :foreign_key => 'language_id', :class_name => 'Vocabulary'
