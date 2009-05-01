@@ -113,12 +113,16 @@ ul#navigation {
 
 #user_bar a { color: #555; }
 
-.gravatar {
+.gravatar, .gravatar_big {
 	background-color: #FFF;
 	float: left;
 	border: 1px #999 solid;
 	margin-right: 5px;
 	padding: 2px;
+}
+
+.gravatar_big {
+	margin-right: 15px;
 }
 
 

@@ -1,6 +1,7 @@
 <div class="content">
+  <%= gravatar_for @user, { :class => 'gravatar_big', :size => '75' } %>
   <h1><%= @user.login %></h1>
-  <p>Member since <%= @user.created_at.to_s(:long) %></p>
+  <p><% if @user.admin %>Administrator and <% end %>Member since <%= @user.created_at.to_s(:long) %><br /><br /></p>
 </div>
 
 <div class="content">
