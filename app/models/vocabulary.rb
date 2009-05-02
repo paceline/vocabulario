@@ -24,6 +24,14 @@ class Vocabulary < ActiveRecord::Base
   # Validations
   validates_uniqueness_of :word, :scope => 'language_id'
   
+  # Copy tags to translations
+  def apply_tags_to_translations
+    self.translations.each do |translation|
+      translation.tag_list = self.tag_list
+      translation.save
+    end
+  end
+  
   # Make sure no dead references are left
   def destroy
     Translation.delete_all(['vocabulary1_id = ? OR vocabulary2_id = ?', self.id, self.id])
@@ -36,8 +44,9 @@ class Vocabulary < ActiveRecord::Base
   end
   
   # Return languages currently supported
-  def self.languages
-    return find(:all, :conditions => 'language = 1', :order => 'word')
+  def self.languages(conditions = "")
+    conditions = conditions.empty? ? "language = 1" : "language = 1 AND #{conditions}"
+    return find(:all, :conditions => conditions, :order => 'word')
   end
   
   # Return language as vocabulary object by name
@@ -51,6 +60,11 @@ class Vocabulary < ActiveRecord::Base
     self.word = word[0]
     self.gender = word[1] if word.size > 1
     self.tag_list = tags
+  end
+  
+  # Get all tags for current language
+  def tags_for_language
+    return Tag.find(:all, :joins => 'LEFT JOIN taggings ON taggings.tag_id = tags.id LEFT JOIN vocabularies ON taggings.taggable_id = vocabularies.id', :conditions => ['vocabularies.language_id = ?',self.id], :group => 'tags.id', :order => 'tags.name')
   end
   
   # Gather all translations (to and from) for given vocabulary id

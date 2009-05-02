@@ -1,20 +1,34 @@
 class VocabulariesController < ApplicationController
+  # Layout
   layout 'default'
   
-  before_filter :login_required, :except => [:index, :by_language, :by_tag, :show]
+  # Filters
+  before_filter :login_required, :except => [:index, :by_language, :by_tag, :select, :show, :tags_for_language]
   before_filter :admin_required, :only => [:create, :edit, :destroy, :new, :import]
   
+  # Features
   in_place_edit_for :vocabulary, :word
   in_place_edit_for :vocabulary, :gender
   in_place_edit_for :vocabulary, :language_id, { :method => :word }
   
+  # Tag vocabulary with new tag list
+  def apply_tags
+    @vocabulary = Vocabulary.find(params[:id])
+    @vocabulary.apply_tags_to_translations
+    flash[:notice] = "#{@vocabulary.word}'s tags have been copied to all translations."
+    redirect_to @vocabulary
+  end
+  
+  # Create translation or new vocabulary
   def create
     if params[:translation]
       @translation = Vocabulary.find(params[:translation][:vocabulary2_id])
-      @vocabulary = current_user.vocabularies.build(params[:vocabulary])
+      @vocabulary = Vocabulary.find_by_word(params[:vocabulary][:word])
+      @vocabulary = current_user.vocabularies.build(params[:vocabulary]) unless @vocabulary
+      @vocabulary.tag_list = @translation.tag_list
       @translation.translation_to << @vocabulary
-      flash[:notice] = "\"#{@vocabulary.word}\" has been added to the database."
-      redirect_to @vocabulary
+      flash[:notice] = "Translation has been successfully saved."
+      redirect_to @translation
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
       @translation = current_user.vocabularies.build(params[:vocabulary])
@@ -24,10 +38,12 @@ class VocabulariesController < ApplicationController
     end
   end
   
+  # Add translation form
   def edit
     @translation = Vocabulary.find(params[:id])
   end
   
+  # Delete vocabulary, including translation links
   def destroy
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.destroy
@@ -35,13 +51,21 @@ class VocabulariesController < ApplicationController
     redirect_to vocabularies_path
   end
   
-  def new
-  end
-  
+  # Display paged list of vocabularies (html) / javascript array of vocabularies for input field suggestions (js)
   def index
-    @vocabularies = Vocabulary.paginate :all, :page => params[:page], :order => 'word'
+    @vocabularies_list = params[:language] ? Vocabulary.find(:all, :order => 'word', :conditions => ['language_id != ?',params[:language]]) : Vocabulary.find(:all, :order => 'word')
+    @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => 100
+    respond_to do |format|
+      format.html { render :action => 'index' }
+      format.js {
+        render :update do |page|
+          page << "var vocabularies = new Array('" + @vocabularies_list.collect { |v| v.word }.join("','") + "');"
+        end
+      }
+    end
   end
   
+  # Import CSV file using FasterCSV (very buggy)
   def import
     if request.post?
       tags = params[:vocabulary][:tags].join(',')
@@ -69,11 +93,26 @@ class VocabulariesController < ApplicationController
     end
   end
   
+  # Make sure that language matches text entered on edit page
+  def refresh_language
+    @vocabulary = Vocabulary.find_by_word(params[:word])
+    if @vocabulary
+      @language = @vocabulary.language
+      render :update do |page|
+        page << "$('vocabulary_language_id').selectedIndex = #{Vocabulary.languages.index(@language)}"
+      end
+    else
+      render :nothing => true
+    end
+  end
+  
+  # Display vocabulary attributes
   def show
     @vocabulary = Vocabulary.find(params[:id])
     @language = @vocabulary.language
   end
   
+  # Tag vocabulary with new tag list
   def tag
     vocabulary = Vocabulary.find(params[:id])
     vocabulary.tag_list = params[:tag_list]
@@ -81,16 +120,27 @@ class VocabulariesController < ApplicationController
     render :partial => "shared/taglist_detail", :object => vocabulary
   end
   
-  def by_language
-    @language = Vocabulary.find_by_permalink(params[:id])
-    @vocabularies = Vocabulary.paginate_by_language_id @language.id, :page => params[:page], :order => 'word'
-    render :action => 'index'
+  # /scores/new support: Make sure to and from select boxes always have different selected languages
+  def select
+    @languages = Vocabulary.languages("id != #{params[:language_id]}")
+    @selected = params[:language_id] == params[:selected] ? @languages.first.id : params[:selected].to_i
+    render :layout => false
   end
   
-  def by_tag
-    @tag = Tag.find_by_permalink(params[:id])
-    @vocabularies = Vocabulary.paginate :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :page => params[:page], :order => 'word'
-    render :action => 'index'
+  # /scores/new support: Update tags select box based on seleted language 
+  def tags_for_language
+    language = Vocabulary.find(params[:language_id])
+    @tags = language.tags_for_language
+    render :layout => false
   end
-
+  
+  # Remove translation object corresponding to two vocabularies
+  def unlink
+    Translation.delete_all(['(vocabulary1_id = ? AND vocabulary2_id = ?) OR (vocabulary1_id = ? AND vocabulary2_id = ?)', params[:id], params[:link], params[:link], params[:id]])
+    render :update do |page|
+      page.remove "translation_#{params[:link]}"
+      page.visual_effect :highlight, 'translations'
+    end
+  end
+  
 end

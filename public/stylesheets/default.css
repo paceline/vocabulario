@@ -18,7 +18,7 @@ em a:hover { text-decoration: underline; }
 
 h1 { color: #C0ED00; font-size: 1.8em; margin: 0 0 10px 0; }
 
-h2 { color: #888; font-size: 1.4em; margin: 25px 0 10px 0; }
+h2, label { color: #888; font-size: 1.4em; margin: 25px 0 10px 0; }
 
 p { margin: 5px 0 15px 0; }
 
@@ -144,7 +144,7 @@ em.tag {
 
 label {
 	display:block;
-	font-weight:bold;
+	font-size: 1.25em;
 	margin: 0 0 5px 0;
 }
 
@@ -192,6 +192,37 @@ form p { margin: 0 0 20px 0; }
 }
 
 
+/* Auto complete */
+
+div.auto_complete {
+	font-size: 0.75em;
+	background: #fff; 
+}
+
+div.auto_complete ul { 
+	border:1px solid #888; 
+	margin:0; 
+	padding:0;
+	width:100%; 
+	list-style-type:none; 
+}
+ 
+div.auto_complete ul li { 
+	margin:0; 
+	padding:3px; 
+} 
+
+div.auto_complete ul li.selected { 
+	background-color: #02B8EA;
+	color: #FFF;
+} 
+
+div.auto_complete ul strong.highlight { 
+	margin:0; 
+	padding:0; 
+} 
+
+
 /* Tag cloud */
 
 .css1 { font-size: 1.0em; }
@@ -209,3 +240,15 @@ form p { margin: 0 0 20px 0; }
 	margin: 15px 0 15px 0;
 	width: 100%;
 }
+
+/* Error page */
+
+div.dialog {
+	background-color: #C0ED00;
+	border: 1px solid #888;
+	width: 900px;
+	padding: 25px;
+	margin: 75px auto 65px auto;
+}
+
+div.dialog h1 { color: #f00; }

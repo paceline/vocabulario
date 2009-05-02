@@ -1,21 +1,28 @@
 class ScoresController < ApplicationController
+  # Layout
   layout 'default'
   
+  # Open up a new vocabulary test
   def new
     @score = Score.new
+    @languages = Vocabulary.languages
+    @tags = @languages.first.tags_for_language
   end
   
+  # Return top scores
   def index
     @scores = Score.top_percentage(10)
   end
   
+  # Create a new vocabulary test (on "Let's go")
   def create
     if params[:test][:from] != params[:test][:to]
-      session[:test] = VocabularyTest.new(params[:test])
-      @score = session[:test].from.scores.create({ :user_id => current_user, :questions => session[:test].current })
+      test = VocabularyTest.new(params[:test])
+      @score = test.from.scores.create({ :user_id => current_user, :questions => test.current })
+      session[:test] = test.to_session_params
       render :update do |page|
         page.hide :intro_pane
-        page.replace_html 'test_pane', render(:partial => 'question', :object => session[:test])
+        page.replace_html 'test_pane', render(:partial => 'question', :object => test)
         page.visual_effect :highlight, 'test_pane'
         page.replace_html 'test_score', render(@score)
         page.visual_effect :highlight, 'test_score'
@@ -31,20 +38,22 @@ class ScoresController < ApplicationController
     end
   end
   
+  # Update current vocabulary test (on answers)
   def update
+    test = VocabularyTest.new(session[:test])
     @score = Score.find(params[:test][:score_id])
-    if session[:test].result_for(params[:test][:answer])
+    if test.result_for(params[:test][:answer])
       @score.points += 1
-      flash.now[:notice] = "That's correct. Well done. #{session[:test].from.word} - #{session[:test].correct_results.join(', ')}."
+      flash.now[:notice] = "That's correct. Well done. #{test.from.word} - #{test.correct_results.join(', ')}."
     else
-      flash.now[:notice] = "Unfortunately that's not correct. #{session[:test].from.word} - #{session[:test].correct_results.join(', ')}."
+      flash.now[:notice] = "Unfortunately that's not correct. #{test.from.word} - #{test.correct_results.join(', ')}."
     end
-    session[:test].current += 1
+    session[:test][:current] = test.current += 1
     @score.questions += 1
     @score.save
     
     render :update do |page|
-      page.replace_html 'test_pane', render(:partial => (session[:test].continue? ? 'question' : 'finish'), :object => session[:test])
+      page.replace_html 'test_pane', render(:partial => (test.continue? ? 'question' : 'finish'), :object => test)
       page.replace_html :notice, flash[:notice]
       page.show :notice
       page.visual_effect :highlight, 'notice'

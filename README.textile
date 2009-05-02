@@ -4,4 +4,5 @@ Vocabulario is a very lo-fi vocabulary trainer I more or less wrote for personal
 
 I'll try and add some documentation soon...
 
-Ulf <ulf@pacelinegroup.com>
+Ulf
+ulf@pacelinegroup.com

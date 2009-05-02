@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
+  # Layout
   layout 'default'
   
   # Protect these actions behind an admin login
   before_filter :login_required, :only => [:edit, :update]
-  before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
+  before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :admin]
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
 
   # render new.rhtml
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
+    @user.admin = true if User.find(:all).blank?
     @user.register! if @user && @user.valid?
     success = @user && @user.valid?
     if success && @user.errors.empty?
@@ -40,6 +42,14 @@ class UsersController < ApplicationController
       flash[:notice]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
       redirect_back_or_default('/')
     end
+  end
+  
+  def admin
+    @user = User.find(params[:id])
+    @user.admin = true
+    @user.save
+    flash[:notice] = "#{@user.login} is now an admin."
+    redirect_to @user
   end
   
   def edit

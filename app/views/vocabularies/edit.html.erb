@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= render :partial => 'vocabularies/manage' %>
+  <%= render :partial => 'shared/manage' %>
 <% end %>
 
 <div class="content">
@@ -11,7 +11,10 @@
     <%= hidden_field :translation, :vocabulary2_id, :value => @translation.id %>
     
     <p><%= label_tag 'word' %>
-    <%= f.text_field :word %></p>
+    <%= f.text_field :word, :size => 50 %>
+    <div class="auto_complete" id="vocabulary_lookup_auto_complete"></div> 
+    <%= javascript_tag("new Autocompleter.Local('vocabulary_word','vocabulary_lookup_auto_complete', vocabularies, {frequency: 0, minChars: 1});") %>
+    </p>
     
     <% unless @translation.gender == "N/A" %>
     <p><%= label_tag 'article' %>
@@ -20,6 +23,7 @@
 
     <p><%= label_tag 'Language' %>
     <%= f.select :language_id, Vocabulary.languages.collect {|p| [ p.word, p.id ] } %></p>
+    <%= observe_field :vocabulary_word, :url => refresh_language_vocabularies_path, :frequency => 1, :with => 'word' %>
 
     <p><%= submit_tag 'Save' %></p>
   <% end -%>

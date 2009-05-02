@@ -1,7 +1,27 @@
+<% content_for :sidebar do %>
+  <% if logged_in? && authorized? %>
+  <div class="content">
+    <ul>
+      <% unless @user.admin %><li><%= link_to('Make admin', admin_user_path(@user), :confirm => 'Are you sure? You can only reverse this by directly editing the database record.', :method => :put) %></li><% end %>
+      <li>
+        <% if @user.state == "active" %>
+          <%= link_to('Suspend user', suspend_user_path(@user), :confirm => "Are you sure you want to suspend this user?", :method => :put) %>
+        <% else %>
+          <%= link_to('Unsuspend user', unsuspend_user_path(@user), :confirm => 'Are you sure you want to allow this user back in?', :method => :put) %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+  <% end %>
+<% end %>
+
 <div class="content">
   <%= gravatar_for @user, { :class => 'gravatar_big', :size => '75' } %>
   <h1><%= @user.login %></h1>
-  <p><% if @user.admin %>Administrator and <% end %>Member since <%= @user.created_at.to_s(:long) %><br /><br /></p>
+  <p>
+    <% if @user.admin %>Administrator and <% end %><%= @user.state.capitalize %> member since <%= @user.updated_at.to_s(:long) %>.
+    <br /><br />
+  </p>
 </div>
 
 <div class="content">

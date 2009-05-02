@@ -15,15 +15,19 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.vocabularies_unlink '/vocabularies/:id/unlink/:link', :controller => 'vocabularies', :action => 'unlink'
   map.vocabularies_with_page '/vocabularies/page/:page', :controller => 'vocabularies', :action => 'index' 
-  map.vocabularies_by_tag '/vocabularies/by_tag/:id', :controller => 'vocabularies', :action => 'by_tag'
-  map.vocabularies_by_language '/vocabularies/by_language/:id', :controller => 'vocabularies', :action => 'by_language'
+  map.vocabularies_by_tag '/vocabularies/by_tag/:id', :controller => 'search', :action => 'by_tag'
+  map.vocabularies_by_language '/vocabularies/by_language/:id', :controller => 'search', :action => 'by_language'
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
-  map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
+  map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete, :admin => :put }
+  map.resource :search, :controller => :search, :member => { :live => :get }
   map.resource :session
-  map.resources :vocabularies, :member => { :tag => :post }, :collection => { :import => [:get, :post] }
+  map.resources :vocabularies,
+    :member => { :apply_tags => :post, :tag => :post, :unlink => :delete },
+    :collection => { :import => [:get, :post], :refresh_language => :get, :select => :get, :tags_for_language => :get }
 
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
