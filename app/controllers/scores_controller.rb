@@ -43,10 +43,12 @@ class ScoresController < ApplicationController
     test = VocabularyTest.new(session[:test])
     @score = Score.find(params[:test][:score_id])
     if test.result_for(params[:test][:answer])
+      color = '#C0ED00'
       @score.points += 1
-      flash.now[:notice] = "That's correct. Well done. #{test.from.word} - #{test.correct_results.join(', ')}."
+      flash.now[:notice] = "<b>Yes</b>, that's correct. Well done. Its <b>#{test.correct_results.join(', ')}</b> in #{test.to.word}."
     else
-      flash.now[:notice] = "Unfortunately that's not correct. #{test.from.word} - #{test.correct_results.join(', ')}."
+      color = '#C66'
+      flash.now[:notice] = "<b>No</b>, unfortunately that's not correct. Its <b>#{test.correct_results.join(', ')}</b> in #{test.to.word}."
     end
     session[:test][:current] = test.current += 1
     @score.questions += 1
@@ -55,6 +57,7 @@ class ScoresController < ApplicationController
     render :update do |page|
       page.replace_html 'test_pane', render(:partial => (test.continue? ? 'question' : 'finish'), :object => test)
       page.replace_html :notice, flash[:notice]
+      page << "$('notice').setStyle({ backgroundColor: '#{color}' })"
       page.show :notice
       page.visual_effect :highlight, 'notice'
       page.replace_html 'test_score', render(@score)

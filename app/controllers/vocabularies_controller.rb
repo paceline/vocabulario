@@ -31,10 +31,16 @@ class VocabulariesController < ApplicationController
       redirect_to @translation
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
-      @translation = current_user.vocabularies.build(params[:vocabulary])
-      @translation.save
-      flash[:notice] = "\"#{@translation.word}\" has been added to the database."
-      redirect_to edit_vocabulary_path(@translation)
+      @vocabulary = current_user.vocabularies.build(params[:vocabulary])
+      success = @vocabulary && @vocabulary.valid?
+      if success && @vocabulary.errors.empty?
+        @vocabulary.save
+        @translation = @vocabulary
+        flash[:notice] = "\"#{@vocabulary.word}\" has been added to the database."
+        redirect_to edit_vocabulary_path(@translation)
+      else
+        render :action => 'new'
+      end
     end
   end
   
@@ -110,6 +116,10 @@ class VocabulariesController < ApplicationController
   def show
     @vocabulary = Vocabulary.find(params[:id])
     @language = @vocabulary.language
+    respond_to do |format|
+      format.html
+      format.json { render :json => @vocabulary }
+    end
   end
   
   # Tag vocabulary with new tag list

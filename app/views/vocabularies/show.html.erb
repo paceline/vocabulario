@@ -17,25 +17,21 @@
 </div>  
 
 <div class="content">
-  <h2>Attributes</h2>
-  <p>
-    <b>Language:</b>
+    <%= label_tag 'Language' %>
     <%= logged_in? && authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Vocabulary.languages.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word %>
-  </p>
-  <p>
-    <b>Article:</b>
+</div>
+<div class="content">
+    <%= label_tag 'Article' %>
     <%= logged_in? && authorized? ? in_place_editor_field(:vocabulary, :gender) : @vocabulary.gender %>
-  </p>
 </div>
 
 <% unless @vocabulary.translations.empty? %>
 <div class="content">
-  <h2>Translations</h2>
+  <%= label_tag 'Translations' %>
   <ul id="translations">
     <% @vocabulary.translations.each do |translation| %>
-      <li id="translation_<%= translation.id %>"><%= link_to(translation.word, vocabulary_path(translation)) %> in <%= translation.language.word %> (<%= link_to_remote('remove', :url => vocabularies_unlink_path(@vocabulary, translation), :confirm => 'Are you sure you want to remove this translation?', :method => :delete) %>)</li>
+      <li id="translation_<%= translation.id %>"><%= link_to(translation.word, vocabulary_path(translation)) %> in <%= translation.language.word %> <%= link_to_remote('remove', { :url => vocabularies_unlink_path(@vocabulary, translation), :confirm => 'Are you sure you want to remove this translation?', :method => :delete }, { :class => 'edit_link' }) %></li>
     <% end %>
   </ul>
 </div>
 <% end %>
-

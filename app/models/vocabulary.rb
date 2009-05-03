@@ -22,7 +22,7 @@ class Vocabulary < ActiveRecord::Base
   has_many :translation_from, :through => :relations_from, :source => :vocabulary1
   
   # Validations
-  validates_uniqueness_of :word, :scope => 'language_id'
+  validates_uniqueness_of :word, :scope => 'language_id', :message => 'already exists in database'
   
   # Copy tags to translations
   def apply_tags_to_translations

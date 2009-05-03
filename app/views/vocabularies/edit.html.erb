@@ -7,24 +7,28 @@
   <p>Fill out the form below to submit a new translation for "<%= link_to(@translation.word, vocabulary_path(@translation)) %>".</p>
   
   <%= error_messages_for :vocabulary %>
+  
   <% form_for :vocabulary, :url => vocabularies_path do |f| -%>
     <%= hidden_field :translation, :vocabulary2_id, :value => @translation.id %>
-    
-    <p><%= label_tag 'word' %>
-    <%= f.text_field :word, :size => 50 %>
-    <div class="auto_complete" id="vocabulary_lookup_auto_complete"></div> 
-    <%= javascript_tag("new Autocompleter.Local('vocabulary_word','vocabulary_lookup_auto_complete', vocabularies, {frequency: 0, minChars: 1});") %>
-    </p>
-    
+    <div class="fields">
+      <%= label_tag 'word' %>
+      <%= f.text_field :word, :size => 50 %>
+      <div class="auto_complete" id="vocabulary_lookup_auto_complete"></div> 
+      <%= javascript_tag("new Autocompleter.Local('vocabulary_word','vocabulary_lookup_auto_complete', vocabularies, {frequency: 0, minChars: 1});") %>
+    </div>
     <% unless @translation.gender == "N/A" %>
-    <p><%= label_tag 'article' %>
-    <%= f.text_field :gender %></p>
+    <div class="fields">
+      <%= label_tag 'article' %>
+      <%= f.text_field :gender %>
+    </div>
     <% end %>
-
-    <p><%= label_tag 'Language' %>
-    <%= f.select :language_id, Vocabulary.languages.collect {|p| [ p.word, p.id ] } %></p>
-    <%= observe_field :vocabulary_word, :url => refresh_language_vocabularies_path, :frequency => 1, :with => 'word' %>
-
-    <p><%= submit_tag 'Save' %></p>
+    <div class="fields">
+      <%= label_tag 'Language' %>
+      <%= f.select :language_id, Vocabulary.languages.collect {|p| [ p.word, p.id ] } %>
+      <%= observe_field :vocabulary_word, :url => refresh_language_vocabularies_path, :frequency => 1, :with => 'word' %>
+    </div>
+    <div class="fields">
+      <%= submit_tag 'Save' %>
+    </div>
   <% end -%>
 </div>

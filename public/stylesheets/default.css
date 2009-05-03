@@ -4,6 +4,7 @@ body {
 	font-family: Helvetica, Geneva, 'Lucida Grande';
 	font-size: 115%;
 	margin: 0;
+	padding: 0;
 }
 
 a { color: #02B8EA; }
@@ -22,7 +23,7 @@ h2, label { color: #888; font-size: 1.4em; margin: 25px 0 10px 0; }
 
 p { margin: 5px 0 15px 0; }
 
-ul { list-style-type: none; }
+ul { list-style-type: none; margin: 0; padding: 0; }
 
 ol { font-size: 1.2em; }
 
@@ -35,67 +36,59 @@ ol li a { color: #FFF; }
 
 #header {
 	background-color: #02B8EA;
-	border-bottom: 1px #999 solid;
-	margin-bottom: 45px;
-	width: 100%;
+	border-bottom: 1px #888 solid;
+	margin-bottom: 50px;
+	padding: 30px 15px 28px 10px;
 }
 
-ul#navigation {
-	margin: 0 auto;
-	width: 918px;
-	padding: 17px 15px 15px 15px;
-}
+.navigation { float: right; padding: 0 7px 0 7px; }
 
-#navigation li {
-	display: inline;
-	font-size: 1.1em;
-}
+.no-floater { float: none; }
 
-#navigation a {
+.navigation a {
 	color: #FFF;
 	padding: 8px 10px 5px 10px;
 	text-decoration: none;
 }
 
-#navigation a:hover {
-	color: #02B8EA;
-	background-color: #FFF;
-}
+.navigation a:hover { color: #02B8EA; background-color: #FFF; }
+
+.navigation em { color: #02B8EA; background-color: #FFF; font-style: normal; padding: 13px 9px 8px 8px; }
+
+.navigation em a { color: #02B8EA }
 
 
 /* Main content */
 
-#content { margin: 0 auto; width: 900px; }
+.container { margin: 0 auto; width: 950px; }
 
-.content { margin-bottom: 35px; }
+.content { margin-bottom: 40px; }
 
-.content ul {
-	margin: 0;
-	padding: 0;
-}
+ul.inline { line-height: 1.5; padding: 0; }
 
-.content ul li { margin: 0 10px 5px 0; }
+ul.inline li { display: inline; padding-right: 10px; }
 
-.content ul.inline li { display: inline; }
+#sidebar li, #translations li { margin: 0 0 10px 0 }
 
 #main { width: 650px; }
 
 #notice, #user_bar {
 	background: #C0ED00;
-	border: 1px solid #999;	
+	border: 1px solid #888;	
 }
 
 #notice {
+	color: #FFF;
 	height: 21px;
-	margin: 20px 0 40px 0;
-	padding: 8px 5px 2px 5px;
+	margin: 20px 0 50px 0;
+	padding: 12px 10px 8px 10px;
 	width: 100%;
 }
 
 
 /* Sidebar */
 
-#sidebar { width: 200px; float: right; }
+#sidebar { width: 225px; float: right; }
 
 #sidebar h1 { color: #888; margin-top: 3px; }
 
@@ -116,7 +109,7 @@ ul#navigation {
 .gravatar, .gravatar_big {
 	background-color: #FFF;
 	float: left;
-	border: 1px #999 solid;
+	border: 1px #888 solid;
 	margin-right: 5px;
 	padding: 2px;
 }
@@ -144,11 +137,12 @@ em.tag {
 
 label {
 	display:block;
+	font-weight:bold;
 	font-size: 1.25em;
 	margin: 0 0 5px 0;
 }
 
-form p { margin: 0 0 20px 0; }
+.fields { margin: 0 0 35px 0; }
 
 .fieldWithErrors  {
   border-left:6px solid #900;
@@ -160,35 +154,34 @@ form p { margin: 0 0 20px 0; }
 }
 
 #errorExplanation {
-	border: 1px solid #555;
+	border:2px solid #900;
 	width:100%;
-	margin:10px 0 40px 0;
-  	background:#FCC;
+	margin:10px 0 30px 0;
+  background:#FCC;
 }
 
 #errorExplanation h2 {
   text-align: left;
   font-weight: bold;
-  padding: .25em .25em .25em 35px;
+  padding: .25em .25em .25em .5em;
   font-size: 12px;
-  background:#C66 url(../images/alert.gif) no-repeat 10px 50%;
+  background:#C66 no-repeat 10px 50%;
   color: #fff;
-  border-top:3px solid #900;
-  border-bottom:3px solid #900;
+  border-bottom:2px solid #900;
   margin-top:0;
 }
 
 #errorExplanation p {
-  color: #9C9791;
-  margin-bottom: 0;
-  padding: .5em 1em;
-  font-size:11px;
+  margin: 0;
+  padding: 0 10px 5px 10px;
+  font-size: 0.75em;
   font-weight:bold;
 }
 
 #errorExplanation ul {
+	font-size: 0.75em;
 	margin-left:30px;
-	padding:0 0 20px;
+	padding:0 0 10px;
 }
 
 
@@ -223,6 +216,29 @@ div.auto_complete ul strong.highlight {
 } 
 
 
+/* In Place Editor */
+
+form.inplaceeditor-form input[type="submit"] {
+  margin-left: 12px;
+}
+
+form.inplaceeditor-form a, a.edit_link {
+	color: #FFF;
+	background-color: #888;
+	font-size: 0.75em;
+	font-style: normal;
+	padding: 3px 4px 1px 3px;
+	margin-left: 7px;
+	text-decoration: none;
+}
+
+form.inplaceeditor-form a:hover {
+	text-decoration: underline;
+}
+
+a.edit_link { margin-left: 3px; padding: 3px 4px 1px 4px; }
+
+
 /* Tag cloud */
 
 .css1 { font-size: 1.0em; }
@@ -235,8 +251,8 @@ div.auto_complete ul strong.highlight {
 
 #footer {
 	float: right;
-	padding: 10px;
-	border-top: 1px #999 solid;
+	padding: 10px 0 10px 0;
+	border-top: 1px #888 solid;
 	margin: 15px 0 15px 0;
 	width: 100%;
 }

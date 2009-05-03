@@ -5,9 +5,9 @@
 // Highlight flash[:notice] and hide after a few seconds
 
 function highlight() {
-  Element.show('notice')
-  new Effect.Highlight('notice');
-  setTimeout("Element.hide('notice')",5000);
+	Element.show('notice');
+	new Effect.Highlight('notice');
+	setTimeout("new Effect.Fade('notice')",3000);
 }
 
 
@@ -21,5 +21,3 @@ function keyPressHandler(e) {
   if(kC==Esc)
     $('taglist','tag_form').invoke('toggle')
 }
-
-
