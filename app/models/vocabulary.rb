@@ -27,7 +27,7 @@ class Vocabulary < ActiveRecord::Base
   # Copy tags to translations
   def apply_tags_to_translations
     self.translations.each do |translation|
-      translation.tag_list = self.tag_list
+      translation.tag_list = (translation.tag_list + self.tag_list).uniq
       translation.save
     end
   end

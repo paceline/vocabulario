@@ -22,10 +22,11 @@ class VocabulariesController < ApplicationController
   # Create translation or new vocabulary
   def create
     if params[:translation]
+      copy_tags = params[:vocabulary].delete(:copy_tags)
       @translation = Vocabulary.find(params[:translation][:vocabulary2_id])
       @vocabulary = Vocabulary.find_by_word(params[:vocabulary][:word])
       @vocabulary = current_user.vocabularies.build(params[:vocabulary]) unless @vocabulary
-      @vocabulary.tag_list = @translation.tag_list
+      @vocabulary.tag_list = (@vocabulary.tag_list + @translation.tag_list).uniq if copy_tags
       @translation.translation_to << @vocabulary
       flash[:notice] = "Translation has been successfully saved."
       redirect_to @translation

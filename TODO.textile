@@ -3,3 +3,5 @@ h1. "TODOs"
 * Find smarter way to deal with Language object (-> e.g. STI) (medium)
 * Make sure unused tags get deleted (low)
 * Checker whether there's a better way for some of the named routes (low)
+* Cool formatting of form fields (low)
+* Write and perform tests (high)

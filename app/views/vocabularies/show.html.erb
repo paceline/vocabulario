@@ -4,7 +4,7 @@
     <ul>
       <li><%= link_to('Add vocabulary', new_vocabulary_path) %></li>
       <li><%= link_to('Add translation', edit_vocabulary_path(@vocabulary)) %></li>
-      <li><%= link_to('Apply tags to translations', apply_tags_vocabulary_path(@vocabulary), :method => :post) %></li>
+      <li><%= link_to('Apply tags to translations', apply_tags_vocabulary_path(@vocabulary), :confirm => "You can't just undo this. Are you sure you want to go ahead?", :method => :post) %></li>
       <li><%= link_to('Delete vocabulary', vocabulary_path(@vocabulary), :confirm => 'Are you sure you want to delete this vocabulary?', :method => :delete) %></li>
     </ul>
   </div>
