@@ -3,8 +3,8 @@ class VocabulariesController < ApplicationController
   layout 'default'
   
   # Filters
-  before_filter :login_required, :except => [:index, :by_language, :by_tag, :select, :show, :tags_for_language]
-  before_filter :admin_required, :only => [:create, :edit, :destroy, :new, :import]
+  before_filter :login_required, :except => [:index, :refresh_language, :select, :show, :tags_for_language]
+  before_filter :admin_required, :only => [:apply_tags, :create, :destroy, :edit, :import, :new, :unlink]
   
   # Features
   in_place_edit_for :vocabulary, :word
@@ -113,14 +113,17 @@ class VocabulariesController < ApplicationController
     end
   end
   
+  # /scores/new support: Make sure to and from select boxes always have different selected languages
+  def select
+    @languages = Vocabulary.languages("id != #{params[:language_id]}")
+    @selected = params[:language_id] == params[:selected] ? @languages.first.id : params[:selected].to_i
+    render :layout => false
+  end
+  
   # Display vocabulary attributes
   def show
     @vocabulary = Vocabulary.find(params[:id])
     @language = @vocabulary.language
-    respond_to do |format|
-      format.html
-      format.json { render :json => @vocabulary }
-    end
   end
   
   # Tag vocabulary with new tag list
@@ -129,13 +132,6 @@ class VocabulariesController < ApplicationController
     vocabulary.tag_list = params[:tag_list]
     vocabulary.save
     render :partial => "shared/taglist_detail", :object => vocabulary
-  end
-  
-  # /scores/new support: Make sure to and from select boxes always have different selected languages
-  def select
-    @languages = Vocabulary.languages("id != #{params[:language_id]}")
-    @selected = params[:language_id] == params[:selected] ? @languages.first.id : params[:selected].to_i
-    render :layout => false
   end
   
   # /scores/new support: Update tags select box based on seleted language 
