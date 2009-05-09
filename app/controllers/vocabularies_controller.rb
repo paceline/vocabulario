@@ -123,8 +123,12 @@ class VocabulariesController < ApplicationController
   
   # Display vocabulary attributes
   def show
-    @vocabulary = Vocabulary.find_by_permalink(params[:permalink])
-    @language = @vocabulary.language
+    begin
+      @vocabulary = Vocabulary.find_by_permalink(params[:permalink])
+      @language = @vocabulary.language
+    rescue
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
   end
   
   # Tag vocabulary with new tag list
