@@ -24,7 +24,7 @@
 <div class="content" id="vocabulary_results">
   <ul class="inline">
     <% @vocabularies.each do |vocabulary| %>
-    <li><%= link_to(vocabulary.name, vocabulary) %></li>
+    <li><%= link_to(vocabulary.name, vocabularies_permalink_path(vocabulary.permalink)) %></li>
     <% end %>
   </ul>
   <br />
