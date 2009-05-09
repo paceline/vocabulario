@@ -13,7 +13,7 @@
   <% form_remote_for @score do %>
     <div class="fields">
       <h2>1. Languages</h2>
-      Show me vocabularies in <%= select :test, :from, @languages.collect {|p| [ p.word, p.id ] } %> and I'll translate them into <%= select :test, :to, Vocabulary.languages.collect {|p| [ p.word, p.id ] }, { :selected => Vocabulary.languages[1].id } %>
+      Show me vocabularies in <%= select :test, :from, @languages.collect {|p| [ p.word, p.id ] } %> and I'll translate them into <%= select :test, :to, Language.list.collect {|p| [ p.word, p.id ] }, { :selected => Language.list[1].id } %>
       <%= observe_field :test_from, :url => select_vocabularies_path, :update => "test_to", :with => "'language_id=' + value + '&selected=' + $A($('test_to').options).find(function(option) { return option.selected; } ).value" %>
     </div>
     <div class="fields">
@@ -27,8 +27,7 @@
       <%= observe_field :test_from, :url => tags_for_language_vocabularies_path, :update => "test_tags", :complete => visual_effect(:highlight, "test_tags"), :with => "language_id" %>
     </div>
     <div class="fields">
-      <h2>4. Ready?</h2>
-      <%= submit_tag "Let's go!" %>
+      <%= submit_tag "Ready? Let's go!" %>
     </div>
   <% end %>
 </div>

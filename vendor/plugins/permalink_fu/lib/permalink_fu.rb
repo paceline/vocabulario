@@ -47,9 +47,6 @@ module PermalinkFu
     #     # add a scope
     #     has_permalink :title, :scope => :blog_id
     #
-    #     # add a scope and specify the permalink field name
-    #     has_permalink :title, :slug, :scope => :blog_id
-    #
     #     # do not bother checking for a unique scope
     #     has_permalink :title, :unique => false
     #
@@ -59,14 +56,10 @@ module PermalinkFu
     #
     #   end
     #
-    def has_permalink(attr_names = [], permalink_field = nil, options = {})
-      if permalink_field.is_a?(Hash)
-        options = permalink_field
-        permalink_field = nil
-      end
+    def has_permalink(attr_names = [], options = {})
       ClassMethods.setup_permalink_fu_on self do
         self.permalink_attributes = Array(attr_names)
-        self.permalink_field      = (permalink_field || 'permalink').to_s
+        self.permalink_field      = 'permalink'
         self.permalink_options    = {:unique => true}.update(options)
       end
     end
@@ -98,7 +91,7 @@ module PermalinkFu
 
     def define_attribute_methods_with_permalinks
       if value = define_attribute_methods_without_permalinks
-        evaluate_attribute_method permalink_field, "def #{self.permalink_field}=(new_value);write_attribute(:#{self.permalink_field}, new_value.blank? ? '' : PermalinkFu.escape(new_value));end", "#{self.permalink_field}="
+        evaluate_attribute_method permalink_field, "def permalink=(new_value);write_attribute(:permalink, new_value.blank? ? '' : PermalinkFu.escape(new_value));end", "permalink_field="
       end
       value
     end
@@ -109,17 +102,17 @@ module PermalinkFu
   protected
     def create_common_permalink
       return unless should_create_permalink?
-      if read_attribute(self.class.permalink_field).blank? || permalink_fields_changed?
-        send("#{self.class.permalink_field}=", create_permalink_for(self.class.permalink_attributes))
+      if read_attribute(class_or_superclass.permalink_field).blank? || permalink_fields_changed?
+        send("#{class_or_superclass.permalink_field}=", create_permalink_for(class_or_superclass.permalink_attributes))
       end
 
       # Quit now if we have the changed method available and nothing has changed
-      permalink_changed = "#{self.class.permalink_field}_changed?"
+      permalink_changed = "#{class_or_superclass.permalink_field}_changed?"
       return if respond_to?(permalink_changed) && !send(permalink_changed)
 
       # Otherwise find the limit and crop the permalink
-      limit   = self.class.columns_hash[self.class.permalink_field].limit
-      base    = send("#{self.class.permalink_field}=", read_attribute(self.class.permalink_field)[0..limit - 1])
+      limit   = class_or_superclass.columns_hash[class_or_superclass.permalink_field].limit
+      base    = send("#{class_or_superclass.permalink_field}=", read_attribute(class_or_superclass.permalink_field)[0..limit - 1])
       [limit, base]
     end
 
@@ -128,13 +121,13 @@ module PermalinkFu
       return if limit.nil? # nil if the permalink has not changed or :if/:unless fail
       counter = 1
       # oh how i wish i could use a hash for conditions
-      conditions = ["#{self.class.permalink_field} = ?", base]
+      conditions = ["#{class_or_superclass.permalink_field} = ?", base]
       unless new_record?
         conditions.first << " and id != ?"
         conditions       << id
       end
-      if self.class.permalink_options[:scope]
-        [self.class.permalink_options[:scope]].flatten.each do |scope|
+      if class_or_superclass.permalink_options[:scope]
+        [class_or_superclass.permalink_options[:scope]].flatten.each do |scope|
           value = send(scope)
           if value
             conditions.first << " and #{scope} = ?"
@@ -144,10 +137,10 @@ module PermalinkFu
           end
         end
       end
-      while self.class.exists?(conditions)
+      while class_or_superclass.exists?(conditions)
         suffix = "-#{counter += 1}"
         conditions[1] = "#{base[0..limit-suffix.size-1]}#{suffix}"
-        send("#{self.class.permalink_field}=", conditions[1])
+        send("#{class_or_superclass.permalink_field}=", conditions[1])
       end
     end
 
@@ -158,10 +151,10 @@ module PermalinkFu
 
   private
     def should_create_permalink?
-      if self.class.permalink_options[:if]
-        evaluate_method(self.class.permalink_options[:if])
-      elsif self.class.permalink_options[:unless]
-        !evaluate_method(self.class.permalink_options[:unless])
+      if class_or_superclass.permalink_options[:if]
+        evaluate_method(class_or_superclass.permalink_options[:if])
+      elsif class_or_superclass.permalink_options[:unless]
+        !evaluate_method(class_or_superclass.permalink_options[:unless])
       else
         true
       end
@@ -169,8 +162,8 @@ module PermalinkFu
 
     # Don't even check _changed? methods unless :update is set
     def permalink_fields_changed?
-      return false unless self.class.permalink_options[:update]
-      self.class.permalink_attributes.any? do |attribute|
+      return false unless class_or_superclass.permalink_options[:update]
+      class_or_superclass.permalink_attributes.any? do |attribute|
         changed_method = "#{attribute}_changed?"
         respond_to?(changed_method) ? send(changed_method) : true
       end
@@ -185,6 +178,10 @@ module PermalinkFu
       when Proc, Method
         method.call(self)
       end
+    end
+    
+    def class_or_superclass
+      return self.class.permalink_field ? self.class : self.class.superclass
     end
   end
 end

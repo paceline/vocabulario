@@ -5,7 +5,7 @@ class ScoresController < ApplicationController
   # Open up a new vocabulary test
   def new
     @score = Score.new
-    @languages = Vocabulary.languages
+    @languages = Language.list
     @tags = @languages.first.tags_for_language
   end
   

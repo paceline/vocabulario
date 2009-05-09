@@ -1,7 +1,1203 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+1:
+  vocabulary1_id: 1
+  vocabulary2_id: 2
+2:
+  vocabulary1_id: 1
+  vocabulary2_id: 3
+3:
+  vocabulary1_id: 2
+  vocabulary2_id: 1
+4:
+  vocabulary1_id: 2
+  vocabulary2_id: 3
+5:
+  vocabulary1_id: 5
+  vocabulary2_id: 4
+6:
+  vocabulary1_id: 5
+  vocabulary2_id: 6
+7:
+  vocabulary1_id: 6
+  vocabulary2_id: 4
+8:
+  vocabulary1_id: 7
+  vocabulary2_id: 8
+9:
+  vocabulary1_id: 7
+  vocabulary2_id: 9
+10:
+  vocabulary1_id: 9
+  vocabulary2_id: 8
+11:
+  vocabulary1_id: 10
+  vocabulary2_id: 13
+12:
+  vocabulary1_id: 11
+  vocabulary2_id: 14
+13:
+  vocabulary1_id: 12
+  vocabulary2_id: 15
+14:
+  vocabulary1_id: 12
+  vocabulary2_id: 16
+15:
+  vocabulary1_id: 17
+  vocabulary2_id: 18
+16:
+  vocabulary1_id: 19
+  vocabulary2_id: 24
+17:
+  vocabulary1_id: 20
+  vocabulary2_id: 22
+18:
+  vocabulary1_id: 21
+  vocabulary2_id: 23
+19:
+  vocabulary1_id: 25
+  vocabulary2_id: 26
+20:
+  vocabulary1_id: 25
+  vocabulary2_id: 27
+21:
+  vocabulary1_id: 28
+  vocabulary2_id: 29
+22:
+  vocabulary1_id: 30
+  vocabulary2_id: 31
+23:
+  vocabulary1_id: 32
+  vocabulary2_id: 33
+24:
+  vocabulary1_id: 34
+  vocabulary2_id: 35
+25:
+  vocabulary1_id: 34
+  vocabulary2_id: 36
+26:
+  vocabulary1_id: 37
+  vocabulary2_id: 38
+27:
+  vocabulary1_id: 37
+  vocabulary2_id: 39
+28:
+  vocabulary1_id: 37
+  vocabulary2_id: 40
+29:
+  vocabulary1_id: 41
+  vocabulary2_id: 42
+30:
+  vocabulary1_id: 43
+  vocabulary2_id: 44
+31:
+  vocabulary1_id: 45
+  vocabulary2_id: 46
+32:
+  vocabulary1_id: 45
+  vocabulary2_id: 47
+33:
+  vocabulary1_id: 48
+  vocabulary2_id: 49
+34:
+  vocabulary1_id: 50
+  vocabulary2_id: 51
+35:
+  vocabulary1_id: 50
+  vocabulary2_id: 52
+36:
+  vocabulary1_id: 53
+  vocabulary2_id: 54
+37:
+  vocabulary1_id: 55
+  vocabulary2_id: 56
+38:
+  vocabulary1_id: 57
+  vocabulary2_id: 58
+39:
+  vocabulary1_id: 59
+  vocabulary2_id: 60
+40:
+  vocabulary1_id: 61
+  vocabulary2_id: 62
+41:
+  vocabulary1_id: 61
+  vocabulary2_id: 63
+42:
+  vocabulary1_id: 64
+  vocabulary2_id: 65
+43:
+  vocabulary1_id: 64
+  vocabulary2_id: 66
+44:
+  vocabulary1_id: 67
+  vocabulary2_id: 68
+45:
+  vocabulary1_id: 69
+  vocabulary2_id: 70
+46:
+  vocabulary1_id: 71
+  vocabulary2_id: 72
+47:
+  vocabulary1_id: 71
+  vocabulary2_id: 73
+48:
+  vocabulary1_id: 74
+  vocabulary2_id: 75
+49:
+  vocabulary1_id: 74
+  vocabulary2_id: 76
+50:
+  vocabulary1_id: 77
+  vocabulary2_id: 78
+51:
+  vocabulary1_id: 77
+  vocabulary2_id: 79
+52:
+  vocabulary1_id: 80
+  vocabulary2_id: 81
+53:
+  vocabulary1_id: 80
+  vocabulary2_id: 82
+54:
+  vocabulary1_id: 83
+  vocabulary2_id: 84
+55:
+  vocabulary1_id: 83
+  vocabulary2_id: 85
+56:
+  vocabulary1_id: 86
+  vocabulary2_id: 87
+57:
+  vocabulary1_id: 88
+  vocabulary2_id: 89
+58:
+  vocabulary1_id: 90
+  vocabulary2_id: 91
+59:
+  vocabulary1_id: 92
+  vocabulary2_id: 93
+60:
+  vocabulary1_id: 94
+  vocabulary2_id: 95
+61:
+  vocabulary1_id: 96
+  vocabulary2_id: 97
+62:
+  vocabulary1_id: 96
+  vocabulary2_id: 98
+63:
+  vocabulary1_id: 99
+  vocabulary2_id: 100
+64:
+  vocabulary1_id: 99
+  vocabulary2_id: 101
+65:
+  vocabulary1_id: 102
+  vocabulary2_id: 103
+66:
+  vocabulary1_id: 104
+  vocabulary2_id: 105
+67:
+  vocabulary1_id: 106
+  vocabulary2_id: 107
+68:
+  vocabulary1_id: 106
+  vocabulary2_id: 108
+69:
+  vocabulary1_id: 109
+  vocabulary2_id: 110
+70:
+  vocabulary1_id: 109
+  vocabulary2_id: 111
+71:
+  vocabulary1_id: 112
+  vocabulary2_id: 113
+72:
+  vocabulary1_id: 112
+  vocabulary2_id: 114
+73:
+  vocabulary1_id: 115
+  vocabulary2_id: 116
+74:
+  vocabulary1_id: 117
+  vocabulary2_id: 118
+75:
+  vocabulary1_id: 119
+  vocabulary2_id: 120
+76:
+  vocabulary1_id: 121
+  vocabulary2_id: 122
+77:
+  vocabulary1_id: 123
+  vocabulary2_id: 124
+78:
+  vocabulary1_id: 123
+  vocabulary2_id: 125
+79:
+  vocabulary1_id: 123
+  vocabulary2_id: 126
+80:
+  vocabulary1_id: 127
+  vocabulary2_id: 128
+81:
+  vocabulary1_id: 127
+  vocabulary2_id: 129
+82:
+  vocabulary1_id: 130
+  vocabulary2_id: 131
+83:
+  vocabulary1_id: 132
+  vocabulary2_id: 607
+84:
+  vocabulary1_id: 138
+  vocabulary2_id: 139
+85:
+  vocabulary1_id: 138
+  vocabulary2_id: 140
+86:
+  vocabulary1_id: 141
+  vocabulary2_id: 142
+87:
+  vocabulary1_id: 143
+  vocabulary2_id: 144
+88:
+  vocabulary1_id: 143
+  vocabulary2_id: 145
+89:
+  vocabulary1_id: 146
+  vocabulary2_id: 147
+90:
+  vocabulary1_id: 148
+  vocabulary2_id: 149
+91:
+  vocabulary1_id: 148
+  vocabulary2_id: 150
+92:
+  vocabulary1_id: 151
+  vocabulary2_id: 152
+93:
+  vocabulary1_id: 151
+  vocabulary2_id: 153
+94:
+  vocabulary1_id: 154
+  vocabulary2_id: 155
+95:
+  vocabulary1_id: 156
+  vocabulary2_id: 157
+96:
+  vocabulary1_id: 156
+  vocabulary2_id: 158
+97:
+  vocabulary1_id: 159
+  vocabulary2_id: 160
+98:
+  vocabulary1_id: 159
+  vocabulary2_id: 161
+99:
+  vocabulary1_id: 162
+  vocabulary2_id: 163
+100:
+  vocabulary1_id: 162
+  vocabulary2_id: 164
+101:
+  vocabulary1_id: 162
+  vocabulary2_id: 165
+102:
+  vocabulary1_id: 166
+  vocabulary2_id: 167
+103:
+  vocabulary1_id: 168
+  vocabulary2_id: 169
+104:
+  vocabulary1_id: 170
+  vocabulary2_id: 171
+105:
+  vocabulary1_id: 172
+  vocabulary2_id: 173
+106:
+  vocabulary1_id: 172
+  vocabulary2_id: 174
+107:
+  vocabulary1_id: 175
+  vocabulary2_id: 176
+108:
+  vocabulary1_id: 175
+  vocabulary2_id: 177
+109:
+  vocabulary1_id: 178
+  vocabulary2_id: 179
+110:
+  vocabulary1_id: 180
+  vocabulary2_id: 181
+111:
+  vocabulary1_id: 182
+  vocabulary2_id: 183
+112:
+  vocabulary1_id: 184
+  vocabulary2_id: 185
+113:
+  vocabulary1_id: 184
+  vocabulary2_id: 186
+114:
+  vocabulary1_id: 184
+  vocabulary2_id: 187
+115:
+  vocabulary1_id: 188
+  vocabulary2_id: 189
+116:
+  vocabulary1_id: 190
+  vocabulary2_id: 191
+117:
+  vocabulary1_id: 190
+  vocabulary2_id: 192
+118:
+  vocabulary1_id: 193
+  vocabulary2_id: 194
+119:
+  vocabulary1_id: 193
+  vocabulary2_id: 195
+120:
+  vocabulary1_id: 196
+  vocabulary2_id: 197
+121:
+  vocabulary1_id: 198
+  vocabulary2_id: 199
+122:
+  vocabulary1_id: 200
+  vocabulary2_id: 201
+123:
+  vocabulary1_id: 202
+  vocabulary2_id: 203
+124:
+  vocabulary1_id: 204
+  vocabulary2_id: 205
+125:
+  vocabulary1_id: 204
+  vocabulary2_id: 206
+126:
+  vocabulary1_id: 204
+  vocabulary2_id: 207
+127:
+  vocabulary1_id: 208
+  vocabulary2_id: 209
+128:
+  vocabulary1_id: 210
+  vocabulary2_id: 211
+129:
+  vocabulary1_id: 212
+  vocabulary2_id: 213
+130:
+  vocabulary1_id: 212
+  vocabulary2_id: 214
+131:
+  vocabulary1_id: 215
+  vocabulary2_id: 216
+132:
+  vocabulary1_id: 217
+  vocabulary2_id: 218
+133:
+  vocabulary1_id: 217
+  vocabulary2_id: 219
+134:
+  vocabulary1_id: 217
+  vocabulary2_id: 220
+135:
+  vocabulary1_id: 221
+  vocabulary2_id: 222
+136:
+  vocabulary1_id: 223
+  vocabulary2_id: 224
+137:
+  vocabulary1_id: 225
+  vocabulary2_id: 226
+138:
+  vocabulary1_id: 225
+  vocabulary2_id: 227
+139:
+  vocabulary1_id: 228
+  vocabulary2_id: 229
+140:
+  vocabulary1_id: 228
+  vocabulary2_id: 230
+141:
+  vocabulary1_id: 228
+  vocabulary2_id: 231
+142:
+  vocabulary1_id: 232
+  vocabulary2_id: 233
+143:
+  vocabulary1_id: 232
+  vocabulary2_id: 234
+144:
+  vocabulary1_id: 235
+  vocabulary2_id: 236
+145:
+  vocabulary1_id: 235
+  vocabulary2_id: 237
+146:
+  vocabulary1_id: 235
+  vocabulary2_id: 238
+147:
+  vocabulary1_id: 239
+  vocabulary2_id: 240
+148:
+  vocabulary1_id: 239
+  vocabulary2_id: 241
+149:
+  vocabulary1_id: 239
+  vocabulary2_id: 242
+150:
+  vocabulary1_id: 243
+  vocabulary2_id: 244
+151:
+  vocabulary1_id: 245
+  vocabulary2_id: 246
+152:
+  vocabulary1_id: 247
+  vocabulary2_id: 248
+153:
+  vocabulary1_id: 247
+  vocabulary2_id: 249
+154:
+  vocabulary1_id: 250
+  vocabulary2_id: 251
+155:
+  vocabulary1_id: 252
+  vocabulary2_id: 253
+156:
+  vocabulary1_id: 252
+  vocabulary2_id: 254
+157:
+  vocabulary1_id: 255
+  vocabulary2_id: 256
+158:
+  vocabulary1_id: 255
+  vocabulary2_id: 257
+159:
+  vocabulary1_id: 255
+  vocabulary2_id: 258
+160:
+  vocabulary1_id: 259
+  vocabulary2_id: 251
+161:
+  vocabulary1_id: 259
+  vocabulary2_id: 656
+162:
+  vocabulary1_id: 260
+  vocabulary2_id: 261
+163:
+  vocabulary1_id: 260
+  vocabulary2_id: 262
+164:
+  vocabulary1_id: 260
+  vocabulary2_id: 263
+165:
+  vocabulary1_id: 264
+  vocabulary2_id: 265
+166:
+  vocabulary1_id: 266
+  vocabulary2_id: 267
+167:
+  vocabulary1_id: 268
+  vocabulary2_id: 269
+168:
+  vocabulary1_id: 268
+  vocabulary2_id: 270
+169:
+  vocabulary1_id: 268
+  vocabulary2_id: 271
+170:
+  vocabulary1_id: 272
+  vocabulary2_id: 273
+171:
+  vocabulary1_id: 272
+  vocabulary2_id: 274
+172:
+  vocabulary1_id: 272
+  vocabulary2_id: 275
+173:
+  vocabulary1_id: 276
+  vocabulary2_id: 277
+174:
+  vocabulary1_id: 278
+  vocabulary2_id: 279
+175:
+  vocabulary1_id: 278
+  vocabulary2_id: 280
+176:
+  vocabulary1_id: 278
+  vocabulary2_id: 281
+177:
+  vocabulary1_id: 282
+  vocabulary2_id: 283
+178:
+  vocabulary1_id: 284
+  vocabulary2_id: 285
+179:
+  vocabulary1_id: 286
+  vocabulary2_id: 287
+180:
+  vocabulary1_id: 286
+  vocabulary2_id: 288
+181:
+  vocabulary1_id: 289
+  vocabulary2_id: 290
+182:
+  vocabulary1_id: 289
+  vocabulary2_id: 291
+183:
+  vocabulary1_id: 292
+  vocabulary2_id: 293
+184:
+  vocabulary1_id: 292
+  vocabulary2_id: 294
+185:
+  vocabulary1_id: 295
+  vocabulary2_id: 296
+186:
+  vocabulary1_id: 295
+  vocabulary2_id: 297
+187:
+  vocabulary1_id: 298
+  vocabulary2_id: 299
+188:
+  vocabulary1_id: 300
+  vocabulary2_id: 301
+189:
+  vocabulary1_id: 300
+  vocabulary2_id: 302
+190:
+  vocabulary1_id: 300
+  vocabulary2_id: 303
+191:
+  vocabulary1_id: 304
+  vocabulary2_id: 305
+192:
+  vocabulary1_id: 306
+  vocabulary2_id: 307
+193:
+  vocabulary1_id: 306
+  vocabulary2_id: 308
+194:
+  vocabulary1_id: 309
+  vocabulary2_id: 310
+195:
+  vocabulary1_id: 311
+  vocabulary2_id: 312
+196:
+  vocabulary1_id: 311
+  vocabulary2_id: 313
+197:
+  vocabulary1_id: 314
+  vocabulary2_id: 315
+198:
+  vocabulary1_id: 314
+  vocabulary2_id: 316
+199:
+  vocabulary1_id: 317
+  vocabulary2_id: 318
+200:
+  vocabulary1_id: 319
+  vocabulary2_id: 320
+201:
+  vocabulary1_id: 321
+  vocabulary2_id: 322
+202:
+  vocabulary1_id: 323
+  vocabulary2_id: 324
+203:
+  vocabulary1_id: 325
+  vocabulary2_id: 326
+204:
+  vocabulary1_id: 327
+  vocabulary2_id: 328
+205:
+  vocabulary1_id: 329
+  vocabulary2_id: 95
+206:
+  vocabulary1_id: 329
+  vocabulary2_id: 330
+207:
+  vocabulary1_id: 332
+  vocabulary2_id: 333
+208:
+  vocabulary1_id: 334
+  vocabulary2_id: 335
+209:
+  vocabulary1_id: 336
+  vocabulary2_id: 337
+210:
+  vocabulary1_id: 338
+  vocabulary2_id: 339
+211:
+  vocabulary1_id: 340
+  vocabulary2_id: 341
+212:
+  vocabulary1_id: 342
+  vocabulary2_id: 343
+213:
+  vocabulary1_id: 344
+  vocabulary2_id: 345
+214:
+  vocabulary1_id: 344
+  vocabulary2_id: 346
+215:
+  vocabulary1_id: 347
+  vocabulary2_id: 348
+216:
+  vocabulary1_id: 347
+  vocabulary2_id: 349
+217:
+  vocabulary1_id: 347
+  vocabulary2_id: 350
+218:
+  vocabulary1_id: 351
+  vocabulary2_id: 352
+219:
+  vocabulary1_id: 351
+  vocabulary2_id: 353
+220:
+  vocabulary1_id: 351
+  vocabulary2_id: 354
+221:
+  vocabulary1_id: 355
+  vocabulary2_id: 356
+222:
+  vocabulary1_id: 357
+  vocabulary2_id: 358
+223:
+  vocabulary1_id: 359
+  vocabulary2_id: 360
+224:
+  vocabulary1_id: 359
+  vocabulary2_id: 361
+225:
+  vocabulary1_id: 362
+  vocabulary2_id: 363
+226:
+  vocabulary1_id: 364
+  vocabulary2_id: 365
+227:
+  vocabulary1_id: 364
+  vocabulary2_id: 366
+228:
+  vocabulary1_id: 367
+  vocabulary2_id: 368
+229:
+  vocabulary1_id: 369
+  vocabulary2_id: 370
+230:
+  vocabulary1_id: 371
+  vocabulary2_id: 372
+231:
+  vocabulary1_id: 371
+  vocabulary2_id: 373
+232:
+  vocabulary1_id: 371
+  vocabulary2_id: 374
+233:
+  vocabulary1_id: 375
+  vocabulary2_id: 377
+234:
+  vocabulary1_id: 376
+  vocabulary2_id: 608
+235:
+  vocabulary1_id: 376
+  vocabulary2_id: 609
+236:
+  vocabulary1_id: 376
+  vocabulary2_id: 610
+237:
+  vocabulary1_id: 378
+  vocabulary2_id: 379
+238:
+  vocabulary1_id: 378
+  vocabulary2_id: 380
+239:
+  vocabulary1_id: 381
+  vocabulary2_id: 382
+240:
+  vocabulary1_id: 381
+  vocabulary2_id: 383
+241:
+  vocabulary1_id: 384
+  vocabulary2_id: 385
+242:
+  vocabulary1_id: 386
+  vocabulary2_id: 387
+243:
+  vocabulary1_id: 388
+  vocabulary2_id: 389
+244:
+  vocabulary1_id: 390
+  vocabulary2_id: 391
+245:
+  vocabulary1_id: 390
+  vocabulary2_id: 392
+246:
+  vocabulary1_id: 393
+  vocabulary2_id: 394
+247:
+  vocabulary1_id: 395
+  vocabulary2_id: 396
+248:
+  vocabulary1_id: 397
+  vocabulary2_id: 398
+249:
+  vocabulary1_id: 397
+  vocabulary2_id: 399
+250:
+  vocabulary1_id: 397
+  vocabulary2_id: 400
+251:
+  vocabulary1_id: 401
+  vocabulary2_id: 402
+252:
+  vocabulary1_id: 403
+  vocabulary2_id: 404
+253:
+  vocabulary1_id: 406
+  vocabulary2_id: 407
+254:
+  vocabulary1_id: 408
+  vocabulary2_id: 409
+255:
+  vocabulary1_id: 410
+  vocabulary2_id: 411
+256:
+  vocabulary1_id: 412
+  vocabulary2_id: 413
+257:
+  vocabulary1_id: 414
+  vocabulary2_id: 415
+258:
+  vocabulary1_id: 414
+  vocabulary2_id: 416
+259:
+  vocabulary1_id: 417
+  vocabulary2_id: 418
+260:
+  vocabulary1_id: 417
+  vocabulary2_id: 419
+261:
+  vocabulary1_id: 420
+  vocabulary2_id: 421
+262:
+  vocabulary1_id: 420
+  vocabulary2_id: 422
+263:
+  vocabulary1_id: 420
+  vocabulary2_id: 423
+264:
+  vocabulary1_id: 424
+  vocabulary2_id: 425
+265:
+  vocabulary1_id: 426
+  vocabulary2_id: 427
+266:
+  vocabulary1_id: 428
+  vocabulary2_id: 429
+267:
+  vocabulary1_id: 428
+  vocabulary2_id: 430
+268:
+  vocabulary1_id: 431
+  vocabulary2_id: 432
+269:
+  vocabulary1_id: 433
+  vocabulary2_id: 434
+270:
+  vocabulary1_id: 435
+  vocabulary2_id: 436
+271:
+  vocabulary1_id: 437
+  vocabulary2_id: 438
+272:
+  vocabulary1_id: 439
+  vocabulary2_id: 440
+273:
+  vocabulary1_id: 441
+  vocabulary2_id: 442
+274:
+  vocabulary1_id: 443
+  vocabulary2_id: 444
+275:
+  vocabulary1_id: 443
+  vocabulary2_id: 445
+276:
+  vocabulary1_id: 443
+  vocabulary2_id: 446
+277:
+  vocabulary1_id: 447
+  vocabulary2_id: 448
+278:
+  vocabulary1_id: 449
+  vocabulary2_id: 450
+279:
+  vocabulary1_id: 451
+  vocabulary2_id: 452
+280:
+  vocabulary1_id: 451
+  vocabulary2_id: 453
+281:
+  vocabulary1_id: 454
+  vocabulary2_id: 455
+282:
+  vocabulary1_id: 454
+  vocabulary2_id: 456
+283:
+  vocabulary1_id: 457
+  vocabulary2_id: 458
+284:
+  vocabulary1_id: 459
+  vocabulary2_id: 460
+285:
+  vocabulary1_id: 461
+  vocabulary2_id: 462
+286:
+  vocabulary1_id: 461
+  vocabulary2_id: 463
+287:
+  vocabulary1_id: 464
+  vocabulary2_id: 465
+288:
+  vocabulary1_id: 464
+  vocabulary2_id: 466
+289:
+  vocabulary1_id: 467
+  vocabulary2_id: 468
+290:
+  vocabulary1_id: 469
+  vocabulary2_id: 470
+291:
+  vocabulary1_id: 469
+  vocabulary2_id: 471
+292:
+  vocabulary1_id: 472
+  vocabulary2_id: 473
+293:
+  vocabulary1_id: 474
+  vocabulary2_id: 475
+294:
+  vocabulary1_id: 476
+  vocabulary2_id: 477
+295:
+  vocabulary1_id: 476
+  vocabulary2_id: 478
+296:
+  vocabulary1_id: 476
+  vocabulary2_id: 479
+297:
+  vocabulary1_id: 480
+  vocabulary2_id: 481
+298:
+  vocabulary1_id: 482
+  vocabulary2_id: 483
+299:
+  vocabulary1_id: 482
+  vocabulary2_id: 484
+300:
+  vocabulary1_id: 485
+  vocabulary2_id: 486
+301:
+  vocabulary1_id: 487
+  vocabulary2_id: 488
+302:
+  vocabulary1_id: 487
+  vocabulary2_id: 489
+303:
+  vocabulary1_id: 490
+  vocabulary2_id: 491
+304:
+  vocabulary1_id: 492
+  vocabulary2_id: 493
+305:
+  vocabulary1_id: 494
+  vocabulary2_id: 495
+306:
+  vocabulary1_id: 494
+  vocabulary2_id: 496
+307:
+  vocabulary1_id: 497
+  vocabulary2_id: 498
+308:
+  vocabulary1_id: 499
+  vocabulary2_id: 500
+309:
+  vocabulary1_id: 501
+  vocabulary2_id: 502
+310:
+  vocabulary1_id: 503
+  vocabulary2_id: 504
+311:
+  vocabulary1_id: 503
+  vocabulary2_id: 505
+312:
+  vocabulary1_id: 506
+  vocabulary2_id: 507
+313:
+  vocabulary1_id: 508
+  vocabulary2_id: 509
+314:
+  vocabulary1_id: 510
+  vocabulary2_id: 511
+315:
+  vocabulary1_id: 510
+  vocabulary2_id: 512
+316:
+  vocabulary1_id: 513
+  vocabulary2_id: 514
+317:
+  vocabulary1_id: 515
+  vocabulary2_id: 516
+318:
+  vocabulary1_id: 517
+  vocabulary2_id: 518
+319:
+  vocabulary1_id: 517
+  vocabulary2_id: 519
+320:
+  vocabulary1_id: 517
+  vocabulary2_id: 520
+321:
+  vocabulary1_id: 521
+  vocabulary2_id: 522
+322:
+  vocabulary1_id: 521
+  vocabulary2_id: 523
+323:
+  vocabulary1_id: 521
+  vocabulary2_id: 524
+324:
+  vocabulary1_id: 525
+  vocabulary2_id: 526
+325:
+  vocabulary1_id: 527
+  vocabulary2_id: 528
+326:
+  vocabulary1_id: 527
+  vocabulary2_id: 529
+327:
+  vocabulary1_id: 530
+  vocabulary2_id: 531
+328:
+  vocabulary1_id: 532
+  vocabulary2_id: 533
+329:
+  vocabulary1_id: 534
+  vocabulary2_id: 535
+330:
+  vocabulary1_id: 536
+  vocabulary2_id: 537
+331:
+  vocabulary1_id: 536
+  vocabulary2_id: 538
+332:
+  vocabulary1_id: 539
+  vocabulary2_id: 540
+333:
+  vocabulary1_id: 541
+  vocabulary2_id: 542
+334:
+  vocabulary1_id: 543
+  vocabulary2_id: 544
+335:
+  vocabulary1_id: 543
+  vocabulary2_id: 545
+336:
+  vocabulary1_id: 546
+  vocabulary2_id: 547
+337:
+  vocabulary1_id: 546
+  vocabulary2_id: 548
+338:
+  vocabulary1_id: 546
+  vocabulary2_id: 549
+339:
+  vocabulary1_id: 550
+  vocabulary2_id: 551
+340:
+  vocabulary1_id: 552
+  vocabulary2_id: 553
+341:
+  vocabulary1_id: 554
+  vocabulary2_id: 555
+342:
+  vocabulary1_id: 556
+  vocabulary2_id: 557
+343:
+  vocabulary1_id: 558
+  vocabulary2_id: 559
+344:
+  vocabulary1_id: 558
+  vocabulary2_id: 560
+345:
+  vocabulary1_id: 561
+  vocabulary2_id: 562
+346:
+  vocabulary1_id: 563
+  vocabulary2_id: 564
+347:
+  vocabulary1_id: 563
+  vocabulary2_id: 565
+348:
+  vocabulary1_id: 566
+  vocabulary2_id: 567
+349:
+  vocabulary1_id: 566
+  vocabulary2_id: 568
+350:
+  vocabulary1_id: 566
+  vocabulary2_id: 569
+351:
+  vocabulary1_id: 570
+  vocabulary2_id: 571
+352:
+  vocabulary1_id: 572
+  vocabulary2_id: 573
+353:
+  vocabulary1_id: 572
+  vocabulary2_id: 574
+354:
+  vocabulary1_id: 575
+  vocabulary2_id: 576
+355:
+  vocabulary1_id: 575
+  vocabulary2_id: 577
+356:
+  vocabulary1_id: 578
+  vocabulary2_id: 579
+357:
+  vocabulary1_id: 580
+  vocabulary2_id: 581
+358:
+  vocabulary1_id: 580
+  vocabulary2_id: 582
+359:
+  vocabulary1_id: 583
+  vocabulary2_id: 584
+360:
+  vocabulary1_id: 583
+  vocabulary2_id: 585
+361:
+  vocabulary1_id: 586
+  vocabulary2_id: 587
+362:
+  vocabulary1_id: 588
+  vocabulary2_id: 589
+363:
+  vocabulary1_id: 588
+  vocabulary2_id: 590
+364:
+  vocabulary1_id: 591
+  vocabulary2_id: 592
+365:
+  vocabulary1_id: 593
+  vocabulary2_id: 594
+366:
+  vocabulary1_id: 595
+  vocabulary2_id: 596
+367:
+  vocabulary1_id: 597
+  vocabulary2_id: 598
+368:
+  vocabulary1_id: 599
+  vocabulary2_id: 600
+369:
+  vocabulary1_id: 601
+  vocabulary2_id: 602
+370:
+  vocabulary1_id: 603
+  vocabulary2_id: 604
+371:
+  vocabulary1_id: 605
+  vocabulary2_id: 606
+372:
+  vocabulary1_id: 611
+  vocabulary2_id: 612
+373:
+  vocabulary1_id: 613
+  vocabulary2_id: 614
+374:
+  vocabulary1_id: 613
+  vocabulary2_id: 615
+375:
+  vocabulary1_id: 616
+  vocabulary2_id: 617
+376:
+  vocabulary1_id: 616
+  vocabulary2_id: 618
+377:
+  vocabulary1_id: 619
+  vocabulary2_id: 620
+378:
+  vocabulary1_id: 619
+  vocabulary2_id: 621
+379:
+  vocabulary1_id: 622
+  vocabulary2_id: 551
+380:
+  vocabulary1_id: 623
+  vocabulary2_id: 624
+381:
+  vocabulary1_id: 623
+  vocabulary2_id: 625
+382:
+  vocabulary1_id: 626
+  vocabulary2_id: 627
+383:
+  vocabulary1_id: 626
+  vocabulary2_id: 628
+384:
+  vocabulary1_id: 629
+  vocabulary2_id: 630
+385:
+  vocabulary1_id: 631
+  vocabulary2_id: 632
+386:
+  vocabulary1_id: 631
+  vocabulary2_id: 633
+387:
+  vocabulary1_id: 631
+  vocabulary2_id: 634
+388:
+  vocabulary1_id: 635
+  vocabulary2_id: 636
+389:
+  vocabulary1_id: 637
+  vocabulary2_id: 638
+390:
+  vocabulary1_id: 639
+  vocabulary2_id: 640
+391:
+  vocabulary1_id: 641
+  vocabulary2_id: 642
+392:
+  vocabulary1_id: 643
+  vocabulary2_id: 644
+393:
+  vocabulary1_id: 643
+  vocabulary2_id: 645
+394:
+  vocabulary1_id: 646
+  vocabulary2_id: 647
+395:
+  vocabulary1_id: 646
+  vocabulary2_id: 648
+396:
+  vocabulary1_id: 649
+  vocabulary2_id: 650
+397:
+  vocabulary1_id: 649
+  vocabulary2_id: 651
+398:
+  vocabulary1_id: 652
+  vocabulary2_id: 653
+399:
+  vocabulary1_id: 654
+  vocabulary2_id: 655
+400:
+  vocabulary1_id: 657
+  vocabulary2_id: 658
+401:
+  vocabulary1_id: 657
+  vocabulary2_id: 659

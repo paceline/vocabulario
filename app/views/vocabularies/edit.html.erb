@@ -26,7 +26,7 @@
     <% end %>
     <div class="fields">
       <%= label_tag 'Language' %>
-      <%= f.select :language_id, Vocabulary.languages.collect {|p| [ p.word, p.id ] } %>
+      <%= f.select :language_id, languages_for_translation(@translation) %>
       <%= observe_field :vocabulary_word, :url => refresh_language_vocabularies_path, :frequency => 1, :with => 'word' %>
     </div>
     <div class="fields">

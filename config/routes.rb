@@ -25,6 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete, :admin => :put }
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resource :session
+  map.resources :languages, :controller => :vocabularies
   map.resources :vocabularies,
     :member => { :apply_tags => :post, :tag => :post, :unlink => :delete },
     :collection => { :import => [:get, :post], :refresh_language => :get, :select => :get, :tags_for_language => :get }

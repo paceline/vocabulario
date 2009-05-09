@@ -32,7 +32,8 @@ class VocabulariesController < ApplicationController
       redirect_to @translation
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
-      @vocabulary = current_user.vocabularies.build(params[:vocabulary])
+      type = params[:vocabulary][:type] ? params[:vocabulary].delete(:type) : 'Vocabulary'
+      @vocabulary = current_user.send(type.pluralize.downcase).build(params[:vocabulary])
       success = @vocabulary && @vocabulary.valid?
       if success && @vocabulary.errors.empty?
         @vocabulary.save
@@ -106,7 +107,7 @@ class VocabulariesController < ApplicationController
     if @vocabulary
       @language = @vocabulary.language
       render :update do |page|
-        page << "$('vocabulary_language_id').selectedIndex = #{Vocabulary.languages.index(@language)}"
+        page << "$('vocabulary_language_id').selectedIndex = #{Language.list.index(@language)}"
       end
     else
       render :nothing => true
@@ -115,7 +116,7 @@ class VocabulariesController < ApplicationController
   
   # /scores/new support: Make sure to and from select boxes always have different selected languages
   def select
-    @languages = Vocabulary.languages("id != #{params[:language_id]}")
+    @languages = Language.list("id != #{params[:language_id]}")
     @selected = params[:language_id] == params[:selected] ? @languages.first.id : params[:selected].to_i
     render :layout => false
   end

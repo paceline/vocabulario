@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090501154048) do
+ActiveRecord::Schema.define(:version => 20090507204444) do
 
   create_table "scores", :force => true do |t|
     t.integer  "user_id"
@@ -19,16 +19,6 @@ ActiveRecord::Schema.define(:version => 20090501154048) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -54,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20090501154048) do
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
-    t.string   "name",                      :limit => 100, :default => ""
+    t.string   "name",                      :limit => 100
     t.string   "email",                     :limit => 100
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
@@ -76,10 +66,10 @@ ActiveRecord::Schema.define(:version => 20090501154048) do
     t.integer  "language_id"
     t.string   "word"
     t.string   "gender",      :limit => 10, :default => "N/A"
-    t.boolean  "language",                  :default => false
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type",        :limit => 25
   end
 
 end

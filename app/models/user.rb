@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   
   has_many :scores
   has_many :vocabularies
+  has_many :languages
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation

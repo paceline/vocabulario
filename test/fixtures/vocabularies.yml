@@ -1,7 +1,5841 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+1:
+  id: 1
+  user_id: 1
+  language_id: 1
+  word: English
+  gender: the
+  permalink: english
+  created_at: 2009-04-13 09:31:22
+  updated_at: 2009-04-18 15:44:31
+  type: Language
+2:
+  id: 2
+  user_id: 1
+  language_id: 5
+  word: Englisch
+  gender: das
+  created_at: 2009-04-13 09:32:28
+  updated_at: 2009-04-13 10:26:29
+3:
+  id: 3
+  user_id: 1
+  language_id: 7
+  word: inglés
+  gender: el
+  created_at: 2009-04-13 09:34:14
+  updated_at: 2009-05-07 20:02:30
+4:
+  id: 4
+  user_id: 1
+  language_id: 5
+  word: Deutsch
+  gender: das
+  created_at: 2009-04-13 10:00:11
+  updated_at: 2009-04-13 10:27:38
+5:
+  id: 5
+  user_id: 1
+  language_id: 1
+  word: German
+  gender: the
+  permalink: german
+  created_at: 2009-04-13 10:04:39
+  updated_at: 2009-04-13 10:05:42
+  type: Language
+6:
+  id: 6
+  user_id: 1
+  language_id: 7
+  word: alemán
+  gender: el
+  created_at: 2009-04-13 10:11:38
+  updated_at: 2009-05-02 15:55:17
+7:
+  id: 7
+  user_id: 1
+  language_id: 1
+  word: Spanish
+  gender: the
+  permalink: spanish
+  created_at: 2009-04-13 10:13:21
+  updated_at: 2009-04-13 10:13:21
+  type: Language
+8:
+  id: 8
+  user_id: 1
+  language_id: 5
+  word: Spanisch
+  gender: das
+  created_at: 2009-04-13 10:15:08
+  updated_at: 2009-04-13 10:27:50
+9:
+  id: 9
+  user_id: 1
+  language_id: 7
+  word: español
+  gender: el
+  created_at: 2009-04-13 10:16:10
+  updated_at: 2009-05-07 20:03:46
+10:
+  id: 10
+  user_id: 1
+  language_id: 7
+  word: luciénaga
+  gender: la
+  created_at: 2009-04-13 10:22:43
+  updated_at: 2009-05-07 20:04:49
+11:
+  id: 11
+  user_id: 1
+  language_id: 7
+  word: gordo
+  gender: N/A
+  created_at: 2009-04-13 10:32:50
+  updated_at: 2009-04-13 10:32:50
+12:
+  id: 12
+  user_id: 1
+  language_id: 7
+  word: cogote
+  gender: el
+  created_at: 2009-04-13 10:33:38
+  updated_at: 2009-04-13 10:33:38
+13:
+  id: 13
+  user_id: 1
+  language_id: 5
+  word: Glühwürmchen
+  gender: das
+  created_at: 2009-04-13 10:37:46
+  updated_at: 2009-05-07 20:04:17
+14:
+  id: 14
+  user_id: 1
+  language_id: 5
+  word: dick
+  gender: N/A
+  created_at: 2009-04-13 10:39:03
+  updated_at: 2009-04-13 10:39:03
+15:
+  id: 15
+  user_id: 1
+  language_id: 5
+  word: Hinterkopf
+  gender: der
+  created_at: 2009-04-13 10:39:58
+  updated_at: 2009-04-13 10:39:58
+16:
+  id: 16
+  user_id: 1
+  language_id: 5
+  word: Nacken
+  gender: der
+  created_at: 2009-04-13 10:40:00
+  updated_at: 2009-04-13 10:40:00
+17:
+  id: 17
+  user_id: 1
+  language_id: 7
+  word: bromear
+  gender: N/A
+  created_at: 2009-04-13 14:35:00
+  updated_at: 2009-04-13 14:35:00
+18:
+  id: 18
+  user_id: 1
+  language_id: 5
+  word: spaßen
+  gender: N/A
+  created_at: 2009-04-13 15:05:30
+  updated_at: 2009-05-07 20:05:12
+19:
+  id: 19
+  user_id: 1
+  language_id: 7
+  word: comilona
+  gender: la
+  created_at: 2009-04-13 15:23:29
+  updated_at: 2009-04-13 15:23:29
+20:
+  id: 20
+  user_id: 1
+  language_id: 7
+  word: pasar el rato
+  gender: N/A
+  created_at: 2009-04-13 15:33:25
+  updated_at: 2009-04-13 15:33:25
+21:
+  id: 21
+  user_id: 1
+  language_id: 7
+  word: meter
+  gender: N/A
+  created_at: 2009-04-13 15:36:04
+  updated_at: 2009-04-13 15:36:04
+22:
+  id: 22
+  user_id: 1
+  language_id: 5
+  word: sich die Zeit vertreiben
+  gender: N/A
+  created_at: 2009-04-13 15:40:18
+  updated_at: 2009-04-13 15:40:18
+23:
+  id: 23
+  user_id: 1
+  language_id: 5
+  word: hineinstecken
+  gender: N/A
+  created_at: 2009-04-13 15:41:22
+  updated_at: 2009-04-13 15:41:22
+24:
+  id: 24
+  user_id: 1
+  language_id: 5
+  word: Freßorgie
+  gender: die
+  created_at: 2009-04-13 15:43:58
+  updated_at: 2009-05-07 20:05:46
+25:
+  id: 25
+  user_id: 1
+  language_id: 7
+  word: fierro
+  gender: el
+  created_at: 2009-04-13 15:48:14
+  updated_at: 2009-04-13 15:48:14
+26:
+  id: 26
+  user_id: 1
+  language_id: 5
+  word: Eisen
+  gender: das
+  created_at: 2009-04-13 15:48:37
+  updated_at: 2009-04-13 15:48:37
+27:
+  id: 27
+  user_id: 1
+  language_id: 5
+  word: Brandzeichen
+  gender: das
+  created_at: 2009-04-13 15:49:08
+  updated_at: 2009-04-13 15:49:08
+28:
+  id: 28
+  user_id: 1
+  language_id: 7
+  word: hasta
+  gender: N/A
+  created_at: 2009-04-13 15:50:39
+  updated_at: 2009-04-13 15:50:39
+29:
+  id: 29
+  user_id: 1
+  language_id: 5
+  word: bis
+  gender: N/A
+  created_at: 2009-04-13 15:51:16
+  updated_at: 2009-04-13 15:51:16
+30:
+  id: 30
+  user_id: 1
+  language_id: 7
+  word: estar hasta la cogote
+  gender: N/A
+  created_at: 2009-04-13 15:54:57
+  updated_at: 2009-04-13 15:54:57
+31:
+  id: 31
+  user_id: 1
+  language_id: 5
+  word: Die Nase voll haben
+  gender: N/A
+  created_at: 2009-04-13 15:55:11
+  updated_at: 2009-04-13 15:55:11
+32:
+  id: 32
+  user_id: 1
+  language_id: 7
+  word: ronronear
+  gender: N/A
+  created_at: 2009-04-13 15:57:51
+  updated_at: 2009-04-13 15:57:51
+33:
+  id: 33
+  user_id: 1
+  language_id: 5
+  word: schnurren
+  gender: N/A
+  created_at: 2009-04-13 15:57:59
+  updated_at: 2009-04-13 15:57:59
+34:
+  id: 34
+  user_id: 1
+  language_id: 7
+  word: chillar
+  gender: N/A
+  created_at: 2009-04-13 15:59:03
+  updated_at: 2009-04-13 15:59:03
+35:
+  id: 35
+  user_id: 1
+  language_id: 5
+  word: kreischen
+  gender: N/A
+  created_at: 2009-04-13 15:59:20
+  updated_at: 2009-04-13 15:59:20
+36:
+  id: 36
+  user_id: 1
+  language_id: 5
+  word: schreien
+  gender: N/A
+  created_at: 2009-04-13 15:59:35
+  updated_at: 2009-04-13 15:59:35
+37:
+  id: 37
+  user_id: 1
+  language_id: 7
+  word: parecer
+  gender: N/A
+  created_at: 2009-04-13 16:00:59
+  updated_at: 2009-04-13 16:00:59
+38:
+  id: 38
+  user_id: 1
+  language_id: 5
+  word: erscheinen
+  gender: N/A 
+  created_at: 2009-04-13 16:01:07
+  updated_at: 2009-04-13 16:01:07
+39:
+  id: 39
+  user_id: 1
+  language_id: 5
+  word: scheinen
+  gender: N/A
+  created_at: 2009-04-13 16:01:23
+  updated_at: 2009-04-13 16:01:23
+40:
+  id: 40
+  user_id: 1
+  language_id: 5
+  word: aussehen
+  gender: N/A
+  created_at: 2009-04-13 16:01:44
+  updated_at: 2009-04-13 16:01:44
+41:
+  id: 41
+  user_id: 1
+  language_id: 7
+  word: risa
+  gender: la
+  created_at: 2009-04-13 16:02:45
+  updated_at: 2009-04-13 20:25:26
+42:
+  id: 42
+  user_id: 1
+  language_id: 5
+  word: Lachen
+  gender: das
+  created_at: 2009-04-13 16:02:54
+  updated_at: 2009-04-13 16:02:54
+43:
+  id: 43
+  user_id: 1
+  language_id: 7
+  word: carcajada
+  gender: la
+  created_at: 2009-04-13 16:04:21
+  updated_at: 2009-04-13 16:04:21
+44:
+  id: 44
+  user_id: 1
+  language_id: 5
+  word: Gelächter
+  gender: das
+  created_at: 2009-04-13 16:04:35
+  updated_at: 2009-05-07 20:06:38
+45:
+  id: 45
+  user_id: 1
+  language_id: 7
+  word: sonreír
+  gender: N/A
+  created_at: 2009-04-13 16:05:20
+  updated_at: 2009-05-01 17:47:52
+46:
+  id: 46
+  user_id: 1
+  language_id: 5
+  word: angrinsen
+  gender: N/A
+  created_at: 2009-04-13 16:05:34
+  updated_at: 2009-04-13 16:05:34
+47:
+  id: 47
+  user_id: 1
+  language_id: 5
+  word: anlächeln
+  gender: N/A
+  created_at: 2009-04-13 16:05:47
+  updated_at: 2009-05-01 17:47:21
+48:
+  id: 48
+  user_id: 1
+  language_id: 7
+  word: proponer
+  gender: N/A
+  created_at: 2009-04-13 16:06:31
+  updated_at: 2009-04-13 16:06:31
+49:
+  id: 49
+  user_id: 1
+  language_id: 5
+  word: vorschlagen
+  gender: N/A 
+  created_at: 2009-04-13 16:06:39
+  updated_at: 2009-04-13 16:06:39
+50:
+  id: 50
+  user_id: 1
+  language_id: 7
+  word: adivinar
+  gender: N/A
+  created_at: 2009-04-13 16:07:33
+  updated_at: 2009-04-13 17:59:36
+51:
+  id: 51
+  user_id: 1
+  language_id: 5
+  word: erraten
+  gender: N/A 
+  created_at: 2009-04-13 16:07:49
+  updated_at: 2009-04-13 16:07:49
+52:
+  id: 52
+  user_id: 1
+  language_id: 5
+  word: raten
+  gender: N/A
+  created_at: 2009-04-13 16:07:59
+  updated_at: 2009-04-13 16:07:59
+53:
+  id: 53
+  user_id: 1
+  language_id: 7
+  word: cara
+  gender: la
+  permalink: cara
+  created_at: 2009-04-19 17:51:34
+  updated_at: 2009-04-19 17:51:34
+54:
+  id: 54
+  user_id: 1
+  language_id: 5
+  word: Gesicht
+  gender: das
+  permalink: gesicht
+  created_at: 2009-04-19 17:58:57
+  updated_at: 2009-04-19 17:58:57
+55:
+  id: 55
+  user_id: 1
+  language_id: 7
+  word: llegar
+  gender: N/A
+  permalink: llegar
+  created_at: 2009-04-19 17:59:33
+  updated_at: 2009-04-19 17:59:33
+56:
+  id: 56
+  user_id: 1
+  language_id: 5
+  word: ankommen
+  gender: N/A
+  permalink: ankommen
+  created_at: 2009-04-19 18:02:48
+  updated_at: 2009-04-19 18:02:48
+57:
+  id: 57
+  user_id: 1
+  language_id: 7
+  word: concretar
+  gender: N/A
+  permalink: concretar
+  created_at: 2009-04-19 18:03:09
+  updated_at: 2009-04-19 18:03:09
+58:
+  id: 58
+  user_id: 1
+  language_id: 5
+  word: konkretisieren
+  gender: N/A
+  permalink: konkretisieren
+  created_at: 2009-04-19 18:04:33
+  updated_at: 2009-04-19 18:04:33
+59:
+  id: 59
+  user_id: 1
+  language_id: 7
+  word: olvidar
+  gender: N/A
+  permalink: olvidar
+  created_at: 2009-04-19 18:05:19
+  updated_at: 2009-04-19 18:05:19
+60:
+  id: 60
+  user_id: 1
+  language_id: 5
+  word: vergessen
+  gender: N/A
+  permalink: vergessen
+  created_at: 2009-04-19 18:05:27
+  updated_at: 2009-04-19 18:05:27
+61:
+  id: 61
+  user_id: 1
+  language_id: 7
+  word: sumar
+  gender: N/A
+  permalink: sumar
+  created_at: 2009-04-20 20:51:41
+  updated_at: 2009-04-20 20:51:41
+62:
+  id: 62
+  user_id: 1
+  language_id: 5
+  word: addieren
+  gender: 
+  permalink: addieren
+  created_at: 2009-04-20 20:51:51
+  updated_at: 2009-04-20 20:51:51
+63:
+  id: 63
+  user_id: 1
+  language_id: 5
+  word: hinzufügen
+  gender: 
+  permalink: hinzufugen
+  created_at: 2009-04-20 20:52:12
+  updated_at: 2009-05-07 20:11:16
+64:
+  id: 64
+  user_id: 1
+  language_id: 7
+  word: destacar
+  gender: N/A
+  permalink: destacar
+  created_at: 2009-04-20 20:52:59
+  updated_at: 2009-04-20 20:52:59
+65:
+  id: 65
+  user_id: 1
+  language_id: 5
+  word: herausragen
+  gender: 
+  permalink: herausragen
+  created_at: 2009-04-20 20:53:10
+  updated_at: 2009-04-20 20:53:10
+66:
+  id: 66
+  user_id: 1
+  language_id: 5
+  word: hervortreten
+  gender: 
+  permalink: hervortreten
+  created_at: 2009-04-20 20:53:32
+  updated_at: 2009-04-20 20:53:32
+67:
+  id: 67
+  user_id: 1
+  language_id: 7
+  word: miércoles
+  gender: el
+  permalink: miercoles
+  created_at: 2009-04-20 20:54:07
+  updated_at: 2009-04-25 11:29:56
+68:
+  id: 68
+  user_id: 1
+  language_id: 5
+  word: Montag
+  gender: der
+  permalink: montag
+  created_at: 2009-04-20 20:55:12
+  updated_at: 2009-04-20 20:55:12
+69:
+  id: 69
+  user_id: 1
+  language_id: 7
+  word: perseguidor
+  gender: el
+  permalink: perseguidor
+  created_at: 2009-04-20 20:55:37
+  updated_at: 2009-04-20 20:55:37
+70:
+  id: 70
+  user_id: 1
+  language_id: 5
+  word: Verfolger
+  gender: der
+  permalink: verfolger
+  created_at: 2009-04-20 20:55:46
+  updated_at: 2009-04-20 20:55:46
+71:
+  id: 71
+  user_id: 1
+  language_id: 7
+  word: desgaste
+  gender: el
+  permalink: desgaste
+  created_at: 2009-04-20 20:56:26
+  updated_at: 2009-04-20 20:56:26
+72:
+  id: 72
+  user_id: 1
+  language_id: 5
+  word: Abnutzung
+  gender: die
+  permalink: abnutzung
+  created_at: 2009-04-20 20:56:46
+  updated_at: 2009-04-20 20:56:46
+73:
+  id: 73
+  user_id: 1
+  language_id: 5
+  word: Verschleiß
+  gender: der
+  permalink: verschleiss
+  created_at: 2009-04-20 20:57:04
+  updated_at: 2009-05-02 15:56:24
+74:
+  id: 74
+  user_id: 1
+  language_id: 7
+  word: valorar
+  gender: N/A
+  permalink: valorar
+  created_at: 2009-04-20 20:57:30
+  updated_at: 2009-04-20 20:57:30
+75:
+  id: 75
+  user_id: 1
+  language_id: 5
+  word: bewerten
+  gender: N/A
+  permalink: bewerten
+  created_at: 2009-04-20 20:57:45
+  updated_at: 2009-04-20 20:57:45
+76:
+  id: 76
+  user_id: 1
+  language_id: 5
+  word: würdigen
+  gender: N/A
+  permalink: wurdigen
+  created_at: 2009-04-20 20:58:03
+  updated_at: 2009-05-07 20:08:35
+77:
+  id: 77
+  user_id: 1
+  language_id: 7
+  word: descanso
+  gender: el
+  permalink: descanso
+  created_at: 2009-04-20 20:59:27
+  updated_at: 2009-04-20 20:59:27
+78:
+  id: 78
+  user_id: 1
+  language_id: 5
+  word: Halbzeitpause
+  gender: die
+  permalink: halbzeitpause
+  created_at: 2009-04-20 20:59:40
+  updated_at: 2009-04-20 20:59:40
+79:
+  id: 79
+  user_id: 1
+  language_id: 5
+  word: Pause
+  gender: die
+  permalink: pause
+  created_at: 2009-04-20 21:00:01
+  updated_at: 2009-04-20 21:00:01
+80:
+  id: 80
+  user_id: 1
+  language_id: 7
+  word: a veces
+  gender: N/A
+  permalink: a-veces
+  created_at: 2009-04-20 21:00:26
+  updated_at: 2009-04-20 21:00:26
+81:
+  id: 81
+  user_id: 1
+  language_id: 5
+  word: ab und an
+  gender: N/A
+  permalink: ab-und-an
+  created_at: 2009-04-20 21:00:38
+  updated_at: 2009-04-20 21:00:38
+82:
+  id: 82
+  user_id: 1
+  language_id: 5
+  word: ab und zu
+  gender: N/A
+  permalink: ab-und-zu
+  created_at: 2009-04-20 21:00:56
+  updated_at: 2009-04-20 21:00:56
+83:
+  id: 83
+  user_id: 1
+  language_id: 7
+  word: plantilla
+  gender: la
+  permalink: plantilla
+  created_at: 2009-04-20 21:01:26
+  updated_at: 2009-04-20 21:01:26
+84:
+  id: 84
+  user_id: 1
+  language_id: 5
+  word: Belegschaft
+  gender: die
+  permalink: belegschaft
+  created_at: 2009-04-20 21:01:38
+  updated_at: 2009-04-20 21:01:38
+85:
+  id: 85
+  user_id: 1
+  language_id: 5
+  word: Mannschaft
+  gender: die
+  permalink: mannschaft
+  created_at: 2009-04-20 21:01:58
+  updated_at: 2009-04-20 21:01:58
+86:
+  id: 86
+  user_id: 1
+  language_id: 7
+  word: árbitro
+  gender: el
+  permalink: arbitro
+  created_at: 2009-04-20 21:02:31
+  updated_at: 2009-05-01 17:49:32
+87:
+  id: 87
+  user_id: 1
+  language_id: 5
+  word: Schiedsrichter
+  gender: der
+  permalink: schiedsrichter
+  created_at: 2009-04-20 21:02:44
+  updated_at: 2009-04-20 21:02:44
+88:
+  id: 88
+  user_id: 1
+  language_id: 7
+  word: manchego
+  gender: N/A
+  permalink: manchego
+  created_at: 2009-04-20 21:03:34
+  updated_at: 2009-04-20 21:03:34
+89:
+  id: 89
+  user_id: 1
+  language_id: 5
+  word: aus La Mancha
+  gender: N/A
+  permalink: aus-la-mancha
+  created_at: 2009-04-20 21:03:42
+  updated_at: 2009-04-20 21:03:42
+90:
+  id: 90
+  user_id: 1
+  language_id: 7
+  word: a cada instante
+  gender: N/A
+  permalink: a-cada-instante
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+91:
+  id: 91
+  user_id: 1
+  language_id: 5
+  word: Zu jedem Zeitpunkt
+  gender: N/A
+  permalink: zu-jedem-zeitpunkt
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+92:
+  id: 92
+  user_id: 1
+  language_id: 7
+  word: a lo lejos
+  gender: N/A
+  permalink: a-lo-lejos
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+93:
+  id: 93
+  user_id: 1
+  language_id: 5
+  word: in der Ferne
+  gender: N/A
+  permalink: in-der-ferne
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+94:
+  id: 94
+  user_id: 1
+  language_id: 7
+  word: abertura
+  gender: la
+  permalink: abertura
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+95:
+  id: 95
+  user_id: 1
+  language_id: 5
+  word: Öffnung
+  gender: die
+  permalink: ffnung
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-05-07 20:25:57
+96:
+  id: 96
+  user_id: 1
+  language_id: 7
+  word: abismo
+  gender: el
+  permalink: abismo
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+97:
+  id: 97
+  user_id: 1
+  language_id: 5
+  word: Abgrund
+  gender: N/A
+  permalink: abgrund
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+98:
+  id: 98
+  user_id: 1
+  language_id: 5
+  word: Kluft
+  gender: N/A
+  permalink: kluft
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+99:
+  id: 99
+  user_id: 1
+  language_id: 7
+  word: abrigado
+  gender: N/A
+  permalink: abrigado
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+100:
+  id: 100
+  user_id: 1
+  language_id: 5
+  word: geschützt
+  gender: N/A
+  permalink: geschtzt
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-05-07 20:08:45
+101:
+  id: 101
+  user_id: 1
+  language_id: 5
+  word: warm angezogen
+  gender: N/A
+  permalink: warm-angezogen
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+102:
+  id: 102
+  user_id: 1
+  language_id: 7
+  word: adjunto
+  gender: el
+  permalink: adjunto
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+103:
+  id: 103
+  user_id: 1
+  language_id: 5
+  word: Stellvertreter
+  gender: N/A
+  permalink: stellvertreter
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+104:
+  id: 104
+  user_id: 1
+  language_id: 7
+  word: algarrobo
+  gender: el
+  permalink: algarrobo
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+105:
+  id: 105
+  user_id: 1
+  language_id: 5
+  word: Johannesbrotbaum
+  gender: N/A
+  permalink: johannesbrotbaum
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+106:
+  id: 106
+  user_id: 1
+  language_id: 7
+  word: almohada
+  gender: la
+  permalink: almohada
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+107:
+  id: 107
+  user_id: 1
+  language_id: 5
+  word: Kissen
+  gender: N/A
+  permalink: kissen
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+108:
+  id: 108
+  user_id: 1
+  language_id: 5
+  word: Kopfkissen
+  gender: N/A
+  permalink: kopfkissen
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+109:
+  id: 109
+  user_id: 1
+  language_id: 7
+  word: alumbrar algo
+  gender: N/A
+  permalink: alumbrar-algo
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+110:
+  id: 110
+  user_id: 1
+  language_id: 5
+  word: etwas beleuchten
+  gender: N/A
+  permalink: etwas-beleuchten
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+111:
+  id: 111
+  user_id: 1
+  language_id: 5
+  word: etwas erhellen
+  gender: N/A
+  permalink: etwas-erhellen
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+112:
+  id: 112
+  user_id: 1
+  language_id: 7
+  word: amanecer
+  gender: el
+  permalink: amanecer
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+113:
+  id: 113
+  user_id: 1
+  language_id: 5
+  word: Tagesanbruch
+  gender: N/A
+  permalink: tagesanbruch
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+114:
+  id: 114
+  user_id: 1
+  language_id: 5
+  word: Morgengrauen
+  gender: N/A
+  permalink: morgengrauen
+  created_at: 2009-04-24 20:11:08
+  updated_at: 2009-04-24 20:11:08
+115:
+  id: 115
+  user_id: 1
+  language_id: 7
+  word: amenaza
+  gender: la
+  permalink: amenaza
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+116:
+  id: 116
+  user_id: 1
+  language_id: 5
+  word: Bedrohung
+  gender: N/A
+  permalink: bedrohung
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+117:
+  id: 117
+  user_id: 1
+  language_id: 7
+  word: amistad
+  gender: la
+  permalink: amistad
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+118:
+  id: 118
+  user_id: 1
+  language_id: 5
+  word: Freundschaft
+  gender: N/A
+  permalink: freundschaft
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+119:
+  id: 119
+  user_id: 1
+  language_id: 7
+  word: aplanadora
+  gender: la
+  permalink: aplanadora
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+120:
+  id: 120
+  user_id: 1
+  language_id: 5
+  word: Planiermaschine
+  gender: N/A
+  permalink: planiermaschine
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+121:
+  id: 121
+  user_id: 1
+  language_id: 7
+  word: aprensión
+  gender: la
+  permalink: aprensin
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-05-01 17:48:53
+122:
+  id: 122
+  user_id: 1
+  language_id: 5
+  word: Besorgnis
+  gender: N/A
+  permalink: besorgnis
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+123:
+  id: 123
+  user_id: 1
+  language_id: 7
+  word: apretar
+  gender: N/A
+  permalink: apretar
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+124:
+  id: 124
+  user_id: 1
+  language_id: 5
+  word: abdrücken
+  gender: N/A
+  permalink: abdrcken
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-28 21:27:24
+125:
+  id: 125
+  user_id: 1
+  language_id: 5
+  word: zusammendrücken
+  gender: N/A
+  permalink: zusammendrcken
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-05-07 20:25:31
+126:
+  id: 126
+  user_id: 1
+  language_id: 5
+  word: drängen
+  gender: N/A
+  permalink: drngen
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-05-07 20:09:54
+127:
+  id: 127
+  user_id: 1
+  language_id: 7
+  word: armería
+  gender: la
+  permalink: armera
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-05-03 01:12:17
+128:
+  id: 128
+  user_id: 1
+  language_id: 5
+  word: Waffenkammer
+  gender: die
+  permalink: waffenkammer
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-05-03 01:13:10
+129:
+  id: 129
+  user_id: 1
+  language_id: 5
+  word: Waffengeschäft
+  gender: das
+  permalink: waffengeschft
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-05-03 01:13:02
+130:
+  id: 130
+  user_id: 1
+  language_id: 7
+  word: arrobato de tristeza
+  gender: N/A
+  permalink: arrobato-de-tristeza
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+131:
+  id: 131
+  user_id: 1
+  language_id: 5
+  word: Anwandlung von Tristesse
+  gender: N/A
+  permalink: anwandlung-von-tristesse
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-04-24 20:11:09
+132:
+  id: 132
+  user_id: 1
+  language_id: 7
+  word: Así debe de
+  gender: N/A
+  permalink: as-debe-de-so-muss
+  created_at: 2009-04-24 20:11:09
+  updated_at: 2009-05-01 17:45:43
+133:
+  id: 137
+  user_id: 1
+  language_id: 7
+  word: asomar
+  gender: N/A
+  permalink: asomar
+  created_at: 2009-04-24 20:14:55
+  updated_at: 2009-04-24 20:14:55
+134:
+  id: 138
+  user_id: 1
+  language_id: 7
+  word: asustar
+  gender: N/A
+  permalink: asustar
+  created_at: 2009-04-24 20:14:55
+  updated_at: 2009-04-24 20:14:55
+135:
+  id: 139
+  user_id: 1
+  language_id: 5
+  word: erschrecken
+  gender: N/A
+  permalink: erschrecken
+  created_at: 2009-04-24 20:14:55
+  updated_at: 2009-04-24 20:14:55
+136:
+  id: 140
+  user_id: 1
+  language_id: 5
+  word: schrecken
+  gender: N/A
+  permalink: schrecken
+  created_at: 2009-04-24 20:14:55
+  updated_at: 2009-04-24 20:14:55
+137:
+  id: 141
+  user_id: 1
+  language_id: 7
+  word: aunque
+  gender: N/A
+  permalink: aunque
+  created_at: 2009-04-24 20:14:55
+  updated_at: 2009-04-24 20:14:55
+138:
+  id: 142
+  user_id: 1
+  language_id: 5
+  word: auch wenn
+  gender: N/A
+  permalink: auch-wenn
+  created_at: 2009-04-24 20:14:55
+  updated_at: 2009-04-24 20:14:55
+139:
+  id: 143
+  user_id: 1
+  language_id: 7
+  word: bajar
+  gender: N/A
+  permalink: bajar
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+140:
+  id: 144
+  user_id: 1
+  language_id: 5
+  word: hinabsteigen
+  gender: N/A
+  permalink: hinabsteigen
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+141:
+  id: 145
+  user_id: 1
+  language_id: 5
+  word: herunterklettern
+  gender: N/A
+  permalink: herunterklettern
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+142:
+  id: 146
+  user_id: 1
+  language_id: 7
+  word: baúl
+  gender: el
+  permalink: bal
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-07 20:31:23
+143:
+  id: 147
+  user_id: 1
+  language_id: 5
+  word: Truhe
+  gender: N/A
+  permalink: truhe
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+144:
+  id: 148
+  user_id: 1
+  language_id: 7
+  word: bolsillo
+  gender: el
+  permalink: bolsillo
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+145:
+  id: 149
+  user_id: 1
+  language_id: 5
+  word: Hosentasche
+  gender: N/A
+  permalink: hosentasche
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+146:
+  id: 150
+  user_id: 1
+  language_id: 5
+  word: Westentasche
+  gender: N/A
+  permalink: westentasche
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+147:
+  id: 151
+  user_id: 1
+  language_id: 7
+  word: borrar
+  gender: N/A
+  permalink: borrar
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+148:
+  id: 152
+  user_id: 1
+  language_id: 5
+  word: ausradieren
+  gender: N/A
+  permalink: ausradieren
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+149:
+  id: 153
+  user_id: 1
+  language_id: 5
+  word: löschen
+  gender: N/A
+  permalink: lschen
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-07 20:28:39
+150:
+  id: 154
+  user_id: 1
+  language_id: 7
+  word: bostezar
+  gender: N/A
+  permalink: bostezar
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+151:
+  id: 155
+  user_id: 1
+  language_id: 5
+  word: gŠhnen
+  gender: N/A
+  permalink: ghnen
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+152:
+  id: 156
+  user_id: 1
+  language_id: 7
+  word: brazo
+  gender: el
+  permalink: brazo
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+153:
+  id: 157
+  user_id: 1
+  language_id: 5
+  word: Arm
+  gender: N/A
+  permalink: arm
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+154:
+  id: 158
+  user_id: 1
+  language_id: 5
+  word: Oberarm
+  gender: N/A
+  permalink: oberarm
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+155:
+  id: 159
+  user_id: 1
+  language_id: 7
+  word: caballete
+  gender: el
+  permalink: caballete
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+156:
+  id: 160
+  user_id: 1
+  language_id: 5
+  word: Sägebock
+  gender: N/A
+  permalink: sgebock
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-07 20:12:17
+157:
+  id: 161
+  user_id: 1
+  language_id: 5
+  word: Holzbock
+  gender: N/A
+  permalink: holzbock
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+158:
+  id: 162
+  user_id: 1
+  language_id: 7
+  word: cabo
+  gender: el
+  permalink: cabo
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+159:
+  id: 163
+  user_id: 1
+  language_id: 5
+  word: Ende
+  gender: N/A
+  permalink: ende
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+160:
+  id: 164
+  user_id: 1
+  language_id: 5
+  word: Vorgebirge
+  gender: N/A
+  permalink: vorgebirge
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+161:
+  id: 165
+  user_id: 1
+  language_id: 5
+  word: Zipfel
+  gender: N/A
+  permalink: zipfel
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+162:
+  id: 166
+  user_id: 1
+  language_id: 7
+  word: cabra
+  gender: la
+  permalink: cabra
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+163:
+  id: 167
+  user_id: 1
+  language_id: 5
+  word: Ziege
+  gender: N/A
+  permalink: ziege
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+164:
+  id: 168
+  user_id: 1
+  language_id: 7
+  word: cacharro
+  gender: el
+  permalink: cacharro
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+165:
+  id: 169
+  user_id: 1
+  language_id: 5
+  word: Topf
+  gender: N/A
+  permalink: topf
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+166:
+  id: 170
+  user_id: 1
+  language_id: 7
+  word: calamina
+  gender: la
+  permalink: calamina
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+167:
+  id: 171
+  user_id: 1
+  language_id: 5
+  word: Wellblech
+  gender: N/A
+  permalink: wellblech
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+168:
+  id: 172
+  user_id: 1
+  language_id: 7
+  word: cambiar
+  gender: N/A
+  permalink: cambiar
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+169:
+  id: 173
+  user_id: 1
+  language_id: 5
+  word: schalten
+  gender: N/A
+  permalink: schalten
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+170:
+  id: 174
+  user_id: 1
+  language_id: 5
+  word: umstellen
+  gender: N/A
+  permalink: umstellen
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+171:
+  id: 175
+  user_id: 1
+  language_id: 7
+  word: campamento
+  gender: N/A
+  permalink: campamento
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+172:
+  id: 176
+  user_id: 1
+  language_id: 5
+  word: Lager
+  gender: N/A
+  permalink: lager
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+173:
+  id: 177
+  user_id: 1
+  language_id: 5
+  word: Feldlager
+  gender: N/A
+  permalink: feldlager
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+174:
+  id: 178
+  user_id: 1
+  language_id: 7
+  word: capataco
+  gender: el
+  permalink: capataco
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+175:
+  id: 179
+  user_id: 1
+  language_id: 5
+  word: Vorarbeiter
+  gender: N/A
+  permalink: vorarbeiter
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+176:
+  id: 180
+  user_id: 1
+  language_id: 7
+  word: carretera
+  gender: N/A
+  permalink: carretera
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+177:
+  id: 181
+  user_id: 1
+  language_id: 5
+  word: Landstraße
+  gender: die
+  permalink: landstrae
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-07 20:28:21
+178:
+  id: 182
+  user_id: 1
+  language_id: 7
+  word: casita
+  gender: la
+  permalink: casita
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+179:
+  id: 183
+  user_id: 1
+  language_id: 5
+  word: HŠuschen
+  gender: N/A
+  permalink: huschen
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+180:
+  id: 184
+  user_id: 1
+  language_id: 7
+  word: castañetear
+  gender: N/A
+  permalink: castaetear
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-07 20:02:00
+181:
+  id: 185
+  user_id: 1
+  language_id: 5
+  word: klappern
+  gender: N/A
+  permalink: klappern
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+182:
+  id: 186
+  user_id: 1
+  language_id: 5
+  word: schnalzen
+  gender: N/A
+  permalink: schnalzen
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+183:
+  id: 187
+  user_id: 1
+  language_id: 5
+  word: schnippen
+  gender: N/A
+  permalink: schnippen
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+184:
+  id: 188
+  user_id: 1
+  language_id: 7
+  word: catre
+  gender: el
+  permalink: catre
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+185:
+  id: 189
+  user_id: 1
+  language_id: 5
+  word: Feldbett
+  gender: N/A
+  permalink: feldbett
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+186:
+  id: 190
+  user_id: 1
+  language_id: 7
+  word: ceder
+  gender: N/A
+  permalink: ceder
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+187:
+  id: 191
+  user_id: 1
+  language_id: 5
+  word: aufgeben
+  gender: N/A
+  permalink: aufgeben
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+188:
+  id: 192
+  user_id: 1
+  language_id: 5
+  word: einlenken
+  gender: N/A
+  permalink: einlenken
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+189:
+  id: 193
+  user_id: 1
+  language_id: 7
+  word: ceño fruncido
+  gender: el
+  permalink: ceo-fruncido
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-08 12:45:42
+190:
+  id: 194
+  user_id: 1
+  language_id: 5
+  word: Finstere Miene
+  gender: die
+  permalink: finstere-miene
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-08 12:45:47
+191:
+  id: 195
+  user_id: 1
+  language_id: 5
+  word: Stirnrunzeln
+  gender: das
+  permalink: stirnrunzeln
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-08 12:45:53
+192:
+  id: 196
+  user_id: 1
+  language_id: 7
+  word: cerro
+  gender: el
+  permalink: cerro
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-04-24 20:14:56
+193:
+  id: 197
+  user_id: 1
+  language_id: 5
+  word: Hügel
+  gender: N/A
+  permalink: hgel
+  created_at: 2009-04-24 20:14:56
+  updated_at: 2009-05-07 20:10:02
+194:
+  id: 198
+  user_id: 1
+  language_id: 7
+  word: charango
+  gender: el
+  permalink: charango
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+195:
+  id: 199
+  user_id: 1
+  language_id: 5
+  word: der Charango - kleines Zupfinstrument aus der Andenregion
+  gender: N/A
+  permalink: der-charango-kleines-zupfinstrument-aus-der-andenregion
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+196:
+  id: 200
+  user_id: 1
+  language_id: 7
+  word: choza
+  gender: la
+  permalink: choza
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+197:
+  id: 201
+  user_id: 1
+  language_id: 5
+  word: HŸtte
+  gender: N/A
+  permalink: htte
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+198:
+  id: 202
+  user_id: 1
+  language_id: 7
+  word: cocinita
+  gender: la
+  permalink: cocinita
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+199:
+  id: 203
+  user_id: 1
+  language_id: 5
+  word: Kleinküche
+  gender: N/A
+  permalink: kleinkche
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-07 20:27:54
+200:
+  id: 204
+  user_id: 1
+  language_id: 7
+  word: cola
+  gender: la
+  permalink: cola
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+201:
+  id: 205
+  user_id: 1
+  language_id: 5
+  word: Schweif
+  gender: N/A
+  permalink: schweif
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+202:
+  id: 206
+  user_id: 1
+  language_id: 5
+  word: Heck
+  gender: N/A
+  permalink: heck
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+203:
+  id: 207
+  user_id: 1
+  language_id: 5
+  word: Schlange
+  gender: N/A
+  permalink: schlange
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+204:
+  id: 208
+  user_id: 1
+  language_id: 7
+  word: comisura de boca
+  gender: N/A
+  permalink: comisura-de-boca
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+205:
+  id: 209
+  user_id: 1
+  language_id: 5
+  word: Mundwinkel
+  gender: N/A
+  permalink: mundwinkel
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+206:
+  id: 210
+  user_id: 1
+  language_id: 7
+  word: compinche
+  gender: el
+  permalink: compinche
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+207:
+  id: 211
+  user_id: 1
+  language_id: 5
+  word: Kumpan
+  gender: N/A
+  permalink: kumpan
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+208:
+  id: 212
+  user_id: 1
+  language_id: 7
+  word: comœn
+  gender: N/A
+  permalink: comn
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+209:
+  id: 213
+  user_id: 1
+  language_id: 5
+  word: gemein
+  gender: N/A
+  permalink: gemein
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+210:
+  id: 214
+  user_id: 1
+  language_id: 5
+  word: einheimisch
+  gender: N/A
+  permalink: einheimisch
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+211:
+  id: 215
+  user_id: 1
+  language_id: 7
+  word: comunero
+  gender: el
+  permalink: comunero
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+212:
+  id: 216
+  user_id: 1
+  language_id: 5
+  word: Bürger
+  gender: N/A
+  permalink: brger
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-03 01:04:40
+213:
+  id: 217
+  user_id: 1
+  language_id: 7
+  word: consejo
+  gender: el
+  permalink: consejo
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+214:
+  id: 218
+  user_id: 1
+  language_id: 5
+  word: Ratschlag
+  gender: N/A
+  permalink: ratschlag
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+215:
+  id: 219
+  user_id: 1
+  language_id: 5
+  word: Beirat
+  gender: N/A
+  permalink: beirat
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+216:
+  id: 220
+  user_id: 1
+  language_id: 5
+  word: Tipp
+  gender: N/A
+  permalink: tipp
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+217:
+  id: 221
+  user_id: 1
+  language_id: 7
+  word: contar algo
+  gender: N/A
+  permalink: contar-algo
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+218:
+  id: 222
+  user_id: 1
+  language_id: 5
+  word: fabulieren
+  gender: N/A
+  permalink: fabulieren
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+219:
+  id: 223
+  user_id: 1
+  language_id: 7
+  word: criollo
+  gender: el
+  permalink: criollo
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+220:
+  id: 224
+  user_id: 1
+  language_id: 5
+  word: Spanisch-stämmiger
+  gender: N/A
+  permalink: spanisch-stmmiger
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-07 20:22:15
+221:
+  id: 225
+  user_id: 1
+  language_id: 7
+  word: crudeza
+  gender: la
+  permalink: crudeza
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+222:
+  id: 226
+  user_id: 1
+  language_id: 5
+  word: HŠrte
+  gender: N/A
+  permalink: hrte
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+223:
+  id: 227
+  user_id: 1
+  language_id: 5
+  word: Roheit
+  gender: N/A
+  permalink: roheit
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+224:
+  id: 228
+  user_id: 1
+  language_id: 7
+  word: cuidadoso
+  gender: N/A
+  permalink: cuidadoso
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+225:
+  id: 229
+  user_id: 1
+  language_id: 5
+  word: sorgfältig
+  gender: N/A
+  permalink: sorgfltig
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-07 20:24:27
+226:
+  id: 230
+  user_id: 1
+  language_id: 5
+  word: bedacht
+  gender: N/A
+  permalink: bedacht
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+227:
+  id: 231
+  user_id: 1
+  language_id: 5
+  word: behutsam
+  gender: N/A
+  permalink: behutsam
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+228:
+  id: 232
+  user_id: 1
+  language_id: 7
+  word: cuidar
+  gender: N/A
+  permalink: cuidar
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+229:
+  id: 233
+  user_id: 1
+  language_id: 5
+  word: aufpassen
+  gender: N/A
+  permalink: aufpassen
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+230:
+  id: 234
+  user_id: 1
+  language_id: 5
+  word: achtgeben
+  gender: N/A
+  permalink: achtgeben
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+231:
+  id: 235
+  user_id: 1
+  language_id: 7
+  word: cumbre
+  gender: la
+  permalink: cumbre
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+232:
+  id: 236
+  user_id: 1
+  language_id: 5
+  word: Gipfel
+  gender: N/A
+  permalink: gipfel
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+233:
+  id: 237
+  user_id: 1
+  language_id: 5
+  word: Spitze
+  gender: N/A
+  permalink: spitze
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+234:
+  id: 238
+  user_id: 1
+  language_id: 5
+  word: Gipfeltreffen
+  gender: N/A
+  permalink: gipfeltreffen
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+235:
+  id: 239
+  user_id: 1
+  language_id: 7
+  word: deducir
+  gender: N/A
+  permalink: deducir
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+236:
+  id: 240
+  user_id: 1
+  language_id: 5
+  word: ableiten
+  gender: N/A
+  permalink: ableiten
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+237:
+  id: 241
+  user_id: 1
+  language_id: 5
+  word: abziehen
+  gender: N/A
+  permalink: abziehen
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+238:
+  id: 242
+  user_id: 1
+  language_id: 5
+  word: entnehmen
+  gender: N/A
+  permalink: entnehmen
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+239:
+  id: 243
+  user_id: 1
+  language_id: 7
+  word: defendernos podremos
+  gender: N/A
+  permalink: defendernos-podremos
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+240:
+  id: 244
+  user_id: 1
+  language_id: 5
+  word: wir können uns selbst verteidigen
+  gender: N/A
+  permalink: wir-knnen-uns-selbst-verteidigen
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-07 20:11:35
+241:
+  id: 245
+  user_id: 1
+  language_id: 7
+  word: del costeño
+  gender: N/A
+  permalink: del-costeo
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-07 20:24:54
+242:
+  id: 246
+  user_id: 1
+  language_id: 5
+  word: von der Küste
+  gender: N/A
+  permalink: von-der-kste
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-07 20:24:46
+243:
+  id: 247
+  user_id: 1
+  language_id: 7
+  word: delante
+  gender: N/A
+  permalink: delante
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+244:
+  id: 248
+  user_id: 1
+  language_id: 5
+  word: vor
+  gender: N/A
+  permalink: vor
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+245:
+  id: 249
+  user_id: 1
+  language_id: 5
+  word: davor
+  gender: N/A
+  permalink: davor
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+246:
+  id: 250
+  user_id: 1
+  language_id: 7
+  word: desconsuelo
+  gender: el
+  permalink: desconsuelo
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+247:
+  id: 251
+  user_id: 1
+  language_id: 5
+  word: Trostlosigkeit
+  gender: die
+  permalink: trostlosigkeit
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-05-07 20:14:14
+248:
+  id: 252
+  user_id: 1
+  language_id: 7
+  word: desmayarse
+  gender: N/A
+  permalink: desmayarse
+  created_at: 2009-04-24 20:14:57
+  updated_at: 2009-04-24 20:14:57
+249:
+  id: 253
+  user_id: 1
+  language_id: 5
+  word: ohnmächtig werden
+  gender: N/A
+  permalink: ohnmchtig-werden
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:20:14
+250:
+  id: 254
+  user_id: 1
+  language_id: 5
+  word: zusammenbrechen
+  gender: N/A
+  permalink: zusammenbrechen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+251:
+  id: 255
+  user_id: 1
+  language_id: 7
+  word: desmoronar
+  gender: N/A
+  permalink: desmoronar
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+252:
+  id: 256
+  user_id: 1
+  language_id: 5
+  word: zerfallen
+  gender: N/A
+  permalink: zerfallen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+253:
+  id: 257
+  user_id: 1
+  language_id: 5
+  word: zerbröckeln
+  gender: N/A
+  permalink: zerbrckeln
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-08 15:04:21
+254:
+  id: 258
+  user_id: 1
+  language_id: 5
+  word: abreißen
+  gender: N/A
+  permalink: abreien
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-01 17:49:51
+255:
+  id: 259
+  user_id: 1
+  language_id: 7
+  word: desolación
+  gender: la
+  permalink: desolacin
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:12:49
+256:
+  id: 260
+  user_id: 1
+  language_id: 7
+  word: devolver
+  gender: N/A
+  permalink: devolver
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+257:
+  id: 261
+  user_id: 1
+  language_id: 5
+  word: erbrechen
+  gender: N/A
+  permalink: erbrechen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+258:
+  id: 262
+  user_id: 1
+  language_id: 5
+  word: wiedergeben
+  gender: N/A
+  permalink: wiedergeben
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+259:
+  id: 263
+  user_id: 1
+  language_id: 5
+  word: zurückbringen
+  gender: N/A
+  permalink: zurckbringen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:08:57
+260:
+  id: 264
+  user_id: 1
+  language_id: 7
+  word: diente
+  gender: el
+  permalink: diente
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+261:
+  id: 265
+  user_id: 1
+  language_id: 5
+  word: Zahn
+  gender: N/A
+  permalink: zahn
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+262:
+  id: 266
+  user_id: 1
+  language_id: 7
+  word: edad
+  gender: la
+  permalink: edad
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+263:
+  id: 267
+  user_id: 1
+  language_id: 5
+  word: Alter
+  gender: N/A
+  permalink: alter
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+264:
+  id: 268
+  user_id: 1
+  language_id: 7
+  word: empeñar
+  gender: N/A
+  permalink: empear
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-01 18:27:40
+265:
+  id: 269
+  user_id: 1
+  language_id: 5
+  word: verpfänden
+  gender: N/A
+  permalink: verpfnden
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-01 18:26:57
+266:
+  id: 270
+  user_id: 1
+  language_id: 5
+  word: versetzen
+  gender: N/A
+  permalink: versetzen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+267:
+  id: 271
+  user_id: 1
+  language_id: 5
+  word: beharren auf
+  gender: N/A
+  permalink: beharren-auf
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+268:
+  id: 272
+  user_id: 1
+  language_id: 7
+  word: empujar
+  gender: N/A
+  permalink: empujar
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+269:
+  id: 273
+  user_id: 1
+  language_id: 5
+  word: (an)schieben
+  gender: N/A
+  permalink: anschieben
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+270:
+  id: 274
+  user_id: 1
+  language_id: 5
+  word: (an)stoßen
+  gender: N/A
+  permalink: anstoen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-28 21:27:45
+271:
+  id: 275
+  user_id: 1
+  language_id: 5
+  word: drängeln
+  gender: N/A
+  permalink: drngeln
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:09:07
+272:
+  id: 276
+  user_id: 1
+  language_id: 7
+  word: en cambio
+  gender: N/A
+  permalink: en-cambio
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+273:
+  id: 277
+  user_id: 1
+  language_id: 5
+  word: stattdessen
+  gender: N/A
+  permalink: stattdessen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+274:
+  id: 278
+  user_id: 1
+  language_id: 7
+  word: enfermedad
+  gender: la
+  permalink: enfermedad
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+275:
+  id: 279
+  user_id: 1
+  language_id: 5
+  word: Krankheit
+  gender: N/A
+  permalink: krankheit
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+276:
+  id: 280
+  user_id: 1
+  language_id: 5
+  word: Erkrankung
+  gender: N/A
+  permalink: erkrankung
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+277:
+  id: 281
+  user_id: 1
+  language_id: 5
+  word: Siechtum
+  gender: N/A
+  permalink: siechtum
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+278:
+  id: 282
+  user_id: 1
+  language_id: 7
+  word: engaño
+  gender: el
+  permalink: engaarnos
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:23:12
+279:
+  id: 283
+  user_id: 1
+  language_id: 5
+  word: Täuschung
+  gender: die
+  permalink: tuschung
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:22:34
+280:
+  id: 284
+  user_id: 1
+  language_id: 7
+  word: entra–a
+  gender: la
+  permalink: entraa
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+281:
+  id: 285
+  user_id: 1
+  language_id: 5
+  word: Eingeweide
+  gender: N/A
+  permalink: eingeweide
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+282:
+  id: 286
+  user_id: 1
+  language_id: 7
+  word: entrecortar
+  gender: N/A
+  permalink: entrecortar
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+283:
+  id: 287
+  user_id: 1
+  language_id: 5
+  word: stocken 
+  gender: N/A
+  permalink: stocken
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+284:
+  id: 288
+  user_id: 1
+  language_id: 5
+  word: unterbrechen
+  gender: N/A
+  permalink: unterbrechen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+285:
+  id: 289
+  user_id: 1
+  language_id: 7
+  word: escrutinio
+  gender: el
+  permalink: escrutinio
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+286:
+  id: 290
+  user_id: 1
+  language_id: 5
+  word: Prüfung
+  gender: N/A
+  permalink: prfung
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:17:37
+287:
+  id: 291
+  user_id: 1
+  language_id: 5
+  word: Wahlprüfung
+  gender: die
+  permalink: wahlprfung
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:25:15
+288:
+  id: 292
+  user_id: 1
+  language_id: 7
+  word: esfumar
+  gender: N/A
+  permalink: esfumar
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+289:
+  id: 293
+  user_id: 1
+  language_id: 5
+  word: abtönen
+  gender: N/A
+  permalink: abtnen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-03 00:07:50
+290:
+  id: 294
+  user_id: 1
+  language_id: 5
+  word: verwischen
+  gender: N/A
+  permalink: verwischen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+291:
+  id: 295
+  user_id: 1
+  language_id: 7
+  word: estera
+  gender: la
+  permalink: estera
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+292:
+  id: 296
+  user_id: 1
+  language_id: 5
+  word: Matte
+  gender: N/A
+  permalink: matte
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+293:
+  id: 297
+  user_id: 1
+  language_id: 5
+  word: Fu§matte
+  gender: N/A
+  permalink: fumatte
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+294:
+  id: 298
+  user_id: 1
+  language_id: 7
+  word: estremeciar
+  gender: N/A
+  permalink: estremeciar
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+295:
+  id: 299
+  user_id: 1
+  language_id: 5
+  word: erschŸttern
+  gender: N/A
+  permalink: erschttern
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+296:
+  id: 300
+  user_id: 1
+  language_id: 7
+  word: evaporar
+  gender: N/A
+  permalink: evaporar
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+297:
+  id: 301
+  user_id: 1
+  language_id: 5
+  word: dünsten
+  gender: N/A
+  permalink: dnsten
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-05-07 20:16:34
+298:
+  id: 302
+  user_id: 1
+  language_id: 5
+  word: verfliegen
+  gender: N/A
+  permalink: verfliegen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+299:
+  id: 303
+  user_id: 1
+  language_id: 5
+  word: verdampfen
+  gender: N/A
+  permalink: verdampfen
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+300:
+  id: 304
+  user_id: 1
+  language_id: 7
+  word: filudo
+  gender: N/A
+  permalink: filudo
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+301:
+  id: 305
+  user_id: 1
+  language_id: 5
+  word: messerscharf
+  gender: N/A
+  permalink: messerscharf
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+302:
+  id: 306
+  user_id: 1
+  language_id: 7
+  word: fuera
+  gender: N/A
+  permalink: fuera
+  created_at: 2009-04-24 20:14:58
+  updated_at: 2009-04-24 20:14:58
+303:
+  id: 307
+  user_id: 1
+  language_id: 5
+  word: drau§en
+  gender: N/A
+  permalink: drauen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+304:
+  id: 308
+  user_id: 1
+  language_id: 5
+  word: hinaus
+  gender: N/A
+  permalink: hinaus
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+305:
+  id: 309
+  user_id: 1
+  language_id: 7
+  word: fusil ametrallador
+  gender: N/A
+  permalink: fusil-ametrallador
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+306:
+  id: 310
+  user_id: 1
+  language_id: 5
+  word: Maschinengewehr
+  gender: N/A
+  permalink: maschinengewehr
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+307:
+  id: 311
+  user_id: 1
+  language_id: 7
+  word: fusil
+  gender: el
+  permalink: fusil
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+308:
+  id: 312
+  user_id: 1
+  language_id: 5
+  word: Gewehr
+  gender: N/A
+  permalink: gewehr
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+309:
+  id: 313
+  user_id: 1
+  language_id: 5
+  word: Flinte
+  gender: N/A
+  permalink: flinte
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+310:
+  id: 314
+  user_id: 1
+  language_id: 7
+  word: garantizar
+  gender: N/A
+  permalink: garantizar
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+311:
+  id: 315
+  user_id: 1
+  language_id: 5
+  word: verbürgen
+  gender: N/A
+  permalink: verbrgen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-05-07 20:09:16
+312:
+  id: 316
+  user_id: 1
+  language_id: 5
+  word: gewährleisten
+  gender: N/A
+  permalink: gewhrleisten
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-05-07 20:09:36
+313:
+  id: 317
+  user_id: 1
+  language_id: 7
+  word: goteron
+  gender: el
+  permalink: goteron
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+314:
+  id: 318
+  user_id: 1
+  language_id: 5
+  word: gro§er Tropfen
+  gender: N/A
+  permalink: groer-tropfen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+315:
+  id: 319
+  user_id: 1
+  language_id: 7
+  word: hielo
+  gender: el
+  permalink: hielo
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+316:
+  id: 320
+  user_id: 1
+  language_id: 5
+  word: Eis
+  gender: N/A
+  permalink: eis
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+317:
+  id: 321
+  user_id: 1
+  language_id: 7
+  word: hilito de saliva
+  gender: N/A
+  permalink: hilito-de-saliva
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+318:
+  id: 322
+  user_id: 1
+  language_id: 5
+  word: Speichelfaden
+  gender: N/A
+  permalink: speichelfaden
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+319:
+  id: 323
+  user_id: 1
+  language_id: 7
+  word: hojalata
+  gender: la
+  permalink: hojalata
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+320:
+  id: 324
+  user_id: 1
+  language_id: 5
+  word: Blech
+  gender: N/A
+  permalink: blech
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+321:
+  id: 325
+  user_id: 1
+  language_id: 7
+  word: hondo
+  gender: N/A
+  permalink: hondo
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+322:
+  id: 326
+  user_id: 1
+  language_id: 5
+  word: tief
+  gender: N/A
+  permalink: tief
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+323:
+  id: 327
+  user_id: 1
+  language_id: 7
+  word: hosco
+  gender: N/A
+  permalink: hosco
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+324:
+  id: 328
+  user_id: 1
+  language_id: 5
+  word: mürrisch
+  gender: N/A
+  permalink: mrrisch
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-05-07 20:17:28
+325:
+  id: 329
+  user_id: 1
+  language_id: 7
+  word: huelco
+  gender: el
+  permalink: huelco
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+326:
+  id: 330
+  user_id: 1
+  language_id: 5
+  word: Loch
+  gender: N/A
+  permalink: loch
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+327:
+  id: 332
+  user_id: 1
+  language_id: 7
+  word: hueso
+  gender: el
+  permalink: hueso
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+328:
+  id: 333
+  user_id: 1
+  language_id: 5
+  word: Gebein
+  gender: N/A
+  permalink: gebein
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+329:
+  id: 334
+  user_id: 1
+  language_id: 7
+  word: inconquistable
+  gender: N/A
+  permalink: inconquistable
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+330:
+  id: 335
+  user_id: 1
+  language_id: 5
+  word: uneinnehmbar
+  gender: N/A
+  permalink: uneinnehmbar
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+331:
+  id: 336
+  user_id: 1
+  language_id: 7
+  word: inminente
+  gender: N/A
+  permalink: inminente
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+332:
+  id: 337
+  user_id: 1
+  language_id: 5
+  word: unimittelbar bevorstehend
+  gender: N/A
+  permalink: unimittelbar-bevorstehend
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+333:
+  id: 338
+  user_id: 1
+  language_id: 7
+  word: irrompible
+  gender: N/A
+  permalink: irrompible
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+334:
+  id: 339
+  user_id: 1
+  language_id: 5
+  word: unzerbrechlich
+  gender: N/A
+  permalink: unzerbrechlich
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+335:
+  id: 340
+  user_id: 1
+  language_id: 7
+  word: lagartija
+  gender: la
+  permalink: lagartija
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+336:
+  id: 341
+  user_id: 1
+  language_id: 5
+  word: Echse
+  gender: N/A
+  permalink: echse
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+337:
+  id: 342
+  user_id: 1
+  language_id: 7
+  word: l‡piz
+  gender: el
+  permalink: lpiz
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+338:
+  id: 343
+  user_id: 1
+  language_id: 5
+  word: Bleistift
+  gender: N/A
+  permalink: bleistift
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+339:
+  id: 344
+  user_id: 1
+  language_id: 7
+  word: l‡stima
+  gender: la
+  permalink: lstima
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+340:
+  id: 345
+  user_id: 1
+  language_id: 5
+  word: Mitleid
+  gender: N/A
+  permalink: mitleid
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+341:
+  id: 346
+  user_id: 1
+  language_id: 5
+  word: Bedauern
+  gender: N/A
+  permalink: bedauern
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+342:
+  id: 347
+  user_id: 1
+  language_id: 7
+  word: levantar
+  gender: N/A
+  permalink: levantar
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+343:
+  id: 348
+  user_id: 1
+  language_id: 5
+  word: aufheben
+  gender: N/A
+  permalink: aufheben
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+344:
+  id: 349
+  user_id: 1
+  language_id: 5
+  word: aufrichten
+  gender: N/A
+  permalink: aufrichten
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+345:
+  id: 350
+  user_id: 1
+  language_id: 5
+  word: aufstehen
+  gender: N/A
+  permalink: aufstehen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+346:
+  id: 351
+  user_id: 1
+  language_id: 7
+  word: llorar
+  gender: N/A
+  permalink: llorar
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+347:
+  id: 352
+  user_id: 1
+  language_id: 5
+  word: bedauern
+  gender: N/A
+  permalink: bedauern-2
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+348:
+  id: 353
+  user_id: 1
+  language_id: 5
+  word: weinen
+  gender: N/A
+  permalink: weinen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+349:
+  id: 354
+  user_id: 1
+  language_id: 5
+  word: beweinen
+  gender: N/A
+  permalink: beweinen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+350:
+  id: 355
+  user_id: 1
+  language_id: 7
+  word: llover
+  gender: N/A
+  permalink: llover
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+351:
+  id: 356
+  user_id: 1
+  language_id: 5
+  word: regnen
+  gender: N/A
+  permalink: regnen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+352:
+  id: 357
+  user_id: 1
+  language_id: 7
+  word: lo demás
+  gender: N/A
+  permalink: lolos-dems
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-05-07 20:00:20
+353:
+  id: 358
+  user_id: 1
+  language_id: 5
+  word: Übrige
+  gender: das
+  permalink: das-brige-die-brigen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-05-07 19:59:08
+354:
+  id: 359
+  user_id: 1
+  language_id: 7
+  word: malestar
+  gender: el
+  permalink: malestar
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+355:
+  id: 360
+  user_id: 1
+  language_id: 5
+  word: Unbehagen
+  gender: N/A
+  permalink: unbehagen
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+356:
+  id: 361
+  user_id: 1
+  language_id: 5
+  word: Unwohlsein
+  gender: N/A
+  permalink: unwohlsein
+  created_at: 2009-04-24 20:14:59
+  updated_at: 2009-04-24 20:14:59
+357:
+  id: 362
+  user_id: 1
+  language_id: 7
+  word: maleta
+  gender: la
+  permalink: maleta
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+358:
+  id: 363
+  user_id: 1
+  language_id: 5
+  word: Koffer
+  gender: N/A
+  permalink: koffer
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+359:
+  id: 364
+  user_id: 1
+  language_id: 7
+  word: manchado
+  gender: N/A
+  permalink: manchado
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+360:
+  id: 365
+  user_id: 1
+  language_id: 5
+  word: fleckig
+  gender: N/A
+  permalink: fleckig
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+361:
+  id: 366
+  user_id: 1
+  language_id: 5
+  word: beschmutzt
+  gender: N/A
+  permalink: beschmutzt
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+362:
+  id: 367
+  user_id: 1
+  language_id: 7
+  word: manera de ser
+  gender: la
+  permalink: manera-de-ser
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-28 21:29:48
+363:
+  id: 368
+  user_id: 1
+  language_id: 5
+  word: Art zu sein
+  gender: die
+  permalink: art-zu-sein
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-28 21:29:40
+364:
+  id: 369
+  user_id: 1
+  language_id: 7
+  word: mascullar
+  gender: N/A
+  permalink: mascullar
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+365:
+  id: 370
+  user_id: 1
+  language_id: 5
+  word: murmeln
+  gender: N/A
+  permalink: murmeln
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+366:
+  id: 371
+  user_id: 1
+  language_id: 7
+  word: matar
+  gender: N/A
+  permalink: matar
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+367:
+  id: 372
+  user_id: 1
+  language_id: 5
+  word: abrackern
+  gender: N/A
+  permalink: abrackern
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+368:
+  id: 373
+  user_id: 1
+  language_id: 5
+  word: erschie§en
+  gender: N/A
+  permalink: erschieen
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+369:
+  id: 374
+  user_id: 1
+  language_id: 5
+  word: niedermachen
+  gender: N/A
+  permalink: niedermachen
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+370:
+  id: 375
+  user_id: 1
+  language_id: 7
+  word: mechón
+  gender: el
+  permalink: mechn
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-05-03 01:07:05
+371:
+  id: 376
+  user_id: 1
+  language_id: 5
+  word: Büschel
+  gender: das
+  permalink: bschel
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-05-03 01:08:33
+372:
+  id: 377
+  user_id: 1
+  language_id: 5
+  word: Strähne
+  gender: N/A
+  permalink: strhne
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-05-03 01:07:24
+373:
+  id: 378
+  user_id: 1
+  language_id: 7
+  word: merecer
+  gender: N/A
+  permalink: merecer
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+374:
+  id: 379
+  user_id: 1
+  language_id: 5
+  word: lohnen
+  gender: N/A
+  permalink: lohnen
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+375:
+  id: 380
+  user_id: 1
+  language_id: 5
+  word: verdienen
+  gender: N/A
+  permalink: verdienen
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+376:
+  id: 381
+  user_id: 1
+  language_id: 7
+  word: meseta
+  gender: la
+  permalink: meseta
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+377:
+  id: 382
+  user_id: 1
+  language_id: 5
+  word: Plateau
+  gender: N/A
+  permalink: plateau
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+378:
+  id: 383
+  user_id: 1
+  language_id: 5
+  word: Hochebene
+  gender: N/A
+  permalink: hochebene
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+379:
+  id: 384
+  user_id: 1
+  language_id: 7
+  word: metralleta
+  gender: la
+  permalink: metralleta
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+380:
+  id: 385
+  user_id: 1
+  language_id: 5
+  word: Maschinenpistole
+  gender: N/A
+  permalink: maschinenpistole
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+381:
+  id: 386
+  user_id: 1
+  language_id: 7
+  word: mezcladora
+  gender: la
+  permalink: mezcladora
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+382:
+  id: 387
+  user_id: 1
+  language_id: 5
+  word: Betonmischmaschine
+  gender: N/A
+  permalink: betonmischmaschine
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+383:
+  id: 388
+  user_id: 1
+  language_id: 7
+  word: miedo
+  gender: el
+  permalink: miedo
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+384:
+  id: 389
+  user_id: 1
+  language_id: 5
+  word: Angst
+  gender: N/A
+  permalink: angst
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+385:
+  id: 390
+  user_id: 1
+  language_id: 7
+  word: milicia
+  gender: la
+  permalink: milicia
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+386:
+  id: 391
+  user_id: 1
+  language_id: 5
+  word: Bürgerwehr
+  gender: N/A
+  permalink: brgerwehr
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-05-03 01:05:45
+387:
+  id: 392
+  user_id: 1
+  language_id: 5
+  word: Miliz
+  gender: N/A
+  permalink: miliz
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+388:
+  id: 393
+  user_id: 1
+  language_id: 7
+  word: mirada huidiza
+  gender: N/A
+  permalink: mirada-huidiza
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+389:
+  id: 394
+  user_id: 1
+  language_id: 5
+  word: Schwerer Blick
+  gender: N/A
+  permalink: schwerer-blick
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+390:
+  id: 395
+  user_id: 1
+  language_id: 7
+  word: mir‡ndolo
+  gender: N/A
+  permalink: mirndolo
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+391:
+  id: 396
+  user_id: 1
+  language_id: 5
+  word: gerade
+  gender: N/A
+  permalink: gerade
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+392:
+  id: 397
+  user_id: 1
+  language_id: 7
+  word: mirar
+  gender: N/A
+  permalink: mirar
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+393:
+  id: 398
+  user_id: 1
+  language_id: 5
+  word: anstrahlen
+  gender: N/A
+  permalink: anstrahlen
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+394:
+  id: 399
+  user_id: 1
+  language_id: 5
+  word: anblicken
+  gender: N/A
+  permalink: anblicken
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+395:
+  id: 400
+  user_id: 1
+  language_id: 5
+  word: beobachten
+  gender: N/A
+  permalink: beobachten
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+396:
+  id: 401
+  user_id: 1
+  language_id: 7
+  word: mudito
+  gender: N/A
+  permalink: mudito
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+397:
+  id: 402
+  user_id: 1
+  language_id: 5
+  word: stumm
+  gender: N/A
+  permalink: stumm
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+398:
+  id: 403
+  user_id: 1
+  language_id: 7
+  word: mudo
+  gender: el
+  permalink: mudo
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+399:
+  id: 404
+  user_id: 1
+  language_id: 5
+  word: Stumme
+  gender: N/A
+  permalink: stumme
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+400:
+  id: 405
+  user_id: 1
+  language_id: 7
+  word: musitar
+  gender: N/A
+  permalink: musitar
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+401:
+  id: 406
+  user_id: 1
+  language_id: 7
+  word: Ni siquiera
+  gender: N/A
+  permalink: ni-siquiera
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+402:
+  id: 407
+  user_id: 1
+  language_id: 5
+  word: Nicht einmal
+  gender: N/A
+  permalink: nicht-einmal
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+403:
+  id: 408
+  user_id: 1
+  language_id: 7
+  word: noches pegados
+  gender: N/A
+  permalink: noches-pegados
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+404:
+  id: 409
+  user_id: 1
+  language_id: 5
+  word: schlaflose Nächte
+  gender: N/A
+  permalink: schlaflose-nchte
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-05-07 20:21:59
+405:
+  id: 410
+  user_id: 1
+  language_id: 7
+  word: nomás
+  gender: N/A
+  permalink: noms
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-05-07 20:35:06
+406:
+  id: 411
+  user_id: 1
+  language_id: 5
+  word: lediglich
+  gender: N/A
+  permalink: lediglich
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+407:
+  id: 412
+  user_id: 1
+  language_id: 7
+  word: nube
+  gender: la
+  permalink: nube
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+408:
+  id: 413
+  user_id: 1
+  language_id: 5
+  word: Wolke
+  gender: N/A
+  permalink: wolke
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+409:
+  id: 414
+  user_id: 1
+  language_id: 7
+  word: ocultar
+  gender: N/A
+  permalink: ocultar
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+410:
+  id: 415
+  user_id: 1
+  language_id: 5
+  word: verbergen
+  gender: N/A
+  permalink: verbergen
+  created_at: 2009-04-24 20:15:00
+  updated_at: 2009-04-24 20:15:00
+411:
+  id: 416
+  user_id: 1
+  language_id: 5
+  word: verschweigen
+  gender: N/A
+  permalink: verschweigen
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+412:
+  id: 417
+  user_id: 1
+  language_id: 7
+  word: ofrenda
+  gender: la
+  permalink: ofrenda
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+413:
+  id: 418
+  user_id: 1
+  language_id: 5
+  word: Opfer
+  gender: N/A
+  permalink: opfer
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+414:
+  id: 419
+  user_id: 1
+  language_id: 5
+  word: Geschenk
+  gender: N/A
+  permalink: geschenk
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+415:
+  id: 420
+  user_id: 1
+  language_id: 7
+  word: oído
+  gender: el
+  permalink: odo
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-07 20:17:03
+416:
+  id: 421
+  user_id: 1
+  language_id: 5
+  word: Ohr
+  gender: N/A
+  permalink: ohr
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+417:
+  id: 422
+  user_id: 1
+  language_id: 5
+  word: Gehör
+  gender: N/A
+  permalink: gehr
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-07 20:17:14
+418:
+  id: 423
+  user_id: 1
+  language_id: 5
+  word: Gehörsinn
+  gender: N/A
+  permalink: gehrsinn
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-07 20:16:45
+419:
+  id: 424
+  user_id: 1
+  language_id: 7
+  word: olor
+  gender: el
+  permalink: olor
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+420:
+  id: 425
+  user_id: 1
+  language_id: 5
+  word: Duft
+  gender: N/A
+  permalink: duft
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+421:
+  id: 426
+  user_id: 1
+  language_id: 7
+  word: orla
+  gender: la
+  permalink: orla
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+422:
+  id: 427
+  user_id: 1
+  language_id: 5
+  word: Besatz
+  gender: N/A
+  permalink: besatz
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+423:
+  id: 428
+  user_id: 1
+  language_id: 7
+  word: oscurecer
+  gender: N/A
+  permalink: oscurecer
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+424:
+  id: 429
+  user_id: 1
+  language_id: 5
+  word: abdunkeln
+  gender: N/A
+  permalink: abdunkeln
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+425:
+  id: 430
+  user_id: 1
+  language_id: 5
+  word: verdunkeln
+  gender: N/A
+  permalink: verdunkeln
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+426:
+  id: 431
+  user_id: 1
+  language_id: 7
+  word: oveja
+  gender: la
+  permalink: oveja
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+427:
+  id: 432
+  user_id: 1
+  language_id: 5
+  word: Schaf
+  gender: N/A
+  permalink: schaf
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+428:
+  id: 433
+  user_id: 1
+  language_id: 7
+  word: paisaje
+  gender: N/A
+  permalink: paisaje
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+429:
+  id: 434
+  user_id: 1
+  language_id: 5
+  word: Landschaft
+  gender: N/A
+  permalink: landschaft
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+430:
+  id: 435
+  user_id: 1
+  language_id: 7
+  word: paja
+  gender: N/A
+  permalink: paja
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+431:
+  id: 436
+  user_id: 1
+  language_id: 5
+  word: Stroh
+  gender: N/A
+  permalink: stroh
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+432:
+  id: 437
+  user_id: 1
+  language_id: 7
+  word: pájaro
+  gender: el
+  permalink: pjaro
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-07 20:18:13
+433:
+  id: 438
+  user_id: 1
+  language_id: 5
+  word: Vogel
+  gender: N/A
+  permalink: vogel
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+434:
+  id: 439
+  user_id: 1
+  language_id: 7
+  word: parejita
+  gender: la
+  permalink: parejita
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+435:
+  id: 440
+  user_id: 1
+  language_id: 5
+  word: Pärchen
+  gender: N/A
+  permalink: prchen
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-07 20:18:28
+436:
+  id: 441
+  user_id: 1
+  language_id: 7
+  word: pavorreal
+  gender: el
+  permalink: pavorreal
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+437:
+  id: 442
+  user_id: 1
+  language_id: 5
+  word: Pfau
+  gender: N/A
+  permalink: pfau
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+438:
+  id: 443
+  user_id: 1
+  language_id: 7
+  word: pegar
+  gender: N/A
+  permalink: pegar
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+439:
+  id: 444
+  user_id: 1
+  language_id: 5
+  word: aufkleben
+  gender: N/A
+  permalink: aufkleben
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+440:
+  id: 445
+  user_id: 1
+  language_id: 5
+  word: verkleben
+  gender: N/A
+  permalink: verkleben
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+441:
+  id: 446
+  user_id: 1
+  language_id: 5
+  word: anheften
+  gender: N/A
+  permalink: anheften
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+442:
+  id: 447
+  user_id: 1
+  language_id: 7
+  word: pel’cula de terror
+  gender: N/A
+  permalink: pelcula-de-terror
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+443:
+  id: 448
+  user_id: 1
+  language_id: 5
+  word: Horrorfilm
+  gender: N/A
+  permalink: horrorfilm
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+444:
+  id: 449
+  user_id: 1
+  language_id: 7
+  word: pellejo
+  gender: el
+  permalink: pellejo
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+445:
+  id: 450
+  user_id: 1
+  language_id: 5
+  word: Haut
+  gender: N/A
+  permalink: haut
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+446:
+  id: 451
+  user_id: 1
+  language_id: 7
+  word: peón
+  gender: el
+  permalink: pen
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-07 20:20:40
+447:
+  id: 452
+  user_id: 1
+  language_id: 5
+  word: Bauer
+  gender: N/A
+  permalink: bauer
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+448:
+  id: 453
+  user_id: 1
+  language_id: 5
+  word: Hilfsarbeiter
+  gender: N/A
+  permalink: hilfsarbeiter
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+449:
+  id: 454
+  user_id: 1
+  language_id: 7
+  word: permanecer
+  gender: N/A
+  permalink: permanecer
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+450:
+  id: 455
+  user_id: 1
+  language_id: 5
+  word: aufhalten
+  gender: N/A
+  permalink: aufhalten
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+451:
+  id: 456
+  user_id: 1
+  language_id: 5
+  word: verbleiben
+  gender: N/A
+  permalink: verbleiben
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+452:
+  id: 457
+  user_id: 1
+  language_id: 7
+  word: picadillo
+  gender: el
+  permalink: picadillo
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+453:
+  id: 458
+  user_id: 1
+  language_id: 5
+  word: Hackfleisch
+  gender: N/A
+  permalink: hackfleisch
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+454:
+  id: 459
+  user_id: 1
+  language_id: 7
+  word: picotazo
+  gender: el
+  permalink: picotazo
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+455:
+  id: 460
+  user_id: 1
+  language_id: 5
+  word: Schnabelhieb
+  gender: N/A
+  permalink: schnabelhieb
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+456:
+  id: 461
+  user_id: 1
+  language_id: 7
+  word: piedra
+  gender: la
+  permalink: piedra
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+457:
+  id: 462
+  user_id: 1
+  language_id: 5
+  word: Felsbrocken
+  gender: N/A
+  permalink: felsbrocken
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+458:
+  id: 463
+  user_id: 1
+  language_id: 5
+  word: Stein
+  gender: N/A
+  permalink: stein
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+459:
+  id: 464
+  user_id: 1
+  language_id: 7
+  word: poblado
+  gender: poblada
+  permalink: poblado
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+460:
+  id: 465
+  user_id: 1
+  language_id: 5
+  word: bevölkerungsreich
+  gender: N/A
+  permalink: bevlkerungsreich
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-01 17:50:17
+461:
+  id: 466
+  user_id: 1
+  language_id: 5
+  word: dichtbevšlkert
+  gender: N/A
+  permalink: dichtbevlkert
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+462:
+  id: 467
+  user_id: 1
+  language_id: 7
+  word: presión
+  gender: N/A
+  permalink: presin
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-05-07 20:18:58
+463:
+  id: 468
+  user_id: 1
+  language_id: 5
+  word: Druck
+  gender: N/A
+  permalink: druck
+  created_at: 2009-04-24 20:15:01
+  updated_at: 2009-04-24 20:15:01
+464:
+  id: 469
+  user_id: 1
+  language_id: 7
+  word: pues
+  gender: N/A
+  permalink: pues
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+465:
+  id: 470
+  user_id: 1
+  language_id: 5
+  word: dann
+  gender: N/A
+  permalink: dann
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+466:
+  id: 471
+  user_id: 1
+  language_id: 5
+  word: also
+  gender: N/A
+  permalink: also
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+467:
+  id: 472
+  user_id: 1
+  language_id: 7
+  word: puna
+  gender: la
+  permalink: puna
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+468:
+  id: 473
+  user_id: 1
+  language_id: 5
+  word: Hšhenkrankheit
+  gender: N/A
+  permalink: hhenkrankheit
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+469:
+  id: 474
+  user_id: 1
+  language_id: 7
+  word: Que ahoga
+  gender: N/A
+  permalink: que-ahoga
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+470:
+  id: 475
+  user_id: 1
+  language_id: 5
+  word: zum ersticken
+  gender: N/A
+  permalink: zum-ersticken
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+471:
+  id: 476
+  user_id: 1
+  language_id: 7
+  word: quejar
+  gender: N/A
+  permalink: quejar
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+472:
+  id: 477
+  user_id: 1
+  language_id: 5
+  word: Über etw. Klagen
+  gender: N/A
+  permalink: ber-etw-klagen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-05-07 20:09:27
+473:
+  id: 478
+  user_id: 1
+  language_id: 5
+  word: stšhnen
+  gender: N/A
+  permalink: sthnen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+474:
+  id: 479
+  user_id: 1
+  language_id: 5
+  word: schimpfen
+  gender: N/A
+  permalink: schimpfen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+475:
+  id: 480
+  user_id: 1
+  language_id: 7
+  word: rato
+  gender: el
+  permalink: rato
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+476:
+  id: 481
+  user_id: 1
+  language_id: 5
+  word: Weile
+  gender: N/A
+  permalink: weile
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+477:
+  id: 482
+  user_id: 1
+  language_id: 7
+  word: rayo
+  gender: el
+  permalink: rayo
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+478:
+  id: 483
+  user_id: 1
+  language_id: 5
+  word: Blitz
+  gender: N/A
+  permalink: blitz
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+479:
+  id: 484
+  user_id: 1
+  language_id: 5
+  word: Strahl
+  gender: N/A
+  permalink: strahl
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+480:
+  id: 485
+  user_id: 1
+  language_id: 7
+  word: rebaño
+  gender: el
+  permalink: rebao
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-05-07 20:19:43
+481:
+  id: 486
+  user_id: 1
+  language_id: 5
+  word: Herde
+  gender: N/A
+  permalink: herde
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+482:
+  id: 487
+  user_id: 1
+  language_id: 7
+  word: rebuscar
+  gender: N/A
+  permalink: rebuscar
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+483:
+  id: 488
+  user_id: 1
+  language_id: 5
+  word: durchforsten
+  gender: N/A
+  permalink: durchforsten
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+484:
+  id: 489
+  user_id: 1
+  language_id: 5
+  word: herumsuchen
+  gender: N/A
+  permalink: herumsuchen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+485:
+  id: 490
+  user_id: 1
+  language_id: 7
+  word: recoveco
+  gender: el
+  permalink: recoveco
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+486:
+  id: 491
+  user_id: 1
+  language_id: 5
+  word: KrŸmmung
+  gender: N/A
+  permalink: krmmung
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+487:
+  id: 492
+  user_id: 1
+  language_id: 7
+  word: retumbar
+  gender: N/A
+  permalink: retumbar
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+488:
+  id: 493
+  user_id: 1
+  language_id: 5
+  word: dršhnen
+  gender: N/A
+  permalink: drhnen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+489:
+  id: 494
+  user_id: 1
+  language_id: 7
+  word: riachuelo
+  gender: el
+  permalink: riachuelo
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+490:
+  id: 495
+  user_id: 1
+  language_id: 5
+  word: Bach
+  gender: N/A
+  permalink: bach
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+491:
+  id: 496
+  user_id: 1
+  language_id: 5
+  word: FlŸsschen
+  gender: N/A
+  permalink: flsschen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+492:
+  id: 497
+  user_id: 1
+  language_id: 7
+  word: ronquido
+  gender: el
+  permalink: ronquido
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+493:
+  id: 498
+  user_id: 1
+  language_id: 5
+  word: Schnarchen
+  gender: N/A
+  permalink: schnarchen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+494:
+  id: 499
+  user_id: 1
+  language_id: 7
+  word: ropero desfondado
+  gender: N/A
+  permalink: ropero-desfondado
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+495:
+  id: 500
+  user_id: 1
+  language_id: 5
+  word: Ein Kleiderschrank mit ausgeschagenem Boden
+  gender: N/A
+  permalink: ein-kleiderschrank-mit-ausgeschagenem-boden
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+496:
+  id: 501
+  user_id: 1
+  language_id: 7
+  word: se burlarbar
+  gender: N/A
+  permalink: se-burlarbar
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+497:
+  id: 502
+  user_id: 1
+  language_id: 5
+  word: sich lustig machen über
+  gender: N/A
+  permalink: sich-lustig-machen-ber
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-05-03 00:14:15
+498:
+  id: 503
+  user_id: 1
+  language_id: 7
+  word: se inmutar
+  gender: N/A
+  permalink: se-inmutar
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+499:
+  id: 504
+  user_id: 1
+  language_id: 5
+  word: sich aufregen
+  gender: N/A
+  permalink: sich-aufregen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+500:
+  id: 505
+  user_id: 1
+  language_id: 5
+  word: sich verändern
+  gender: N/A
+  permalink: sich-verngern
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-05-07 20:10:31
+501:
+  id: 506
+  user_id: 1
+  language_id: 7
+  word: semejante
+  gender: N/A
+  permalink: semejante
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+502:
+  id: 507
+  user_id: 1
+  language_id: 5
+  word: Šhnlich
+  gender: N/A
+  permalink: hnlich
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+503:
+  id: 508
+  user_id: 1
+  language_id: 7
+  word: serrano
+  gender: N/A
+  permalink: serrano
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+504:
+  id: 509
+  user_id: 1
+  language_id: 5
+  word: Berg-
+  gender: N/A
+  permalink: berg
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+505:
+  id: 510
+  user_id: 1
+  language_id: 7
+  word: serrucho
+  gender: el
+  permalink: serrucho
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+506:
+  id: 511
+  user_id: 1
+  language_id: 5
+  word: Fuchsschwanz
+  gender: N/A
+  permalink: fuchsschwanz
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+507:
+  id: 512
+  user_id: 1
+  language_id: 5
+  word: Handsäge
+  gender: N/A
+  permalink: handsge
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-05-07 20:11:01
+508:
+  id: 513
+  user_id: 1
+  language_id: 7
+  word: sien
+  gender: la
+  permalink: sien
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+509:
+  id: 514
+  user_id: 1
+  language_id: 5
+  word: Schläfe
+  gender: die
+  permalink: schlfe
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-05-08 15:05:05
+510:
+  id: 515
+  user_id: 1
+  language_id: 7
+  word: sincerar
+  gender: N/A
+  permalink: sincerar
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+511:
+  id: 516
+  user_id: 1
+  language_id: 5
+  word: rechtfertigen
+  gender: N/A
+  permalink: rechtfertigen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+512:
+  id: 517
+  user_id: 1
+  language_id: 7
+  word: soltar
+  gender: N/A
+  permalink: soltar
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+513:
+  id: 518
+  user_id: 1
+  language_id: 5
+  word: loslassen
+  gender: N/A
+  permalink: loslassen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+514:
+  id: 519
+  user_id: 1
+  language_id: 5
+  word: abgehen
+  gender: N/A
+  permalink: abgehen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+515:
+  id: 520
+  user_id: 1
+  language_id: 5
+  word: auslösen
+  gender: N/A
+  permalink: auslsen
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-05-08 12:43:57
+516:
+  id: 521
+  user_id: 1
+  language_id: 7
+  word: subir
+  gender: N/A
+  permalink: subir
+  created_at: 2009-04-24 20:15:02
+  updated_at: 2009-04-24 20:15:02
+517:
+  id: 522
+  user_id: 1
+  language_id: 5
+  word: ansteigen
+  gender: N/A
+  permalink: ansteigen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+518:
+  id: 523
+  user_id: 1
+  language_id: 5
+  word: auflaufen
+  gender: N/A
+  permalink: auflaufen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+519:
+  id: 524
+  user_id: 1
+  language_id: 5
+  word: erhšhen
+  gender: N/A
+  permalink: erhhen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+520:
+  id: 525
+  user_id: 1
+  language_id: 7
+  word: suelo
+  gender: el
+  permalink: suelo
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+521:
+  id: 526
+  user_id: 1
+  language_id: 5
+  word: Boden
+  gender: N/A
+  permalink: boden
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+522:
+  id: 527
+  user_id: 1
+  language_id: 7
+  word: suntuoso
+  gender: N/A
+  permalink: suntuoso
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+523:
+  id: 528
+  user_id: 1
+  language_id: 5
+  word: luxerišs
+  gender: N/A
+  permalink: luxeris
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+524:
+  id: 529
+  user_id: 1
+  language_id: 5
+  word: prächtig
+  gender: N/A
+  permalink: prchtig
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-28 21:28:01
+525:
+  id: 530
+  user_id: 1
+  language_id: 7
+  word: tachonar
+  gender: N/A
+  permalink: tachonar
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+526:
+  id: 531
+  user_id: 1
+  language_id: 5
+  word: beschlagen
+  gender: N/A
+  permalink: beschlagen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+527:
+  id: 532
+  user_id: 1
+  language_id: 7
+  word: tartamudeo
+  gender: el
+  permalink: tartamudeo
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+528:
+  id: 533
+  user_id: 1
+  language_id: 5
+  word: Das Stottern
+  gender: N/A
+  permalink: das-stottern
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+529:
+  id: 534
+  user_id: 1
+  language_id: 7
+  word: techo
+  gender: el
+  permalink: techo
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+530:
+  id: 535
+  user_id: 1
+  language_id: 5
+  word: Dach
+  gender: N/A
+  permalink: dach
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+531:
+  id: 536
+  user_id: 1
+  language_id: 7
+  word: temor
+  gender: el
+  permalink: temor
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+532:
+  id: 537
+  user_id: 1
+  language_id: 5
+  word: Furcht
+  gender: N/A
+  permalink: furcht
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+533:
+  id: 538
+  user_id: 1
+  language_id: 5
+  word: Befürchtung
+  gender: N/A
+  permalink: befrchtung
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-05-01 17:48:22
+534:
+  id: 539
+  user_id: 1
+  language_id: 7
+  word: tenebroso
+  gender: N/A
+  permalink: tenebroso
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+535:
+  id: 540
+  user_id: 1
+  language_id: 5
+  word: finster
+  gender: N/A
+  permalink: finster
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+536:
+  id: 541
+  user_id: 1
+  language_id: 7
+  word: tipo
+  gender: el
+  permalink: tipo
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+537:
+  id: 542
+  user_id: 1
+  language_id: 5
+  word: Typ
+  gender: N/A
+  permalink: typ
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+538:
+  id: 543
+  user_id: 1
+  language_id: 7
+  word: tormenta
+  gender: la
+  permalink: tormenta
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+539:
+  id: 544
+  user_id: 1
+  language_id: 5
+  word: Sturm
+  gender: N/A
+  permalink: sturm
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+540:
+  id: 545
+  user_id: 1
+  language_id: 5
+  word: Gewitter
+  gender: N/A
+  permalink: gewitter
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+541:
+  id: 546
+  user_id: 1
+  language_id: 7
+  word: traer
+  gender: N/A
+  permalink: traer
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+542:
+  id: 547
+  user_id: 1
+  language_id: 5
+  word: beibringen
+  gender: N/A
+  permalink: beibringen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+543:
+  id: 548
+  user_id: 1
+  language_id: 5
+  word: herbeiholen
+  gender: N/A
+  permalink: herbeiholen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+544:
+  id: 549
+  user_id: 1
+  language_id: 5
+  word: bringen
+  gender: N/A
+  permalink: bringen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+545:
+  id: 550
+  user_id: 1
+  language_id: 7
+  word: tristón
+  gender: N/A
+  permalink: tristn
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-05-07 20:24:01
+546:
+  id: 551
+  user_id: 1
+  language_id: 5
+  word: traurig
+  gender: N/A
+  permalink: traurig
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+547:
+  id: 552
+  user_id: 1
+  language_id: 7
+  word: trocha
+  gender: la
+  permalink: trocha
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+548:
+  id: 553
+  user_id: 1
+  language_id: 5
+  word: Pfad
+  gender: N/A
+  permalink: pfad
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+549:
+  id: 554
+  user_id: 1
+  language_id: 7
+  word: truneo
+  gender: el
+  permalink: truneo
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+550:
+  id: 555
+  user_id: 1
+  language_id: 5
+  word: Donner
+  gender: N/A
+  permalink: donner
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+551:
+  id: 556
+  user_id: 1
+  language_id: 7
+  word: valse
+  gender: la
+  permalink: valse
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+552:
+  id: 557
+  user_id: 1
+  language_id: 5
+  word: Walze
+  gender: N/A
+  permalink: walze
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+553:
+  id: 558
+  user_id: 1
+  language_id: 7
+  word: vencido
+  gender: N/A
+  permalink: vencido
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+554:
+  id: 559
+  user_id: 1
+  language_id: 5
+  word: besiegt
+  gender: N/A
+  permalink: besiegt
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+555:
+  id: 560
+  user_id: 1
+  language_id: 5
+  word: geschlagen
+  gender: N/A
+  permalink: geschlagen
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+556:
+  id: 561
+  user_id: 1
+  language_id: 7
+  word: viborilla
+  gender: la
+  permalink: viborilla
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+557:
+  id: 562
+  user_id: 1
+  language_id: 5
+  word: Kleine Viper
+  gender: N/A
+  permalink: kleine-viper
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+558:
+  id: 563
+  user_id: 1
+  language_id: 7
+  word: vivienda
+  gender: la
+  permalink: vivienda
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+559:
+  id: 564
+  user_id: 1
+  language_id: 5
+  word: Behausung
+  gender: N/A
+  permalink: behausung
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+560:
+  id: 565
+  user_id: 1
+  language_id: 5
+  word: Wohnung
+  gender: N/A
+  permalink: wohnung
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+561:
+  id: 566
+  user_id: 1
+  language_id: 7
+  word: volver
+  gender: N/A
+  permalink: volver
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+562:
+  id: 567
+  user_id: 1
+  language_id: 5
+  word: fortentwickeln
+  gender: N/A
+  permalink: fortentwickeln
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+563:
+  id: 568
+  user_id: 1
+  language_id: 5
+  word: zuwenden
+  gender: N/A
+  permalink: zuwenden
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+564:
+  id: 569
+  user_id: 1
+  language_id: 5
+  word: wiederkehren
+  gender: N/A
+  permalink: wiederkehren
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+565:
+  id: 570
+  user_id: 1
+  language_id: 7
+  word: ya tener bastante encima
+  gender: N/A
+  permalink: ya-tener-bastante-encima
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+566:
+  id: 571
+  user_id: 1
+  language_id: 5
+  word: Schon genug Sorgen haben
+  gender: N/A
+  permalink: schon-genug-sorgen-haben
+  created_at: 2009-04-24 20:15:03
+  updated_at: 2009-04-24 20:15:03
+567:
+  id: 572
+  user_id: 1
+  language_id: 7
+  word: delgado
+  gender: N/A
+  permalink: delgado
+  created_at: 2009-04-25 10:40:05
+  updated_at: 2009-04-25 10:40:05
+568:
+  id: 573
+  user_id: 1
+  language_id: 5
+  word: dünn
+  gender: N/A
+  permalink: dunn
+  created_at: 2009-04-25 10:40:31
+  updated_at: 2009-04-25 10:40:31
+569:
+  id: 574
+  user_id: 1
+  language_id: 5
+  word: schlank
+  gender: N/A
+  permalink: schlank
+  created_at: 2009-04-25 10:41:50
+  updated_at: 2009-04-25 10:41:50
+570:
+  id: 575
+  user_id: 1
+  language_id: 7
+  word: descansar
+  gender: N/A
+  permalink: descansar
+  created_at: 2009-04-25 11:02:01
+  updated_at: 2009-04-25 11:02:01
+571:
+  id: 576
+  user_id: 1
+  language_id: 5
+  word: ausspannen
+  gender: N/A
+  permalink: ausspannen
+  created_at: 2009-04-25 11:02:06
+  updated_at: 2009-04-25 11:02:06
+572:
+  id: 577
+  user_id: 1
+  language_id: 5
+  word: ruhen
+  gender: N/A
+  permalink: ruhen
+  created_at: 2009-04-25 11:02:26
+  updated_at: 2009-04-25 11:02:26
+573:
+  id: 578
+  user_id: 1
+  language_id: 7
+  word: solemnizar
+  gender: N/A
+  permalink: solemnizar
+  created_at: 2009-04-25 11:14:29
+  updated_at: 2009-04-25 11:14:29
+574:
+  id: 579
+  user_id: 1
+  language_id: 5
+  word: feiern
+  gender: N/A
+  permalink: feiern
+  created_at: 2009-04-25 11:14:35
+  updated_at: 2009-04-25 11:14:35
+575:
+  id: 580
+  user_id: 1
+  language_id: 7
+  word: mudarse
+  gender: N/A
+  permalink: mudarse
+  created_at: 2009-04-25 11:18:30
+  updated_at: 2009-04-25 11:18:30
+576:
+  id: 581
+  user_id: 1
+  language_id: 5
+  word: umziehen
+  gender: N/A
+  permalink: umziehen
+  created_at: 2009-04-25 11:18:44
+  updated_at: 2009-04-25 11:18:44
+577:
+  id: 582
+  user_id: 1
+  language_id: 5
+  word: umsiedeln
+  gender: N/A
+  permalink: umsiedeln
+  created_at: 2009-04-25 11:19:42
+  updated_at: 2009-04-25 11:19:42
+578:
+  id: 583
+  user_id: 1
+  language_id: 7
+  word: tener ganas
+  gender: N/A
+  permalink: tener-ganas
+  created_at: 2009-04-25 11:21:14
+  updated_at: 2009-04-25 11:21:14
+579:
+  id: 584
+  user_id: 1
+  language_id: 5
+  word: dürsten
+  gender: N/A
+  permalink: dursten
+  created_at: 2009-04-25 11:21:28
+  updated_at: 2009-04-25 11:21:28
+580:
+  id: 585
+  user_id: 1
+  language_id: 5
+  word: Lust haben
+  gender: N/A
+  permalink: lust-haben
+  created_at: 2009-04-25 11:21:53
+  updated_at: 2009-04-25 11:21:53
+581:
+  id: 586
+  user_id: 1
+  language_id: 7
+  word: tarjeta de credito
+  gender: la
+  permalink: tarjeta-de-credito
+  created_at: 2009-04-26 16:51:22
+  updated_at: 2009-04-26 16:51:22
+582:
+  id: 587
+  user_id: 1
+  language_id: 5
+  word: Kreditkarte
+  gender: die
+  permalink: kreditkarte
+  created_at: 2009-04-26 16:51:37
+  updated_at: 2009-04-26 16:51:37
+583:
+  id: 588
+  user_id: 1
+  language_id: 7
+  word: seguir
+  gender: N/A
+  permalink: seguir
+  created_at: 2009-04-26 16:54:58
+  updated_at: 2009-04-26 16:54:58
+584:
+  id: 589
+  user_id: 1
+  language_id: 5
+  word: fortsetzen
+  gender: N/A
+  permalink: fortsetzen
+  created_at: 2009-04-26 16:55:16
+  updated_at: 2009-04-26 16:55:16
+585:
+  id: 590
+  user_id: 1
+  language_id: 5
+  word: folgen
+  gender: N/A
+  permalink: folgen
+  created_at: 2009-04-26 16:55:49
+  updated_at: 2009-04-26 16:55:49
+586:
+  id: 591
+  user_id: 1
+  language_id: 7
+  word: desayuno
+  gender: el
+  permalink: desayuno
+  created_at: 2009-04-26 17:13:02
+  updated_at: 2009-04-26 17:13:02
+587:
+  id: 592
+  user_id: 1
+  language_id: 5
+  word: Frühstück
+  gender: das
+  permalink: fruhstuck
+  created_at: 2009-04-26 17:13:15
+  updated_at: 2009-04-26 17:13:15
+588:
+  id: 593
+  user_id: 1
+  language_id: 7
+  word: acondicionado
+  gender: el
+  permalink: acondicionado
+  created_at: 2009-04-26 17:14:04
+  updated_at: 2009-04-26 17:14:04
+589:
+  id: 594
+  user_id: 1
+  language_id: 5
+  word: Klimaanlage
+  gender: die
+  permalink: klimaanlage
+  created_at: 2009-04-26 17:14:15
+  updated_at: 2009-04-26 17:14:15
+590:
+  id: 595
+  user_id: 1
+  language_id: 7
+  word: habitación doble
+  gender: la
+  permalink: habitacion-doble
+  created_at: 2009-04-26 17:15:17
+  updated_at: 2009-04-26 17:15:17
+591:
+  id: 596
+  user_id: 1
+  language_id: 5
+  word: Doppelzimmer
+  gender: das
+  permalink: doppelzimmer
+  created_at: 2009-04-26 17:15:27
+  updated_at: 2009-04-26 17:15:27
+592:
+  id: 597
+  user_id: 1
+  language_id: 7
+  word: habitación indivdual
+  gender: la
+  permalink: habitacion-indivdual
+  created_at: 2009-04-26 17:16:32
+  updated_at: 2009-04-26 17:16:32
+593:
+  id: 598
+  user_id: 1
+  language_id: 5
+  word: Einzelzimmer
+  gender: das
+  permalink: einzelzimmer
+  created_at: 2009-04-26 17:16:42
+  updated_at: 2009-04-26 17:16:42
+594:
+  id: 599
+  user_id: 1
+  language_id: 7
+  word: carnet de identidad
+  gender: el
+  permalink: carnet-de-identidad
+  created_at: 2009-04-26 17:17:35
+  updated_at: 2009-04-26 17:17:35
+595:
+  id: 600
+  user_id: 1
+  language_id: 5
+  word: Personalausweis
+  gender: der
+  permalink: personalausweis
+  created_at: 2009-04-26 17:17:47
+  updated_at: 2009-04-26 17:17:54
+596:
+  id: 601
+  user_id: 1
+  language_id: 7
+  word: rellenar
+  gender: N/A
+  permalink: rellenar
+  created_at: 2009-04-26 17:18:55
+  updated_at: 2009-04-26 17:18:55
+597:
+  id: 602
+  user_id: 1
+  language_id: 5
+  word: ausfüllen
+  gender: N/A
+  permalink: ausfullen
+  created_at: 2009-04-26 17:19:02
+  updated_at: 2009-04-26 17:19:02
+598:
+  id: 603
+  user_id: 1
+  language_id: 7
+  word: pantalla
+  gender: la
+  permalink: pantalla
+  created_at: 2009-04-26 17:29:33
+  updated_at: 2009-04-26 17:29:33
+599:
+  id: 604
+  user_id: 1
+  language_id: 5
+  word: Bildschirm
+  gender: der
+  permalink: bildschirm
+  created_at: 2009-04-26 17:29:47
+  updated_at: 2009-04-26 17:29:47
+600:
+  id: 605
+  user_id: 1
+  language_id: 7
+  word: zanjar
+  gender: N/A
+  permalink: zanjar
+  created_at: 2009-04-28 09:23:47
+  updated_at: 2009-04-28 09:23:47
+601:
+  id: 606
+  user_id: 1
+  language_id: 5
+  word: schlichten
+  gender: N/A
+  permalink: schlichten
+  created_at: 2009-04-28 09:23:59
+  updated_at: 2009-04-28 09:23:59
+602:
+  id: 607
+  user_id: 1
+  language_id: 5
+  word: So muss
+  gender: N/A
+  permalink: so-muss
+  created_at: 2009-05-01 17:46:10
+  updated_at: 2009-05-01 17:46:10
+603:
+  id: 608
+  user_id: 1
+  language_id: 7
+  word: fascículo
+  gender: el
+  permalink: fasciculo
+  created_at: 2009-05-03 01:08:58
+  updated_at: 2009-05-03 01:08:58
+604:
+  id: 609
+  user_id: 1
+  language_id: 7
+  word: penacho
+  gender: el
+  permalink: penacho
+  created_at: 2009-05-03 01:10:10
+  updated_at: 2009-05-03 01:10:10
+605:
+  id: 610
+  user_id: 1
+  language_id: 7
+  word: racimo
+  gender: el
+  permalink: racimo
+  created_at: 2009-05-03 01:10:59
+  updated_at: 2009-05-03 01:10:59
+606:
+  id: 611
+  user_id: 1
+  language_id: 7
+  word: enfermo
+  gender: N/A
+  permalink: enfermo
+  created_at: 2009-05-03 20:47:37
+  updated_at: 2009-05-03 20:47:37
+607:
+  id: 612
+  user_id: 1
+  language_id: 5
+  word: krank
+  gender: N/A
+  permalink: krank
+  created_at: 2009-05-03 20:47:57
+  updated_at: 2009-05-03 20:47:57
+608:
+  id: 613
+  user_id: 1
+  language_id: 7
+  word: aburrido
+  gender: N/A
+  permalink: aburrido
+  created_at: 2009-05-03 20:48:56
+  updated_at: 2009-05-03 20:48:56
+609:
+  id: 614
+  user_id: 1
+  language_id: 5
+  word: langweilig
+  gender: N/A
+  permalink: langweilig
+  created_at: 2009-05-03 20:49:10
+  updated_at: 2009-05-03 20:49:10
+610:
+  id: 615
+  user_id: 1
+  language_id: 5
+  word: einfallslos
+  gender: N/A
+  permalink: einfallslos
+  created_at: 2009-05-03 20:50:06
+  updated_at: 2009-05-03 20:50:06
+611:
+  id: 616
+  user_id: 1
+  language_id: 7
+  word: agotado
+  gender: N/A
+  permalink: agotado
+  created_at: 2009-05-03 20:50:45
+  updated_at: 2009-05-03 20:50:45
+612:
+  id: 617
+  user_id: 1
+  language_id: 5
+  word: erschöpft
+  gender: N/A
+  permalink: erschopft
+  created_at: 2009-05-03 20:51:09
+  updated_at: 2009-05-03 20:51:09
+613:
+  id: 618
+  user_id: 1
+  language_id: 5
+  word: hundemüde
+  gender: N/A
+  permalink: hundemude
+  created_at: 2009-05-03 20:51:25
+  updated_at: 2009-05-03 20:51:25
+614:
+  id: 619
+  user_id: 1
+  language_id: 7
+  word: enfadado
+  gender: N/A
+  permalink: enfadado
+  created_at: 2009-05-03 20:52:11
+  updated_at: 2009-05-03 20:52:11
+615:
+  id: 620
+  user_id: 1
+  language_id: 5
+  word: böse
+  gender: N/A
+  permalink: bose
+  created_at: 2009-05-03 20:52:28
+  updated_at: 2009-05-03 20:52:28
+616:
+  id: 621
+  user_id: 1
+  language_id: 5
+  word: verärgert
+  gender: N/A
+  permalink: verargert
+  created_at: 2009-05-03 20:52:45
+  updated_at: 2009-05-03 20:52:45
+617:
+  id: 622
+  user_id: 1
+  language_id: 7
+  word: triste
+  gender: N/A
+  permalink: triste
+  created_at: 2009-05-03 20:53:18
+  updated_at: 2009-05-03 20:53:18
+618:
+  id: 623
+  user_id: 1
+  language_id: 7
+  word: preocupado
+  gender: N/A
+  permalink: preocupado
+  created_at: 2009-05-03 20:54:33
+  updated_at: 2009-05-03 20:54:33
+619:
+  id: 624
+  user_id: 1
+  language_id: 5
+  word: bekümmert
+  gender: N/A
+  permalink: bekummert
+  created_at: 2009-05-03 20:55:00
+  updated_at: 2009-05-03 20:55:00
+620:
+  id: 625
+  user_id: 1
+  language_id: 5
+  word: besorgt
+  gender: N/A
+  permalink: besorgt
+  created_at: 2009-05-03 20:55:18
+  updated_at: 2009-05-03 20:55:18
+621:
+  id: 626
+  user_id: 1
+  language_id: 7
+  word: contento
+  gender: N/A
+  permalink: contento
+  created_at: 2009-05-03 20:56:00
+  updated_at: 2009-05-03 20:56:00
+622:
+  id: 627
+  user_id: 1
+  language_id: 5
+  word: zufrieden
+  gender: N/A
+  permalink: zufrieden
+  created_at: 2009-05-03 20:56:22
+  updated_at: 2009-05-03 20:56:22
+623:
+  id: 628
+  user_id: 1
+  language_id: 5
+  word: froh
+  gender: N/A
+  permalink: froh
+  created_at: 2009-05-03 20:56:31
+  updated_at: 2009-05-03 20:56:31
+624:
+  id: 629
+  user_id: 1
+  language_id: 7
+  word: conmigo
+  gender: N/A
+  permalink: conmigo
+  created_at: 2009-05-03 20:58:14
+  updated_at: 2009-05-03 20:58:14
+625:
+  id: 630
+  user_id: 1
+  language_id: 5
+  word: mit mir
+  gender: N/A
+  permalink: mit-mir
+  created_at: 2009-05-03 20:58:25
+  updated_at: 2009-05-03 20:58:25
+626:
+  id: 631
+  user_id: 1
+  language_id: 7
+  word: matrícula
+  gender: la
+  permalink: matricula
+  created_at: 2009-05-03 21:02:24
+  updated_at: 2009-05-03 21:02:24
+627:
+  id: 632
+  user_id: 1
+  language_id: 5
+  word: Autonummer
+  gender: die
+  permalink: autonummer
+  created_at: 2009-05-03 21:02:45
+  updated_at: 2009-05-03 21:02:45
+628:
+  id: 633
+  user_id: 1
+  language_id: 5
+  word: Immatrikulation
+  gender: die
+  permalink: immatrikulation
+  created_at: 2009-05-03 21:02:59
+  updated_at: 2009-05-03 21:02:59
+629:
+  id: 634
+  user_id: 1
+  language_id: 5
+  word: Einschreibung
+  gender: die
+  permalink: einschreibung
+  created_at: 2009-05-03 21:03:14
+  updated_at: 2009-05-03 21:03:14
+630:
+  id: 635
+  user_id: 1
+  language_id: 7
+  word: aprender
+  gender: N/A
+  permalink: aprender
+  created_at: 2009-05-03 21:04:09
+  updated_at: 2009-05-03 21:04:09
+631:
+  id: 636
+  user_id: 1
+  language_id: 5
+  word: lernen
+  gender: N/A
+  permalink: lernen
+  created_at: 2009-05-03 21:04:17
+  updated_at: 2009-05-03 21:04:17
+632:
+  id: 637
+  user_id: 1
+  language_id: 7
+  word: viaje
+  gender: el
+  permalink: viaje
+  created_at: 2009-05-03 21:07:29
+  updated_at: 2009-05-03 21:07:29
+633:
+  id: 638
+  user_id: 1
+  language_id: 5
+  word: Reise
+  gender: die
+  permalink: reise
+  created_at: 2009-05-03 21:07:40
+  updated_at: 2009-05-03 21:07:40
+634:
+  id: 639
+  user_id: 1
+  language_id: 7
+  word: vuelo
+  gender: el
+  permalink: vuelo
+  created_at: 2009-05-03 21:08:45
+  updated_at: 2009-05-03 21:08:45
+635:
+  id: 640
+  user_id: 1
+  language_id: 5
+  word: Flug
+  gender: der
+  permalink: flug
+  created_at: 2009-05-03 21:08:56
+  updated_at: 2009-05-03 21:08:56
+636:
+  id: 641
+  user_id: 1
+  language_id: 7
+  word: alojamiento
+  gender: el
+  permalink: habitacion
+  created_at: 2009-05-03 21:10:54
+  updated_at: 2009-05-03 21:17:11
+637:
+  id: 642
+  user_id: 1
+  language_id: 5
+  word: Gästezimmer
+  gender: das
+  permalink: gastezimmer
+  created_at: 2009-05-03 21:11:06
+  updated_at: 2009-05-03 21:11:06
+638:
+  id: 643
+  user_id: 1
+  language_id: 5
+  word: Flugticket
+  gender: das
+  permalink: flugticket
+  created_at: 2009-05-03 21:12:28
+  updated_at: 2009-05-03 21:12:28
+639:
+  id: 644
+  user_id: 1
+  language_id: 7
+  word: billete
+  gender: el
+  permalink: billete
+  created_at: 2009-05-03 21:12:44
+  updated_at: 2009-05-03 21:12:44
+640:
+  id: 645
+  user_id: 1
+  language_id: 7
+  word: pasaje
+  gender: el
+  permalink: pasaje
+  created_at: 2009-05-03 21:12:58
+  updated_at: 2009-05-03 21:12:58
+641:
+  id: 646
+  user_id: 1
+  language_id: 5
+  word: Aufenthalt
+  gender: der
+  permalink: aufenthalt
+  created_at: 2009-05-03 21:13:41
+  updated_at: 2009-05-03 21:13:41
+642:
+  id: 647
+  user_id: 1
+  language_id: 7
+  word: estadía
+  gender: la
+  permalink: estadia
+  created_at: 2009-05-03 21:13:54
+  updated_at: 2009-05-03 21:13:54
+643:
+  id: 648
+  user_id: 1
+  language_id: 7
+  word: estancia
+  gender: la
+  permalink: estancia
+  created_at: 2009-05-03 21:14:13
+  updated_at: 2009-05-03 21:14:13
+644:
+  id: 649
+  user_id: 1
+  language_id: 5
+  word: Gepäck
+  gender: das
+  permalink: gepack
+  created_at: 2009-05-03 21:14:51
+  updated_at: 2009-05-03 21:14:51
+645:
+  id: 650
+  user_id: 1
+  language_id: 7
+  word: bagaje
+  gender: el
+  permalink: bagaje
+  created_at: 2009-05-03 21:15:21
+  updated_at: 2009-05-03 21:15:21
+646:
+  id: 651
+  user_id: 1
+  language_id: 7
+  word: equipaje
+  gender: el
+  permalink: equipaje
+  created_at: 2009-05-03 21:16:03
+  updated_at: 2009-05-03 21:16:03
+647:
+  id: 652
+  user_id: 1
+  language_id: 7
+  word: bandolero
+  gender: el
+  permalink: bandolero
+  created_at: 2009-05-04 21:27:51
+  updated_at: 2009-05-04 21:27:51
+648:
+  id: 653
+  user_id: 1
+  language_id: 5
+  word: Bandit
+  gender: der
+  permalink: bandit
+  created_at: 2009-05-04 21:28:10
+  updated_at: 2009-05-04 21:28:10
+649:
+  id: 654
+  user_id: 1
+  language_id: 7
+  word: los demás
+  gender: N/A
+  permalink: los-demas
+  created_at: 2009-05-07 20:00:47
+  updated_at: 2009-05-07 20:00:47
+650:
+  id: 655
+  user_id: 1
+  language_id: 5
+  word: die Übrigen
+  gender: N/A
+  permalink: die-ubrigen
+  created_at: 2009-05-07 20:01:16
+  updated_at: 2009-05-07 20:01:16
+651:
+  id: 656
+  user_id: 1
+  language_id: 5
+  word: Verwüstung
+  gender: die
+  permalink: verwustung
+  created_at: 2009-05-07 20:14:44
+  updated_at: 2009-05-07 20:14:44
+652:
+  id: 657
+  user_id: 1
+  language_id: 1
+  word: French
+  gender: the
+  permalink: french
+  created_at: 2009-05-09 17:26:51
+  updated_at: 2009-05-09 17:26:51
+  type: Language
+653:
+  id: 658
+  user_id: 1
+  language_id: 657
+  word: FranÃ§ais
+  gender: le
+  permalink: francais
+  created_at: 2009-05-09 17:28:13
+  updated_at: 2009-05-09 17:28:13
+654:
+  id: 659
+  user_id: 1
+  language_id: 5
+  word: FranzÃ¶sisch
+  gender: das
+  permalink: franzosisch
+  created_at: 2009-05-09 17:32:44
+  updated_at: 2009-05-09 17:32:44

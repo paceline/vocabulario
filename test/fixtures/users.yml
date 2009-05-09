@@ -1,42 +1,34 @@
+1:
+  id: 1
+  login: ulf
+  name: 
+  email: ulf@pacelinegroup.com
+  crypted_password: c963c4fa51d40bf811dc9f44970e73678b739038
+  salt: 1790493909db0ff054fb93e47e2795b84679dcef
+  created_at: 2009-04-13 13:37:36
+  updated_at: 2009-05-08 15:02:07
+  remember_token: 4218f4adcee180e849f7fd847724c699e2f20119
+  remember_token_expires_at: 2009-05-22 12:43:42
+  activated_at: 2009-04-13 13:39:35
+  state: active
+  admin: 1
 
 quentin:
-  id:                        1
-  login:                     quentin
-  email:                     quentin@example.com
-  salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
-  crypted_password:          75cbca65a45ae3b5651f10762102cf0c1ee7f65b # 'monkey'
-  created_at:                <%= 5.days.ago.to_s :db  %>
-  remember_token_expires_at: <%= 1.days.from_now.to_s %>
-  remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
-  activation_code:           
-  activated_at:              <%= 5.days.ago.to_s :db %>
-  state:                     active
-      
+  id: 2
+  login: quentin
+  email: quentin@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.days.ago.to_s :db %>
+  activated_at: <%= 3.days.ago.to_s :db %>
+  state: active
+
 aaron:
-  id:                        2
-  login:                     aaron
-  email:                     aaron@example.com
-  salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
-  crypted_password:          fb47e10e5b76816fab38575226659fbe11eef374 # 'monkey'
-  created_at:                <%= 1.days.ago.to_s :db %>
-  remember_token_expires_at: 
-  remember_token:            
-  activation_code:           1b6453892473a467d07372d45eb05abc2031647a
-  activated_at:              
-
-  state:                     pending
-
-
-old_password_holder:
-  id:                        3
-  login:                     old_password_holder
-  email:                     salty_dog@example.com
-  salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  created_at:                <%= 1.days.ago.to_s :db %>
-
-  activation_code:           
-  activated_at:              <%= 5.days.ago.to_s :db %>
-
-
-  state:                     active
+  id: 3
+  login: aaron
+  email: aaron@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+  activated_at: <%= 2.days.ago.to_s :db %>
+  state: active

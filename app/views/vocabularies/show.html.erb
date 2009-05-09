@@ -18,7 +18,7 @@
 
 <div class="content">
     <%= label_tag 'Language' %>
-    <%= logged_in? && authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Vocabulary.languages.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word %>
+    <%= logged_in? && authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word %>
 </div>
 <div class="content">
     <%= label_tag 'Article' %>
@@ -30,7 +30,7 @@
   <%= label_tag 'Translations' %>
   <ul id="translations">
     <% @vocabulary.translations.each do |translation| %>
-      <li id="translation_<%= translation.id %>"><%= link_to(translation.word, vocabulary_path(translation)) %> in <%= translation.language.word %> <%= link_to_remote('remove', { :url => vocabularies_unlink_path(@vocabulary, translation), :confirm => 'Are you sure you want to remove this translation?', :method => :delete }, { :class => 'edit_link' }) %></li>
+      <li id="translation_<%= translation.id %>"><%= link_to(translation.word, vocabulary_path(translation)) %> in <%= translation.language.word %> <%= link_to_remote('remove', { :url => vocabularies_unlink_path(@vocabulary, translation), :confirm => 'Are you sure you want to remove this translation?', :method => :delete }, { :class => 'edit_link' }) if logged_in? && authorized? %></li>
     <% end %>
   </ul>
 </div>

@@ -215,7 +215,22 @@ div.auto_complete ul li.selected {
 div.auto_complete ul strong.highlight { 
 	margin:0; 
 	padding:0; 
-} 
+}
+
+input, select {
+	color: #555;
+	font-family: Helvetica, Geneva, 'Lucida Grande';
+	font-size: 0.9em;
+}
+
+option { padding: 3px; }
+	
+input[type="submit"] {
+	background: #02B8EA;
+	border: 1px solid #888;
+	color: #FFF;
+	padding: 5px;
+}
 
 
 /* In Place Editor */

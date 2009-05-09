@@ -4,6 +4,7 @@
   <ul>
     <li><%= link_to('List vocabularies', vocabularies_path) %></li>
     <li><%= link_to('Add vocabulary', new_vocabulary_path) %></li>
+    <li><%= link_to('Add language', new_vocabulary_path(:type => 'Language')) %></li>
     <li><%= link_to('Import CSV file', import_vocabularies_path) %></li>
   </ul>
 </div>
