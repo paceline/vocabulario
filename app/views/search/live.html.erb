@@ -1,6 +1,6 @@
 <ul class="inline">
   <% @vocabularies.each do |vocabulary| %>
-    <li><%= link_to(vocabulary.name.sub(@search,"<b>#{@search}</b>"), vocabulary) %></li>
+    <li><%= link_to(vocabulary.name.sub(@search,"<b>#{@search}</b>"), vocabularies_permalink_path(vocabulary.permalink))) %></li>
   <% end %>
 </ul>
 <% if @search.blank? %>
