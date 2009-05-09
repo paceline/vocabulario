@@ -16,7 +16,7 @@ class VocabulariesController < ApplicationController
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.apply_tags_to_translations
     flash[:notice] = "#{@vocabulary.word}'s tags have been copied to all translations."
-    redirect_to vocabularies_permalink_path(@vocabulary.permalink)
+    redirect_to vocabulary_path(@vocabulary.permalink)
   end
   
   # Create translation or new vocabulary
@@ -29,7 +29,7 @@ class VocabulariesController < ApplicationController
       @vocabulary.tag_list = (@vocabulary.tag_list + @translation.tag_list).uniq if copy_tags
       @translation.translation_to << @vocabulary
       flash[:notice] = "Translation has been successfully saved."
-      redirect_to vocabularies_permalink_path(@translation.permalink)
+      redirect_to vocabulary_path(@translation.permalink)
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
       type = params[:vocabulary][:type] ? params[:vocabulary].delete(:type) : 'Vocabulary'
@@ -124,7 +124,7 @@ class VocabulariesController < ApplicationController
   # Display vocabulary attributes
   def show
     begin
-      @vocabulary = Vocabulary.find_by_permalink(params[:permalink])
+      @vocabulary = Vocabulary.find_by_permalink(params[:id])
       @language = @vocabulary.language
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
