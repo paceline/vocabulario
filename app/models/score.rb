@@ -1,5 +1,8 @@
 class Score < ActiveRecord::Base
-  belongs_to :language, :class_name => 'Vocabulary'
+  
+  # Associations
+  belongs_to :language_from, :foreign_key => 'language_from_id', :class_name => 'Language'
+  belongs_to :language_to, :foreign_key => 'language_to_id', :class_name => 'Language'
   belongs_to :user
   
   # Return % of correct answers

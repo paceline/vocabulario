@@ -9,15 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090507204444) do
+ActiveRecord::Schema.define(:version => 20090510152052) do
 
   create_table "scores", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "language_id"
-    t.integer  "points",      :default => 0
+    t.integer  "language_from_id"
+    t.integer  "points",           :default => 0
     t.integer  "questions"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "language_to_id"
   end
 
   create_table "taggings", :force => true do |t|

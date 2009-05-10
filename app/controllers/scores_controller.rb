@@ -18,7 +18,7 @@ class ScoresController < ApplicationController
   def create
     if params[:test][:from] != params[:test][:to]
       @test = VocabularyTest.new(params[:test])
-      @score = @test.from.scores.create({ :user_id => current_user, :questions => @test.current })
+      @score = Score.create({ :language_from_id => @test.from.id, :language_to_id => @test.to.id, :user_id => current_user, :questions => @test.current })
       session[:test] = @test.to_session_params
       render :update do |page|
         page.hide :intro_pane

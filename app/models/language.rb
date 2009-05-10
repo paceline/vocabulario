@@ -1,7 +1,8 @@
 class Language < Vocabulary
   
   # Associations - Determine scores for every lanugage
-  has_many :scores, :foreign_key => 'language_id'
+  has_many :scores_from, :foreign_key => 'language_from_id', :class_name => 'Score'
+  has_many :scores_to, :foreign_key => 'language_to_id', :class_name => 'Score'
   
   # Associations - Determine vocabularies for every lanugage
   has_many :vocabularies, :foreign_key => 'language_id', :class_name => 'Vocabulary'

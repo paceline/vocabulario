@@ -16,7 +16,7 @@
       <% else %>
         <%= gravatar('unknown@gravatar.com') %><b>Guest</b>
       <% end %>
-      <p>Got <em><%= score.ratio %>%</em> right on a <%= score.questions %> question <%= score.language.word %> test</p>
+      <p>Got <em><%= score.ratio %>%</em> right on a <%= score.questions %> question <%= score.language_from.word %> to <%= score.language_to.word %> test</p>
     </li>
     <% end %>
   </ol>
