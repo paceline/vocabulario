@@ -135,7 +135,7 @@ class VocabulariesController < ApplicationController
     vocabulary = Vocabulary.find(params[:id])
     vocabulary.tag_list = params[:tag_list]
     vocabulary.save
-    render :partial => "shared/taglist_detail", :object => vocabulary
+    render :partial => "shared/taglist_detail", :object => vocabulary.tag_list
   end
   
   # /scores/new support: Update tags select box based on seleted language 

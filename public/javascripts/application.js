@@ -14,10 +14,10 @@ function highlight() {
 // Exit out of tag edit menu with ESC key
 
 function keyPressHandler(e) {
-  var kC  = (window.event) ?    // MSIE or Firefox?
-    event.keyCode : e.keyCode;
-  var Esc = (window.event) ?   
-    27 : e.DOM_VK_ESCAPE // MSIE : Firefox
-  if(kC==Esc)
-    $('taglist','tag_form').invoke('toggle')
+  var kC  = (window.event) ? event.keyCode : e.keyCode;
+  var Esc = (window.event) ? 27 : e.DOM_VK_ESCAPE
+  if(kC==Esc) {
+    $('tag_form').hide();
+		$('taglist').show();
+	}
 }
