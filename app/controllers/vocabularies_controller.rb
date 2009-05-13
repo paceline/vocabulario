@@ -37,9 +37,8 @@ class VocabulariesController < ApplicationController
       success = @vocabulary && @vocabulary.valid?
       if success && @vocabulary.errors.empty?
         @vocabulary.save
-        @translation = @vocabulary
         flash[:notice] = "\"#{@vocabulary.word}\" has been added to the database."
-        redirect_to edit_vocabulary_path(@translation)
+        redirect_to vocabulary_path(@vocabulary.permalink)
       else
         render :action => 'new'
       end

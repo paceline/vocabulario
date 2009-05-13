@@ -3,7 +3,6 @@ h1. "TODOs"
 h2. "1.0"
 
 * Write and perform tests
-* Improve elegance of translation auto-complete
 * Glitch with refresh when editing tags
 
 h2. "2.0"
