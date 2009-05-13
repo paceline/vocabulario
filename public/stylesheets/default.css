@@ -25,6 +25,8 @@ p { margin: 5px 0 15px 0; }
 
 ul { list-style-type: none; margin: 0; padding: 0; }
 
+li { margin: 10px 0 10px 0 }
+
 ol { font-size: 1.2em; }
 
 ol li { margin: 35px 0 40px 0; }
@@ -67,8 +69,6 @@ ol li a { color: #FFF; }
 ul.inline { line-height: 1.5; padding: 0; }
 
 ul.inline li { display: inline; padding-right: .6em; }
-
-#sidebar li, #translations li { margin: 0 0 10px 0 }
 
 #main { width: 650px; }
 
