@@ -23,6 +23,14 @@
 </div>
 
 <div class="content">
+  <h2>Rankings</h2>
+  <ul>
+    <% unless @user.scores.blank? %><li><b>#<%= @user.score_rank %></b> on <b>best overall score</b> list with <b><%= number_to_percentage(@user.average_score, :precision => 2) %></b></li><% end %>
+    <li><b>#<%= @user.contributor_rank %></b> on <b>most vocabularies contributed</b> list with <b><%= @user.vocabularies.count %></b> vocabularies</li>
+  <ul>
+</div>
+
+<div class="content">
   <h2>Test stats</h2>
   <ul>
     <li>Took a <b>total</b> of <%= @user.number_of_tests %> <b>tests</b></li>

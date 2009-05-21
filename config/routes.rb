@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
-  map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete, :admin => :put }
+  map.resources :users, :collection => { :forgot_password => [:get, :post] }, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete, :admin => :put }
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resource :session
   map.resources :languages, :controller => :vocabularies

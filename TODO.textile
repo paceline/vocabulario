@@ -1,10 +1,3 @@
 h1. "TODOs"
 
-h2. "1.0"
-
 * Write and perform tests
-
-h2. "2.0"
-
-* Internationalization / Multi-language
-* List of untagged vocabularies

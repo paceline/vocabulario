@@ -48,8 +48,28 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
   
+  def new_random_password
+    self.password = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--")[0,6]
+    self.password_confirmation = self.password
+    UserMailer.deliver_forgot_password(self)
+  end
+  
   def number_of_tests(percentile = 0)
     return scores.count({ :conditions => ['points/questions >= ?',percentile] })
+  end
+  
+  def contributor_rank
+    top_list = User.find(:all, :include => 'vocabularies', :group => 'users.id', :order => 'COUNT(vocabularies.id) DESC')
+    return top_list.index(self) + 1
+  end
+  
+  def score_rank
+    top_list = User.find(:all, :include => 'scores', :group => 'users.id', :order => 'AVG(scores.points / scores.questions * 100) DESC')
+    return top_list.index(self) + 1
+  end
+  
+  def average_score
+    return self.scores.average('points / questions * 100')
   end
 
   protected

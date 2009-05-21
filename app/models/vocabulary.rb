@@ -52,5 +52,5 @@ class Vocabulary < ActiveRecord::Base
     end
     return self.translation_to + self.translation_from
   end
-  
+
 end

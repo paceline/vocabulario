@@ -56,6 +56,20 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to @user unless current_user == @user
   end
+  
+  def forgot_password
+    if request.post?
+      user = User.find_by_login(params[:login])
+      if user
+        user.new_random_password
+        user.save
+        flash[:notice] = "Your password has been emailed to you."
+        redirect_to '/login'
+      else
+        flash[:notice] = "Don't recognize that login. Are you sure you're a member already?"
+      end
+    end
+  end
 
   def suspend
     @user.suspend! 
@@ -78,11 +92,11 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.find(:all)
+    @users = User.find(:all, :order => 'login')
   end
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_login(params[:id])
   end
   
   def update

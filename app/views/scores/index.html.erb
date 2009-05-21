@@ -12,11 +12,11 @@
     <% @scores.each do |score| %>
     <li>
       <% if score.user %>
-        <%= link_to(gravatar_for(score.user), user_path(score.user)) %><b><%= score.user.login %></b>
+        <%= link_to(gravatar_for(score.user), user_path(score.user.login)) %><b><%= score.user.login %></b>
       <% else %>
         <%= gravatar('unknown@gravatar.com') %><b>Guest</b>
       <% end %>
-      <p>Got <em><%= score.ratio %>%</em> right on a <%= score.questions %> question <%= score.language_from.word %> to <%= score.language_to.word %> test</p>
+      <p>Got <em><%= number_to_percentage(score.ratio, :precision => 2) %></em> right on a <%= score.questions %> question <%= score.language_from.word %> to <%= score.language_to.word %> test</p>
     </li>
     <% end %>
   </ol>
