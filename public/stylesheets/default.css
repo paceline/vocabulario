@@ -92,7 +92,9 @@ ul.inline li { display: inline; padding-right: .6em; }
 
 #sidebar { width: 225px; float: right; }
 
-#sidebar h1 { color: #888; }
+#sidebar .content { margin-bottom: 30px; }
+
+#sidebar h1 { color: #888; font-size: 1.25em; }
 
 #footer, #notice, .pagination { text-align: center; }
 
@@ -100,8 +102,8 @@ ul.inline li { display: inline; padding-right: .6em; }
 /* User bar */
 
 #user_bar {
-	float: left;
 	font-size: .9em;
+	height: 57px;
 	padding: .35em;
 	width: 100%;
 }
