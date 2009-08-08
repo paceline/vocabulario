@@ -1,0 +1,4 @@
+%b= move.pattern_start && move.pattern_end ? apply_transformations(move, @vocabulary) : @vocabulary.word
+%p.small
+  = move.pattern_start && move.pattern_end ? "Moves -#{move.extract_pattern(apply_transformations(move, @vocabulary))} to #{move.insert_before_as_text}" : "No pattern set yet"
+= render :partial => 'transformations/form', :object => move

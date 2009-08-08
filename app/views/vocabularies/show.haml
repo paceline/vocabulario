@@ -1,0 +1,13 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+.tabs
+  #overview_link.tab_link.active= link_to_remote("Overview", :url => vocabulary_path(@vocabulary.permalink, :menu => 'overview'), :method => :get)
+  - if @vocabulary.class == Verb && logged_in? && authorized?
+    #conjugations_link.tab_link= link_to_remote("Conjugations", :url => vocabulary_path(@vocabulary.permalink, :menu => 'conjugations'), :method => :get)
+  - else
+    #conjugations_link.tab_link{ :style => 'display: none;' }
+  #translations_link.tab_link= link_to_remote("Translations", :url => vocabulary_path(@vocabulary.permalink, :menu => 'translations'), :method => :get)
+  
+#vocabulary_pane.tab_content_pane
+  = render(:partial => 'vocabularies/overview')

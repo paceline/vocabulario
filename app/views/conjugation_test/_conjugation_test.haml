@@ -1,0 +1,21 @@
+- form_remote_for @score, :url => scores_path(:type => 'ConjugationTest') do
+  
+  .fields
+    %h2 1. Tenses
+    I want to conjugate verbs in the following tenses
+    = select_tag('test[tense]', option_groups_from_collection_for_select(@languages, :conjugation_times, :word, :id, :name))
+       
+  .fields
+    %h2 2. Number of questions
+    I'm up for
+    = select(:test, :limit, VocabularyTest.limits)
+    questions.
+
+  .fields
+    %h2 3. Topic
+    I only want to be tested on vocabularies tagged with:<br />
+    %p= select(:test, :tags, @tags.collect {|t| [ t.name, t.id ] }, { }, { :multiple => true, :size => 5 })
+    = observe_field(:test_tense, :url => tags_for_language_vocabularies_path, :update => "test_tags", :complete => visual_effect(:highlight, "test_tags"), :with => "conjugation_time_id")
+
+  .fields
+    = submit_tag("Ready? Let's go!")

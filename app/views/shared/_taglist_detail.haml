@@ -1,0 +1,9 @@
+- if taglist_detail.blank?
+  %em.tag= link_to_function("This vocabulary is currently untagged.", "$('taglist','tag_form').invoke('toggle'); $('tag_list').focus();", :class => "edit")
+
+- else
+  - taglist_detail.each do |tag|
+    - if logged_in?
+      %em.tag= link_to_function(tag, "$('taglist','tag_form').invoke('toggle'); $('tag_list').focus();", :class => "edit")
+    - else
+      %em.tag= tag

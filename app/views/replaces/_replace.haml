@@ -1,0 +1,4 @@
+%b= replace.pattern_start && replace.pattern_end ? apply_transformations(replace, @vocabulary) : @vocabulary.word
+%p.small
+  = replace.pattern_start && replace.pattern_end ? "Replaces -#{replace.extract_pattern(apply_transformations(replace, @vocabulary))} with the appropriate ending (e.g. -o instead of -ar) when conjugating" : "No pattern set yet"
+= render :partial => 'transformations/form', :object => replace

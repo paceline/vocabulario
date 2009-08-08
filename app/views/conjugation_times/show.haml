@@ -1,0 +1,21 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+.content
+  %h1= logged_in? && authorized? ? in_place_editor_field(:conjugation_time, :name) : @conjugation_time.name
+  A
+  = logged_in? && authorized? ? in_place_select_field(:conjugation_time, :language_id, { :label => @conjugation_time.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @conjugation_time.language.word
+  tense
+
+.content
+  = label_tag 'Conjugations'
+  - if !@conjugation_time.conjugations.blank?
+    %p The following conjugation patterns have already been defined for this tense. As an admin you can add more.
+    %ul{ :id => "conjugations"}
+      - @conjugation_time.conjugations.each do |conjugation|
+        %li{ :id => "conjugation_#{conjugation.id}" }
+          = link_to(conjugation.name, conjugation)
+          = link_to_remote('delete', { :url => conjugation_path(conjugation.id), :confirm => 'Are you sure you want to delete this conjugation?', :method => :delete }, { :class => 'edit_link' }) if logged_in? && authorized?
+  - else
+    No conjugation patterns matching this tense have been defined yet.
+    = link_to('Change this', new_conjugation_path) 

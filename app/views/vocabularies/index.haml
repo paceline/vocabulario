@@ -1,0 +1,39 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+  .content
+    .tabs.green
+      %h1 Find by language
+    %p= language_links
+  .content
+    .tabs.green
+      %h1 Find by tag
+    = render :partial => 'shared/tagcloud', :object => @tags
+  .content
+    .tabs.green
+      %h1 Find by type
+    %p= type_links
+  .content
+    .tabs.green
+      %h1 Export
+    %ul
+      %li= link_to('Vocabularies as JSON', vocabularies_path(:format => :json))
+      %li= link_to('Vocabularies as XML', vocabularies_path(:format => :xml))
+
+- content_for :notice do
+  %h1 Explore
+  %p
+    There are currently
+    = Vocabulary.count
+    vocabularies in the database. Use the live search below or the tools on the right to explore them.
+
+.content
+  = label_tag 'live search'
+  = text_field :vocabulary, :word, :size => 30
+  = observe_field :vocabulary_word, :url => live_search_path, :update => 'vocabulary_results', :frequency => 0.5, :with => 'word'
+
+.content#vocabulary_results
+  %ul.inline
+    - @vocabularies.each do |vocabulary|
+      %li= link_to(vocabulary.name, vocabulary_path(vocabulary.permalink))  
+  <br />
+  = will_paginate @vocabularies

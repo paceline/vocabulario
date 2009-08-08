@@ -1,0 +1,6 @@
+- if !@conjugations.blank?
+  = render @conjugations
+- else
+  %li No conjugation patterns matching this verb's language have been defined yet.
+%li
+  %p= render :partial => 'assign_conjugation'

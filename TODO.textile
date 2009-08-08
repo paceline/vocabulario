@@ -1,3 +1,8 @@
-h1. "TODOs"
+h1. TODOs
 
-* Write and perform tests
+* Internationalization / Multi-language
+* List of untagged vocabularies
+* Make vocabulary only appear once on test (-> sometimes multiple translations exist)
+* Polish UI
+* Warning that renaming breaks conjugation rules
+* Manage people

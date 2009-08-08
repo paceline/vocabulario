@@ -1,0 +1,10 @@
+- if score.new_record?
+  .tabs.green
+    %h1 What's this?
+  %p Vocabulario is a very lo-fi vocabulary trainer I more or less wrote for personal use only.
+  %p Feel free to use it and/or <a href="http://github.com/paceline/vocabulario/downloads">get your own copy</a>. Patches are always welcome!
+
+- else
+  .tabs.green
+    %h1 Your score
+  %p= "#{number_to_percentage(score.ratio, :precision => 0)} (#{score.points} for #{score.questions})"

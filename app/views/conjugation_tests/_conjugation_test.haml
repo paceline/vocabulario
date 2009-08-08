@@ -1,0 +1,30 @@
+- if @test.continue?
+  %h1= "Question #{@test.current + 1} / #{@test.limit}"
+  %h2= @test.current_question.word
+  - form_remote_for(:score, @score, :url => score_path(@score, :type => 'ConjugationTest', :score_id => @score.id), :html => { :method => :put })  do
+    %p
+      %table
+        %tr
+          %th I
+          %td= text_field_tag 'test[1]', '', :size => 15
+          %th We
+          %td= text_field_tag 'test[4]', '', :size => 15
+        %tr
+          %th You
+          %td= text_field_tag 'test[2]', '', :size => 15
+          %th You
+          %td= text_field_tag 'test[5]', '', :size => 15
+        %tr
+          %th He/She/It</th>
+          %td= text_field_tag 'test[3]', '', :size => 15
+          %th They
+          %td= text_field_tag 'test[6]', '', :size => 15
+    %p= submit_tag('Go')
+
+- else
+  %h1 Congratulations
+  %p
+    You have completed the
+    = @test.tense.name
+    conjugation test.
+  %p Successfully? Check out your scores on the right and judge for yourself.

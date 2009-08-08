@@ -20,8 +20,14 @@ module InPlaceEditing
           return render(:text => 'Method not allowed', :status => 405)
         end
         @item = object.to_s.camelize.constantize.find(params[:id])
-        @item.update_attribute(attribute, params[:value])
-        html = options.key?(:method) ? @item.send(attribute.to_s.split('_').first).send(options[:method]) : @item.send(attribute)
+        oldvalue = @item.send(attribute)
+        @item.send("#{attribute}=",params[:value])
+        if @item.valid?
+          @item.save 
+          html = options.key?(:method) ? @item.send(attribute.to_s.split('_').first).send(options[:method]) : @item.send(attribute)
+        else
+          html = oldvalue
+        end
         render :text => CGI::escapeHTML(html.to_s)
       end
     end

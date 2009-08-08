@@ -1,0 +1,14 @@
+- if @test.continue?
+  %h1= "Question #{@test.current + 1} / #{@test.limit}"
+  %h2
+    = @test.current_question.word
+    = @test.current_question.gender unless @test.current_question.gender == "N/A"
+  - form_remote_for(:score, @score, :url => score_path(@score, :type => 'VocabularyTest', :score_id => @score.id), :html => { :method => :put })  do
+    %p
+      = text_field_tag 'test[answer]'
+      = submit_tag 'Go'
+      
+- else
+  %h1 Congratulations
+  %p= "You have completed the #{@test.from.word} vocabulary test."
+  %p Successfully? Check out your scores on the right and judge for yourself.

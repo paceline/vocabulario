@@ -9,16 +9,56 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090510152052) do
+ActiveRecord::Schema.define(:version => 20090807212126) do
+
+  create_table "conjugation_times", :force => true do |t|
+    t.integer  "language_id"
+    t.string   "name",        :limit => 25
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conjugations", :force => true do |t|
+    t.integer  "conjugation_time_id"
+    t.string   "name",                   :limit => 25
+    t.boolean  "regular",                              :default => true, :null => false
+    t.string   "first_person_singular",  :limit => 50
+    t.string   "second_person_singular", :limit => 50
+    t.string   "third_person_singular",  :limit => 50
+    t.string   "first_person_plural",    :limit => 50
+    t.string   "second_person_plural",   :limit => 50
+    t.string   "third_person_plural",    :limit => 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conjugations_verbs", :id => false, :force => true do |t|
+    t.integer "conjugation_id"
+    t.integer "verb_id"
+  end
+
+  create_table "people", :force => true do |t|
+    t.integer  "language_id"
+    t.string   "first_person_singular",  :limit => 50
+    t.string   "second_person_singular", :limit => 50
+    t.string   "third_person_singular",  :limit => 50
+    t.string   "first_person_plural",    :limit => 50
+    t.string   "second_person_plural",   :limit => 50
+    t.string   "third_person_plural",    :limit => 50
+    t.string   "pronoun",                :limit => 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "scores", :force => true do |t|
     t.integer  "user_id"
     t.integer  "language_from_id"
-    t.integer  "points",           :default => 0
+    t.integer  "points",                         :default => 0
     t.integer  "questions"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "language_to_id"
+    t.string   "test_type",        :limit => 50
   end
 
   create_table "taggings", :force => true do |t|
@@ -34,6 +74,18 @@ ActiveRecord::Schema.define(:version => 20090510152052) do
   create_table "tags", :force => true do |t|
     t.string "name"
     t.string "permalink"
+  end
+
+  create_table "transformations", :force => true do |t|
+    t.string   "type",                :limit => 50
+    t.integer  "vocabulary_id"
+    t.integer  "position"
+    t.integer  "pattern_start"
+    t.integer  "pattern_end"
+    t.integer  "insert_before"
+    t.boolean  "include_white_space",               :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "translations", :id => false, :force => true do |t|
@@ -71,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20090510152052) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type",        :limit => 25
+    t.string   "comment",                   :default => "-"
   end
 
 end

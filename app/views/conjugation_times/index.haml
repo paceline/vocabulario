@@ -1,0 +1,19 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+- content_for :notice do
+  %h1 Explore Tenses
+  %p
+    There are currently
+    = ConjugationTime.count
+    times in the database.
+
+- @languages.each do |l|
+  .content
+    %h2= l.word
+    - if l.conjugation_times
+      %ul#conjugation_times
+        - l.conjugation_times.find(:all, :order => 'name').each do |t|
+          %li{ :id => "conjugation_time_#{t.id}" }
+            = link_to(t.name, t)
+            = link_to_remote('delete', { :url => conjugation_time_path(t.id), :confirm => 'Are you sure you want to delete this tense?', :method => :delete }, { :class => 'edit_link' }) if logged_in? && authorized?

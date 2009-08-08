@@ -1,0 +1,49 @@
+- content_for :sidebar do
+  = render(:partial => 'shared/manage')
+  
+- content_for :notice do
+  %h1 New conjugation
+  %p Add a new conjugation pattern
+
+.content
+  = error_messages_for :conjugation
+  
+  - form_for @conjugation, :url => @path do |f|
+  
+    .fields
+      = label_tag 'name'
+      %p Please pick something intuitive, e.g. ar for a conjugation for verbs ending in -ar
+      = f.text_field :name
+  
+    .fields
+      = label_tag 'Time'
+      - if @vocabulary
+        = f.select(:conjugation_time_id, @vocabulary.language.conjugation_times.collect {|t| [ t.name, t.id ] })
+      - else
+        = select_tag('conjugation[conjugation_time_id]', option_groups_from_collection_for_select(Language.list, :conjugation_times, :word, :id, :name))
+  
+    .fields
+      = label_tag 'Verb forms'
+      %table
+        %tr
+          %th I
+          %td= f.text_field :first_person_singular, :size => 15
+          %th We
+          %td= f.text_field :first_person_plural, :size => 15
+        %tr
+          %th You
+          %td= f.text_field :second_person_singular, :size => 15
+          %th You
+          %td= f.text_field :second_person_plural, :size => 15
+        %tr
+          %th He/She/It</th>
+          %td= f.text_field :third_person_singular, :size => 15
+          %th They
+          %td= f.text_field :third_person_plural, :size => 15
+    
+    .fields
+      = label_tag 'Regular?'
+      = f.check_box :regular
+    
+    .fields
+      = f.submit 'Create'

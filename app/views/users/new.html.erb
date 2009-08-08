@@ -1,5 +1,8 @@
-<div class="content">
+<% content_for :notice do %>
   <h1>Sign up as a new user</h1>
+<% end %>
+
+<div class="content">
   <p>Already have an account? Click here to <%= link_to "log in", "/login" %>.</p>
   <% @user.password = @user.password_confirmation = nil %>
 </div>

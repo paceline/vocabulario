@@ -1,0 +1,18 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+- content_for :notice do
+  %h1 Add new tense
+  %p Add a new tense (such as present, future)
+
+.content
+  = error_messages_for :time
+  - form_for @time do |f|
+    .content
+      = label_tag 'Name'
+      = f.text_field :name
+    .content
+      = label_tag 'Language'
+      = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }
+    .content
+      = submit_tag 'Save'

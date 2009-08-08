@@ -20,9 +20,9 @@ class UsersController < ApplicationController
     success = @user && @user.valid?
     if success && @user.errors.empty?
       redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+      flash[:notice] = render_notice("Welcome!", "Thanks for signing up! We're sending you an email with your activation code.")
     else
-      flash[:notice]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin."
+      flash[:notice] = render_notice("Sorry...", "We couldn't set up that account, sorry.  Please try again, or contact an admin.")
       render :action => 'new'
     end
   end
@@ -33,13 +33,13 @@ class UsersController < ApplicationController
     case
     when (!params[:activation_code].blank?) && user && !user.active?
       user.activate!
-      flash[:notice] = "Signup complete! Please sign in to continue."
+      flash[:notice] = render_notice("Signup complete!", "Please sign in to continue.")
       redirect_to '/login'
     when params[:activation_code].blank?
-      flash[:notice] = "The activation code was missing.  Please follow the URL from your email."
+      flash[:notice] = render_notice("Sorry...", "The activation code was missing.  Please follow the URL from your email.")
       redirect_back_or_default('/')
-    else 
-      flash[:notice]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
+    else
+      flash[:notice] = render_notice("Sorry...", "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in.")
       redirect_back_or_default('/')
     end
   end
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.admin = true
     @user.save
-    flash[:notice] = "#{@user.login} is now an admin."
+    flash[:notice] = render_notice("Wonderful...", "#{@user.login} is now an admin.")
     redirect_to @user
   end
   
@@ -63,10 +63,10 @@ class UsersController < ApplicationController
       if user
         user.new_random_password
         user.save
-        flash[:notice] = "Your password has been emailed to you."
+        flash[:notice] = render_notice("Hope, it helps...", "Your password has been emailed to you.")
         redirect_to '/login'
       else
-        flash[:notice] = "Don't recognize that login. Are you sure you're a member already?"
+        flash[:notice] = render_notice("Sorry...", "Don't recognize that login. Are you sure you're a member already?")
       end
     end
   end
@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     redirect_to @user unless current_user == @user
     begin
       @user.update_attributes!(params[:user])
-      flash[:notice] = "Your profile has been successfully updated."
+      flash[:notice] = render_notice("Wonderful...", "Your profile has been successfully updated.")
     rescue
     end
     render(:action => 'edit')

@@ -1,0 +1,27 @@
+- content_for :sidebar do
+  .content
+    .tabs.green
+      %h1 Better than them?
+    %p Well, you can prove it right now.
+    %p <a href="/">Click here</a> to get started and show 'em.
+
+- content_for :notice do
+  %h1 Top Scores
+
+#scores.content
+  %ol
+    - @scores.each do |score|
+      %li
+        - if score.user
+          %b= link_to(score.user.login, user_path(score.user.login))
+        - else
+          %b Guest
+        %p
+          Got
+          %em= number_to_percentage(score.ratio, :precision => 2)
+          right on a
+          = "#{score.questions} question #{score.language_from.word}"
+          - if score.language_from != score.language_to
+            to
+            = score.language_to.word
+          = score.test_type.underscore.humanize.downcase

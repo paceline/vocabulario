@@ -2,10 +2,10 @@
   <%= render :partial => 'shared/manage' %>
 <% end %>
 
-<div class="content">
+<% content_for :notice do %>
   <h1>New <% if params[:type] %>language<% else %>vocabulary<% end %></h1>
   <p>Fill out the form below to submit a new <% if params[:type] %>language<% else %>vocabulary<% end %>.</p>
-</div>
+<% end %>
 
 <div class="content">
   <%= error_messages_for :vocabulary %>
@@ -20,8 +20,16 @@
       <%= f.text_field :gender %>
     </div>
     <div class="fields">
+      <%= label_tag 'comment' %>
+      <%= f.text_area :comment, { :cols => 50, :rows => 5 } %>
+    </div>
+    <div class="fields">
       <%= label_tag 'Language' %>
       <%= f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] } %>
+    </div>
+    <div class="fields">
+      <%= label_tag 'Type' %>
+      <%= f.select :type, Vocabulary::TYPES %>
     </div>
     <div class="fields">
       <%= submit_tag 'Save' %>

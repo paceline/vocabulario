@@ -2,10 +2,10 @@
   <%= render :partial => 'shared/manage' %>
 <% end %>
 
-<div class="content">
+<% content_for :notice do %>
   <h1>New translation</h1>
   <p>Fill out the form below to submit a new translation for "<%= link_to(@translation.word, vocabulary_path(@translation.permalink)) %>".</p>
-</div>
+<% end %>
 
 <div class="content">
   <%= error_messages_for :vocabulary %>

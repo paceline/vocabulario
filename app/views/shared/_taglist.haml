@@ -1,0 +1,7 @@
+.content
+
+  %p#taglist
+    = render :partial => 'shared/taglist_detail', :object => taglist.tag_list
+
+  - form_remote_tag :url => tag_vocabulary_path(taglist), :complete => "$('taglist','tag_form').invoke('toggle')", :success => visual_effect(:highlight, "taglist"), :update => "taglist", :html => {:id => "tag_form", :style => "display:none"} do 
+    = text_field_tag "tag_list", taglist.tags.collect{|t| t.name}.join(", "), :size => 70, :onKeyDown => "toggleElementsOnEscape(event, ['tag_form','taglist'])"

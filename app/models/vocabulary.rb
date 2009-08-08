@@ -4,18 +4,25 @@ class Vocabulary < ActiveRecord::Base
   acts_as_taggable
   has_permalink :word, :update => true
   cattr_reader :per_page
-  @@per_page = 100
+  @@per_page = 150
+  TYPES = ['Language','Noun','Verb','Vocabulary',nil]
   
   # Associations - Determine language for every vocabulary
   belongs_to :language, :foreign_key => 'language_id', :class_name => 'Vocabulary'
   
+  # Associations - Determines user who addess vocabulary
+  belongs_to :user
+  
   # Associations - Determine translations (to and from) for vocabulary. relations_to/from reference join model translation
   has_many :relations_to, :foreign_key => 'vocabulary1_id',  :class_name => 'Translation'
   has_many :relations_from, :foreign_key => 'vocabulary2_id', :class_name => 'Translation'
+  has_many :transformations, :order => 'position'
   has_many :translation_to, :through => :relations_to, :source => :vocabulary2
   has_many :translation_from, :through => :relations_from, :source => :vocabulary1
   
   # Validations
+  validates_inclusion_of :type, :in => TYPES, :message => "{{value}} is not a supported vocabulary type"
+  validates_presence_of :word, :language_id
   validates_uniqueness_of :word, :scope => ['language_id','gender'], :message => 'already exists in database'
   
   # Copy tags to translations
@@ -24,6 +31,30 @@ class Vocabulary < ActiveRecord::Base
       translation.tag_list = (translation.tag_list + self.tag_list).uniq
       translation.save
     end
+  end
+  
+  # Copy type to translations
+  def apply_type_to_translations
+    self.translations.each do |translation|
+      translation.conjugations.clear unless translation.conjugations.blank?
+      translation.class_type = self.class_type
+      translation.save
+    end
+  end
+  
+  # Set method for re-casting vocabulary type
+  def class_type=(value)
+    self[:type] = value == "Vocabulary" ? nil : value
+  end
+
+  # Get method for vocabulary type
+  def class_type
+    return self[:type] ? self[:type] : "Vocabulary"
+  end
+  
+  # Stub for conjugation realtionship
+  def conjugations
+    nil
   end
   
   # Make sure no dead references are left

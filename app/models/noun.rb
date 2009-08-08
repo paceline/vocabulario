@@ -1,0 +1,2 @@
+class Noun < Vocabulary
+end

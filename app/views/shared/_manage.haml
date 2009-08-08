@@ -1,0 +1,28 @@
+- if logged_in? && authorized?
+
+  .content
+    .tabs.green
+      %h1 Add stuff
+    %ul
+      %li= link_to('Add new vocabulary', new_vocabulary_path)
+      %li= link_to('Add new language', new_vocabulary_path(:type => 'Language'))
+      %li= link_to('Add new tense', new_conjugation_time_path)
+      %li= @vocabulary ? link_to('Add new conjugation', new_vocabulary_conjugation_path(@vocabulary)) : link_to('Add new conjugation', new_conjugation_path)
+      %li= link_to('Import CSV file', import_vocabularies_path)
+  
+  - if @vocabulary
+    .content
+      .tabs.green
+        %h1 Edit stuff
+      %ul
+        %li= link_to('Add new translation', edit_vocabulary_path(@vocabulary))
+        %li= link_to('Apply tags to translations', apply_tags_vocabulary_path(@vocabulary), :confirm => "You can't just undo this. Are you sure you want to go ahead?", :method => :post)
+        %li= link_to('Apply type to translations', apply_type_vocabulary_path(@vocabulary), :confirm => "Are you sure you want to set the type of all translations to this vocabulary's?", :method => :post)
+        %li= link_to('Delete vocabulary', vocabulary_path(@vocabulary), :confirm => 'Are you sure you want to delete this vocabulary?', :method => :delete)
+
+  .content
+    .tabs.green
+      %h1 List stuff
+    %ul
+      %li= link_to('List vocabularies', vocabularies_path)
+      %li= link_to('List tenses', conjugation_times_path)

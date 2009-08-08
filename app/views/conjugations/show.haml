@@ -1,0 +1,34 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+.content
+  %h1= logged_in? && authorized? ? in_place_editor_field(:conjugation, :name) : @conjugation.name
+  A 
+  = @conjugation.regular_or_irregular
+  conjugation pattern for the
+  = link_to(@conjugation.conjugation_time.language.word, vocabulary_path(@conjugation.conjugation_time.language.permalink))
+  = "\"#{link_to(@conjugation.conjugation_time.name, @conjugation.conjugation_time)}\""
+
+.content
+  %table
+    %tr
+      %th I
+      %td= "-#{@conjugation.first_person_singular}"
+      %th We
+      %td= "-#{@conjugation.first_person_plural}"
+    %tr
+      %th You
+      %td= "-#{@conjugation.second_person_singular}"
+      %th You
+      %td= "-#{@conjugation.second_person_plural}"
+    %tr
+      %th He/She/It</th>
+      %td= "-#{@conjugation.third_person_singular}"
+      %th They
+      %td= "-#{@conjugation.third_person_plural}"
+
+.content
+  %p= !@conjugation.verbs.blank? ? "It applies to the following verbs:" : "No verbs use this pattern. You can change this by selecting this pattern as any verb's conjugation" 
+  %ul.inline
+    - @conjugation.verbs.each do |verb|
+      %li= link_to(verb.name, vocabulary_path(verb.permalink))

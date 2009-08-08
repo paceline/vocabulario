@@ -1,6 +1,7 @@
 <% content_for :sidebar do %>
   <% if logged_in? && authorized? && @user != current_user %>
   <div class="content">
+    <div class="tabs green"><h1>Admin stuff</div>
     <ul>
       <% unless @user.admin %><li><%= link_to('Make admin', admin_user_path(@user), :confirm => 'Are you sure? You can only reverse this by directly editing the database record.', :method => :put) %></li><% end %>
       <li>
@@ -11,6 +12,10 @@
     </ul>
   </div>
   <% end %>
+<% end %>
+
+<% content_for :notice do %>
+  <h1>User profile</h1>
 <% end %>
 
 <div class="content">

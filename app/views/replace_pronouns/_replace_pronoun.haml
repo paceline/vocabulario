@@ -1,0 +1,4 @@
+%b= replace_pronoun.pattern_start && replace_pronoun.pattern_end ?apply_transformations(replace_pronoun, @vocabulary) : @vocabulary.word
+%p.small
+  = replace_pronoun.pattern_start && replace_pronoun.pattern_end ? "Replaces -#{replace_pronoun.extract_pattern(apply_transformations(replace_pronoun, @vocabulary))} with the appropriate pronoun when conjugating" : "No pattern set yet"
+= render :partial => 'transformations/form', :object => replace_pronoun

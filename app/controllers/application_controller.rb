@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
   
   # Include Restful Authentication
   include AuthenticatedSystem
+  
+  # Renders flash[:notice]
+  def render_notice(header, text)
+    return "<h1>#{header}</h1> <p>#{text}</p>"
+  end
 end
