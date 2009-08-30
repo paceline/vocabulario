@@ -1,8 +1,17 @@
 h1. TODOs
 
-* Internationalization / Multi-language
+h2. Priority 1
+
+
+h2. Priority 2
+
 * List of untagged vocabularies
 * Make vocabulary only appear once on test (-> sometimes multiple translations exist)
 * Polish UI
 * Warning that renaming breaks conjugation rules
-* Manage people
+
+h2. Priority 3
+
+* Internationalization / Multi-language
+* Convert all views to HAML
+

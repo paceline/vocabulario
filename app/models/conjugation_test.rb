@@ -11,7 +11,7 @@ class ConjugationTest < LanguageTest
       raise(ActiveRecord::RecordNotFound, "Given tense not found. Probably either a typ-o or unsupported tense.") unless @tense
       @limit = options[:limit].to_i if options.key?(:limit)
       @tags = options[:tags].join(',') if options.key?(:tags)
-      options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? @tense.verbs_tagged_with(@tags) : @tense.verbs)
+      options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? clean_verb_selection(@tense.verbs_tagged_with(@tags), @tense.id) : clean_verb_selection(@tense.verbs, @tense.id))
       super
     else
       raise(ArgumentError, "Missing options. :tense and :limit are required at minimum.")
@@ -40,6 +40,19 @@ class ConjugationTest < LanguageTest
       :current => @current,
       :test => @test.collect { |t| t.first.id }
     }
+  end
+  
+  # Removes verbs with incomplete conjugations from array
+  def clean_verb_selection(verbs, tense_id)
+    clean = []
+    verbs.each do |verb|
+      begin
+        verb.conjugate_all(tense_id)
+        clean << verb
+      rescue
+      end
+    end
+    return clean
   end
   
 end

@@ -8,9 +8,9 @@ class Verb < Vocabulary
   def conjugate(tense_id, person)
     tense = ConjugationTime.find(tense_id)
     pattern = self.conjugations.find(:first, :conditions => ['conjugation_time_id = ?',tense.id])
-    output = word
+    output = word.mb_chars
     transformations.each do |t|
-      output = t.class == Replace ? t.execute(self, output, pattern.send(person)) : t.execute(self, output, person)
+      output = t.class == ReplaceEnding ? t.execute(self, output, pattern.send(person)) : t.execute(self, output, person)
     end
     return output
   end

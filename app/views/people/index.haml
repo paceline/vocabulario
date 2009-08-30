@@ -1,0 +1,21 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+- content_for :notice do
+  %h1 Explore Pronouns
+  %p
+    There are currently
+    = Person.count
+    sets of pronouns in the database.
+
+- @languages.each do |l|
+  .content
+    %h2= l.word
+    - unless l.people.blank?
+      %ul{ :id => "pronouns_#{l.id}" }
+        - l.people.find(:all, :order => 'pronoun').each do |t|
+          %li{ :id => "pronoun_#{t.id}" }
+            = link_to(t.pronoun, t)
+            = link_to_remote('delete', { :url => person_path(t), :confirm => 'Are you sure you want to delete this pronoun?', :method => :delete }, { :class => 'edit_link' }) if logged_in? && authorized?
+    - else
+      No pronouns have been added yet

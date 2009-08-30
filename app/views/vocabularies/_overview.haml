@@ -1,6 +1,4 @@
 .content
-  %h1= logged_in? && authorized? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word
-  = render :partial => 'shared/taglist', :object => @vocabulary
   %p
     This is a
     = logged_in? && authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word

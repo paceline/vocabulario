@@ -2,6 +2,7 @@ class Transformation < ActiveRecord::Base
   
   # Attributes
   attr_writer :start_in_back, :use_open_range
+  TYPES = ['Move','ReplaceEnding','ReplacePronoun']
   
   # Associations
   belongs_to :vocabulary
@@ -52,6 +53,15 @@ class Transformation < ActiveRecord::Base
   # Helper method for intepreting pattern_start and pattern_end
   def use_open_range
     pattern_end == 0
+  end
+  
+  # Retrun TYPES in a user-friendly way
+  def self.supported_types
+    types = []
+    TYPES.each do |type|
+      types << [type.underscore.humanize, type]
+    end
+    return types
   end
   
 end

@@ -1,4 +1,4 @@
-class Replace < Transformation
+class ReplaceEnding < Transformation
   
   # Executes transformation on associated vocabulary
   def execute(vocabulary, word, text)

@@ -3,11 +3,11 @@
 
 - content_for :notice do
   %h1 Welcome!
-  %p Fill out the form below to get started and test your foreign language skills:
+  %p Fill out the form below to get started and test your foreign language skills
 
 #test_tabs.tabs
   #vocabulary_test_link.tab_link.active= link_to_remote("Vocabulary Test", :url => new_score_path(:menu => 'vocabulary'))
-  #conjugation_test_link.tab_link= link_to_remote("Conjugation Test", :url => new_score_path(:menu => 'conjugation'))
+  #conjugation_test_link.tab_link= link_to_remote("Conjugation Test (BETA)", :url => new_score_path(:menu => 'conjugation'))
 
 #error_pane.tab_content_pane{:style => 'display:none'}
 

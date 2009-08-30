@@ -5,19 +5,19 @@
     %p
       %table
         %tr
-          %th I
+          %th= @score.personal_pronouns[0]
           %td= text_field_tag 'test[1]', '', :size => 15
-          %th We
+          %th= @score.personal_pronouns[3]
           %td= text_field_tag 'test[4]', '', :size => 15
         %tr
-          %th You
+          %th= @score.personal_pronouns[1]
           %td= text_field_tag 'test[2]', '', :size => 15
-          %th You
+          %th= @score.personal_pronouns[4]
           %td= text_field_tag 'test[5]', '', :size => 15
         %tr
-          %th He/She/It</th>
+          %th= @score.personal_pronouns[2]
           %td= text_field_tag 'test[3]', '', :size => 15
-          %th They
+          %th= @score.personal_pronouns[5]
           %td= text_field_tag 'test[6]', '', :size => 15
     %p= submit_tag('Go')
 

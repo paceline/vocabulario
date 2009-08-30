@@ -2,7 +2,7 @@ class ConjugationTime < ActiveRecord::Base
   
   # Associations
   belongs_to :language
-  has_many :conjugations, :dependent => :delete_all do
+  has_many :conjugations, :dependent => :delete_all, :order => 'name' do
     def regular
       find(:all, :conditions => 'regular = 1')
     end

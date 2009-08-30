@@ -1,4 +1,4 @@
 - if !@vocabulary.language.conjugation_times.blank?
   - form_remote_for @vocabulary, :url => apply_conjugation_vocabulary_path(:id => @vocabulary.id) do
-    = select_tag('conjugation_id', option_groups_from_collection_for_select(@vocabulary.language.conjugation_times, 'conjugations.regular', :name, :id, :name))
+    = select_tag('conjugation_id', option_groups_from_collection_for_select(@vocabulary.language.conjugation_times, :conjugations, :name, :id, :name))
     = submit_tag("Add", :class => 'grey')

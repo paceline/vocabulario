@@ -4,10 +4,11 @@
     .tabs.green
       %h1 Add stuff
     %ul
-      %li= link_to('Add new vocabulary', new_vocabulary_path)
-      %li= link_to('Add new language', new_vocabulary_path(:type => 'Language'))
-      %li= link_to('Add new tense', new_conjugation_time_path)
       %li= @vocabulary ? link_to('Add new conjugation', new_vocabulary_conjugation_path(@vocabulary)) : link_to('Add new conjugation', new_conjugation_path)
+      %li= link_to('Add new language', new_vocabulary_path(:type => 'Language'))
+      %li= link_to('Add new set of pronouns', new_person_path)
+      %li= link_to('Add new tense', new_conjugation_time_path)
+      %li= link_to('Add new vocabulary', new_vocabulary_path)
       %li= link_to('Import CSV file', import_vocabularies_path)
   
   - if @vocabulary
@@ -24,5 +25,7 @@
     .tabs.green
       %h1 List stuff
     %ul
-      %li= link_to('List vocabularies', vocabularies_path)
+      %li= link_to('List pronouns', people_path)
       %li= link_to('List tenses', conjugation_times_path)
+      %li= link_to('List vocabularies', vocabularies_path)
+      

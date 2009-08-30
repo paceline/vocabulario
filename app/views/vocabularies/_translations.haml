@@ -1,5 +1,4 @@
 .content
-  %h1 Translations
   = @vocabulary.translations.empty? ? "No translations have been defined yet. If you're an admin you should change this." : "The following translations have already been added. As an admin you can add new and delete existing ones."
 
 - unless @vocabulary.translations.empty? 

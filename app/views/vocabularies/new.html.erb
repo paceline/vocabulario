@@ -29,7 +29,7 @@
     </div>
     <div class="fields">
       <%= label_tag 'Type' %>
-      <%= f.select :type, Vocabulary::TYPES %>
+      <%= f.select :type, Vocabulary.supported_types %>
     </div>
     <div class="fields">
       <%= submit_tag 'Save' %>

@@ -1,12 +1,8 @@
 class LanguageTest
   
-  # Readers for member variables
+  # Fetaures
   attr_reader :current, :limit
-  
-  # Define available limits
-  def self.limits
-    return [5,10,25,50,75,100]
-  end
+  LIMITS = [5,10,25,50,75,100]
   
   # Generate test questions
   def generate_test(words = nil)
@@ -23,7 +19,7 @@ class LanguageTest
     @test = []
     test.each do |test|
       word = Vocabulary.find(test)
-      answers = self.class == VocabularyTest ? word.translations(@to) : word.conjugate(@tense)
+      answers = self.class == VocabularyTest ? word.translations(@to) : word.conjugate_all(@tense.id)
       @test << [ word, answers ] unless answers.empty?
     end
   end

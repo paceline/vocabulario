@@ -56,7 +56,7 @@ class VocabulariesController < ApplicationController
       redirect_to vocabulary_path(@translation.permalink)
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
-      type = params[:vocabulary][:type] ? params[:vocabulary].delete(:type) : 'Vocabulary'
+      type = params[:vocabulary][:type].blank? ? 'Vocabulary' : params[:vocabulary].delete(:type)
       @vocabulary = Object.const_get(type).new(params[:vocabulary])
       if @vocabulary.valid? && @vocabulary.errors.empty?
         @vocabulary.user = current_user

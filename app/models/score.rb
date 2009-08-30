@@ -18,4 +18,10 @@ class Score < ActiveRecord::Base
     return find(:all, :order => "points/questions*100 DESC, questions DESC", :limit => limit)
   end
   
+  # Get personal pronouns based on target language
+  def personal_pronouns
+    pronoun = Person.find(:first, :conditions => ["language_id = ? AND pronoun = 'personal'", self.language_to_id])
+    return pronoun ? pronoun.set_as_list : ['I','You','He/She/It','We','You','They']
+  end
+  
 end

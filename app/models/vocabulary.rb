@@ -5,7 +5,7 @@ class Vocabulary < ActiveRecord::Base
   has_permalink :word, :update => true
   cattr_reader :per_page
   @@per_page = 150
-  TYPES = ['Language','Noun','Verb','Vocabulary',nil]
+  TYPES = ['Language','Noun','Verb',nil]
   
   # Associations - Determine language for every vocabulary
   belongs_to :language, :foreign_key => 'language_id', :class_name => 'Vocabulary'
@@ -82,6 +82,16 @@ class Vocabulary < ActiveRecord::Base
       return self.translation_to.find(:all, :conditions => ['language_id = ?', to]) + self.translation_from.find(:all, :conditions => ['language_id = ?', to])
     end
     return self.translation_to + self.translation_from
+  end
+  
+  # Retrun TYPES in a user-friendly way
+  def self.supported_types
+    types = []
+    TYPES.each do |t|
+      type = t.blank? ? ['Other', t] : [t, t]
+      types << type
+    end
+    return types
   end
 
 end

@@ -2,28 +2,27 @@
   = render(:partial => 'shared/manage')
   
 - content_for :notice do
-  %h1 New conjugation
-  %p Add a new conjugation pattern
+  %h1 New pronouns
+  %p Add a new set of pronouns
 
 .content
-  = error_messages_for :conjugation
+  = error_messages_for :person
   
-  - form_for @conjugation, :url => @path do |f|
-  
-    .fields
-      = label_tag 'name'
-      %p Please pick something intuitive, e.g. ar for a conjugation for verbs ending in -ar
-      = f.text_field :name
+  - form_for @person do |f|
   
     .fields
-      = label_tag 'Time'
-      - if @vocabulary
-        = f.select(:conjugation_time_id, @vocabulary.language.conjugation_times.collect {|t| [ t.name, t.id ] })
-      - else
-        = select_tag('conjugation[conjugation_time_id]', option_groups_from_collection_for_select(Language.list, :conjugation_times, :word, :id, :name))
+      = label_tag 'pronoun'
+      %p Please select, which type of pronoun you want:
+      = f.select(:pronoun, Person::SUPPORTED_PRONOUNS)
   
     .fields
-      = label_tag 'Verb forms'
+      = label_tag 'Language'
+      %p Please select the appropriate language:
+      = f.select(:language_id, Language.list.collect {|p| [ p.word, p.id ] })
+     
+    .fields
+      = label_tag 'Forms'
+      %p Please enter your pronoun's forms:
       %table
         %tr
           %th 1st person singular
@@ -40,10 +39,6 @@
           %td= f.text_field :third_person_singular, :size => 15
           %th 3rd person plural
           %td= f.text_field :third_person_plural, :size => 15
-    
-    .fields
-      = label_tag 'Regular?'
-      = f.check_box :regular
     
     .fields
       = f.submit 'Create'

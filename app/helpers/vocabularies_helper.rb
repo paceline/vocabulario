@@ -26,10 +26,10 @@ module VocabulariesHelper
   def apply_transformations(rule, vocabulary)
     tense = ConjugationTime.find(:first, :conditions => ['language_id = ?',vocabulary.language.id])
     pattern = vocabulary.conjugations.find(:first, :conditions => ['conjugation_time_id = ?',tense.id])
-    output = vocabulary.word
+    output = vocabulary.word.mb_chars
     vocabulary.transformations.each do |t|
       return output if t == rule
-      output = t.class == Replace ? t.execute(vocabulary, output, pattern.send(:first_person_singular)) : t.execute(vocabulary, output, :first_person_singular)
+      output = t.class == ReplaceEnding ? t.execute(vocabulary, output, pattern.send(:first_person_singular)) : t.execute(vocabulary, output, :first_person_singular)
     end
   end
    

@@ -1,6 +1,9 @@
 - content_for :sidebar do
   = render :partial => 'shared/manage'
 
+%h1= logged_in? && authorized? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word
+= render :partial => 'shared/taglist', :object => @vocabulary
+
 .tabs
   #overview_link.tab_link.active= link_to_remote("Overview", :url => vocabulary_path(@vocabulary.permalink, :menu => 'overview'), :method => :get)
   - if @vocabulary.class == Verb && logged_in? && authorized?

@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :conjugations
   map.resources :conjugation_times, :as => 'tenses'
   map.resources :languages, :controller => :vocabularies
+  map.resources :people, :as => 'pronouns'
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resource :session
   map.resources :scores, :collection => { :change_test_type => :get }

@@ -13,7 +13,7 @@
     - @scores.each do |score|
       %li
         - if score.user
-          %b= link_to(score.user.login, user_path(score.user.login))
+          %strong= link_to(score.user.login, user_path(score.user.login))
         - else
           %b Guest
         %p
