@@ -1,12 +1,12 @@
 - content_for :sidebar do
   = render :partial => 'shared/manage'
 
-%h1= logged_in? && authorized? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word
+%h1= signed_in_as_admin? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word
 = render :partial => 'shared/taglist', :object => @vocabulary
 
 .tabs
   #overview_link.tab_link.active= link_to_remote("Overview", :url => vocabulary_path(@vocabulary.permalink, :menu => 'overview'), :method => :get)
-  - if @vocabulary.class == Verb && logged_in? && authorized?
+  - if @vocabulary.class == Verb && signed_in_as_admin?
     #conjugations_link.tab_link= link_to_remote("Conjugations", :url => vocabulary_path(@vocabulary.permalink, :menu => 'conjugations'), :method => :get)
   - else
     #conjugations_link.tab_link{ :style => 'display: none;' }

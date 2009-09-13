@@ -1,7 +1,5 @@
 class SearchController < ApplicationController
-  # Layout
-  layout 'default', :except => [:live]
-  
+
   # Live search of the vocabularies database
   def live
     @search = params[:word]
@@ -44,6 +42,17 @@ class SearchController < ApplicationController
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     end
+  end
+  
+  # Display paged list of vocabularies with correspoding tag
+  def by_user
+    begin
+      @user = User.find_by_login(params[:id])
+      @vocabularies = Vocabulary.paginate_by_user_id @user.id, :page => params[:page], :order => 'word'
+      render 'vocabularies/index'
+      rescue
+        render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+      end
   end
   
 end

@@ -1,6 +1,4 @@
 class ScoresController < ApplicationController
-  # Layout
-  layout 'default'
   
   # Open up a new language test
   def new
@@ -50,21 +48,21 @@ class ScoresController < ApplicationController
       @score.points += @results.count(true)
       if !@results.include?(false)
         color = '#C0ED00'
-        flash.now[:notice] = render_notice("Yes", "You got everything right.")
+        flash.now[:result] = "<strong>Yes</strong>, you got everything right."
       else
         @correct_results = @test.correct_results
         color = '#C66'
-        flash.now[:notice] = render_notice("No", "Unfortunately you made some mistakes. See below for the correct answers.")
+        flash.now[:result] = "<strong>No</strong>, unfortunately you made some mistakes. See below for the correct answers."
       end
       @score.questions += 6
     else
       if @test.result_for(params[:test][:answer])
         color = '#C0ED00'
         @score.points += 1
-        flash.now[:notice] = render_notice("Yes", "That's correct. Well done. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}.")
+        flash.now[:result] = "<strong>Yes</strong>, that's correct. Well done. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}."
       else
         color = '#C66'
-        flash.now[:notice] = render_notice("No", "Unfortunately that's not correct. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}")
+        flash.now[:result] = "<strong>No</strong>, unfortunately that's not correct. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}"
       end
       @score.questions += 1
     end
@@ -79,8 +77,8 @@ class ScoresController < ApplicationController
         page.hide :error_pane
       end
       page.replace_html 'test_pane', render(@test)
-      page.replace_html :notice, flash[:notice]
-      page << "$('notice').setStyle({ backgroundColor: '#{color}' })"
+      page.replace_html :notice, render(:partial => 'layouts/flashes')
+      page << "$('notice').childElements().collect(function(v) { $(v).setStyle({ backgroundColor: '#{color}' }); })"
       page.show :notice
       page.visual_effect :highlight, 'notice'
       page.replace_html 'test_score', render(@score)

@@ -1,0 +1,47 @@
+- content_for :sidebar do
+  - if signed_in_as_admin? && @user != current_user
+    .content
+      .tabs.green
+        %h1 Admin stuff
+      %ul
+        %li= link_to('Make admin', admin_user_path(@user), :confirm => 'Are you sure? You can only reverse this by directly editing the database record.', :method => :put) unless @user.admin?
+        %li= link_to('Activate user', new_user_confirmation_path({ :user_id => @user.id, :token => @user.confirmation_token }), :confirm => 'Are you sure you want to activate this user?') if @user.email_confirmed == false
+        %li= link_to('Delete user', user_path(@user), :confirm => "Are you sure you want to delete this user?", :method => :delete)
+
+- content_for :notice do
+  %h1 User profile
+
+.content
+  = gravatar_for @user, { :class => 'gravatar_big', :size => '75' }
+  %h1= @user.name
+  %p
+    - if @user.admin
+      Administrator since
+    - else
+      Member since
+    = "since #{@user.updated_at.to_s(:long)}."
+    %br
+    %br
+
+.content
+  %h2 Rankings
+  %ul
+    - unless @user.scores.blank?
+      %li
+        %strong= @user.score_rank
+        on <strong>best overall score</strong> list with
+        %strong= number_to_percentage(@user.average_score, :precision => 2)
+      %li
+        %strong= @user.contributor_rank
+        on <strong>most vocabularies contributed</strong> list with
+        %strong= @user.vocabularies.count
+        vocabularies
+
+.content
+  %h2 Test stats
+  %ul
+    %li= "Took a <strong>total</strong> of <strong>#{@user.number_of_tests} tests</strong>"
+    %li= "Got <strong>100%</strong> right on <strong>#{@user.number_of_tests(1)} tests</strong>"
+    %li= "Got <strong>75%</strong> or more right on <strong>#{@user.number_of_tests(0.75)} tests</strong>"
+    %li= "Got <strong>50%</strong> or more right on <strong>#{@user.number_of_tests(0.5)} tests</strong>"
+    %li= "Got <strong>25%</strong> or more right on <strong>#{@user.number_of_tests(0.25)} tests</strong>"

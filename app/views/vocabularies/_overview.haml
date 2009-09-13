@@ -1,14 +1,14 @@
 .content
   %p
     This is a
-    = logged_in? && authorized? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word
-    = logged_in? && authorized? && @vocabulary.conjugations.blank? ? in_place_editor_field(:vocabulary, :class_type) : @vocabulary.class_type
+    = signed_in_as_admin? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word
+    = signed_in_as_admin? && @vocabulary.conjugations.blank? ? in_place_editor_field(:vocabulary, :class_type) : @vocabulary.class_type
 
 .content
   = label_tag 'Comment'
-  = logged_in? && authorized? ? in_place_editor_field(:vocabulary, :comment) : @vocabulary.comment
+  = signed_in_as_admin? ? in_place_editor_field(:vocabulary, :comment) : @vocabulary.comment
 
 - if @vocabulary.class == Noun
   .content
     = label_tag 'Article'
-    = logged_in? && authorized? ? in_place_editor_field(:vocabulary, :gender) : @vocabulary.gender
+    = signed_in_as_admin? ? in_place_editor_field(:vocabulary, :gender) : @vocabulary.gender

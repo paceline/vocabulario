@@ -1,8 +1,0 @@
-<% content_for :notice do %>
-  <h1>Users</h1>
-  <p>A growing community! Well, not really...</p>
-<% end %>
-
-<div class="content">
-  <%= @users.collect { |user| render user } %>
-</div>

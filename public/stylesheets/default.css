@@ -86,7 +86,7 @@ th { background-color: #CCC; text-align: left; }
 /* "Notice"
    ======== */
 
-#notice {
+#notice .notice {
 	background: #C0ED00;
 	height: 60px;
 	margin: 0 0 55px 0;
@@ -200,6 +200,8 @@ em.tag {
 
 #user_bar a { color: #666; }
 
+#user_bar li { margin: 3px 0 3px 0; }
+
 .gravatar, .gravatar_big {
 	background-color: #FFF;
 	float: left;
@@ -234,6 +236,14 @@ label {
 	font-size: 1.25em;
 	margin: 0 0 5px 0;
 }
+
+fieldset { border: none; padding: 0; margin: 0; }
+
+fieldset ol { font-size: 1.1em; }
+
+fieldset ol li { margin: 25px 0 25px 0; }
+
+fieldset.buttons ol { list-style: none; }
 
 .fields { margin: 0 0 35px 0; }
 
@@ -384,11 +394,7 @@ a.edit_link, input[type="submit"].grey { margin-left: 3px; padding: .25em; }
    ===================== */
 
 div.dialog {
-	background-color: #C0ED00;
-	border: 1px solid #888;
 	width: 900px;
 	padding: 1em;
-	margin: 75px auto 65px auto;
+	margin: 50px auto 50px auto;
 }
-
-div.dialog h1 { color: #f00; }

@@ -1,121 +1,73 @@
-class UsersController < ApplicationController
-  # Layout
-  layout 'default'
+class UsersController < Clearance::UsersController
   
-  # Protect these actions behind an admin login
-  before_filter :login_required, :only => [:edit, :update]
-  before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :admin]
-  before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
-
-  # render new.rhtml
-  def new
-    @user = User.new
-  end
- 
-  def create
-    logout_keeping_session!
-    @user = User.new(params[:user])
-    @user.admin = true if User.find(:all).blank?
-    @user.register! if @user && @user.valid?
-    success = @user && @user.valid?
-    if success && @user.errors.empty?
-      redirect_back_or_default('/')
-      flash[:notice] = render_notice("Welcome!", "Thanks for signing up! We're sending you an email with your activation code.")
-    else
-      flash[:notice] = render_notice("Sorry...", "We couldn't set up that account, sorry.  Please try again, or contact an admin.")
-      render :action => 'new'
-    end
-  end
-
-  def activate
-    logout_keeping_session!
-    user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?
-    case
-    when (!params[:activation_code].blank?) && user && !user.active?
-      user.activate!
-      flash[:notice] = render_notice("Signup complete!", "Please sign in to continue.")
-      redirect_to '/login'
-    when params[:activation_code].blank?
-      flash[:notice] = render_notice("Sorry...", "The activation code was missing.  Please follow the URL from your email.")
-      redirect_back_or_default('/')
-    else
-      flash[:notice] = render_notice("Sorry...", "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in.")
-      redirect_back_or_default('/')
-    end
-  end
+  # Filters
+  before_filter :users_only, :only => [:show]
+  before_filter :admin_only, :only => [:admin, :destroy]
+  before_filter :get_user, :only => [:edit, :update]
   
+  # Make user an admin (one way only)
   def admin
     @user = User.find(params[:id])
     @user.admin = true
     @user.save
-    flash[:notice] = render_notice("Wonderful...", "#{@user.login} is now an admin.")
-    redirect_to @user
+    flash[:notice] = "#{@user.name} is now an admin."
+    redirect_to user_path(@user.permalink)
   end
   
+  # Destroy user (entirely)
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_path
+  end
+  
+  # Edit user profile
   def edit
     @user = User.find(params[:id])
     redirect_to @user unless current_user == @user
   end
   
-  def forgot_password
-    if request.post?
-      user = User.find_by_login(params[:login])
-      if user
-        user.new_random_password
-        user.save
-        flash[:notice] = render_notice("Hope, it helps...", "Your password has been emailed to you.")
-        redirect_to '/login'
-      else
-        flash[:notice] = render_notice("Sorry...", "Don't recognize that login. Are you sure you're a member already?")
-      end
+  # List users
+  def index
+    @users = User.find(:all, :order => 'name')
+  end
+  
+  # FIX ME - copy/paste from clearance until I can find the routing error
+  def password
+    @user = User.find_by_id_and_confirmation_token(params[:id], params[:token])
+    if @user.update_password(params[:user][:password], params[:user][:password_confirmation])
+      @user.confirm_email!
+      sign_in(@user)
+      flash[:success] = "Password has now been changed."
+      redirect_to '/'
+    else
+      render :template => 'passwords/edit'
     end
   end
 
-  def suspend
-    @user.suspend! 
-    redirect_to users_path
-  end
-
-  def unsuspend
-    @user.unsuspend! 
-    redirect_to users_path
-  end
-
-  def destroy
-    @user.delete!
-    redirect_to users_path
-  end
-
-  def purge
-    @user.destroy
-    redirect_to users_path
-  end
-  
-  def index
-    @users = User.find(:all, :order => 'login')
-  end
-  
+  # Show user profile and stats
   def show
-    @user = User.find_by_login(params[:id])
+    @user = User.find_by_permalink(params[:id])
   end
-  
+
+  # Update user profile
   def update
     @user = User.find(params[:id])
     redirect_to @user unless current_user == @user
     begin
       @user.update_attributes!(params[:user])
-      flash[:notice] = render_notice("Wonderful...", "Your profile has been successfully updated.")
+      flash[:success] = "Your profile has been successfully updated."
     rescue
     end
     render(:action => 'edit')
   end
   
-  # There's no page here to update or destroy a user.  If you add those, be
-  # smart -- make sure you check that the visitor is authorized to do so, that they
-  # supply their old password along with a new one to update it, etc.
-
-protected
-  def find_user
-    @user = User.find(params[:id])
-  end
+  protected
+    def get_user
+      if signed_in_as_admin?
+        @user = User.find(params[:id])
+      elsif signed_in?
+        @user = current_user
+      end
+    end
 end

@@ -1,7 +1,8 @@
 class ConjugationsController < ApplicationController
-  # Layout
-  layout 'default'
-  
+   
+  # Filters
+  before_filter :admin_only, :except => [:show] 
+   
   # Features
   in_place_edit_for :conjugation, :name
   
@@ -12,7 +13,7 @@ class ConjugationsController < ApplicationController
       @conjugation.save
       reference = Vocabulary.find(params[:vocabulary_id]) if params[:vocabulary_id]
       reference.conjugations << @conjugation if reference
-      flash[:notice] = render_notice("Great", "\"#{@conjugation.name}\" has been added to the database.")
+      flash[:great] = "\"#{@conjugation.name}\" has been added to the database."
       redirect_to @conjugation
     else
       render :action => 'new'

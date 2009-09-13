@@ -3,7 +3,7 @@
 
 - else
   - taglist_detail.each do |tag|
-    - if logged_in?
+    - if signed_in?
       %em.tag= link_to_function(tag, "$('taglist','tag_form').invoke('toggle'); $('tag_list').focus();", :class => "edit")
     - else
       %em.tag= tag

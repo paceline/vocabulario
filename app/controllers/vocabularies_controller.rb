@@ -1,10 +1,8 @@
 class VocabulariesController < ApplicationController
-  # Layout
-  layout 'default'
   
   # Filters
-  before_filter :login_required, :except => [:index, :refresh_language, :select, :show, :tags_for_language]
-  before_filter :admin_required, :only => [:apply_tags, :create, :destroy, :edit, :import, :new, :unlink]
+  before_filter :users_only, :except => [:index, :refresh_language, :select, :show, :tags_for_language]
+  before_filter :admin_only, :only => [:apply_conjugation, :apply_tags, :apply_type, :create, :destroy, :edit, :import, :new, :unapply_conjugation, :unlink]
   
   # Features
   in_place_edit_for :vocabulary, :word
@@ -30,7 +28,7 @@ class VocabulariesController < ApplicationController
   def apply_tags
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.apply_tags_to_translations
-    flash[:notice] = render_notice("Great...", "#{@vocabulary.word}'s tags have been copied to all translations.")
+    flash[:success] = "#{@vocabulary.word}'s tags have been copied to all translations."
     redirect_to vocabulary_path(@vocabulary.permalink)
   end
   
@@ -38,7 +36,7 @@ class VocabulariesController < ApplicationController
   def apply_type
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.apply_type_to_translations
-    flash[:notice] = render_notice("Great...", "#{@vocabulary.word}'s type has been copied to all translations.")
+    flash[:success] = "#{@vocabulary.word}'s type has been copied to all translations."
     redirect_to vocabulary_path(@vocabulary.permalink)
   end
   
@@ -52,7 +50,7 @@ class VocabulariesController < ApplicationController
       @vocabulary.user = current_user
       @vocabulary.tag_list = (@vocabulary.tag_list + @translation.tag_list).uniq if copy_tags
       @translation.translation_to << @vocabulary
-      flash[:notice] = render_notice("Great...", "Translation has been successfully saved.")
+      flash[:success] = "Translation has been successfully saved."
       redirect_to vocabulary_path(@translation.permalink)
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
@@ -61,7 +59,7 @@ class VocabulariesController < ApplicationController
       if @vocabulary.valid? && @vocabulary.errors.empty?
         @vocabulary.user = current_user
         @vocabulary.save
-        flash[:notice] = render_notice("Great...", "\"#{@vocabulary.word}\" has been added to the database.")
+        flash[:success] = "\"#{@vocabulary.word}\" has been added to the database."
         redirect_to vocabulary_path(@vocabulary.permalink)
       else
         render :action => 'new'
@@ -78,7 +76,7 @@ class VocabulariesController < ApplicationController
   def destroy
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.destroy
-    flash[:notice] = render_notice("You wanted it...", "Vocabulary has been deleted from to the database.")
+    flash[:notice] = "You wanted it. Vocabulary has been deleted from to the database."
     redirect_to vocabularies_path
   end
   
@@ -122,7 +120,7 @@ class VocabulariesController < ApplicationController
           @to = Vocabulary.find_by_word(row[1].split(' ').first)
         end
       end
-      flash[:notice] = render_notice("Great...", "Vocabularies have been imported to the database.")
+      flash[:success] = "Vocabularies have been imported to the database."
     end
   end
   

@@ -1,4 +1,4 @@
-- if @vocabulary.class == Verb && logged_in? && authorized?
+- if @vocabulary.class == Verb && signed_in_as_admin?
   .content
     %p This page allows you to define conjugation patterns for verbs.
     %p Since with many verbs there's a lot more to a conjugation than just exchanging the verb's last syllables you can define a set of transformations to get from infinitive to conjugated verb.

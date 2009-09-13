@@ -1,0 +1,25 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+- content_for :notice do
+  %h1 Import a text file
+  %p Currently Vocabulario is not very flexible in terms of the file format.
+
+.content
+  Here's a quick example:
+  %ul
+    %li <strong>Line 1:</strong> Spanish;German 1;German 2;German 3
+    %li <strong>Line 2:</strong> a cada instante;Zu jedem Zeitpunkt;;
+    %li <strong>Line 2:</strong> apretar;abdr&uuml;cken;zusammendr&uuml;cken;dr&auml;ngen
+
+.content
+  - form_for :vocabulary, :url => import_vocabularies_path, :html => {:multipart => true} do |f|
+    %p
+      = label_tag 'File'
+      = f.file_field :file
+    
+    %p
+      = label_tag 'Tag with'
+      = f.select :tags, Tag.find(:all, :order => 'name'), { }, { :multiple => true, :size => 5 }
+
+    %p= submit_tag 'Import'

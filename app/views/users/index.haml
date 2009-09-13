@@ -1,0 +1,6 @@
+- content_for :notice do
+  %h1 Users
+  %p A growing community! Well, not really...
+
+.content
+  = @users.collect { |user| render user }

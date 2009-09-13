@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
-  # Layout
-  layout 'default'
+  
+  # Filters
+  before_filter :admin_only, :except => [:index, :show]
   
   # Features
   in_place_edit_for :person, :pronoun
@@ -17,7 +18,7 @@ class PeopleController < ApplicationController
     @person = Person.new(params[:person])
     if @person.valid? && @person.errors.empty?
       @person.save
-      flash[:notice] = render_notice("Great...", "Your set of #{@person.pronoun} pronouns has been added to the database.")
+      flash[:success] = "Your set of #{@person.pronoun} pronouns has been added to the database."
       redirect_to @person
     else
       render :action => 'new'

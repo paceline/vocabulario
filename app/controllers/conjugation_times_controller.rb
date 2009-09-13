@@ -1,10 +1,7 @@
 class ConjugationTimesController < ApplicationController
-  # Layout
-  layout 'default'
   
   # Filters
-  before_filter :login_required, :except => [:index]
-  before_filter :admin_required, :except => [:index]
+  before_filter :admin_only, :except => [:index, :show]
   
   # Features
   in_place_edit_for :conjugation_time, :name
@@ -15,7 +12,7 @@ class ConjugationTimesController < ApplicationController
     @time = ConjugationTime.new(params[:conjugation_time])
     if @time.valid? && @time.errors.empty?
       @time.save
-      flash[:notice] = render_notice("Great", "\"#{@time.name}\" has been added to the database.")
+      flash[:success] = "\"#{@time.name}\" has been added to the database."
       redirect_to conjugation_times_path
     else
       render :action => 'new'

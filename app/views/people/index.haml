@@ -16,6 +16,6 @@
         - l.people.find(:all, :order => 'pronoun').each do |t|
           %li{ :id => "pronoun_#{t.id}" }
             = link_to(t.pronoun, t)
-            = link_to_remote('delete', { :url => person_path(t), :confirm => 'Are you sure you want to delete this pronoun?', :method => :delete }, { :class => 'edit_link' }) if logged_in? && authorized?
+            = link_to_remote('delete', { :url => person_path(t), :confirm => 'Are you sure you want to delete this pronoun?', :method => :delete }, { :class => 'edit_link' }) if signed_in_as_admin?
     - else
       No pronouns have been added yet

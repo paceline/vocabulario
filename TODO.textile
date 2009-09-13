@@ -2,6 +2,7 @@ h1. TODOs
 
 h2. Priority 1
 
+* Only get asked own vocabulary
 
 h2. Priority 2
 
@@ -13,5 +14,3 @@ h2. Priority 2
 h2. Priority 3
 
 * Internationalization / Multi-language
-* Convert all views to HAML
-

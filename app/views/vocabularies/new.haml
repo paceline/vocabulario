@@ -1,0 +1,28 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+- content_for :notice do
+  %h1= "New #{params[:type] ? 'language' : 'vocabulary'}"
+  %p= "Fill out the form below to submit a new #{params[:type] ? 'language' : 'vocabulary'}."
+
+.content
+  = error_messages_for :vocabulary
+  - form_for :vocabulary, :url => vocabularies_path do |f|
+    = f.hidden_field :type, :value => params[:type] if params[:type]
+    .fields
+      = label_tag 'word'
+      = f.text_field :word
+    .fields
+      = label_tag 'article'
+      = f.text_field :gender
+    .fields
+      = label_tag 'comment'
+      = f.text_area :comment, { :cols => 50, :rows => 5 }
+    .fields
+      = label_tag 'Language'
+      = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }
+    .fields
+      = label_tag 'Type'
+      = f.select :type, Vocabulary.supported_types
+    .fields
+      = submit_tag 'Save'

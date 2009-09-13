@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090807212126) do
+ActiveRecord::Schema.define(:version => 20090913110133) do
 
   create_table "conjugation_times", :force => true do |t|
     t.integer  "language_id"
@@ -96,23 +96,23 @@ ActiveRecord::Schema.define(:version => 20090807212126) do
   add_index "translations", ["vocabulary1_id", "vocabulary2_id"], :name => "vocabulary1_id_vocabulary2_id_index", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "login",                     :limit => 40
-    t.string   "name",                      :limit => 100
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
+    t.string   "login",              :limit => 40
+    t.string   "name",               :limit => 100
+    t.string   "email",              :limit => 100
+    t.string   "salt",               :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_token",            :limit => 40
-    t.datetime "remember_token_expires_at"
-    t.string   "activation_code",           :limit => 40
-    t.datetime "activated_at"
-    t.string   "state",                                    :default => "passive"
-    t.datetime "deleted_at"
-    t.boolean  "admin",                                    :default => false
+    t.string   "remember_token",     :limit => 40
+    t.boolean  "admin",                             :default => false
+    t.string   "encrypted_password", :limit => 128
+    t.string   "confirmation_token", :limit => 128
+    t.boolean  "email_confirmed",                   :default => false, :null => false
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["id", "confirmation_token"], :name => "index_users_on_id_and_confirmation_token"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
   create_table "vocabularies", :force => true do |t|
     t.integer  "user_id"
