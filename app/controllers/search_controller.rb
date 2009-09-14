@@ -47,7 +47,7 @@ class SearchController < ApplicationController
   # Display paged list of vocabularies with correspoding tag
   def by_user
     begin
-      @user = User.find_by_login(params[:id])
+      @user = User.find_by_permalink(params[:id])
       @vocabularies = Vocabulary.paginate_by_user_id @user.id, :page => params[:page], :order => 'word'
       render 'vocabularies/index'
       rescue

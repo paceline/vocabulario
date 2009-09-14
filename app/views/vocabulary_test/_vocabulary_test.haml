@@ -1,4 +1,4 @@
-- form_remote_for @score, :url => scores_path(:type => 'VocabularyTest')   do
+- form_remote_for @score, :url => scores_path(:type => 'VocabularyTest') do 
 
   .fields
     %h2 1. Languages
@@ -12,14 +12,14 @@
     %h2 2. Number of questions
     I'm up for
     = select(:test, :limit, VocabularyTest::LIMITS)
-    questions.
-
+    questions
+   
   .fields
     %h2 3. Topic
     I only want to be tested on vocabularies tagged with:<br />
     %p= select(:test, :tags, @tags.collect {|t| [ t.name, t.id ] }, { }, { :multiple => true, :size => 5 })
     = observe_field(:test_from, :url => tags_for_language_vocabularies_path, :update => "test_tags", :complete => visual_effect(:highlight, "test_tags"), :with => "language_id")
-
+  
   .fields
     = submit_tag("Ready? Let's go!")
   
