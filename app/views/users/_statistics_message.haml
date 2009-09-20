@@ -1,0 +1,10 @@
+- if !tag.blank?
+  = "Showing performance on tests tagged with '" + tag + "'."
+  = link_to_remote('Reset.', :url => statistics_user_path(@user.permalink), :before => "$('loading').show(); getGraphData('#{@user.permalink}')")
+
+- elsif !type.blank?
+  = "Showing performance on " + type.underscore.humanize.downcase + "s."
+  = link_to_remote('Reset.', :url => statistics_user_path(@user.permalink), :before => "$('loading').show(); getGraphData('#{@user.permalink}')")
+
+- else
+  Showing performance on all tests.

@@ -3,7 +3,13 @@ module ApplicationHelper
   include TagsHelper
   
   def on_load()
-    flash.empty? ? "" : "highlight()"
+    if flash.empty?
+      if @current_action == 'statistics'
+        return "getGraphData('#{current_user.permalink}')"
+      end
+      return ""
+    end
+    return "highlight()"
   end
   
   def interpret_flash_key(key)

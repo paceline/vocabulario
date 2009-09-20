@@ -30,4 +30,12 @@ class ApplicationController < ActionController::Base
   # Security Features - Scrub sensitive parameters from your log
   filter_parameter_logging :password
   
+  # Filters
+  private
+    before_filter :identify_controller_and_action
+
+    def identify_controller_and_action
+      @current_action = action_name
+      @current_controller = controller_name
+    end
 end

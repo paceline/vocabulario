@@ -1,0 +1,26 @@
+- content_for :notice do
+  %h1 Personal trainer
+  %p Welcome to your personal stat and training center!
+
+- content_for :sidebar do
+  .content
+    .tabs.green
+      %h1 By tag
+    - tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class|
+      = link_to_remote tag.name, :url => statistics_user_path(@user.permalink, :tag => tag.permalink), :before => "$('loading').show(); getGraphData('#{@user.permalink}','#{tag.permalink}')", :html => { :class => css_class }
+  .content
+    .tabs.green
+      %h1 By type
+    %ul
+      %li= link_to_remote "Conjugation Tests", :url => statistics_user_path(@user.permalink, :type => 'ConjugationTest'), :before => "$('loading').show(); getGraphData('#{@user.permalink}','','ConjugationTest')"
+      %li= link_to_remote "Vocabulary Tests", :url => statistics_user_path(@user.permalink, :type => 'VocabularyTest'), :before => "$('loading').show(); getGraphData('#{@user.permalink}','','VocabularyTest')"
+
+%h1
+  Learning curve
+  #loading{ :style => 'display: none' }= image_tag('ajax-loader.gif')
+%p#description= render :partial => 'statistics_message', :locals => { :tag => '', :type => '' }
+
+%canvas{:id => "scores_as_timeline", :width => "800", :height => "350"}
+
+.content#graph_navigation
+  = render :partial => 'statistics_navigation', :locals => { :tag => '', :type => '' }

@@ -142,6 +142,8 @@ ul.inline li { display: inline; padding-right: .6em; }
 
 .active { border: none; background-color: #02B8EA; }
 
+a.active { color: #FFF; padding: 2px; text-decoration: none; }
+
 
 /* "Main" -> "Test section"
    ======================== */
@@ -380,6 +382,10 @@ a.edit_link, input[type="submit"].grey { margin-left: 3px; padding: .25em; }
 	display: inline;
 }
 	
+#loading { float: left; margin-right: 10px; }
+
+#graph_navigation { margin: 35px 0 0 20px; }
+
 
 /* "Various" -> "Tag cloud"
    ======================== */

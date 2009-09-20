@@ -26,8 +26,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :people, :as => 'pronouns'
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resources :scores, :collection => { :change_test_type => :get }
+  map.resources :statistics
   map.resources :transformations, :member => { :reorder => :post }
-  map.resources :users, :member => { :admin => :put, :password => :put }
+  map.resources :users, :member => { :admin => :put, :password => :put, :statistics => [:get, :post] }, :has_many => :scores
   
   map.resources :vocabularies,
     :member => { :apply_conjugation => :put, :unapply_conjugation => :delete, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },

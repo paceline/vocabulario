@@ -3,6 +3,8 @@ h1. TODOs
 h2. Priority 1
 
 * Only get asked own vocabulary
+* Test center
+  - Comparative analysis (you're best with vocabulary test tagged with intermediate)
 
 h2. Priority 2
 

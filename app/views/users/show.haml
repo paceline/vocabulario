@@ -28,11 +28,11 @@
   %ul
     - unless @user.scores.blank?
       %li
-        %strong= @user.score_rank
+        %strong= "##{@user.score_rank}"
         on <strong>best overall score</strong> list with
         %strong= number_to_percentage(@user.average_score, :precision => 2)
       %li
-        %strong= @user.contributor_rank
+        %strong= "##{@user.contributor_rank}"
         on <strong>most vocabularies contributed</strong> list with
         %strong= @user.vocabularies.count
         vocabularies

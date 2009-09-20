@@ -49,6 +49,39 @@ class UsersController < Clearance::UsersController
   def show
     @user = User.find_by_permalink(params[:id])
   end
+  
+  # Statistics page
+  # FIX ME - There's probably a better way to do this - i.e. this needs to be cleaned up
+  def statistics
+    @user = User.find_by_permalink(params[:id])
+    @tags = Score.tag_counts(:conditions => ["scores.user_id = ?", @user.id])
+    
+    if !params[:tag].blank?
+      @tag = Tag.find_by_permalink(params[:tag])
+      @page = params[:page].to_i == 0 ? Score.last_page_number(['user_id = ? AND taggings.tag_id = ?', @user.id, @tag.id], [ :taggings ]) : params[:page]
+      @scores = Score.paginate_by_user_id @user.id, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :page => @page, :per_page => 25
+    elsif !params[:type].blank?
+      @page = params[:page].to_i == 0 ? Score.last_page_number(['user_id = ? AND test_type = ?', @user.id, params[:type]]) : params[:page]
+      @scores = Score.paginate_by_user_id @user.id, :conditions => ['test_type = ?', params[:type]], :page => @page, :per_page => 25
+    else
+      @page = params[:page].to_i == 0 ? Score.last_page_number(['user_id = ?', @user.id]) : params[:page]
+      @scores = Score.paginate_by_user_id @user.id, :page => @page, :per_page => 25
+    end
+    
+    respond_to do |format|
+      format.html {
+        if request.post?
+          render :update do |page|
+            page.replace_html 'description', render(:partial => 'statistics_message', :locals => { :tag => params[:tag], :type => params[:type] })
+            page.replace_html 'graph_navigation', render(:partial => 'statistics_navigation', :locals => { :tag => params[:tag], :type => params[:type] })
+          end
+        else
+          render :action => 'statistics'
+        end
+      }
+      format.json { render :json => { :scores => @scores, :page => @page } }
+    end
+  end
 
   # Update user profile
   def update

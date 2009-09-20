@@ -3,8 +3,8 @@
   %head
     %title VOCABULARIO - A simple, non-social vocabulary trainer
     = javascript_include_tag :defaults, 'ierange-m2.js'
-    - if @translation
-      %script{ :src => "/vocabularies.js?language=#{@translation.language.id}", :type => "text/javascript" }
+    = javascript_include_tag "/vocabularies.js?language=#{@translation.language.id}" if @translation
+    = javascript_include_tag 'js-class.js', 'bluff-min.js', 'bluff-src.js', 'excanvas.js' if @current_action == 'statistics'
     = stylesheet_link_tag "default"
   %body{ :onLoad => on_load }
     .container
@@ -30,7 +30,7 @@
               %h1= "Hello, #{current_user.name}"
             = gravatar_for current_user, { :size => '75' }
             %ul
-              %li= link_to('My vocabularies', vocabularies_by_user_path(current_user.permalink), { :title => 'My vocabularies' })
+              %li= link_to('Test stats', statistics_user_path(current_user.permalink), { :title => 'Stat center' })
               %li= link_to('Profile', edit_user_path(current_user), { :title => 'Profile' })
               %li= link_to('Log out', logout_path, { :title => 'Log out' })
           - else

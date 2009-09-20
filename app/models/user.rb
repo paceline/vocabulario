@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Features
   include Clearance::User
   attr_accessible :name
-  has_permalink :name, :update => true
+  has_permalink :name
   
   # Associations
   has_many :scores

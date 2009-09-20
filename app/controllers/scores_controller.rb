@@ -23,8 +23,7 @@ class ScoresController < ApplicationController
   def create
     @test = Object.const_get(params[:type]).new(params[:test])
     @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
-    @score.language_from_id = params[:test][:from] ? @test.from.id : ConjugationTime.find(params[:test][:tense]).language.id
-    @score.language_to_id = params[:test][:to] ? @test.to.id : @score.language_from_id
+    @score.setup(params[:test], @test)
     @score.save
     session[:test] = @test.to_session_params
     render :update do |page|

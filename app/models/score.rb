@@ -1,5 +1,8 @@
 class Score < ActiveRecord::Base
   
+  # Features
+  acts_as_taggable
+  
   # Associations
   belongs_to :language_from, :foreign_key => 'language_from_id', :class_name => 'Language'
   belongs_to :language_to, :foreign_key => 'language_to_id', :class_name => 'Language'
@@ -22,6 +25,23 @@ class Score < ActiveRecord::Base
   def personal_pronouns
     pronoun = Person.find(:first, :conditions => ["language_id = ? AND pronoun = 'personal'", self.language_to_id])
     return pronoun ? pronoun.set_as_list : ['I','You','He/She/It','We','You','They']
+  end
+  
+  # Post-initialize operations
+  def setup(params, test)
+    language_from_id = params[:from] ? test.from.id : ConjugationTime.find(params[:tense]).language.id
+    language_to_id = params[:to] ? test.to.id : language_from_id
+    params[:tags].each do |tag|
+      t = Tag.find(tag)
+      tag_list.add(t.name)
+    end
+  end
+  
+  # takes a hash of finder conditions and returns a page number 
+  # returns 1 if nothing was found, as not to break pagination by passing page=0 
+  def self.last_page_number(conditions=nil, includes=nil) 
+    total = count :all, :conditions => conditions, :include => includes
+    [((total - 1) / 25) + 1, 1].max 
   end
   
 end
