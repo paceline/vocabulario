@@ -8,5 +8,4 @@ config/initializers/site_keys.rb
 log/*.log
 db/*.db
 tmp/*/*
-public/images/*
 vendor/plugins/viget_deployment
