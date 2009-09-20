@@ -17,7 +17,7 @@
 
 %h1
   Learning curve
-  #loading{ :style => 'display: none' }= image_tag('ajax-loader.gif')
+  #loading= image_tag('ajax-loader.gif')
 %p#description= render :partial => 'statistics_message', :locals => { :tag => '', :type => '' }
 
 %canvas{:id => "scores_as_timeline", :width => "800", :height => "350"}
