@@ -21,22 +21,18 @@ class ScoresController < ApplicationController
   
   # Create a new vocabulary test (on "Let's go")
   def create
-    if params[:commit] == "Just start the damn' test!"
-      @test = Object.const_get(params[:type]).new(params[:test])
-      @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
-      @score.setup(params[:test], @test)
-      @score.save
-      session[:test] = @test.to_session_params
-      render :update do |page|
-        page.hide :test_tabs
-        page << "$('test_pane').className = ''"
-        page.replace_html 'test_pane', render(@test)
-        page.visual_effect :highlight, 'test_pane'
-        page.replace_html 'test_score', render(@score)
-        page.visual_effect :highlight, 'test_score'
-      end
-    else
-      redirect_to review_vocabularies_path(params[:test])
+    @test = Object.const_get(params[:type]).new(params[:test])
+    @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
+    @score.setup(params[:test], @test)
+    @score.save
+    session[:test] = @test.to_session_params
+    render :update do |page|
+      page.hide :test_tabs
+      page << "$('test_pane').className = ''"
+      page.replace_html 'test_pane', render(@test)
+      page.visual_effect :highlight, 'test_pane'
+      page.replace_html 'test_score', render(@score)
+      page.visual_effect :highlight, 'test_score'
     end
   end
   
