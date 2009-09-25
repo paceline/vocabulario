@@ -144,6 +144,12 @@ ul.inline li { display: inline; padding-right: .6em; }
 
 a.active { color: #FFF; padding: 2px; text-decoration: none; }
 
+#browser {
+	background-color: #EFE;
+	padding: 1em;
+	margin-bottom: 40px;
+}
+
 
 /* "Main" -> "Test section"
    ======================== */
@@ -173,6 +179,7 @@ em.tag {
 
 #sidebar {
 	background-color: #FFF;
+	min-height: 590px;
 	width: 275px;
 	float: right;
 	padding: 0 0 0 50px;
@@ -343,6 +350,7 @@ input[type="submit"] {
 	background: #02B8EA;
 	border: none;
 	color: #FFF;
+	margin-right: 25px;
 	padding: .5em;
 }
 

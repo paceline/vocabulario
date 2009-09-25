@@ -1,0 +1,6 @@
+%ul.inline
+  - Vocabulary::TYPES.each do |type|
+    - if type
+      %li= link_to(type, vocabularies_by_type_path(type))
+    - else
+      %li= link_to('Other', vocabularies_by_type_path('other'))

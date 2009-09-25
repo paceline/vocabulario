@@ -88,7 +88,15 @@ class VocabulariesController < ApplicationController
       format.html { render :action => 'index' }
       format.js {
         render :update do |page|
-          page << "var vocabularies = new Array('" + @vocabularies_list.collect { |v| v.word }.join("','") + "');"
+          if params[:menu]
+            page.hide 'browser'
+            page << "['live_search','by_language','by_tag','by_type'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
+            page << "$('#{params[:menu]}_link').addClassName('active')"
+            page.replace_html 'browser', render(:partial => params[:menu])
+            page << "new Effect.BlindDown('browser')"
+          else
+            page << "var vocabularies = new Array('" + @vocabularies_list.collect { |v| v.word }.join("','") + "');"
+          end
         end
       }
       format.json { render :json => @vocabularies_list.to_json(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_to ]) }

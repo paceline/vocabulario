@@ -1,0 +1,3 @@
+%ul.inline
+  -  Language.list.each do |item|
+    %li= link_to(item.name, vocabularies_by_language_path(item.permalink))

@@ -1,0 +1,2 @@
+= text_field :vocabulary, :word, :size => 30
+= observe_field :vocabulary_word, :url => live_search_path, :update => 'vocabulary_results', :frequency => 0.5, :with => 'word'
