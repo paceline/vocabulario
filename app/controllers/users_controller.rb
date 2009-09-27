@@ -29,6 +29,7 @@ class UsersController < Clearance::UsersController
   # List users
   def index
     @users = User.find(:all, :order => 'name')
+    @lists = List.find_public(current_user)
   end
   
   # FIX ME - copy/paste from clearance until I can find the routing error
@@ -46,7 +47,11 @@ class UsersController < Clearance::UsersController
 
   # Show user profile and stats
   def show
-    @user = User.find_by_permalink(params[:id])
+    begin
+      @user = User.find_by_permalink(params[:id])
+    rescue
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
   end
   
   # Statistics page

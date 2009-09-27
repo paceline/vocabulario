@@ -6,7 +6,7 @@ class SearchController < ApplicationController
     if @search.blank?
       @vocabularies = Vocabulary.paginate :all, :page => params[:page], :order => 'word'
     else
-      @vocabularies = Vocabulary.find(:all, :conditions => ['word LIKE ?',"%#{params[:word]}%"], :limit => 100, :order => 'word')
+      @vocabularies = Vocabulary.find(:all, :conditions => ['word LIKE ?',"%#{@search}%"], :limit => 100, :order => 'word')
       render :nothing => true if @vocabularies.blank?
     end
   end

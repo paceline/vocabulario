@@ -1,0 +1,42 @@
+- content_for :sidebar do
+  - if @list.class.to_s == 'StaticList' && current_user == @list.user
+    .content
+      .tabs.green
+        %h1 Search & drag
+      = text_field :vocabulary, :word, :size => 15
+      = observe_field :vocabulary_word, :url => live_lists_path, :update => 'search_and_drag', :frequency => 0.5, :with => "'word=' + value + '&id=#{@list.id}'"
+      #search_and_drag
+  =  render :partial => 'manage'
+  - unless @vocabularies.blank?
+    .content
+      .tabs.green
+        %h1 Export
+      %ul
+        %li= link_to('List as JSON', list_path(@list.permalink, :format => :json))
+        %li= link_to('List as XML', list_path(@list.permalink, :format => :xml))
+      
+- content_for :notice do
+  %h1= @list.name
+  %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}."
+
+- if @list.class.to_s == 'StaticList' && signed_in? && current_user == @list.user
+  %ul#static_list.list
+    = render :partial => 'advanced_list', :object => @list
+  
+    - if @vocabularies.blank?
+      %li#dropzone
+        %ul.inline
+          %li Drop vocabularies here to start a list
+      = drop_receiving_element "dropzone", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1]"
+  
+  - if signed_in? && @list.user == current_user
+    = sortable_element 'static_list', :url => reorder_list_path(@list), :handle => 'item'
+  
+- else
+  - if @vocabularies.blank?
+    %p Looks like you've set your list criteria in a way that it doesn't match any vocabularies.
+
+  - else
+    %ul.list
+      = render :partial => 'simple_list', :object => @list
+   

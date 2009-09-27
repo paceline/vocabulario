@@ -19,6 +19,8 @@ class Vocabulary < ActiveRecord::Base
   has_many :transformations, :order => 'position'
   has_many :translation_to, :through => :relations_to, :source => :vocabulary2
   has_many :translation_from, :through => :relations_from, :source => :vocabulary1
+  has_many :vocabulary_lists
+  has_many :lists, :through => :vocabulary_lists
   
   # Validations
   validates_inclusion_of :type, :in => TYPES, :message => "{{value}} is not a supported vocabulary type"

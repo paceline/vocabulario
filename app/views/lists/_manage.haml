@@ -1,0 +1,10 @@
+- if signed_in?
+  .content
+    .tabs.green
+      %h1 Manage lists
+    %ul
+      %li= link_to('Add new list', new_user_list_path(current_user.permalink))
+      - if @list  && @list.user == current_user
+        %li= link_to('Edit list', edit_list_path(@list.permalink)) 
+        %li= link_to('Delete list', list_path(@list), :confirm => 'Are you sure you want to delete this list?', :method => :delete)
+  = render :partial => 'lists/list'

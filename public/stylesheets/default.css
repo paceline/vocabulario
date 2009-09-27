@@ -48,7 +48,7 @@ ul {
 	margin: 0; 
 	padding: 0;
 }
-li { margin: .75em 0 .75em 0 }
+li { margin: .75em 0 0 0 }
 ol { font-size: 1.2em; }
 ol li { margin: 35px 0 40px 0; line-height: 125%; }
 
@@ -174,6 +174,27 @@ em.tag {
 }
 
 
+/* "Main" -> "Vocabulary list"
+   ========================== */
+
+ul.list li.item { cursor: move; }
+
+.list li ul.inline {
+	background-color: #EFE;
+	padding: .7em .55em .7em .55em;
+}
+
+.list li ul.inline li {
+	background-color: #FFF;
+	margin: 0 .3em 0 0;
+	padding: .2em .4em .3em .4em;
+}
+
+.list li.over_receiving_element ul.inline { background-color: #02B8EA; }
+
+.list a.delete { color: #C66; text-decoration: none; }
+
+
 /* "Sidebar"
    ========= */
 
@@ -183,6 +204,8 @@ em.tag {
 	width: 275px;
 	float: right;
 	padding: 0 0 0 50px;
+	position: relative;
+	z-index: +1;
 }
 
 #sidebar a { color: #C0ED00; }
@@ -199,17 +222,17 @@ em.tag {
 
 #footer, #notice, .pagination { text-align: center; }
 
+#sidebar .content { margin-bottom: 20px; }
+
+#search_and_drag { margin-top: 10px; }
+
 
 /* "Sidebar" -> "User bar"
    ======================= */
 
 .green { border-bottom-color: #C0ED00; margin-bottom: 15px; }
 
-#user_bar {	padding-bottom: 65px; }
-
-#user_bar a { color: #666; }
-
-#user_bar li { margin: 3px 0 3px 0; }
+#user_bar li { margin: 5px 0 0 0; }
 
 .gravatar, .gravatar_big {
 	background-color: #FFF;
@@ -295,6 +318,8 @@ fieldset.buttons ol { list-style: none; }
 	margin-left:30px;
 	padding:0 0 10px;
 }
+
+.inline-hints { color: #AAA; font-style: italic; font-size: 0.85em; }
 
 
 /* "Forms" -> "Small"

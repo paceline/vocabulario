@@ -1,0 +1,14 @@
+- content_for :sidebar do
+  =  render :partial => 'manage'
+  
+- content_for :notice do
+  %h1 New list
+  %p Make a list of vocabularies you want to study
+
+- semantic_form_for @list do |form|
+  = form.error_messages
+  = render :partial => "inputs", :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button "Save"
+
+= observe_field(:list_type, :url => switch_lists_path, :update => "test_to", :with => "'selected=' + $A($('list_type').options).find(function(option) { return option.selected; } ).value")

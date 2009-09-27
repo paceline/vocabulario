@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090913110133) do
+ActiveRecord::Schema.define(:version => 20090926211951) do
 
   create_table "conjugation_times", :force => true do |t|
     t.integer  "language_id"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(:version => 20090913110133) do
   create_table "conjugations_verbs", :id => false, :force => true do |t|
     t.integer "conjugation_id"
     t.integer "verb_id"
+  end
+
+  create_table "lists", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "language_from_id"
+    t.integer  "language_to_id"
+    t.string   "type",             :limit => 25
+    t.string   "name"
+    t.string   "permalink"
+    t.boolean  "public",                         :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "people", :force => true do |t|
@@ -96,7 +108,6 @@ ActiveRecord::Schema.define(:version => 20090913110133) do
   add_index "translations", ["vocabulary1_id", "vocabulary2_id"], :name => "vocabulary1_id_vocabulary2_id_index", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "login",              :limit => 40
     t.string   "name",               :limit => 100
     t.string   "email",              :limit => 100
     t.string   "salt",               :limit => 40
@@ -104,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20090913110133) do
     t.datetime "updated_at"
     t.string   "remember_token",     :limit => 40
     t.boolean  "admin",                             :default => false
+    t.string   "permalink",          :limit => 128
     t.string   "encrypted_password", :limit => 128
     t.string   "confirmation_token", :limit => 128
     t.boolean  "email_confirmed",                   :default => false, :null => false
@@ -111,7 +123,6 @@ ActiveRecord::Schema.define(:version => 20090913110133) do
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["id", "confirmation_token"], :name => "index_users_on_id_and_confirmation_token"
-  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
   create_table "vocabularies", :force => true do |t|
@@ -124,6 +135,12 @@ ActiveRecord::Schema.define(:version => 20090913110133) do
     t.datetime "updated_at"
     t.string   "type",        :limit => 25
     t.string   "comment",                   :default => "-"
+  end
+
+  create_table "vocabulary_lists", :force => true do |t|
+    t.integer "list_id"
+    t.integer "vocabulary_id"
+    t.integer "position"
   end
 
 end

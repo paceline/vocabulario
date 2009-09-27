@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'clearance/sessions', :action => 'destroy'
   map.login '/login', :controller => 'clearance/sessions', :action => 'new'
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.community '/community', :controller => 'users', :action => 'index'
   
   # Vocabularies
   map.vocabularies_unlink '/vocabularies/:id/unlink/:link', :controller => 'vocabularies', :action => 'unlink'
@@ -17,18 +18,20 @@ ActionController::Routing::Routes.draw do |map|
   map.vocabularies_by_language '/vocabularies/by_language/:id', :controller => 'search', :action => 'by_language'
   map.vocabularies_by_user '/vocabularies/by_user/:id', :controller => 'search', :action => 'by_user'
   
+  
   # Resources
   # =========
   
   map.resources :conjugations
   map.resources :conjugation_times, :as => 'tenses'
   map.resources :languages, :controller => :vocabularies
+  map.resources :lists, :collection => { :switch => :get, :live => :get }, :member => { :newitem => :post, :reorder => :post, :unlink => :delete }
   map.resources :people, :as => 'pronouns'
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resources :scores, :collection => { :change_test_type => :get }
   map.resources :statistics
   map.resources :transformations, :member => { :reorder => :post }
-  map.resources :users, :member => { :admin => :put, :password => :put, :statistics => [:get, :post] }, :has_many => :scores
+  map.resources :users, :member => { :admin => :put, :password => :put, :statistics => [:get, :post] }, :has_many => [:scores, :lists]
   
   map.resources :vocabularies,
     :member => { :apply_conjugation => :put, :unapply_conjugation => :delete, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },
