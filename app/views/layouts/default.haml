@@ -21,10 +21,7 @@
       - else
         #notice
           - unless flash.empty?
-            - flash.each do |key, value|
-              %div{:id => "flash_#{key}", :class => 'notice'}
-                %h1= interpret_flash_key(key)
-                %p= value
+            = render :partial => 'layouts/flashes'
           - else
             .notice= yield(:notice)
       #sidebar
