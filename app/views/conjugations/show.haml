@@ -12,21 +12,21 @@
 .content
   %table
     %tr
-      %th I
-      %td= "-#{@conjugation.first_person_singular}"
-      %th We
-      %td= "-#{@conjugation.first_person_plural}"
+      %th 1st person singular
+      %td= signed_in_as_admin? ? in_place_editor_field(:conjugation, :first_person_singular) : @conjugation.first_person_singular
+      %th 1st person plural
+      %td= signed_in_as_admin? ? in_place_editor_field(:conjugation, :first_person_plural) : @conjugation.first_person_plural
     %tr
-      %th You
-      %td= "-#{@conjugation.second_person_singular}"
-      %th You
-      %td= "-#{@conjugation.second_person_plural}"
+      %th 2nd person singular
+      %td= signed_in_as_admin? ? in_place_editor_field(:conjugation, :second_person_singular) : @conjugation.second_person_singular
+      %th 2nd person plural
+      %td= signed_in_as_admin? ? in_place_editor_field(:conjugation, :second_person_plural) : @conjugation.second_person_plural
     %tr
-      %th He/She/It
-      %td= "-#{@conjugation.third_person_singular}"
-      %th They
-      %td= "-#{@conjugation.third_person_plural}"
-
+      %th 3rd person singular
+      %td= signed_in_as_admin? ? in_place_editor_field(:conjugation, :third_person_singular) : @conjugation.third_person_singular
+      %th 3rd person plural
+      %td= signed_in_as_admin? ? in_place_editor_field(:conjugation, :third_person_plural) : @conjugation.third_person_plural
+      
 .content
   %p= !@conjugation.verbs.blank? ? "It applies to the following verbs:" : "No verbs use this pattern. You can change this by selecting this pattern as any verb's conjugation" 
   %ul.inline

@@ -5,6 +5,12 @@ class ConjugationsController < ApplicationController
    
   # Features
   in_place_edit_for :conjugation, :name
+  in_place_edit_for :conjugation, :first_person_singular
+  in_place_edit_for :conjugation, :second_person_singular
+  in_place_edit_for :conjugation, :third_person_singular
+  in_place_edit_for :conjugation, :first_person_plural
+  in_place_edit_for :conjugation, :second_person_plural
+  in_place_edit_for :conjugation, :third_person_plural
   
   # Create a new conjugation (including link to :vocabulary_id if given)
   def create
