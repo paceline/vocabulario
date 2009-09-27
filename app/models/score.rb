@@ -29,8 +29,8 @@ class Score < ActiveRecord::Base
   
   # Post-initialize operations
   def setup(params, test)
-    language_from_id = params[:from] ? test.from.id : ConjugationTime.find(params[:tense]).language.id
-    language_to_id = params[:to] ? test.to.id : language_from_id
+    self.language_from_id = params[:from] ? test.from.id : ConjugationTime.find(params[:tense]).language.id
+    self.language_to_id = params[:to] ? test.to.id : language_from_id
     if params.key?(:tags)
       params[:tags].each do |tag|
         t = Tag.find(tag)
