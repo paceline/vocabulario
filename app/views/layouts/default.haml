@@ -41,7 +41,7 @@
             %ul
               %li= link_to 'Log in',  login_path,  { :title => 'Log in' }
               %li= link_to 'Sign up', signup_path, { :title => 'Create an account' }
-        = render :partial => 'lists/list' if @current_controller == 'scores' && @current_action == 'new' && signed_in?
+        #list_stuff= render :partial => 'lists/list' if @current_controller == 'scores' && @current_action == 'new' && signed_in?
         = yield :sidebar
       #main= yield
       #footer Powered by <a href="http://github.com/paceline/vocabulario/tree/master">Vocabulario</a>, created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>

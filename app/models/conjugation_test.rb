@@ -18,6 +18,15 @@ class ConjugationTest < LanguageTest
     end
   end
   
+  # Counts correct results in given result array
+  def count_correct_results(result = [])
+    i = 0
+    result.each do |r|
+      i += 1 if r
+    end
+    return i
+  end
+  
   # Returns result for current question (answer true/false)
   def result_for(response = [])
     result = []

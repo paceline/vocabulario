@@ -27,7 +27,7 @@ class ScoresController < ApplicationController
     @score.save
     session[:test] = @test.to_session_params
     render :update do |page|
-      page.hide :test_tabs
+      page.hide :test_tabs, :list_stuff
       page << "$('test_pane').className = ''"
       page.replace_html 'test_pane', render(@test)
       page.visual_effect :highlight, 'test_pane'
@@ -44,7 +44,7 @@ class ScoresController < ApplicationController
       answers = []
       1.upto(6) { |i| answers << params['test'][i.to_s] }
       @results = @test.result_for(answers)
-      @score.points += @results.count(true)
+      @score.points += @test.count_correct_results(@results)
       if !@results.include?(false)
         color = '#C0ED00'
         flash.now[:result] = "<strong>Yes</strong>, you got everything right."
