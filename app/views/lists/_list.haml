@@ -1,6 +1,9 @@
-.content
-  .tabs.green
-    %h1 Your lists
-  %ul
-    - current_user.lists.each do |list|
-      %li= link_to(list.name, list_path(list.permalink))
+- if current_user.lists.blank?
+  = render :partial => 'manage'
+- else
+  .content
+    .tabs.green
+      %h1 Your lists
+      %ul
+      - current_user.lists.each do |list|
+        %li= link_to(list.name, list_path(list.permalink))
