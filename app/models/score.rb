@@ -31,9 +31,11 @@ class Score < ActiveRecord::Base
   def setup(params, test)
     language_from_id = params[:from] ? test.from.id : ConjugationTime.find(params[:tense]).language.id
     language_to_id = params[:to] ? test.to.id : language_from_id
-    params[:tags].each do |tag|
-      t = Tag.find(tag)
-      tag_list.add(t.name)
+    if params.key?(:tags)
+      params[:tags].each do |tag|
+        t = Tag.find(tag)
+        tag_list.add(t.name)
+      end
     end
   end
   
