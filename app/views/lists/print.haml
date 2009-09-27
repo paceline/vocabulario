@@ -1,0 +1,11 @@
+%h1= @list.name
+%p
+  A Vocabulario list by
+  = @list.user.name
+
+- if @vocabularies.blank?
+  %p Looks like you've set your list criteria in a way that it doesn't match any vocabularies.
+
+- else
+  %ul.list
+    = render :partial => 'simple_list', :object => @list

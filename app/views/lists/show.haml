@@ -6,14 +6,16 @@
       = text_field :vocabulary, :word, :size => 15
       = observe_field :vocabulary_word, :url => live_lists_path, :update => 'search_and_drag', :frequency => 0.5, :with => "'word=' + value + '&id=#{@list.id}'"
       #search_and_drag
-  =  render :partial => 'manage'
   - unless @vocabularies.blank?
     .content
       .tabs.green
-        %h1 Export
+        %h1 Other formats
       %ul
-        %li= link_to('List as JSON', list_path(@list.permalink, :format => :json))
-        %li= link_to('List as XML', list_path(@list.permalink, :format => :xml))
+        %li= link_to('Print list', print_list_path(@list.permalink), :target => '_blank')
+        %li= link_to('Export as JSON', list_path(@list.permalink, :format => :json))
+        %li= link_to('Export as XML', list_path(@list.permalink, :format => :xml))
+  =  render :partial => 'list'
+  
       
 - content_for :notice do
   %h1= @list.name

@@ -68,6 +68,19 @@ class ListsController < ApplicationController
     end
   end
   
+  # Render show view for printing
+  def print
+   
+      @list = List.find_by_permalink(params[:id])
+      if @list.public || @list.user == current_user
+        @vocabularies = @list.vocabularies
+        render :layout => 'print'
+      else
+        redirect_to '/login'
+      end
+   
+  end
+  
   # Reorder a static list
   def reorder
     @list = List.find(params[:id]) 

@@ -1,0 +1,38 @@
+a, a:visited {
+	color: #333;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+body {
+	color: #666;
+	font-family: Helvetica, Geneva, 'Lucida Grande';
+	font-size: 90%;
+	margin: 0;
+	padding: 1em;
+}
+
+h1, p, ul { margin: 0; padding: 0; }
+
+h1 {
+	color: #333;
+	font-size: 1.25em;
+}
+
+p {
+	font-style: italic;
+	padding: .75em 0 1.5em 0;
+}
+
+ul { list-style-type: none; }
+
+.list li { margin-bottom: 5px; }
+
+.list li ul.inline {
+	padding: .7em .55em .9em 0;
+}
+
+.list li ul.inline li {
+	display: inline;
+	margin: 0 1em 0 0;
+}

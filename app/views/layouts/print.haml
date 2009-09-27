@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title
+      = @list.name
+      (powered by Vocabulario)
+    = stylesheet_link_tag "print", :media => 'all'
+  %body{ :onLoad => "javascript:print()" }
+    = yield

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
   # Layout
-  layout 'default', :except => [:live]
+  layout 'default', :except => [:live, :print]
   
   # Security Features - Include Clearance
   include Clearance::Authentication
