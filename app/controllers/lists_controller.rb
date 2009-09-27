@@ -63,7 +63,7 @@ class ListsController < ApplicationController
       @lister.insert_at(position)
       render :update do |page|
         page.hide :dropzone if list.size <= 1
-        page.replace_html 'static_list', render(:partial => 'advanced_list', :object => list)
+        page.replace_html 'static_list', render(:partial => 'admin_list', :object => list)
         page.visual_effect :shake, "list_item_#{vocabulary.id}"
       end
     else

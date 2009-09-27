@@ -1,8 +1,0 @@
-- advanced_list.vocabularies.each do |vocabulary|
-  %li{ :id => "list_item_#{vocabulary.id}", :class => 'item' }
-    %ul.inline
-      %li= link_to_remote('X', { :url => unlink_list_path(advanced_list, :vocabulary_id => vocabulary.id), :method => :delete }, :class => 'delete')
-      %li= link_to(vocabulary.word, vocabulary_path(vocabulary.permalink))
-      - vocabulary.translations(advanced_list.language_to_id).each do |i|
-        %li= i.word
-    = drop_receiving_element "list_item_#{vocabulary.id}", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(advanced_list), :with => "'vocabulary_id=' + element.id.split('_')[1] + '&insert_after=#{vocabulary.id}'"

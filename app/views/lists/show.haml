@@ -23,7 +23,7 @@
 
 - if @list.class.to_s == 'StaticList' && signed_in? && current_user == @list.user
   %ul#static_list.list
-    = render :partial => 'advanced_list', :object => @list
+    = render :partial => 'admin_list', :object => @list
   
     - if @vocabularies.blank?
       %li#dropzone
@@ -31,14 +31,11 @@
           %li Drop vocabularies here to start a list
       = drop_receiving_element "dropzone", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1]"
   
-  - if signed_in? && @list.user == current_user
-    = sortable_element 'static_list', :url => reorder_list_path(@list), :handle => 'item'
-  
 - else
   - if @vocabularies.blank?
     %p Looks like you've set your list criteria in a way that it doesn't match any vocabularies.
 
   - else
     %ul.list
-      = render :partial => 'simple_list', :object => @list
+      = render :partial => 'regular_list', :object => @list
    

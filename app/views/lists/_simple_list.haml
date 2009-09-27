@@ -1,6 +1,0 @@
-- simple_list.vocabularies.each do |vocabulary|
-  %li
-    %ul.inline
-      %li= link_to(vocabulary.word, vocabulary_path(vocabulary.permalink))
-      - vocabulary.translations(simple_list.language_to_id).each do |i|
-        %li= i.word
