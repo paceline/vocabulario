@@ -5,7 +5,7 @@
   %h1 New list
   %p Make a list of vocabularies you want to study
 
-- semantic_form_for @list do |form|
+- semantic_form_for @list, :url => new_list_path do |form|
   = form.error_messages
   = render :partial => "inputs", :locals => { :form => form }
   - form.buttons do
