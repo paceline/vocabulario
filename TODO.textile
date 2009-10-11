@@ -3,10 +3,7 @@ h1. TODOs
 h2. Priority 1
 
 * Only get asked own vocabulary
-* Vocabularies as list for studying before test
-  - Implement test-from-list
 * Return error if no vocabularies found for selection (-> test)
-* Finally fix sidebar wrapping and spacing issue
 * Harden form validation
 
 h2. Priority 2

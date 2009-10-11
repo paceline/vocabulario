@@ -31,7 +31,17 @@ class List < ActiveRecord::Base
   
   # Returns list size
   def size
-    vocabulary_lists.size
+    vocabularies.size
+  end
+  
+  # "Reverses" list
+  def vocabularies_to_translations
+    new_list = []
+    vocabularies.each do |v|
+      translations = v.translations(language_to)
+      new_list << translations[rand(translations.size-1)]
+    end
+    return new_list
   end
 
 end

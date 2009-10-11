@@ -8,20 +8,19 @@
 - content_for :notice do
   %h1 Top Scores
 
-#scores.content
-  %ol
-    - @scores.each do |score|
-      %li
-        - if score.user
-          %strong= link_to(score.user.name, user_path(score.user.permalink))
-        - else
-          %b Guest
-        %p
-          Got
-          %em= number_to_percentage(score.ratio, :precision => 2)
-          right on a
-          = "#{score.questions} question #{score.language_from.word}"
-          - if score.language_from != score.language_to
-            to
-            = score.language_to.word
-          = score.test_type.underscore.humanize.downcase
+%ol#scores
+  - @scores.each do |score|
+    %li
+      - if score.user
+        %strong= link_to(score.user.name, user_path(score.user.permalink))
+      - else
+        %b Guest
+      %p
+        Got
+        %em= number_to_percentage(score.ratio, :precision => 2)
+        right on a
+        = "#{score.questions} question #{score.language_from.word}"
+        - if score.language_from != score.language_to
+          to
+          = score.language_to.word
+        = score.test_type.underscore.humanize.downcase

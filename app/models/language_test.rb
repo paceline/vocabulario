@@ -1,7 +1,7 @@
 class LanguageTest
   
   # Fetaures
-  attr_reader :current, :limit
+  attr_reader :current, :limit, :tags
   LIMITS = [5,10,25,50,75,100]
   
   # Generate test questions

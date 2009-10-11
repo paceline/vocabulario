@@ -11,7 +11,7 @@ class ListsController < ApplicationController
     @list = Object.const_get(type).new(params[:list])
     @list.user = current_user
     @list.tag_list = tag_names unless type == 'StaticList'
-    if @list.valid? && @list.errors.empy?
+    if @list.valid? && @list.errors.empty?
       @list.save
       redirect_to list_path(@list.permalink)
     else

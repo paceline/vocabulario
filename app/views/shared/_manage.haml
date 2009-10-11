@@ -2,30 +2,16 @@
 
   .content
     .tabs.green
-      %h1 Add stuff
-    %ul
-      %li= @vocabulary ? link_to('Add new conjugation', new_vocabulary_conjugation_path(@vocabulary)) : link_to('Add new conjugation', new_conjugation_path)
-      %li= link_to('Add new language', new_vocabulary_path(:type => 'Language'))
-      %li= link_to('Add new set of pronouns', new_person_path)
-      %li= link_to('Add new tense', new_conjugation_time_path)
-      %li= link_to('Add new translation', edit_vocabulary_path(@vocabulary)) if @vocabulary
-      %li= link_to('Add new vocabulary', new_vocabulary_path)
-      %li= link_to('Import CSV file', import_vocabularies_path)
-  
-  - if @vocabulary
-    .content
-      .tabs.green
-        %h1 Edit stuff
-      %ul
-        %li= link_to('Apply tags to translations', apply_tags_vocabulary_path(@vocabulary), :confirm => "You can't just undo this. Are you sure you want to go ahead?", :method => :post)
-        %li= link_to('Apply type to translations', apply_type_vocabulary_path(@vocabulary), :confirm => "Are you sure you want to set the type of all translations to this vocabulary's?", :method => :post)
-        %li= link_to('Delete vocabulary', vocabulary_path(@vocabulary), :confirm => 'Are you sure you want to delete this vocabulary?', :method => :delete)
+      %h1 Admin stuff
+    %p Select an action:
+    %form
+      = select 'redirect', 'to', admin_options(@vocabulary), :include_blank => true
+      = observe_field(:redirect_to, :frequency => 1, :function => "redirectTo($A($('redirect_to').options).find(function(option) { return option.selected; } ).value, $A($('redirect_to').options).find(function(option) { return option.selected; } ).text)")
 
   .content
     .tabs.green
       %h1 List stuff
-    %ul
-      %li= link_to('List pronouns', people_path)
-      %li= link_to('List tenses', conjugation_times_path)
-      %li= link_to('List vocabularies', vocabularies_path)
-      
+    %p Pick something you want to list:
+    %form
+      = select 'redirect', 'to_list', [['List pronouns', people_path], ['List tenses', conjugation_times_path], ['List vocabularies', vocabularies_path]], :include_blank => true
+      = observe_field(:redirect_to_list, :frequency => 1, :function => "window.location = $A($('redirect_to_list').options).find(function(option) { return option.selected; } ).value")

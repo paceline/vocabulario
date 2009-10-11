@@ -28,16 +28,22 @@ class VocabulariesController < ApplicationController
   def apply_tags
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.apply_tags_to_translations
-    flash[:success] = "#{@vocabulary.word}'s tags have been copied to all translations."
-    redirect_to vocabulary_path(@vocabulary.permalink)
+    flash.now[:success] = "#{@vocabulary.word}'s tags have been copied to all translations."
+    render :update do |page|
+      page.replace_html :notice, render(:partial => 'layouts/flashes')
+      page.show :notice
+    end
   end
   
   # Apply vocabulary's type to all translations
   def apply_type
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.apply_type_to_translations
-    flash[:success] = "#{@vocabulary.word}'s type has been copied to all translations."
-    redirect_to vocabulary_path(@vocabulary.permalink)
+    flash.now[:success] = "#{@vocabulary.word}'s type has been copied to all translations."
+    render :update do |page|
+      page.replace_html :notice, render(:partial => 'layouts/flashes')
+      page.show :notice
+    end
   end
   
   # Create translation or new vocabulary
@@ -77,7 +83,7 @@ class VocabulariesController < ApplicationController
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.destroy
     flash[:notice] = "You wanted it. Vocabulary has been deleted from to the database."
-    redirect_to vocabularies_path
+    render :nothing => true
   end
   
   # Display paged list of vocabularies (html) / javascript array of vocabularies for input field suggestions (js)

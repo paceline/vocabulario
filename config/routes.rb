@@ -25,7 +25,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :conjugations
   map.resources :conjugation_times, :as => 'tenses'
   map.resources :languages, :controller => :vocabularies
-  map.resources :lists, :collection => { :switch => :get, :live => :get }, :member => { :newitem => :post, :print => :get, :reorder => :post, :unlink => :delete }
+  map.resources :lists,
+    :collection => { :switch => :get, :live => :get },
+    :member => { :newitem => :post, :print => :get, :reorder => :post, :unlink => :delete },
+    :has_many => :scores
+  
   map.resources :people, :as => 'pronouns'
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resources :scores, :collection => { :change_test_type => :get }
@@ -35,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :vocabularies,
     :member => { :apply_conjugation => :put, :unapply_conjugation => :delete, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },
-    :collection => { :import => [:get, :post], :refresh_language => :get, :select => :get, :tags_for_language => :get, :review => :get },
+    :collection => { :import => [:get, :post], :refresh_language => :get, :select => :get, :tags_for_language => :get, :review => :get, :redirect => :get },
     :has_many => [:conjugations, :transformations]
     
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.

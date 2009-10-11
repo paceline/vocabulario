@@ -28,15 +28,10 @@ class Score < ActiveRecord::Base
   end
   
   # Post-initialize operations
-  def setup(params, test)
-    self.language_from_id = params[:from] ? test.from.id : ConjugationTime.find(params[:tense]).language.id
-    self.language_to_id = params[:to] ? test.to.id : language_from_id
-    if params.key?(:tags)
-      params[:tags].each do |tag|
-        t = Tag.find(tag)
-        tag_list.add(t.name)
-      end
-    end
+  def setup(test)
+    self.language_from_id = test.class == VocabularyTest ? test.from.id : ConjugationTime.find(test.tense).language.id
+    self.language_to_id = test.class == VocabularyTest ? test.to.id : language_from_id
+    self.tag_list = test.tags
   end
   
   # takes a hash of finder conditions and returns a page number 
