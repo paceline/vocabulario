@@ -31,6 +31,7 @@ module VocabulariesHelper
       grouped_options << ['Delete', [['Delete vocabulary',vocabulary_path(vocabulary)]]]
     end
     grouped_options[0][1] << ['New vocabulary', new_vocabulary_path]
+    grouped_options[0][1] << ['Import vocabularies', import_vocabularies_path]
     
     grouped_options_for_select(grouped_options)
   end

@@ -1,5 +1,11 @@
 - content_for :sidebar do
   = render :partial => 'shared/manage'
+  .content
+    .tabs.green
+      %h1 Export
+    %ul
+      %li= link_to('Vocabulary as JSON', vocabulary_path(:format => :json))
+      %li= link_to('Vocabulary as XML', vocabulary_path(:format => :xml))
   
 %h1= signed_in_as_admin? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word
 = render :partial => 'shared/taglist', :object => @vocabulary

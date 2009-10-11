@@ -166,13 +166,18 @@ class VocabulariesController < ApplicationController
       @conjugations = @vocabulary.conjugations if @vocabulary.class == Verb
       @transformations = @vocabulary.transformations if @vocabulary.class == Verb
       @transformation = Transformation.new if @vocabulary.class == Verb
-      if params[:menu]
-        @display_transformations = @conjugations.empty? ? "display: none;" : "display: visible;" if @vocabulary.class == Verb
-        render :update do |page|
-          page << "['overview','conjugations','translations'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
-          page << "$('#{params[:menu]}_link').addClassName('active')"
-          page.replace_html 'vocabulary_pane', render(:partial => params[:menu])
-        end
+      respond_to do |format|
+        format.html { render :action => 'show' }
+        format.js {
+          @display_transformations = @conjugations.empty? ? "display: none;" : "display: visible;" if @vocabulary.class == Verb
+          render :update do |page|
+            page << "['overview','conjugations','translations'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
+            page << "$('#{params[:menu]}_link').addClassName('active')"
+            page.replace_html 'vocabulary_pane', render(:partial => params[:menu])
+          end
+        }
+        format.json { render :json => @vocabulary.to_json(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_from, :translation_to ]) }
+        format.xml { render :xml => @vocabulary.to_xml(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_from, :translation_to ]) }
       end
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404

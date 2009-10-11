@@ -6,12 +6,14 @@
     %p Select an action:
     %form
       = select 'redirect', 'to', admin_options(@vocabulary), :include_blank => true
-      = observe_field(:redirect_to, :frequency => 1, :function => "redirectTo($A($('redirect_to').options).find(function(option) { return option.selected; } ).value, $A($('redirect_to').options).find(function(option) { return option.selected; } ).text)")
+      = observe_field(:redirect_to, :frequency => 0.5, :function => "redirectTo($A($('redirect_to').options).find(function(option) { return option.selected; } ).value, $A($('redirect_to').options).find(function(option) { return option.selected; } ).text)")
 
   .content
     .tabs.green
       %h1 List stuff
-    %p Pick something you want to list:
-    %form
-      = select 'redirect', 'to_list', [['List pronouns', people_path], ['List tenses', conjugation_times_path], ['List vocabularies', vocabularies_path]], :include_blank => true
-      = observe_field(:redirect_to_list, :frequency => 1, :function => "window.location = $A($('redirect_to_list').options).find(function(option) { return option.selected; } ).value")
+    %p
+      = link_to('Pronouns', people_path)
+      |
+      = link_to('Tenses', conjugation_times_path)
+      |
+      = link_to('Vocabularies', vocabularies_path)

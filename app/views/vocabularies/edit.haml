@@ -23,7 +23,7 @@
     .fields
       = label_tag 'Language'
       = f.select :language_id, languages_for_translation(@translation)
-      = observe_field :vocabulary_word, :url => refresh_language_vocabularies_path, :frequency => 1, :with => 'word'
+      = observe_field :vocabulary_word, :url => refresh_language_vocabularies_path, :frequency => 0.5, :with => 'word'
     .fields
       = label_tag 'Copy tags to translation?'
       = f.check_box :copy_tags
