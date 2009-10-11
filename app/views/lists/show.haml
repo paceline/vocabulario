@@ -4,16 +4,8 @@
       .tabs.green
         %h1 Search & drag
       = text_field :vocabulary, :word, :size => 15
-      = observe_field :vocabulary_word, :url => live_lists_path, :update => 'search_and_drag', :frequency => 0.5, :with => "'word=' + value + '&id=#{@list.id}'"
-      #search_and_drag
-  - unless @vocabularies.blank?
-    .content
-      .tabs.green
-        %h1 Other formats
-      %ul
-        %li= link_to('Print list', print_list_path(@list.permalink), :target => '_blank')
-        %li= link_to('Export as JSON', list_path(@list.permalink, :format => :json))
-        %li= link_to('Export as XML', list_path(@list.permalink, :format => :xml))
+      = observe_field :vocabulary_word, :url => live_lists_path, :update => 'search_and_drag', :after => "$('search_and_drag').show()", :frequency => 0.5, :with => "'word=' + value + '&id=#{@list.id}'"
+      #search_and_drag{ :style => 'display: none;' }
   =  render :partial => 'list'
   
       
@@ -44,3 +36,11 @@
   - else
     %ul.list
       = render :partial => 'regular_list', :object => @list
+  
+- unless @vocabularies.blank?
+  .content
+    %h3 View in other formats
+    %ul
+      %li= link_to('Print list', print_list_path(@list.permalink), :target => '_blank')
+      %li= link_to('Export as JSON', list_path(@list.permalink, :format => :json))
+      %li= link_to('Export as XML', list_path(@list.permalink, :format => :xml))

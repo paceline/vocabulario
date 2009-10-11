@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_permalink :name
   
   # Associations
-  has_many :lists
+  has_many :lists, :order => 'name'
   has_many :scores
   has_many :vocabularies
   has_many :languages

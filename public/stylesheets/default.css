@@ -111,7 +111,7 @@ th { background-color: #CCC; text-align: left; }
 #main	{
 	background-color: #FFF;
 	float: left;
-	min-height: 445px;
+	min-height: 670px;
 	padding-right: 50px;
 	width: 75%;
 }
@@ -209,6 +209,8 @@ ul.list li.item { cursor: move; }
 
 #sidebar a { color: #C0ED00; }
 
+#sidebar form { margin-top: 5px; }
+
 #sidebar h1 {
 		background-color: #C0ED00;
 		color: #FFF;
@@ -218,6 +220,8 @@ ul.list li.item { cursor: move; }
 		margin: 0;
 		padding: .5em;
 }
+
+#sidebar p { margin: 0; padding: 0; }
 
 #footer, #notice, .pagination { text-align: center; }
 

@@ -118,17 +118,13 @@ function redirectTo(url, text) {
 		if (confirm('Are you sure you want to copy these attributes to all translations?')) {
 			new Ajax.Request(url, { method: 'post', onSuccess: function() { highlight(); } });
 		}
-		else {
-			$('redirect_to').selectedIndex = 0;
-		}
+		$('redirect_to').selectedIndex = 0;
 	}
 	else if (text.substring(0,6) == 'Delete') {
 		if (confirm('Are you sure you want to delete his vocabulary?')) {
 			new Ajax.Request(url, { method: 'delete', onSuccess: function() { window.location = '/vocabularies' } });
 		}
-		else {
-			$('redirect_to').selectedIndex = 0;
-		}
+		$('redirect_to').selectedIndex = 0;
 	}
 	else {
 		window.location = url;
