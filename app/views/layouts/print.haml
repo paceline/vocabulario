@@ -4,6 +4,7 @@
     %title
       = @list.name
       (powered by Vocabulario)
+    = ANALYTICS_CODE
     = stylesheet_link_tag "print", :media => 'all'
   %body{ :onLoad => "javascript:print()" }
     = yield

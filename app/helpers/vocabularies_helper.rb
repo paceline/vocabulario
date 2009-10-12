@@ -25,7 +25,7 @@ module VocabulariesHelper
             ['New set of pronouns', new_person_path],
             ['New tense', new_conjugation_time_path]]
           ]]
-    if vocabulary
+    if vocabulary && !vocabulary.new_record?
       grouped_options[0][1] << ['New translation', edit_vocabulary_path(vocabulary)]
       grouped_options << ['Copy', [['Apply tags to translations', apply_tags_vocabulary_path(vocabulary)], ['Apply type to translations',apply_type_vocabulary_path(vocabulary)]]]
       grouped_options << ['Delete', [['Delete vocabulary',vocabulary_path(vocabulary)]]]

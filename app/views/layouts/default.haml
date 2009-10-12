@@ -6,6 +6,7 @@
     = javascript_include_tag 'ierange-m2.js' if @current_controller == 'vocabularies' && @current_action == 'show'
     = javascript_include_tag "/vocabularies.js?language=#{@translation.language.id}" if @translation
     = javascript_include_tag 'js-class.js', 'bluff-min.js', 'bluff-src.js', 'excanvas.js' if @current_action == 'statistics'
+    = ANALYTICS_CODE
     = stylesheet_link_tag "default"
   %body{ :onLoad => on_load }
     .container

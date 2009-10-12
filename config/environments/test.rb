@@ -29,3 +29,6 @@ config.action_mailer.delivery_method = :test
 
 # Default host to include in emails
 HOST = "localhost:3000"
+
+# Google Analytics tracking
+ANALYTICS_CODE = ""

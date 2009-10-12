@@ -18,3 +18,6 @@ config.action_mailer.raise_delivery_errors = false
 
 # Default host to include in emails
 HOST = "localhost:3000"
+
+# Google Analytics tracking
+ANALYTICS_CODE = ""
