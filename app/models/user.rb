@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :languages
   
   # Validations
-  validates_presence_of :name
+  validates_presence_of :name, :email
   validates_length_of :name, :within => 1..100
   validates_uniqueness_of :name
   

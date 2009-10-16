@@ -7,6 +7,9 @@ class Transformation < ActiveRecord::Base
   # Associations
   belongs_to :vocabulary
   
+  # Validations
+  validates_presence_of :type, :vocabulary_id, :position, :pattern_start, :pattern_end
+  
   # Features
   acts_as_list :scope => :vocabulary
   

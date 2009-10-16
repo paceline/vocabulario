@@ -13,7 +13,7 @@ class ConjugationTime < ActiveRecord::Base
   has_many :verbs, :finder_sql => 'SELECT vocabularies.* FROM vocabularies LEFT JOIN conjugations_verbs ON conjugations_verbs.verb_id = vocabularies.id LEFT JOIN conjugations ON conjugations.id = conjugations_verbs.conjugation_id LEFT JOIN conjugation_times ON conjugation_times.id = conjugations.conjugation_time_id WHERE conjugation_times.id = #{id}'
   
   # Validations
-  validates_presence_of :name
+  validates_presence_of :language_id, :name
   validates_uniqueness_of :name, :scope => 'language_id', :message => 'already exists in database'
   
   # Get verbs with certain tags only

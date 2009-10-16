@@ -24,7 +24,7 @@ class Vocabulary < ActiveRecord::Base
   
   # Validations
   validates_inclusion_of :type, :in => TYPES, :message => "{{value}} is not a supported vocabulary type"
-  validates_presence_of :word, :language_id
+  validates_presence_of :word, :language_id, :user_id
   validates_uniqueness_of :word, :scope => ['language_id','gender'], :message => 'already exists in database'
   
   # Copy tags to translations

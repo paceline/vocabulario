@@ -13,7 +13,7 @@ class List < ActiveRecord::Base
   has_many :vocabularies, :through => :vocabulary_lists, :order => :position
   
   # Validations
-  validates_presence_of :name, :language_from_id, :language_to_id
+  validates_presence_of :user_id, :language_from_id, :language_to_id, :name
   
   # Find public lists
   def self.find_public(user = nil)
