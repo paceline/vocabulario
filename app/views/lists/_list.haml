@@ -1,6 +1,6 @@
 = render :partial => 'lists/manage'
   
-- unless current_user.lists.blank?
+- unless !current_user || current_user.lists.blank?
   .content
     .tabs.green
       %h1 Your lists
