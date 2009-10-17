@@ -145,7 +145,7 @@ class ListsController < ApplicationController
       @list.update_attributes(params[:static_list])
     else
       if params[:dynamic_list][:tag_ids]
-        tag_names = params[:dynamic_list].delete().collect { |t| Tag.find(t).name }.join(', ')
+        tag_names = params[:dynamic_list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ')
         @list.tag_list = tag_names
       end
       @list.update_attributes(params[:dynamic_list])
