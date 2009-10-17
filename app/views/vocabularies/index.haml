@@ -12,7 +12,7 @@
   %p
     There are currently
     = number_with_precision(Vocabulary.count, :precision => 0, :delimiter => ',')
-    vocabularies in the database. Use the live search below or the tools on the right to explore them.
+    vocabularies in the database. Not too shabby...
 
 .tabs
   #live_search_link{ :class => set_link_class('live_search') }= link_to_remote("Live search", :url => vocabularies_path(:menu => 'live_search'), :method => :get)

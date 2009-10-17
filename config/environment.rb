@@ -15,10 +15,11 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
   # Specify gems that this application depends on and have them installed with rake gems:install
-  config.gem "justinfrench-formtastic", :lib => 'formtastic', :source  => 'http://gems.github.com'
-  config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
-  config.gem "thoughtbot-clearance", :lib => 'clearance', :source  => 'http://gems.github.com', :version => '0.8.2'
   config.gem "fastercsv"
+  config.gem "justinfrench-formtastic", :lib => 'formtastic', :source  => 'http://gems.github.com'
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
+  config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
+  config.gem "thoughtbot-clearance", :lib => 'clearance', :source  => 'http://gems.github.com'
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
