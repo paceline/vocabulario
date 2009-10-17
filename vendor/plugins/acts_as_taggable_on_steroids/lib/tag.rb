@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
   validates_uniqueness_of :name
   
   cattr_accessor :destroy_unused
-  self.destroy_unused = false
+  self.destroy_unused = true
   
   # LIKE is used for cross-database case-insensitivity
   def self.find_or_create_with_like_by_name(name)

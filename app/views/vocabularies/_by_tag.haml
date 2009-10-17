@@ -1,2 +1,9 @@
 - tag_cloud Vocabulary.tag_counts, %w(css1 css2 css3 css4) do |tag, css_class|
-   = link_to tag.name, vocabularies_by_tag_path(tag.permalink), :class => css_class
+  = link_to tag.name, vocabularies_by_tag_path(tag.permalink), :class => css_class
+
+- if Vocabulary.exist_untagged?
+  %br
+  %br
+  Wanna help out? Please
+  = link_to 'tag', vocabularies_by_tag_path('untagged')
+  currently untagged vocabularies.
