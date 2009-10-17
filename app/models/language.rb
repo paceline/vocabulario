@@ -6,7 +6,6 @@ class Language < Vocabulary
   
   # Associations - Times for conjugations
   has_many :conjugation_times, :order => 'name', :dependent => :delete_all
-  
   has_many :people
   
   # Associations - Determine vocabularies for every lanugage

@@ -4,6 +4,7 @@ class List < ActiveRecord::Base
   acts_as_taggable
   attr_reader :max_translations
   has_permalink :name, :update => true
+  TIMEUNITS = ['days','weeks','months']
   
   # Associations
   belongs_to :language_from, :class_name => 'Language'

@@ -22,7 +22,7 @@ class UsersController < Clearance::UsersController
   
   # Edit user profile
   def edit
-    @user = User.find(params[:id])
+    @user = User.find_by_permalink(params[:id])
     redirect_to user_path(@user.permalink) unless current_user == @user
   end
   
@@ -93,14 +93,14 @@ class UsersController < Clearance::UsersController
 
   # Update user profile
   def update
-    @user = User.find(params[:id])
+    @user = User.find_by_permalink(params[:id])
     redirect_to user_path(@user.permalink) unless current_user == @user
     begin
       @user.update_attributes!(params[:user])
-      flash[:success] = "Your profile has been successfully updated."
+      flash.now[:success] = "Your profile has been successfully updated."
     rescue
     end
-    render(:action => 'edit')
+    render :edit
   end
   
 end

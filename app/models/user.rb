@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   # Features
   include Clearance::User
-  attr_accessible :name
+  attr_accessible :email, :name
   has_permalink :name
   
   # Associations
@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :languages
   
   # Validations
-  validates_presence_of :name, :email
+  validates_presence_of :email, :name
   validates_length_of :name, :within => 1..100
   validates_uniqueness_of :name
   

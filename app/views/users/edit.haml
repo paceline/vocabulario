@@ -6,8 +6,8 @@
   %p BTW: Your user icon is automatically loaded from Gravatar based on your email address. Be sure to <a href="http://gravatar.com">sign up</a> with them!
   - @user.password = @user.password_confirmation = nil
 
-- semantic_form_for @user do |form|
+- semantic_form_for @user, :url => user_path(@user.permalink) do |form|
   = form.error_messages
   = render :partial => "/users/inputs", :locals => { :form => form }
   - form.buttons do
-    = form.commit_button "Sign up"
+    = form.commit_button "Save"

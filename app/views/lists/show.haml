@@ -40,7 +40,8 @@
 - unless @vocabularies.blank?
   .content
     %h3 View in other formats
-    %ul
+    %ul.inline
       %li= link_to('Print list', print_list_path(@list.permalink), :target => '_blank')
+      %li= link_to('Feed', list_path(@list.permalink, :format => :atom))
       %li= link_to('Export as JSON', list_path(@list.permalink, :format => :json))
       %li= link_to('Export as XML', list_path(@list.permalink, :format => :xml))

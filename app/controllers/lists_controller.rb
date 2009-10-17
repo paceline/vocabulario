@@ -6,11 +6,11 @@ class ListsController < ApplicationController
   # Creates a new list
   def create
     type = params[:list].delete(:type) == 'true' ? 'DynamicList' : 'StaticList'
-    tag_names = params[:list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ') unless type == 'StaticList'
+    tag_names = params[:list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ') unless params[:list][:tag_ids].blank?
     
     @list = Object.const_get(type).new(params[:list])
     @list.user = current_user
-    @list.tag_list = tag_names unless type == 'StaticList'
+    @list.tag_list = tag_names unless params[:list][:tag_ids].blank?
     if @list.valid? && @list.errors.empty?
       @list.save
       redirect_to list_path(@list.permalink)
@@ -98,21 +98,22 @@ class ListsController < ApplicationController
   
   # Shows list
   def show
-    begin
+    #begin
       @list = List.find_by_permalink(params[:id])
       if @list.public || @list.user == current_user
         @vocabularies = @list.vocabularies
         respond_to do |format|
-          format.html { render :action => 'show' }
+          format.html
+          format.atom { render :layout => false }
           format.json { render :json => @vocabularies.to_json(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_to ]) }
           format.xml { render :xml => @vocabularies.to_xml(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_to ]) }
         end
       else
         redirect_to '/login'
       end
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-    end
+    #rescue
+    #  render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    #end
   end
   
   # Live search of the vocabularies database
@@ -127,26 +128,26 @@ class ListsController < ApplicationController
   def switch
     render :update do |page|
       if params[:selected] == 'false'
-        page.hide 'list_tag_ids'
-        page << "$('list_tags_input').childElements().last().update('Tags only work with dynamic lists')"
-        page << "new Effect.Highlight('list_tags_input')"
+        page.hide 'list_tags_input', 'list_time_input'
       else
-        page.show 'list_tag_ids'
-        page << "$('list_tags_input').childElements().last().update('Select some tags to narrow down the word selection')"
-        page << "new Effect.Highlight('list_tags_input')"
+        page.show 'list_tags_input', 'list_time_input'
+        page.visual_effect :highlight, 'list_tags_input'
+        page.visual_effect :highlight, 'list_time_input'
       end
     end
   end
   
   # Update vocabulary list
   def update
-    @list = List.find(params[:id])
+    @list = List.find_by_permalink(params[:id])
 
     if @list.class.to_s == 'StaticList'
       @list.update_attributes(params[:static_list])
     else
-      tag_names = params[:dynamic_list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ') 
-      @list.tag_list = tag_names
+      if params[:dynamic_list][:tag_ids]
+        tag_names = params[:dynamic_list].delete().collect { |t| Tag.find(t).name }.join(', ')
+        @list.tag_list = tag_names
+      end
       @list.update_attributes(params[:dynamic_list])
     end
     
