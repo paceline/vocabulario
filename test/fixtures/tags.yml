@@ -1,44 +1,81 @@
-1:
-  id: 1
-  name: Lituma en los Andes
-  permalink: lituma_en_los_andes
-2:
-  id: 2
-  name: Expression
-  permalink: expression
-3:
-  id: 3
-  name: Advanced
-  permalink: advanced
-4:
-  id: 4
-  name: Language
-  permalink: language
-5:
-  id: 5
-  name: Basic
-  permalink: basic
-6:
-  id: 6
-  name: Intermediate
-  permalink: intermediate
-7:
-  id: 7
-  name: Noun
-  permalink: noun
-8:
-  id: 9
-  name: Verb
+--- 
+tags_019: 
+  permalink: "12"
+  name: "12"
+  id: "20"
+tags_008: 
   permalink: verb
-9:
-  id: 10
-  name: El País
+  name: Verb
+  id: "9"
+tags_020: 
+  permalink: "5"
+  name: "5"
+  id: "21"
+tags_009: 
   permalink: el-pais
-10:
-  id: 11
-  name: PONS
+  name: "El Pa\xC3\xADs"
+  id: "10"
+tags_010: 
   permalink: pons
-11:
-  id: 12
-  name: Anfänger
+  name: PONS
+  id: "11"
+tags_011: 
   permalink: anfanger
+  name: "Anf\xC3\xA4nger"
+  id: "12"
+tags_012: 
+  permalink: vhs
+  name: VHS
+  id: "13"
+tags_001: 
+  permalink: lituma_en_los_andes
+  name: Lituma en los Andes
+  id: "1"
+tags_013: 
+  permalink: b1
+  name: B1
+  id: "14"
+tags_002: 
+  permalink: expression
+  name: Expression
+  id: "2"
+tags_014: 
+  permalink: test
+  name: Test
+  id: "15"
+tags_003: 
+  permalink: advanced
+  name: Advanced
+  id: "3"
+tags_015: 
+  permalink: ti
+  name: TI
+  id: "16"
+tags_004: 
+  permalink: language
+  name: Language
+  id: "4"
+tags_016: 
+  permalink: korperteile
+  name: "K\xC3\xB6rperteile"
+  id: "17"
+tags_005: 
+  permalink: basic
+  name: Basic
+  id: "5"
+tags_017: 
+  permalink: months
+  name: Months
+  id: "18"
+tags_006: 
+  permalink: intermediate
+  name: Intermediate
+  id: "6"
+tags_018: 
+  permalink: cocinar
+  name: cocinar
+  id: "19"
+tags_007: 
+  permalink: noun
+  name: Noun
+  id: "7"

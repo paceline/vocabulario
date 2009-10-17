@@ -6,12 +6,23 @@
   %p Currently Vocabulario is not very flexible in terms of the file format.
 
 .content
-  Here's a quick example:
+  %h3 Here's a quick example:
   %ul
-    %li <strong>Line 1:</strong> Spanish;German 1;German 2;German 3
-    %li <strong>Line 2:</strong> a cada instante;Zu jedem Zeitpunkt;;
-    %li <strong>Line 2:</strong> apretar;abdr&uuml;cken;zusammendr&uuml;cken;dr&auml;ngen
-
+    %li <strong>Line 1:</strong> Spanish;Type;German 1;German 2;German 3
+    %li <strong>Line 2:</strong> a cada instante;Vocabulary;Zu jedem Zeitpunkt;;
+    %li ...
+    %li <strong>Line n:</strong> apretar;Verb;abdr&uuml;cken;zusammendr&uuml;cken;dr&auml;ngen
+    
+- if @exception
+  .content.error
+    %h3 Import failed, sorry. Please check the following: 
+    %ul.small
+      %li You're using an actual CSV file with the format shown above (; delimiters, column headings, etc.)
+      %li Are you using only two languages?
+      %li= "Correct type? Currently supported special types are #{Vocabulary::TYPES[0..Vocabulary::TYPES.size-2].join(', ')}. Use Vocabulary for everything else."
+    %br
+    %p.small Feel like you did everything right? Please <a href="http://github.com/paceline/vocabulario/issues">report</a> an issue.
+  
 .content
   - form_for :vocabulary, :url => import_vocabularies_path, :html => {:multipart => true} do |f|
     %p

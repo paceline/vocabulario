@@ -71,11 +71,9 @@ class Vocabulary < ActiveRecord::Base
   end
   
   # Imports csv string
-  def import(csv, tags)
-    word = csv.split(', ')
-    self.word = word[0]
-    self.gender = word[1] if word.size > 1
-    self.tag_list = tags
+  def import(user, tags)
+    self.user = user
+    self.tag_list = (self.tag_list + tags).uniq unless tags.blank?
   end
   
   # Gather all translations (to and from) for given vocabulary id

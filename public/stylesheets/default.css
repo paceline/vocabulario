@@ -38,10 +38,8 @@ h3 {
 }
 
 p { margin: 5px 0 15px 0; }
-p.small {
-	font-size: .8em;
-	font-style: italic;
-}
+p.small, ul.small {font-size: .8em; }
+p.small { font-style: italic; }
 p.spacing { margin-bottom: 30px; }
 
 ul {
@@ -106,6 +104,8 @@ th { background-color: #CCC; text-align: left; }
 
 #notice p { float: right; margin-top: 30px; }
 
+.error, .error h3 { color: #C66; }
+
 
 /* "Main"
    ====== */
@@ -120,7 +120,7 @@ th { background-color: #CCC; text-align: left; }
 
 .container { margin: 0 auto; width: 90%; }
 
-.content, .tab_content_pane { padding-bottom: 40px; }
+.content, .tab_content_pane { padding-bottom: 30px; }
 
 ul.inline { line-height: 1.5; padding: 0; }
 

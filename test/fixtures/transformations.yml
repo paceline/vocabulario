@@ -1,7 +1,298 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+--- 
+transformations_027: 
+  position: "1"
+  vocabulary_id: "660"
+  created_at: 2009-09-27 20:51:47
+  updated_at: 2009-09-27 20:51:51
+  pattern_end: "7"
+  id: "33"
+  type: ReplaceEnding
+  pattern_start: "6"
+  include_white_space: "0"
+  insert_before: 
+transformations_016: 
+  position: "2"
+  vocabulary_id: "47"
+  created_at: 2009-08-07 21:31:49
+  updated_at: 2009-08-07 21:32:32
+  pattern_end: "1"
+  id: "22"
+  type: Move
+  pattern_start: "0"
+  include_white_space: "1"
+  insert_before: "-1"
+transformations_005: 
+  position: "1"
+  vocabulary_id: "221"
+  created_at: 2009-08-01 16:20:14
+  updated_at: 2009-08-01 16:20:40
+  pattern_end: "5"
+  id: "7"
+  type: ReplaceEnding
+  pattern_start: "4"
+  include_white_space: "0"
+  insert_before: 
+transformations_017: 
+  position: "1"
+  vocabulary_id: "635"
+  created_at: 2009-08-08 08:47:42
+  updated_at: 2009-08-08 08:48:05
+  pattern_end: "8"
+  id: "23"
+  type: ReplaceEnding
+  pattern_start: "6"
+  include_white_space: "0"
+  insert_before: 
+transformations_006: 
+  position: "1"
+  vocabulary_id: "30"
+  created_at: 2009-08-01 16:29:35
+  updated_at: 2009-08-30 16:59:54
+  pattern_end: "4"
+  id: "8"
+  type: ReplaceEnding
+  pattern_start: "0"
+  include_white_space: "0"
+  insert_before: 
+transformations_018: 
+  position: "1"
+  vocabulary_id: "446"
+  created_at: 2009-08-08 08:49:16
+  updated_at: 2009-08-08 08:49:37
+  pattern_end: "7"
+  id: "24"
+  type: ReplaceEnding
+  pattern_start: "6"
+  include_white_space: "0"
+  insert_before: 
+transformations_007: 
+  position: "1"
+  vocabulary_id: "20"
+  created_at: 2009-08-01 16:30:11
+  updated_at: 2009-08-01 16:30:22
+  pattern_end: "4"
+  id: "9"
+  type: ReplaceEnding
+  pattern_start: "3"
+  include_white_space: "0"
+  insert_before: 
+transformations_020: 
+  position: "1"
+  vocabulary_id: "56"
+  created_at: 2009-08-08 09:24:40
+  updated_at: 2009-08-08 09:24:49
+  pattern_end: "7"
+  id: "26"
+  type: ReplaceEnding
+  pattern_start: "6"
+  include_white_space: "0"
+  insert_before: 
+transformations_019: 
+  position: "2"
+  vocabulary_id: "446"
+  created_at: 2009-08-08 08:49:46
+  updated_at: 2009-08-08 09:30:37
+  pattern_end: "1"
+  id: "25"
+  type: Move
+  pattern_start: "0"
+  include_white_space: "1"
+  insert_before: "-1"
+transformations_008: 
+  position: "1"
+  vocabulary_id: "123"
+  created_at: 2009-08-01 16:30:51
+  updated_at: 2009-08-01 16:30:57
+  pattern_end: "6"
+  id: "10"
+  type: ReplaceEnding
+  pattern_start: "5"
+  include_white_space: "0"
+  insert_before: 
+transformations_021: 
+  position: "2"
+  vocabulary_id: "56"
+  created_at: 2009-08-08 09:24:57
+  updated_at: 2009-08-08 09:25:14
+  pattern_end: "1"
+  id: "27"
+  type: Move
+  pattern_start: "0"
+  include_white_space: "1"
+  insert_before: "-1"
+transformations_010: 
+  position: "1"
+  vocabulary_id: "699"
+  created_at: 2009-08-01 16:38:12
+  updated_at: 2009-08-01 16:38:20
+  pattern_end: "5"
+  id: "12"
+  type: ReplaceEnding
+  pattern_start: "4"
+  include_white_space: "0"
+  insert_before: 
+transformations_009: 
+  position: "1"
+  vocabulary_id: "239"
+  created_at: 2009-08-01 16:37:07
+  updated_at: 2009-08-01 16:37:17
+  pattern_end: "6"
+  id: "11"
+  type: ReplaceEnding
+  pattern_start: "5"
+  include_white_space: "0"
+  insert_before: 
+transformations_022: 
+  position: "1"
+  vocabulary_id: "240"
+  created_at: 2009-08-08 14:54:18
+  updated_at: 2009-08-08 14:56:49
+  pattern_end: "7"
+  id: "28"
+  type: ReplaceEnding
+  pattern_start: "6"
+  include_white_space: "0"
+  insert_before: 
+transformations_011: 
+  position: "1"
+  vocabulary_id: "273"
+  created_at: 2009-08-07 20:19:24
+  updated_at: 2009-08-07 20:19:53
+  pattern_end: "2"
+  id: "13"
+  type: ReplaceEnding
+  pattern_start: "-2"
+  include_white_space: "0"
+  insert_before: 
+transformations_023: 
+  position: "2"
+  vocabulary_id: "240"
+  created_at: 2009-08-08 14:57:14
+  updated_at: 2009-08-08 14:58:39
+  pattern_end: "1"
+  id: "29"
+  type: Move
+  pattern_start: "0"
+  include_white_space: "1"
+  insert_before: "-1"
+transformations_012: 
+  position: "2"
+  vocabulary_id: "273"
+  created_at: 2009-08-07 20:20:03
+  updated_at: 2009-08-07 20:20:29
+  pattern_end: "1"
+  id: "14"
+  type: Move
+  pattern_start: "0"
+  include_white_space: "1"
+  insert_before: "-1"
+transformations_001: 
+  position: "1"
+  vocabulary_id: "580"
+  created_at: 2009-07-12 10:15:27
+  updated_at: 2009-07-25 16:52:39
+  pattern_end: "6"
+  id: "1"
+  type: ReplacePronoun
+  pattern_start: "5"
+  include_white_space: "0"
+  insert_before: 
+transformations_024: 
+  position: "1"
+  vocabulary_id: "697"
+  created_at: 2009-08-08 16:40:33
+  updated_at: 2009-08-08 16:40:40
+  pattern_end: "5"
+  id: "30"
+  type: ReplaceEnding
+  pattern_start: "4"
+  include_white_space: "0"
+  insert_before: 
+transformations_013: 
+  position: "1"
+  vocabulary_id: "274"
+  created_at: 2009-08-07 20:27:18
+  updated_at: 2009-08-08 15:03:41
+  pattern_end: "7"
+  id: "17"
+  type: ReplaceEnding
+  pattern_start: "6"
+  include_white_space: "0"
+  insert_before: 
+transformations_002: 
+  position: "2"
+  vocabulary_id: "580"
+  created_at: 2009-07-12 10:19:16
+  updated_at: 2009-07-25 16:52:39
+  pattern_end: "0"
+  id: "2"
+  type: Move
+  pattern_start: "5"
+  include_white_space: "1"
+  insert_before: "0"
+transformations_025: 
+  position: "1"
+  vocabulary_id: "184"
+  created_at: 2009-08-29 15:22:15
+  updated_at: 2009-08-29 15:22:26
+  pattern_end: "10"
+  id: "31"
+  type: ReplaceEnding
+  pattern_start: "9"
+  include_white_space: "0"
+  insert_before: 
+transformations_014: 
+  position: "2"
+  vocabulary_id: "274"
+  created_at: 2009-08-07 20:28:46
+  updated_at: 2009-08-08 15:03:10
+  pattern_end: "1"
+  id: "18"
+  type: Move
+  pattern_start: "0"
+  include_white_space: "1"
+  insert_before: "-1"
+transformations_003: 
+  position: "3"
+  vocabulary_id: "580"
+  created_at: 2009-07-12 10:55:45
+  updated_at: 2009-07-12 10:55:45
+  pattern_end: "2"
+  id: "3"
+  type: ReplaceEnding
+  pattern_start: "-2"
+  include_white_space: "0"
+  insert_before: 
+transformations_026: 
+  position: "1"
+  vocabulary_id: "34"
+  created_at: 2009-09-27 20:24:05
+  updated_at: 2009-09-27 20:24:09
+  pattern_end: "6"
+  id: "32"
+  type: ReplaceEnding
+  pattern_start: "5"
+  include_white_space: "0"
+  insert_before: 
+transformations_015: 
+  position: "1"
+  vocabulary_id: "47"
+  created_at: 2009-08-07 20:52:42
+  updated_at: 2009-08-08 08:33:19
+  pattern_end: "9"
+  id: "21"
+  type: ReplaceEnding
+  pattern_start: "9"
+  include_white_space: "0"
+  insert_before: 
+transformations_004: 
+  position: "1"
+  vocabulary_id: "50"
+  created_at: 2009-07-25 15:54:09
+  updated_at: 2009-08-08 09:16:27
+  pattern_end: "8"
+  id: "6"
+  type: ReplaceEnding
+  pattern_start: "6"
+  include_white_space: "0"
+  insert_before: 

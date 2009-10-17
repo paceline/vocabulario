@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   
   # Filters
-  before_filter :users_only, :except => [:index, :show]
+  before_filter :users_only, :except => [:index, :print, :show]
   
   # Creates a new list
   def create

@@ -110,31 +110,32 @@ class VocabulariesController < ApplicationController
     end
   end
   
-  # Import CSV file using FasterCSV (very buggy)
+  # Import CSV file using FasterCSV
   def import
     if request.post?
-      tags = params[:vocabulary][:tags].join(',')
-      FasterCSV.parse(params[:vocabulary][:file].read, { :col_sep => ';', :row_sep => :auto }) do |row|
-        if @from && @to
-          begin
-            vocabulary = @from.vocabularies.new({ :user_id => current_user })
-            vocabulary.import(row[0], tags)
-            vocabulary.save
-            row[1..row.size-1].each do |translations|
+      begin
+        FasterCSV.parse(params[:vocabulary][:file].read, { :col_sep => ';', :row_sep => :auto }) do |row|
+          if @from && @to
+            vocabulary = Object.const_get(row[1].strip).find_or_initialize_by_word(row[0].strip) { |v| v.language = @from }
+            vocabulary.import(current_user, params[:vocabulary][:tags])
+            row[3..row.size-1].each do |translations|
               if translations
-                translation = @to.vocabularies.new({ :user_id => current_user })
-                translation.import(translations, tags)
-                vocabulary.translation_to << translation
+                translation = Object.const_get(row[1].strip).find_or_initialize_by_word(translations) { |v| v.language = @to }
+                translation.import(current_user, params[:vocabulary][:tags])
+                vocabulary.translation_to << translation if vocabulary.new_record? || translation.new_record?
+                translation.save
               end
             end
-          rescue
+            vocabulary.save
+          else
+            @from = Language.find_by_word(row[0].strip)
+            @to = Language.find_by_word(row[2].split(' ').first.strip)
           end
-        else
-          @from = Vocabulary.find_by_word(row[0].split(' ').first)
-          @to = Vocabulary.find_by_word(row[1].split(' ').first)
         end
+        flash.now[:success] = "Vocabularies have been imported to the database."
+      rescue Exception => @exception
+        flash.now[:failure] = "Something went wrong here..."
       end
-      flash[:success] = "Vocabularies have been imported to the database."
     end
   end
   

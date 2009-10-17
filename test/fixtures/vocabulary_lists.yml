@@ -1,7 +1,6 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+--- 
+vocabulary_lists_001: 
+  position: "1"
+  vocabulary_id: "660"
+  id: "1"
+  list_id: "1"

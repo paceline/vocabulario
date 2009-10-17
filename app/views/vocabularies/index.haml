@@ -11,7 +11,7 @@
   %h1 Explore
   %p
     There are currently
-    = Vocabulary.count
+    = number_with_precision(Vocabulary.count, :precision => 0, :delimiter => ',')
     vocabularies in the database. Use the live search below or the tools on the right to explore them.
 
 .tabs

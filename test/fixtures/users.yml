@@ -1,34 +1,66 @@
-1:
-  id: 1
-  login: ulf
-  name: 
+--- 
+users_004: 
+  encrypted_password: b7e396fe07f48c95bbcccb88588e3b9c95e37472
+  permalink: hans-peter
+  salt: 855f12d3dd1a7d1ef1d35be14260ee3ce7c7478d
+  name: Hans Peter
+  created_at: 2009-10-11 12:17:43
+  updated_at: 2009-10-11 14:09:56
+  admin: "0"
+  id: "4"
+  remember_token: 1a29af1320947096bb952c76ccd4320e021150ce
+  email_confirmed: "1"
+  confirmation_token: 
   email: ulf@pacelinegroup.com
-  crypted_password: c963c4fa51d40bf811dc9f44970e73678b739038
-  salt: 1790493909db0ff054fb93e47e2795b84679dcef
+users_005: 
+  encrypted_password: 53e6afded9f17e0ec5837d136412fa151ec87ea7
+  permalink: the-big-lebowski
+  salt: 9fed85363e01fc362450074cec6be9eec18089be
+  name: The Big Lebowski
+  created_at: 2009-10-11 12:19:07
+  updated_at: 2009-10-11 12:19:16
+  admin: "0"
+  id: "5"
+  remember_token: d1967856b0b28b237189082458fd4ddb88ebb717
+  email_confirmed: "1"
+  confirmation_token: 
+  email: info@ulfmoehring.net
+users_001: 
+  encrypted_password: b88b1845a6bb5597da5049af13f94a2444dacc25
+  permalink: ulf-mohring
+  salt: 8b04c7c84be38e9fa790823a913a7fa4c0cc328d
+  name: "Ulf M\xC3\xB6hring"
   created_at: 2009-04-13 13:37:36
-  updated_at: 2009-05-08 15:02:07
-  remember_token: 4218f4adcee180e849f7fd847724c699e2f20119
-  remember_token_expires_at: 2009-05-22 12:43:42
-  activated_at: 2009-04-13 13:39:35
-  state: active
-  admin: 1
-
-quentin:
-  id: 2
-  login: quentin
-  email: quentin@example.com
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  created_at: <%= 5.days.ago.to_s :db %>
-  activated_at: <%= 3.days.ago.to_s :db %>
-  state: active
-
-aaron:
-  id: 3
-  login: aaron
-  email: aaron@example.com
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  created_at: <%= 1.days.ago.to_s :db %>
-  activated_at: <%= 2.days.ago.to_s :db %>
-  state: active
+  updated_at: 2009-10-11 15:23:18
+  admin: "1"
+  id: "1"
+  remember_token: f477c0059c44a4571f43386b11279537421d9049
+  email_confirmed: "1"
+  confirmation_token: 
+  email: hello@ulfmoehring.net
+users_002: 
+  encrypted_password: 6a5531c8549511826e2f9c3114959a166199f820
+  permalink: jens-wollschlager
+  salt: 8b04c7c84be38e9fa790823a913a7fa4c0cc328d
+  name: "Jens Wollschl\xC3\xA4ger"
+  created_at: 2009-05-17 09:07:54
+  updated_at: 2009-09-13 15:50:31
+  admin: "0"
+  id: "2"
+  remember_token: ea5270025775e51dc78429518c5bce9c53f81366
+  email_confirmed: "1"
+  confirmation_token: 
+  email: jensis@gmail.com
+users_003: 
+  encrypted_password: 6a5531c8549511826e2f9c3114959a166199f820
+  permalink: kathleen-voigt
+  salt: 8b04c7c84be38e9fa790823a913a7fa4c0cc328d
+  name: Kathleen Voigt
+  created_at: 2009-05-17 09:16:11
+  updated_at: 2009-09-13 17:23:19
+  admin: "1"
+  id: "3"
+  remember_token: 8e23a53d8984f19f42f0a215f8c421cab4bebaf8
+  email_confirmed: "1"
+  confirmation_token: 
+  email: kathaleenchen@web.de
