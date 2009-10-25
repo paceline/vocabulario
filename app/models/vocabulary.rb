@@ -27,6 +27,32 @@ class Vocabulary < ActiveRecord::Base
   validates_presence_of :word, :language_id
   validates_uniqueness_of :word, :scope => ['language_id','gender'], :message => 'already exists in database'
   
+  
+  # Check for untagged vocabularies FIMXE - Wonder if there's a better way to do this, jus couldn't get count to work
+  def self.exist_untagged?
+    !find(:all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :having => 'COUNT(taggings.id) = 0').blank?
+  end
+  
+  # Quick way to determine type of vocabulary
+  def self.identify_methods_for_subclasses
+    TYPES[0..TYPES.size-2].each do |type|
+      define_method "#{type.downcase}?" do
+        self.class.to_s == type
+      end
+    end
+  end
+  identify_methods_for_subclasses
+  
+  # Retrun TYPES in a user-friendly way
+  def self.supported_types
+    types = []
+    TYPES.each do |t|
+      type = t.blank? ? ['Other', t] : [t, t]
+      types << type
+    end
+    return types
+  end
+  
   # Copy tags to translations
   def apply_tags_to_translations
     self.translations.each do |translation|
@@ -82,21 +108,6 @@ class Vocabulary < ActiveRecord::Base
       return self.translation_to.find(:all, :conditions => ['language_id = ?', to]) + self.translation_from.find(:all, :conditions => ['language_id = ?', to])
     end
     return self.translation_to + self.translation_from
-  end
-  
-  # Check for untagged vocabularies FIMXE - Wonder if there's a better way to do this, jus couldn't get count to work
-  def self.exist_untagged?
-    !find(:all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :having => 'COUNT(taggings.id) = 0').blank?
-  end
-  
-  # Retrun TYPES in a user-friendly way
-  def self.supported_types
-    types = []
-    TYPES.each do |t|
-      type = t.blank? ? ['Other', t] : [t, t]
-      types << type
-    end
-    return types
   end
 
 end

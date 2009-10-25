@@ -1,5 +1,5 @@
 - content_for :sidebar do
-  - if @list.class.to_s == 'StaticList' && current_user == @list.user
+  - if @list.static? && current_user == @list.user
     .content
       .tabs.green
         %h1 Search & drag
@@ -19,7 +19,7 @@
   or even better from
   = link_to("#{@list.language_to.word} to #{@list.language_from.word}!", list_scores_path(@list, :reverse => true), :method => :post)
 
-- if @list.class.to_s == 'StaticList' && signed_in? && current_user == @list.user
+- if @list.static? && signed_in? && current_user == @list.user
   %ul#static_list.list
     = render :partial => 'admin_list', :object => @list
   

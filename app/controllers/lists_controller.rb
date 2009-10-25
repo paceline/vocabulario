@@ -141,7 +141,7 @@ class ListsController < ApplicationController
   def update
     @list = List.find_by_permalink(params[:id])
 
-    if @list.class.to_s == 'StaticList'
+    if @list.static?
       @list.update_attributes(params[:static_list])
     else
       if params[:dynamic_list][:tag_ids]

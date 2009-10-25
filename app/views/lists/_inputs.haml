@@ -1,7 +1,7 @@
 - form.inputs do
   = form.input :type, :as => :select, :label => "Smart list", :hint => "Do you want a smart (yes) or regular (no) list?" unless @current_action == 'edit'
   = form.input :name, :label => "Title", :hint => "Give your list a title"
-  - unless @list.class.to_s == 'StaticList'
+  - unless @list.static?
     = form.input :language_from, :label => "Language (from)", :hint => "What language are your words supposed to be in?"
     = form.input :language_to, :label => "Language (to)", :hint => "What languages should the translations be in?"
     = form.input :tags, :hint => "Select some tags to narrow down the word selection", :required => false 

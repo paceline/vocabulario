@@ -12,7 +12,7 @@
 
 .tabs
   #overview_link.tab_link.active= link_to_remote("Overview", :url => vocabulary_path(@vocabulary.permalink, :menu => 'overview'), :method => :get)
-  - if @vocabulary.class == Verb && signed_in_as_admin?
+  - if @vocabulary.verb? && signed_in_as_admin?
     #conjugations_link.tab_link= link_to_remote("Conjugations", :url => vocabulary_path(@vocabulary.permalink, :menu => 'conjugations'), :method => :get)
   - else
     #conjugations_link.tab_link{ :style => 'display: none;' }

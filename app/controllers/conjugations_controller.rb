@@ -42,7 +42,7 @@ class ConjugationsController < ApplicationController
     @conjugation = Conjugation.new
     @path = conjugations_path
     if params[:vocabulary_id]
-      @vocabulary = Vocabulary.find(params[:vocabulary_id])
+      @vocabulary = Vocabulary.find_by_permalink(params[:vocabulary_id])
       @path = vocabulary_conjugations_path(@vocabulary)
     end
   end

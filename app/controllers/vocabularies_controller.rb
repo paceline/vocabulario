@@ -75,7 +75,7 @@ class VocabulariesController < ApplicationController
   
   # Add translation form
   def edit
-    @translation = Vocabulary.find(params[:id])
+    @translation = Vocabulary.find_by_permalink(params[:id])
   end
   
   # Delete vocabulary, including translation links
@@ -164,13 +164,15 @@ class VocabulariesController < ApplicationController
     begin
       @vocabulary = Vocabulary.find_by_permalink(params[:id])
       @language = @vocabulary.language
-      @conjugations = @vocabulary.conjugations if @vocabulary.class == Verb
-      @transformations = @vocabulary.transformations if @vocabulary.class == Verb
-      @transformation = Transformation.new if @vocabulary.class == Verb
+      if @vocabulary.verb?
+        @conjugations = @vocabulary.conjugations
+        @transformations = @vocabulary.transformations
+        @transformation = Transformation.new
+      end
       respond_to do |format|
         format.html { render :action => 'show' }
         format.js {
-          @display_transformations = @conjugations.empty? ? "display: none;" : "display: visible;" if @vocabulary.class == Verb
+          @display_transformations = @conjugations.empty? ? "display: none;" : "display: visible;" if @vocabulary.verb?
           render :update do |page|
             page << "['overview','conjugations','translations'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
             page << "$('#{params[:menu]}_link').addClassName('active')"

@@ -20,13 +20,13 @@ module VocabulariesHelper
   
   def admin_options(vocabulary = nil)
     grouped_options = [['Add',
-            [vocabulary ? ['New conjugation', new_vocabulary_conjugation_path(vocabulary)] : ['New conjugation', new_conjugation_path],
+            [vocabulary && vocabulary.verb? ? ['New conjugation', new_vocabulary_conjugation_path(vocabulary.permalink)] : ['New conjugation', new_conjugation_path],
             ['New language', new_vocabulary_path(:type => 'Language')],
             ['New set of pronouns', new_person_path],
             ['New tense', new_conjugation_time_path]]
           ]]
     if vocabulary && !vocabulary.new_record?
-      grouped_options[0][1] << ['New translation', edit_vocabulary_path(vocabulary)]
+      grouped_options[0][1] << ['New translation', edit_vocabulary_path(vocabulary.permalink)]
       grouped_options << ['Copy', [['Apply tags to translations', apply_tags_vocabulary_path(vocabulary)], ['Apply type to translations',apply_type_vocabulary_path(vocabulary)]]]
       grouped_options << ['Delete', [['Delete vocabulary',vocabulary_path(vocabulary)]]]
     end
