@@ -98,7 +98,7 @@ class ListsController < ApplicationController
   
   # Shows list
   def show
-    #begin
+    begin
       @list = List.find_by_permalink(params[:id])
       if @list.public || @list.user == current_user
         @vocabularies = @list.vocabularies
@@ -111,9 +111,9 @@ class ListsController < ApplicationController
       else
         redirect_to '/login'
       end
-    #rescue
-    #  render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-    #end
+    rescue
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
   end
   
   # Live search of the vocabularies database

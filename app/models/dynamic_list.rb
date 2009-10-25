@@ -17,7 +17,7 @@ class DynamicList < List
         when 'weeks' then "DATEDIFF(CURDATE(), vocabularies.created_at) <= #{time_value*7}"
         when 'months' then "DATEDIFF(CURDATE(), vocabularies.created_at) <= #{time_value*30}"
       end
-      order << 'vocabularies.created_at DESC'
+      order << 'vocabularies.updated_at DESC'
     end
     
     Vocabulary.find_by_sql("SELECT * FROM vocabularies #{joins.join(' AND ')} WHERE #{conditions.join(' AND ')} #{'ORDER BY ' + order.join(', ') unless order.blank?}")
