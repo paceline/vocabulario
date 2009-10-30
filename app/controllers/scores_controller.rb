@@ -24,7 +24,7 @@ class ScoresController < ApplicationController
     if params[:list_id]
       @test = params[:reverse] ? VocabularyTest.new(params[:list_id], :reverse => true) : VocabularyTest.new(params[:list_id], :reverse => false)
     else
-      Object.const_get(params[:type]).new(params[:test])
+      @test = Object.const_get(params[:type]).new(params[:test])
     end
     @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
     @score.setup(@test)
