@@ -118,7 +118,7 @@ class VocabulariesController < ApplicationController
           if @from && @to
             vocabulary = Object.const_get(row[1].strip).find_or_initialize_by_word(row[0].strip) { |v| v.language = @from }
             vocabulary.import(current_user, params[:vocabulary][:tags])
-            row[3..row.size-1].each do |translations|
+            row[2..row.size-1].each do |translations|
               if translations
                 translation = Object.const_get(row[1].strip).find_or_initialize_by_word(translations) { |v| v.language = @to }
                 translation.import(current_user, params[:vocabulary][:tags])
@@ -132,7 +132,7 @@ class VocabulariesController < ApplicationController
             @to = Language.find_by_word(row[2].split(' ').first.strip)
           end
         end
-        flash.now[:success] = "Vocabularies have been imported to the database."
+      flash.now[:success] = "Vocabularies have been imported to the database."
       rescue Exception => @exception
         flash.now[:failure] = "Something went wrong here..."
       end
