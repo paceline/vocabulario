@@ -20,7 +20,7 @@ class DynamicList < List
       order << 'vocabularies.updated_at DESC'
     end
     
-    Vocabulary.find_by_sql("SELECT * FROM vocabularies #{joins.join(' AND ')} WHERE #{conditions.join(' AND ')} #{'ORDER BY ' + order.join(', ') unless order.blank?}")
+    Vocabulary.find_by_sql("SELECT vocabularies.* FROM vocabularies #{joins.join(' AND ')} WHERE #{conditions.join(' AND ')} #{'ORDER BY ' + order.join(', ') unless order.blank?}")
   end
 
 end
