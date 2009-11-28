@@ -43,6 +43,25 @@ class Vocabulary < ActiveRecord::Base
   end
   identify_methods_for_subclasses
   
+  # Get latest vocabularies
+  def self.latest(limit = 15)
+    latest = taken = []
+    j = i = 0
+    
+    while i < limit do
+      vocabulary = find(:first, :offset => i+j, :order => 'updated_at DESC')
+      if taken.include?(vocabulary)
+        j += 1
+      else
+        latest << vocabulary
+        taken = (taken + [vocabulary] + vocabulary.translations).uniq
+        i += 1
+      end
+    end
+    
+    return latest
+  end
+  
   # Retrun TYPES in a user-friendly way
   def self.supported_types
     types = []
@@ -98,16 +117,25 @@ class Vocabulary < ActiveRecord::Base
   
   # Imports csv string
   def import(user, tags)
-    self.user = user
+    self.user = user if new_record?
     self.tag_list = (self.tag_list + tags).uniq unless tags.blank?
   end
   
   # Gather all translations (to and from) for given vocabulary id
   def translations(to = nil)
-    if to
-      return self.translation_to.find(:all, :conditions => ['language_id = ?', to]) + self.translation_from.find(:all, :conditions => ['language_id = ?', to])
-    end
-    return self.translation_to + self.translation_from
+    translations = all_translations.sort { |x,y| x.word.downcase <=> y.word.downcase }
+    return to ? translations.delete_if {|t| t.language_id != to} : translations
   end
+  
+  protected
+    def all_translations(word = self, translations = [])
+      new_translations = word.translation_to.find(:all, :conditions => ['language_id != ?', self.language_id]) + word.translation_from.find(:all, :conditions => ['language_id != ?', self.language_id])
+      new_translations -= (translations & new_translations)
+      translations += new_translations
+      new_translations.each do |t|
+        translations = all_translations(t, translations)
+      end
+      return translations
+    end
 
 end

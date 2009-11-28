@@ -1,5 +1,5 @@
 - if @test.continue?
-  %h1= "Question #{@test.current + 1} / #{@test.limit}"
+  %h1.spacing= "Question #{@test.current + 1} / #{@test.limit}"
   %h2= @test.current_question.word
   - form_remote_for(:score, @score, :url => score_path(@score, :type => 'ConjugationTest', :score_id => @score.id), :html => { :method => :put })  do
     %p

@@ -2,8 +2,8 @@
   #test_score.content= render(@score)
 
 - content_for :notice do
-  %h1 Welcome!
-  %p Fill out the form below to get started and test your foreign language skills
+  %h1 Test Center
+  %p To take a vocabulary or conjugation test fill out the form below!
 
 #test_tabs.tabs
   #vocabulary_test_link.tab_link.active= link_to_remote("Vocabulary Test", :url => new_score_path(:menu => 'vocabulary'))

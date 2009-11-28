@@ -132,10 +132,19 @@ class VocabulariesController < ApplicationController
             @to = Language.find_by_word(row[2].split(' ').first.strip)
           end
         end
-      flash.now[:success] = "Vocabularies have been imported to the database."
+        flash.now[:success] = "Vocabularies have been imported to the database."
       rescue Exception => @exception
         flash.now[:failure] = "Something went wrong here..."
       end
+    end
+  end
+  
+  # List latest vocabularies
+  def latest
+    @latest = Vocabulary.latest
+    respond_to do |format|
+      format.html
+      format.atom { render :layout => false }
     end
   end
   

@@ -40,7 +40,7 @@ h3 {
 p { margin: 5px 0 15px 0; }
 p.small, ul.small {font-size: .8em; }
 p.small { font-style: italic; }
-p.spacing { margin-bottom: 30px; }
+.spacing { margin-bottom: 30px; }
 
 ul {
 	list-style-type: none;
@@ -188,7 +188,11 @@ em.tag {
 /* "Main" -> "Vocabulary list"
    ========================== */
 
+ul#latest.list { margin-top: -22px; }
+
 ul.list li.item { cursor: move; }
+
+.list li ul.inline li.highlight { background-color: #02B8EA; color: #FFF; }
 
 .list li ul.inline {
 	background-color: #DED;

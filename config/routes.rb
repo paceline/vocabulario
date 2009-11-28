@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'clearance/sessions', :action => 'new'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.community '/community', :controller => 'users', :action => 'index'
+  map.test '/test', :controller => 'scores', :action => 'new'
   
   # Vocabularies
   map.vocabularies_unlink '/vocabularies/:id/unlink/:link', :controller => 'vocabularies', :action => 'unlink'
@@ -39,11 +40,11 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :vocabularies,
     :member => { :apply_conjugation => :put, :unapply_conjugation => :delete, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },
-    :collection => { :import => [:get, :post], :refresh_language => :get, :select => :get, :tags_for_language => :get, :review => :get, :redirect => :get },
+    :collection => { :import => [:get, :post], :latest => :get, :refresh_language => :get, :select => :get, :tags_for_language => :get, :review => :get, :redirect => :get },
     :has_many => [:conjugations, :transformations]
     
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => 'scores', :action => 'new'
+  map.root :controller => 'vocabularies', :action => 'latest'
 
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should

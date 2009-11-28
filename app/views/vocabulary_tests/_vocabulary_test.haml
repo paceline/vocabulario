@@ -1,5 +1,5 @@
 - if @test.continue?
-  %h1= "Question #{@test.current + 1} / #{@test.limit}"
+  %h1.spacing= "Question #{@test.current + 1} / #{@test.limit}"
   %h2
     = @test.current_question.word
     = "(#{@test.current_question.gender})" unless @test.current_question.gender == "N/A"

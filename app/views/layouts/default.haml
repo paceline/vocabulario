@@ -4,6 +4,8 @@
     %title VOCABULARIO - A simple, non-social vocabulary trainer
     - if @current_controller == 'lists' && @current_action == 'show'
       %link{ :href => list_path(@list.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+    - if @current_controller == 'vocabularies' && @current_action == 'latest'
+      %link{ :href => latest_vocabularies_path(:format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
     = javascript_include_tag :defaults
     = javascript_include_tag 'ierange-m2.js' if @current_controller == 'vocabularies' && @current_action == 'show'
     = javascript_include_tag "/vocabularies.js?language=#{@translation.language.id}" if @translation
@@ -16,7 +18,7 @@
         .navigation.no-padding= link_to "Wiki", '/wiki'
         .navigation= link_to "Community", community_path
         .navigation= link_to "Vocabularies", vocabularies_path
-        .navigation= link_to "Scores", scores_path
+        .navigation= link_to "Test Center", test_path
         .navigation= link_to "Home", "/"
         .navigation.no-floater= link_to "VOCABULARIO - a simple vocablary trainer", "/"
       - unless !flash.empty? || yield(:notice)
@@ -45,6 +47,5 @@
             %ul
               %li= link_to 'Log in',  login_path,  { :title => 'Log in' }
               %li= link_to 'Sign up', signup_path, { :title => 'Create an account' }
-        #list_stuff= render :partial => 'lists/list' if @current_controller == 'scores' && @current_action == 'new' && signed_in?
         = yield :sidebar
       #footer Powered by <a href="http://github.com/paceline/vocabulario/tree/master">Vocabulario</a>, created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>
