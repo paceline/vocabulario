@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091017182408) do
+ActiveRecord::Schema.define(:version => 20091129100428) do
 
   create_table "conjugation_times", :force => true do |t|
     t.integer  "language_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20091017182408) do
     t.datetime "updated_at"
     t.integer  "time_value"
     t.string   "time_unit",        :limit => 10
+    t.boolean  "all_or_any",                     :default => false
   end
 
   create_table "people", :force => true do |t|

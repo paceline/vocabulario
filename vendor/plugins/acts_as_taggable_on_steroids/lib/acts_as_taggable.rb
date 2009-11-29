@@ -75,6 +75,8 @@ module ActiveRecord #:nodoc:
           conditions = []
           conditions << sanitize_sql(options.delete(:conditions)) if options[:conditions]
           
+          order = options[:order] ? options.delete(:order) : "#{table_name}.id"
+          
           taggings_alias, tags_alias = "#{table_name}_taggings", "#{table_name}_tags"
           
           if options.delete(:exclude)
@@ -101,7 +103,8 @@ module ActiveRecord #:nodoc:
           { :select => "DISTINCT #{table_name}.*",
             :joins => "INNER JOIN #{Tagging.table_name} #{taggings_alias} ON #{taggings_alias}.taggable_id = #{table_name}.#{primary_key} AND #{taggings_alias}.taggable_type = #{quote_value(base_class.name)} " +
                       "INNER JOIN #{Tag.table_name} #{tags_alias} ON #{tags_alias}.id = #{taggings_alias}.tag_id",
-            :conditions => conditions.join(" AND ")
+            :conditions => conditions.join(" AND "),
+            :order => order
           }.reverse_merge!(options)
         end
         

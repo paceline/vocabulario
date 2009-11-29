@@ -4,7 +4,7 @@
   - unless @list.static?
     = form.input :language_from, :label => "Language (from)", :hint => "What language are your words supposed to be in?"
     = form.input :language_to, :label => "Language (to)", :hint => "What languages should the translations be in?"
-    = form.input :tags, :hint => "Select some tags to narrow down the word selection", :required => false 
+    = form.input :tags, :hint => "Match #{form.select :all_or_any, [['all',true],['any',false]]} of the above tags", :required => false 
     %li#list_time_input.string
       %label{ :for => "list_name" } Added within the last...
       = form.text_field :time_value, :size => 3

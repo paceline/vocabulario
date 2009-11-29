@@ -3,13 +3,7 @@ class DynamicList < List
   # Returns vocabularies associated with list
   def vocabularies
     conditions = ["vocabularies.language_id = #{language_from.id}"]
-    joins = []
-    order = []
-    
-    unless tag_list.blank?
-      conditions << "taggings.tag_id IN ('#{tags.collect { |t| t.id }.join('\',\'')}')"
-      joins << "LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id"
-    end
+    order = ['vocabularies.word']
     
     unless time_value.blank? || time_unit.blank?
       conditions << case time_unit
@@ -20,7 +14,11 @@ class DynamicList < List
       order << 'vocabularies.updated_at DESC'
     end
     
-    Vocabulary.find_by_sql("SELECT vocabularies.* FROM vocabularies #{joins.join(' AND ')} WHERE #{conditions.join(' AND ')} #{'ORDER BY ' + order.join(', ') unless order.blank?}")
+    if tag_list.blank?
+      Vocabulary.find(:all, :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
+    else
+      Vocabulary.find_tagged_with(tags, :match_all => all_or_any, :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
+    end
   end
 
 end
