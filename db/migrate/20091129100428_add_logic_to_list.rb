@@ -4,7 +4,7 @@ class AddLogicToList < ActiveRecord::Migration
       t.boolean :all_or_any, :default => false
     end
     List.find(:all).each do |l|
-      if l.all_or_any == nil
+      if l.all_or_any == nil && l.class.to_s == "DynamicList"
         l.all_or_any = false
         l.save!
       end
