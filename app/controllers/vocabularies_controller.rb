@@ -204,14 +204,6 @@ class VocabulariesController < ApplicationController
     render :partial => "shared/taglist_detail", :object => vocabulary.tag_list
   end
   
-  # /scores/new support: Update tags select box based on seleted language 
-  def tags_for_language
-    language = Vocabulary.find(params[:language_id]) if params[:language_id]
-    language = ConjugationTime.find(params[:conjugation_time_id]).language if params[:conjugation_time_id]
-    @tags = language.tags_for_language
-    render :layout => false
-  end
-  
   # Remove conjugation from vocabulary
   def unapply_conjugation
     @vocabulary = Vocabulary.find(params[:id])

@@ -2,11 +2,11 @@ class LanguageTest
   
   # Fetaures
   attr_reader :current, :limit, :tags
-  LIMITS = [5,10,25,50,75,100]
+  LIMITS = [5,10,25,50,75,100,'all']
   
   # Generate test questions
   def generate_test(words = nil)
-    @limit = @limit <= words.size ? @limit : words.size
+    @limit = @limit && @limit <= words.size ? @limit : words.size
     @test = []
     @current = 0
     generate_test_order(words)
@@ -19,7 +19,7 @@ class LanguageTest
     @test = []
     test.each do |test|
       word = Vocabulary.find(test)
-      answers = self.class == VocabularyTest ? word.translations(@to) : word.conjugate_all(@tense.id)
+      answers = self.class == VocabularyTest ? word.translations(@to.id) : word.conjugate_all(@tense.id)
       @test << [ word, answers ] unless answers.empty?
     end
   end

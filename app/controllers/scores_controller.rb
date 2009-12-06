@@ -3,14 +3,23 @@ class ScoresController < ApplicationController
   # Open up a new language test
   def new
     @score = Score.new
-    @languages = Language.list
-    @tags = @languages.first.tags_for_language
-    if params[:menu]
-      render :update do |page|
-        page << "['vocabulary','conjugation'].collect(function(v) { $(v + '_test_link').className = 'tab_link'; })"
-        page << "$('#{params[:menu]}_test_link').addClassName('active')"
-        page.replace_html 'test_pane', render(:partial => "#{params[:menu]}_test/#{params[:menu]}_test")
-      end
+    if params[:menu] == 'translate_by_list'
+      @lists = List.find_public(current_user)
+      @from = @lists.first.language_from.word
+      @to = @lists.first.language_to.word
+    else
+      @languages = Language.list
+      @tags = @languages.first.tags_for_language
+    end
+    respond_to do |format|
+      format.html
+      format.js {
+        render :update do |page|
+          page << "['translate_by_tag','translate_by_list','conjugate'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
+          page << "$('#{params[:menu]}_link').addClassName('active')"
+          page.replace_html 'test_pane', render(:partial => "new_#{params[:menu]}")
+        end
+      }
     end
   end
   
@@ -21,27 +30,19 @@ class ScoresController < ApplicationController
   
   # Create a new vocabulary test (on "Let's go")
   def create
-    if params[:list_id]
-      @test = params[:reverse] ? VocabularyTest.new(params[:list_id], :reverse => true) : VocabularyTest.new(params[:list_id], :reverse => false)
-    else
-      @test = Object.const_get(params[:type]).new(params[:test])
-    end
+    params[:test].delete(:limit) if params[:test][:limit] == 'all'
+    @test = params[:test][:list_id] ? Object.const_get(params[:type]).new(params[:test].delete(:list_id), params[:test]) : Object.const_get(params[:type]).new(params[:test])
     @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
     @score.setup(@test)
     @score.save
     session[:test] = @test.to_session_params
-    if params[:list_id]
-      flash.now[:success] = "Good luck with your test!"
-      render :new_from_list
-    else
-      render :update do |page|
-        page.hide :test_tabs, :list_stuff
-        page << "$('test_pane').className = ''"
-        page.replace_html 'test_pane', render(@test)
-        page.visual_effect :highlight, 'test_pane'
-        page.replace_html 'test_score', render(@score)
-        page.visual_effect :highlight, 'test_score'
-      end
+    render :update do |page|
+      page.hide :test_tabs
+      page << "$('test_pane').className = ''"
+      page.replace_html 'test_pane', render(@test)
+      page.visual_effect :highlight, 'test_pane'
+      page.replace_html 'test_score', render(@score)
+      page.visual_effect :highlight, 'test_score'
     end
   end
   
@@ -92,6 +93,21 @@ class ScoresController < ApplicationController
       page.replace_html 'test_score', render(@score)
       page.visual_effect :highlight, 'test_score'
     end
+  end
+  
+  # /scores/new support: Update tags select box based on seleted language 
+  def tags_for_language
+    language = Vocabulary.find(params[:language_id]) if params[:language_id]
+    language = ConjugationTime.find(params[:conjugation_time_id]).language if params[:conjugation_time_id]
+    @tags = language.tags_for_language
+    render :layout => false
+  end
+  
+  def direction_for_list
+    list = List.find(params[:list_id])
+    @from = list.language_from.word
+    @to = list.language_to.word
+    render :partial => 'direction_for_list'
   end
 
 end

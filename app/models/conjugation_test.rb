@@ -6,7 +6,7 @@ class ConjugationTest < LanguageTest
   # Initialize new vocabulary test
   def initialize(*args)
     options = args.extract_options!
-    if options.key?(:tense) && options.key?(:limit)
+    if options.key?(:tense)
       @tense = ConjugationTime.find(options[:tense])
       raise(ActiveRecord::RecordNotFound, "Given tense not found. Probably either a typ-o or unsupported tense.") unless @tense
       @limit = options[:limit].to_i if options.key?(:limit)
@@ -14,7 +14,7 @@ class ConjugationTest < LanguageTest
       options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? clean_verb_selection(@tense.verbs_tagged_with(@tags), @tense.id) : clean_verb_selection(@tense.verbs, @tense.id))
       super
     else
-      raise(ArgumentError, "Missing options. :tense and :limit are required at minimum.")
+      raise(ArgumentError, "Missing options. :tense is required at minimum.")
     end
   end
   

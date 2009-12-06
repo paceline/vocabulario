@@ -1,0 +1,6 @@
+%li
+  = radio_button(:test, :reverse, false, :checked => true)
+  = "Translate <strong>#{@from}</strong> to <strong>#{@to}</strong>"
+%li
+  = radio_button(:test, :reverse, true)
+  = "Translate <strong>#{@to}</strong> to <strong>#{@from}</strong>"

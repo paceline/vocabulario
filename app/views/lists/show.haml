@@ -14,11 +14,9 @@
   %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}."
 
 %p.spacing
-  Know them by heart? Take a test from 
-  = link_to("#{@list.language_from.word} to #{@list.language_to.word}", list_scores_path(@list), :method => :post)
-  or even better from
-  = link_to("#{@list.language_to.word} to #{@list.language_from.word}!", list_scores_path(@list, :reverse => true), :method => :post)
-
+  Know them by heart?
+  = link_to('Take a test!', test_path)
+ 
 - if @list.static? && signed_in? && current_user == @list.user
   %ul#static_list.list
     = render :partial => 'admin_list', :object => @list

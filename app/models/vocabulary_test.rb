@@ -6,22 +6,22 @@ class VocabularyTest < LanguageTest
   # Initialize new vocabulary test
   def initialize(*args)
     options = args.extract_options!
-    args.size == 1 ? setup_based_on_list(args.first, options[:reverse]) : setup_based_on_params(options)
+    args.size == 1 ? setup_based_on_list(args.first, options) : setup_based_on_params(options)
   end
   
   # Setup a new vocabulary test based on a vocabulary list
-  def setup_based_on_list(list_id, reverse)
+  def setup_based_on_list(list_id, options)
     list = List.find(list_id)
-    @from = reverse ? list.language_to : list.language_from
-    @to = reverse ? list.language_from : list.language_to
-    @limit = list.size
+    @from = options.key?(:reverse) && options[:reverse] == 'true' ? list.language_to : list.language_from
+    @to = options.key?(:reverse) && options[:reverse] == 'true' ? list.language_from : list.language_to
+    @limit = options[:limit].to_i if options.key?(:limit)
     @tags = list.tag_list
-    generate_test(reverse ? list.vocabularies_to_translations : list.vocabularies)
+    generate_test(options.key?(:reverse) && options[:reverse] == 'true' ? list.vocabularies_to_translations : list.vocabularies)
   end
   
   # Setup a new vocabulary test based on params (language, tags, etc.)
   def setup_based_on_params(options)
-    if options.key?(:to) && options.key?(:from) && options.key?(:limit)
+    if options.key?(:to) && options.key?(:from)
       @from = Vocabulary.find(options[:from])
       @to = Vocabulary.find(options[:to])
       raise(ActiveRecord::RecordNotFound, "At least one of the languages not found. Probably either a typ-o or unsupported language.") unless @to && @from
@@ -29,7 +29,7 @@ class VocabularyTest < LanguageTest
       @tags = options[:tags].join(',') if options.key?(:tags)
       options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? @from.vocabularies.find(:all, :conditions => "taggings.tag_id IN (#{@tags})", :include => [ :taggings ]) : @from.vocabularies)
     else
-      raise(ArgumentError, "Missing options. :to, :from, and :limit are required at minimum.")
+      raise(ArgumentError, "Missing options. :to and :from are required at minimum.")
     end
   end
   

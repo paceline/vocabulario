@@ -1,7 +1,7 @@
 class AddLogicToList < ActiveRecord::Migration
   def self.up
     change_table(:lists) do |t|
-      t.boolean :all_or_any, :default => false
+      t.boolean :all_or_any
     end
     List.find(:all).each do |l|
       if l.all_or_any == nil && l.class.to_s == "DynamicList"

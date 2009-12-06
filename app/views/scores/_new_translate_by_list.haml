@@ -1,0 +1,22 @@
+- form_remote_for @score, :url => scores_path(:type => 'VocabularyTest') do 
+
+  .fields
+    %h2 1. Pick a list
+    I'd like to get tested on the vocabularies from the list
+    = select(:test, :list_id, @lists.collect {|l| [ l.name, l.id ] })
+    = observe_field(:test_list_id, :url => direction_for_list_scores_path, :update => "test_direction", :with => "list_id")
+    
+  .fields
+    %h2 2. Direction
+    %ul#test_direction
+      = render :partial => 'direction_for_list'
+    
+  .fields
+    %h2 3. Number of questions
+    I'm up for
+    = select(:test, :limit, LanguageTest::LIMITS)
+    questions
+   
+  .fields
+    = submit_tag("Ready? Let's go!")
+  

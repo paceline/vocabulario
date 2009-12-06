@@ -6,10 +6,11 @@
   %p To take a vocabulary or conjugation test fill out the form below!
 
 #test_tabs.tabs
-  #vocabulary_test_link.tab_link.active= link_to_remote("Vocabulary Test", :url => new_score_path(:menu => 'vocabulary'))
-  #conjugation_test_link.tab_link= link_to_remote("Conjugation Test (BETA)", :url => new_score_path(:menu => 'conjugation'))
+  #translate_by_tag_link.tab_link.active= link_to_remote("Translate (by tag)", :url => new_score_path(:menu => 'translate_by_tag'))
+  #translate_by_list_link.tab_link= link_to_remote("Translate (by list)", :url => new_score_path(:menu => 'translate_by_list'))
+  #conjugate_link.tab_link= link_to_remote("Conjugate (BETA)", :url => new_score_path(:menu => 'conjugate'))
 
 #error_pane.tab_content_pane{:style => 'display:none'}
 
 #test_pane.tab_content_pane
-  = render(:partial => 'vocabulary_test/vocabulary_test')
+  = render(:partial => 'new_translate_by_tag')
