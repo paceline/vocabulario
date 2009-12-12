@@ -9,3 +9,4 @@ log/*.log
 db/*.db
 tmp/*/*
 vendor/plugins/viget_deployment
+mkmf.log

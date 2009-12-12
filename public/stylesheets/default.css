@@ -85,14 +85,14 @@ th { background-color: #CCC; text-align: left; }
 /* "Notice"
    ======== */
 
-#notice .notice, #notice .error {
+#notice .notice, #notice .success, #notice .failure {
 	background: #C0ED00;
 	height: 60px;
 	margin-bottom: 55px;
 	padding: 0 .75em 0 .75em;
 }
 
-#notice .error { background: #C66; }
+#notice .failure { background: #C66; }
 
 #notice h1, #notice p { color: #FFF; }
 

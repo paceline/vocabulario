@@ -161,13 +161,6 @@ class VocabulariesController < ApplicationController
     end
   end
   
-  # /scores/new support: Make sure to and from select boxes always have different selected languages
-  def select
-    @languages = Language.list("id != #{params[:language_id]}")
-    @selected = params[:language_id] == params[:selected] ? @languages.first.id : params[:selected].to_i
-    render :layout => false
-  end
-  
   # Display vocabulary attributes
   def show
     begin

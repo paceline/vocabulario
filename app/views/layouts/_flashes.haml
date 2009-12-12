@@ -1,4 +1,4 @@
 - flash.each do |key, value|
-  %div{:id => "flash_#{key}", :class => 'notice'}
+  %div{:id => "flash_#{key}", :class => key }
     %h1= interpret_flash_key(key)
     %p= value

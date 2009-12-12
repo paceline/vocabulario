@@ -32,17 +32,22 @@ class ScoresController < ApplicationController
   def create
     params[:test].delete(:limit) if params[:test][:limit] == 'all'
     @test = params[:test][:list_id] ? Object.const_get(params[:type]).new(params[:test].delete(:list_id), params[:test]) : Object.const_get(params[:type]).new(params[:test])
-    @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
-    @score.setup(@test)
-    @score.save
-    session[:test] = @test.to_session_params
-    render :update do |page|
-      page.hide :test_tabs
-      page << "$('test_pane').className = ''"
-      page.replace_html 'test_pane', render(@test)
-      page.visual_effect :highlight, 'test_pane'
-      page.replace_html 'test_score', render(@score)
-      page.visual_effect :highlight, 'test_score'
+    if @test.empty?
+      flash.now[:failure] = "Sorry, no vocabularies were found based on your selection."
+      render(:update) { |page| page.update_notice }
+    else
+      @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
+      @score.setup(@test)
+      @score.save
+      session[:test] = @test.to_session_params
+      render :update do |page|
+        page.hide :test_tabs
+        page << "$('test_pane').className = ''"
+        page.replace_html 'test_pane', render(@test)
+        page.visual_effect :highlight, 'test_pane'
+        page.replace_html 'test_score', render(@score)
+        page.visual_effect :highlight, 'test_score'
+      end
     end
   end
   
@@ -56,22 +61,18 @@ class ScoresController < ApplicationController
       @results = @test.result_for(answers)
       @score.points += @test.count_correct_results(@results)
       if !@results.include?(false)
-        color = '#C0ED00'
-        flash.now[:result] = "<strong>Yes</strong>, you got everything right."
+        flash.now[:success] = "You got everything right."
       else
         @correct_results = @test.correct_results
-        color = '#C66'
-        flash.now[:result] = "<strong>No</strong>, unfortunately you made some mistakes. See below for the correct answers."
+        flash.now[:failure] = "Unfortunately you made some mistakes. See below for the correct answers."
       end
       @score.questions += 6
     else
       if @test.result_for(params[:test][:answer])
-        color = '#C0ED00'
         @score.points += 1
-        flash.now[:result] = "<strong>Yes</strong>, that's correct. Well done. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}."
+        flash.now[:success] = "That's correct. Well done. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}."
       else
-        color = '#C66'
-        flash.now[:result] = "<strong>No</strong>, unfortunately that's not correct. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}"
+        flash.now[:failure] = "Unfortunately that's not correct. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}"
       end
       @score.questions += 1
     end
@@ -86,23 +87,33 @@ class ScoresController < ApplicationController
         page.hide :error_pane
       end
       page.replace_html 'test_pane', render(@test)
-      page.replace_html :notice, render(:partial => 'layouts/flashes')
-      page << "$('notice').childElements().collect(function(v) { $(v).setStyle({ backgroundColor: '#{color}' }); })"
-      page.show :notice
-      page.visual_effect :highlight, 'notice'
       page.replace_html 'test_score', render(@score)
+      page.update_notice
       page.visual_effect :highlight, 'test_score'
     end
   end
   
-  # /scores/new support: Update tags select box based on seleted language 
-  def tags_for_language
-    language = Vocabulary.find(params[:language_id]) if params[:language_id]
-    language = ConjugationTime.find(params[:conjugation_time_id]).language if params[:conjugation_time_id]
-    @tags = language.tags_for_language
-    render :layout => false
+  # /scores/new support: Make sure to and from select boxes always have different selected languages
+  def update_languages
+    @languages = Language.list("id != #{params[:language_from_id]}")
+    @language_from = Vocabulary.find(params[:language_from_id])
+    @language_to = params[:language_from_id] == params[:language_to_id] ? @languages.first : @languages.fetch_object(:id, params[:language_to_id].to_i)   
+    @tags = @language_from.tags_for_language & @language_to.tags_for_language
+    render :update do |page|
+      page.replace_html 'test_to', options_for_select(@languages.collect {|p| [p.word, p.id ] }, @language_to)
+      page.replace_html 'test_tags', options_for_select(@tags.collect {|t| [t.name, t.id ] })
+    end
   end
   
+  # /scores/new support: Update tags select box based on seleted language 
+  def update_tags
+    @language_from = params.key?(:conjugation_time_id) ? ConjugationTime.find(params[:conjugation_time_id]).language : Vocabulary.find(params[:language_from_id])
+    @language_to = Vocabulary.find(params[:language_to_id]) unless params.key?(:conjugation_time_id)
+    @tags = params.key?(:conjugation_time_id) ? @language_from.tags_for_language : @language_from.tags_for_language & @language_to.tags_for_language
+    render(:update) { |page| page.replace_html 'test_tags', options_for_select(@tags.collect {|t| [t.name, t.id ] }) }
+  end
+  
+  # /scores/new support: Update directions based on list selected
   def direction_for_list
     list = List.find(params[:list_id])
     @from = list.language_from.word

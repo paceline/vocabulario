@@ -13,8 +13,14 @@ module ApplicationHelper
   end
   
   def interpret_flash_key(key)
-    keys = { :failure => 'Nope', :success => 'Great', :notice => 'Done', :result => 'Your result' }
+    keys = { :failure => 'Nope', :success => 'Great', :notice => 'Done' }
     return keys[key]
+  end
+  
+  def update_notice()
+    page.replace_html :notice, render(:partial => 'layouts/flashes')
+    page.show :notice
+    page.visual_effect :highlight, 'notice'
   end
   
 end

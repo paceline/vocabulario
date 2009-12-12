@@ -45,6 +45,11 @@ class LanguageTest
     return @current
   end
   
+  # Returns true if no vocabularies were found
+  def empty?
+    @test.size == 0
+  end
+  
   protected
     # Generates random order of test questions w/ respective results
     def generate_test_order(words, i=0)
