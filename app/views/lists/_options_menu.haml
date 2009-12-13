@@ -1,0 +1,3 @@
+%li= link_to_remote('Delete from list', :url => unlink_list_path(@list, :vocabulary_id => @vocabulary.id), :method => :delete)
+%li= link_to_remote('Move to other list', :url => copy_move_list_path(@list, :vocabulary_id => @vocabulary.id, :method => 'Move to list'), :update => "options_for_#{@vocabulary.id}")
+%li= link_to_remote('Copy to other list', :url => copy_move_list_path(@list, :vocabulary_id => @vocabulary.id, :method => 'Copy to list'), :update => "options_for_#{@vocabulary.id}")

@@ -51,19 +51,32 @@ class ListsController < ApplicationController
     end
   end
   
+  # Moves or copies vocabulary from one list to another
+  def copy_move
+    if params.key?(:new_list_id)
+      vocabulary = Vocabulary.find(params[:vocabulary_id])
+      vocabulary.remove_from_list(params[:id]) if params[:commit] == 'Move to list'
+      vocabulary.add_to_list(params[:new_list_id])
+      render(:update) { |page| params[:commit] == 'Move to list' ? page.visual_effect(:drop_out, "list_item_#{params[:vocabulary_id]}") : page << "toggleListMenu('#{params[:vocabulary_id]}')" }
+    else
+      @params = params
+      @list = List.find(params[:id])
+      @lists = StaticList.list("id != #{@list.id}")
+      render :partial => 'copy_move_form'
+    end
+  end
+  
   # Adds new item to a static list
   def newitem
-    list = List.find(params[:id])
-    position = params.key?(:insert_after) ? list.ids.index(params[:insert_after])+2 : 1
+    @list = List.find(params[:id])
+    position = params.key?(:insert_after) ? @list.ids.index(params[:insert_after])+2 : 1
     vocabulary = Vocabulary.find(params[:vocabulary_id])
-    vocabulary = vocabulary.translations(list.language_from_id).first if list.language_to == vocabulary.language
-    @lister = list.vocabulary_lists.build({ :vocabulary_id => vocabulary.id })
-    if @lister.valid? && @lister.errors.empty?
-      @lister.save
-      @lister.insert_at(position)
+    vocabulary = vocabulary.translations(list.language_from_id).first if @list.language_to == vocabulary.language
+    valid = vocabulary.add_to_list(@list.id, position)
+    if valid
       render :update do |page|
-        page.hide :dropzone if list.size <= 1
-        page.replace_html 'static_list', render(:partial => 'admin_list', :object => list)
+        page.hide :dropzone if @list.size <= 1
+        page.replace_html 'static_list', render(:partial => 'admin_list')
         page.visual_effect :shake, "list_item_#{vocabulary.id}"
       end
     else
@@ -116,25 +129,23 @@ class ListsController < ApplicationController
     end
   end
   
+  # Sort a dynamic list by different attributes
+  def sort
+    if params.key?(:attribute) && params.key?(:order)
+      @list = List.find(params[:id])
+      @vocabularies = @list.vocabularies(params[:attribute], params[:order])
+      render :partial => 'regular_list'
+    else
+      render :nothing => true
+    end
+  end
+  
   # Live search of the vocabularies database
   def live
     list = List.find(params[:id])
     @search = params[:word]
     @vocabularies = Vocabulary.find(:all, :conditions => ['(language_id = ? OR language_id = ?) AND word LIKE ?', list.language_from.id, list.language_to.id, "%#{params[:word]}%"], :limit => 10, :order => 'word') if params[:word].size >= 3
     render :nothing => true if @vocabularies.blank?
-  end
-  
-  # /lists/new support: Hide tags menu when static is selected (and vice versa)
-  def switch
-    render :update do |page|
-      if params[:selected] == 'false'
-        page.hide 'list_tags_input', 'list_time_input'
-      else
-        page.show 'list_tags_input', 'list_time_input'
-        page.visual_effect :highlight, 'list_tags_input'
-        page.visual_effect :highlight, 'list_time_input'
-      end
-    end
   end
   
   # Update vocabulary list
@@ -161,6 +172,29 @@ class ListsController < ApplicationController
     list.destroy
     render :update do |page|
       page.visual_effect :drop_out, "list_item_#{params[:vocabulary_id]}"
+    end
+  end
+  
+  # /lists/show support: Show options menu
+  def show_options_menu
+    @list = List.find(params[:id])
+    @vocabulary = Vocabulary.find(params[:vocabulary_id])
+    render :update do |page|
+      page.replace_html "options_for_#{@vocabulary.id}", render(:partial => 'options_menu')
+      page << "toggleListMenu('#{@vocabulary.id}')"
+    end
+  end
+  
+  # /lists/new support: Hide tags menu when static is selected (and vice versa)
+  def switch
+    render :update do |page|
+      if params[:selected] == 'false'
+        page.hide 'list_tags_input', 'list_time_input'
+      else
+        page.show 'list_tags_input', 'list_time_input'
+        page.visual_effect :highlight, 'list_tags_input'
+        page.visual_effect :highlight, 'list_time_input'
+      end
     end
   end
   

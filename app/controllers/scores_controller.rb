@@ -100,7 +100,7 @@ class ScoresController < ApplicationController
     @language_to = params[:language_from_id] == params[:language_to_id] ? @languages.first : @languages.fetch_object(:id, params[:language_to_id].to_i)   
     @tags = @language_from.tags_for_language & @language_to.tags_for_language
     render :update do |page|
-      page.replace_html 'test_to', options_for_select(@languages.collect {|p| [p.word, p.id ] }, @language_to)
+      page.replace_html 'test_to', options_for_select(@languages.collect {|p| [p.word, p.id ] }, @language_to.id)
       page.replace_html 'test_tags', options_for_select(@tags.collect {|t| [t.name, t.id ] })
     end
   end

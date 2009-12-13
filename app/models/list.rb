@@ -37,6 +37,11 @@ class List < ActiveRecord::Base
   end
   identify_methods_for_subclasses :dynamic, :static
   
+  # Return all lists
+  def self.list(conditions = "")
+    return conditions.empty? ? find(:all) : find(:all, :conditions => conditions) 
+  end
+  
   # Checks whether list is public or private
   def public?
     public ? "public" : "private"

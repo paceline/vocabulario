@@ -1,9 +1,9 @@
 class DynamicList < List
   
   # Returns vocabularies associated with list
-  def vocabularies
+  def vocabularies(custom_attribute = "", custom_order = "")
     conditions = ["vocabularies.language_id = #{language_from.id}"]
-    order = ['vocabularies.word']
+    order = custom_attribute.blank? ? ['vocabularies.word'] : ["#{custom_attribute} #{custom_order}"]
     
     unless time_value.blank? || time_unit.blank?
       conditions << case time_unit
@@ -11,7 +11,7 @@ class DynamicList < List
         when 'weeks' then "DATEDIFF(CURDATE(), vocabularies.created_at) <= #{time_value*7}"
         when 'months' then "DATEDIFF(CURDATE(), vocabularies.created_at) <= #{time_value*30}"
       end
-      order << 'vocabularies.updated_at DESC'
+      order << 'vocabularies.updated_at DESC' if custom_attribute.blank?
     end
     
     if tag_list.blank?

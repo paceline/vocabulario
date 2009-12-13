@@ -1,6 +1,12 @@
-- regular_list.vocabularies.each do |vocabulary|
-  %li
-    %ul.inline
-      %li= link_to(vocabulary.word, vocabulary_path(vocabulary.permalink))
-      - vocabulary.translations(regular_list.language_to_id).each do |i|
-        %li= i.word
+- if @vocabularies.blank?
+  %li Looks like the list criteria doesn't match any vocabularies.
+  - if current_user == @list.user
+    %li= link_to 'Change this.', edit_list_path(@list.permalink)
+
+- else
+  - @vocabularies.each do |vocabulary|
+    %li
+      %ul.inline
+        %li= link_to(vocabulary.word, vocabulary_path(vocabulary.permalink))
+        - vocabulary.translations(@list.language_to_id).each do |i|
+          %li= i.word

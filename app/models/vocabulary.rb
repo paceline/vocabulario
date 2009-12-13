@@ -62,6 +62,24 @@ class Vocabulary < ActiveRecord::Base
     return latest
   end
   
+  # Adds vocabulary to list
+  def add_to_list(list_id, position = 1)
+    lister = self.vocabulary_lists.build({ :list_id => list_id })
+    if lister.valid? && lister.errors.empty?
+      lister.save
+      lister.insert_at(position)
+      return true
+    end
+    return false
+  end
+  
+  # Removes vocabulary from list
+  def remove_from_list(list_id)
+    list = VocabularyList.find(:first, :conditions => ['list_id = ? AND vocabulary_id = ?', list_id, self.id])
+    list.remove_from_list
+    list.destroy
+  end
+  
   # Retrun TYPES in a user-friendly way
   def self.supported_types
     types = []

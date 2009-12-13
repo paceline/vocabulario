@@ -1,10 +1,18 @@
-- admin_list.vocabularies.each do |vocabulary|
+- @list.vocabularies.each do |vocabulary|
   %li{ :id => "list_item_#{vocabulary.id}", :class => 'item' }
     %ul.inline
-      %li= link_to_remote('X', { :url => unlink_list_path(admin_list, :vocabulary_id => vocabulary.id), :method => :delete }, :class => 'delete')
+      %li{ :id => "link_to_#{vocabulary.id}", :class => 'options_menu' }
+        = link_to_remote 'options &darr;', { :url => show_options_menu_list_path(:id => @list.id, :vocabulary_id => vocabulary.id) }, { :class => 'options_link' }
+        %ul{ :id => "options_for_#{vocabulary.id}", :class => 'list_options', :style => "display: none;" }
       %li= link_to(vocabulary.word, vocabulary_path(vocabulary.permalink))
-      - vocabulary.translations(admin_list.language_to_id).each do |i|
+      - vocabulary.translations(@list.language_to_id).each do |i|
         %li= i.word
-    = drop_receiving_element "list_item_#{vocabulary.id}", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(admin_list), :with => "'vocabulary_id=' + element.id.split('_')[1] + '&insert_after=#{vocabulary.id}'"
+    = drop_receiving_element "list_item_#{vocabulary.id}", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1] + '&insert_after=#{vocabulary.id}'"
 
-= sortable_element 'static_list', :url => reorder_list_path(admin_list), :handle => 'item'
+= sortable_element 'static_list', :url => reorder_list_path(@list), :handle => 'item'
+
+- if @list.vocabularies.blank?
+  %li#dropzone
+    %ul.inline
+      %li Drop vocabularies here to start a list
+  = drop_receiving_element "dropzone", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1]"

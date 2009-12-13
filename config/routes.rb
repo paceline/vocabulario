@@ -28,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :languages, :controller => :vocabularies
   map.resources :lists,
     :collection => { :switch => :get, :live => :get },
-    :member => { :newitem => :post, :print => :get, :reorder => :post, :unlink => :delete },
+    :member => { :newitem => :post, :copy_move => [:put, :post], :show_options_menu => :post, :sort => :post, :print => :get, :reorder => :post, :unlink => :delete },
     :has_many => :scores
   
   map.resources :people, :as => 'pronouns'

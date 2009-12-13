@@ -13,14 +13,14 @@ body {
 a { color: #02B8EA; }
 a:hover { text-decoration: none; }
 
-em {
+em, #order a {
 	color: #FFF;
 	background-color: #02B8EA;
 	font-style: normal;
 	padding: .25em;
 }
-em a { color: #FFF; text-decoration: none; }
-em a:hover { text-decoration: underline; }
+em a, #order a, a.options_link { color: #FFF; text-decoration: none; }
+em a:hover, #order a:hover { text-decoration: underline; }
 
 h1 {
 	color: #02B8EA;
@@ -209,6 +209,26 @@ ul.list li.item { cursor: move; }
 
 .list a.delete { color: #C66; text-decoration: none; }
 
+ul#order { float: right; margin-right: -21px; }
+
+#order a { font-size: .75em; padding: .15em .25em .15em .25em; }
+
+.list li ul.inline li.options_menu { background-color: #444; }
+ 
+a.options_link { color: #FFF; }
+
+ul.list_options {
+  background-color: #02B8EA;
+  font-size: .75em;
+  padding: .5em;
+  position: absolute;
+  z-index: 100;
+}
+
+.list li ul.inline li.options_menu ul.list_options li { background-color: #02B8EA; display: block; }
+
+.list li ul.inline li.options_menu ul.list_options li a { color: #FFF; }
+
 
 /* "Sidebar"
    ========= */
@@ -387,6 +407,8 @@ input[type="submit"] {
 	margin-right: 25px;
 	padding: .5em;
 }
+
+input[type="submit"].reverse { background: #FFF; color: #02B8EA; }
 
 
 /* "Forms" -> "In Place Editor"

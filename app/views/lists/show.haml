@@ -8,32 +8,22 @@
       #search_and_drag{ :style => 'display: none;' }
   =  render :partial => 'list'
   
-      
 - content_for :notice do
   %h1= @list.name
   %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}."
 
+- if @list.dynamic? && !@vocabularies.blank?
+  = render :partial => 'sort_menu'
+
 %p.spacing
   Know them by heart?
-  = link_to('Take a test!', test_path)
+  = link_to('Take a test!', test_path)  
  
 - if @list.static? && signed_in? && current_user == @list.user
-  %ul#static_list.list
-    = render :partial => 'admin_list', :object => @list
-  
-    - if @vocabularies.blank?
-      %li#dropzone
-        %ul.inline
-          %li Drop vocabularies here to start a list
-      = drop_receiving_element "dropzone", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1]"
-  
+  %ul#static_list.list= render :partial => 'admin_list'
+    
 - else
-  - if @vocabularies.blank?
-    %p Looks like you've set your list criteria in a way that it doesn't match any vocabularies.
-
-  - else
-    %ul.list
-      = render :partial => 'regular_list', :object => @list
+  %ul#regular_list.list= render :partial => 'regular_list'
   
 - unless @vocabularies.blank?
   .content

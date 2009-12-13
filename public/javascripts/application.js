@@ -39,6 +39,19 @@ function toggleListItem(dom_id) {
 }
 
 
+// Toggle list item
+
+function toggleListMenu(vocabulary_id) {
+  if ($('options_for_' + vocabulary_id).visible()) {
+		$('link_to_' + vocabulary_id).setStyle({ background: '#444' });
+	}
+	else {
+		$('link_to_' + vocabulary_id).setStyle({ background: '#02B8EA' });
+	}
+	$('options_for_' + vocabulary_id).toggle();
+}
+
+
 // Get selected text
 // Requires ierange to work in IE (http://code.google.com/p/ierange/)
 
