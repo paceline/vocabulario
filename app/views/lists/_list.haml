@@ -6,5 +6,5 @@
       %h1 Your lists
     %p Pick a list:
     %form
-      = select 'your', 'lists', lists_as_options(current_user.lists), :include_blank => true
-      = observe_field(:your_lists, :frequency => 0.5, :function => "window.location = $A($('your_lists').options).find(function(option) { return option.selected; } ).value")
+      = select 'your', 'lists', lists_as_options(current_user.lists), { :include_blank => true }, { :style => 'max-width: 270px;' }
+      = observe_field(:your_lists, :function => "window.location = $A($('your_lists').options).find(function(option) { return option.selected; } ).value")

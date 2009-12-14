@@ -209,7 +209,7 @@ ul.list li.item { cursor: move; }
 
 .list a.delete { color: #C66; text-decoration: none; }
 
-ul#order { float: right; margin-right: -21px; }
+ul#order { float: right; margin-right: -10px; }
 
 #order a { font-size: .75em; padding: .15em .25em .15em .25em; }
 
