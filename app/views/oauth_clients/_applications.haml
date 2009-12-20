@@ -4,5 +4,5 @@
   %ul
     %li= link_to "Your applications", oauth_clients_path
     %li= link_to "New application", new_oauth_client_path
-    - if @client_application
+    - if @client_application && !@client_application.new_record?
       %li= link_to "Edit application", edit_oauth_client_path(@client_application)
