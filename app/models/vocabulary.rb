@@ -151,7 +151,7 @@ class Vocabulary < ActiveRecord::Base
        :id => id,
        :text => "Created the new #{language.word} vocabulary \"#{word}\"",
        :created_at => created_at,
-       :url => "http://#{HOST}/#{permalink}",
+       :url => "http://#{HOST}/vocabularies/#{permalink}",
        :user => user.to_hash
      ]
   end

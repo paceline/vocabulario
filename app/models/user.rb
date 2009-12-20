@@ -41,16 +41,16 @@ class User < ActiveRecord::Base
   end
   
   # Timeline with all actions
-  def timeline(count = 200)
+  def timeline(since = DateTime.now-30)
     timeline = []
     [:lists, :scores, :vocabularies].each do |association|
-      timeline += send(association).send("find", :all, :limit => count, :order => 'created_at DESC').collect { |item| item.updates_for_timeline }
+      timeline += send(association).send("find", :all, :conditions => ['created_at >= ?', since], :order => 'created_at DESC').collect { |item| item.updates_for_timeline }
     end
-    (timeline.sort { |x,y| y[:created_at] <=> x[:created_at] })[0..count-1]
+    timeline.sort { |x,y| y[:created_at] <=> x[:created_at] }
   end
   
   def to_hash
-    { :id => id, :name => name, :email => email, :created_at => created_at, :url => "http://#{HOST}/#{permalink}" }
+    { :id => id, :name => name, :email => email, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" }
   end
   
 end

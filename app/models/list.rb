@@ -68,7 +68,7 @@ class List < ActiveRecord::Base
       :id => id,
       :text => "Created a new vocabulary list \"#{name}\"",
       :created_at => created_at,
-      :url => "http://#{HOST}/#{permalink}",
+      :url => "http://#{HOST}/lists/#{permalink}",
       :user => user.to_hash
     ]
   end
