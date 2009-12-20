@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :scores
   has_many :vocabularies
   has_many :languages
+  has_many :client_applications
+  has_many :tokens, :class_name => "OauthToken", :order => "authorized_at desc", :include => [:client_application]
   
   # Validations
   validates_presence_of :email, :name
@@ -36,6 +38,19 @@ class User < ActiveRecord::Base
   # Statistics - Average score
   def average_score
     return self.scores.average('points / questions * 100')
+  end
+  
+  # Timeline with all actions
+  def timeline(count = 200)
+    timeline = []
+    [:lists, :scores, :vocabularies].each do |association|
+      timeline += send(association).send("find", :all, :limit => count, :order => 'created_at DESC').collect { |item| item.updates_for_timeline }
+    end
+    (timeline.sort { |x,y| y[:created_at] <=> x[:created_at] })[0..count-1]
+  end
+  
+  def to_hash
+    { :id => id, :name => name, :email => email, :created_at => created_at, :url => "http://#{HOST}/#{permalink}" }
   end
   
 end

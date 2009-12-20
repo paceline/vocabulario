@@ -1,7 +1,8 @@
 class UsersController < Clearance::UsersController
   
   # Filters
-  before_filter :users_only, :only => [:show]
+  before_filter :login_required, :only => [:show]
+  before_filter :login_or_oauth_required, :only => [:timeline]
   before_filter :admin_only, :only => [:admin, :destroy]
   
   # Make user an admin (one way only)
@@ -88,6 +89,17 @@ class UsersController < Clearance::UsersController
       end
     else
       redirect_to user_path(@user.permalink)
+    end
+  end
+  
+  # Show updates for current user
+  def timeline
+    user = params.key?(:id) ? User.find(params[:id]) : current_user
+    @timeline = params.key?(:count) ? user.timeline(params[:count].to_i) : user.timeline
+    respond_to do |format|
+      format.atom  { render :layout => false }
+      format.json { render :json => @timeline }
+      format.xml { render :xml => @timeline }
     end
   end
 

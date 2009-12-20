@@ -1,0 +1,40 @@
+- content_for :sidebar do
+  = render :partial => 'applications'
+
+- content_for :notice do
+  %h1 Client applications
+  %p 3rd party apps you gave access to or developed yourself
+
+.content
+  %h2 Users
+  - if @tokens.empty?
+    %p It appears that you haven't authorized any applications.
+  - else
+    %p The following tokens have been issued to applications in your name
+    %table
+      %tr
+        %th Application
+        %th Issued
+        %th Revoke?
+      - @tokens.each do |token|
+        %tr
+          %td= link_to token.client_application.name, token.client_application.url
+          %td= token.authorized_at
+          %td
+            - form_tag :controller => 'oauth', :action => 'revoke' do
+              = hidden_field_tag 'token', token.token
+              = submit_tag "Revoke!"
+
+.content
+  %h2 Developers
+  - if @client_applications.empty?
+    %p Do you have an application you would like to register for use with us using the <a href="http://oauth.net">OAuth</a> standard?
+    %p You must register your web application before it can make OAuth requests to this service
+  - else
+    %p You have the following client applications registered:
+    - @client_applications.each do |client|
+      - div_for client do
+        = link_to client.name, oauth_client_path(client)
+        = '(' + link_to('Edit', edit_oauth_client_path(client)) + ', '
+        = link_to('Delete', oauth_client_path(client), :confirm => "Are you sure?", :method => :delete) + ')'
+ 

@@ -1,0 +1,10 @@
+- content_for :sidebar do
+  = render :partial => '/oauth_clients/applications'
+
+- content_for :notice do
+  %h1 Authorization denied
+  %p
+    = @token.client_application.name
+    has been denied access to your account data
+    
+%h1 You have disallowed this request.

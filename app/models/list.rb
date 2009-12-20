@@ -61,5 +61,16 @@ class List < ActiveRecord::Base
     end
     return new_list
   end
+  
+  # Return updates for timline
+  def updates_for_timeline
+    Status[
+      :id => id,
+      :text => "Created a new vocabulary list \"#{name}\"",
+      :created_at => created_at,
+      :url => "http://#{HOST}/#{permalink}",
+      :user => user.to_hash
+    ]
+  end
 
 end

@@ -19,6 +19,13 @@ ActionController::Routing::Routes.draw do |map|
   map.vocabularies_by_language '/vocabularies/by_language/:id', :controller => 'search', :action => 'by_language'
   map.vocabularies_by_user '/vocabularies/by_user/:id', :controller => 'search', :action => 'by_user'
   
+  # Oauth
+  map.test_request '/oauth/test_request', :controller => 'oauth', :action => 'test_request'
+  map.access_token '/oauth/access_token', :controller => 'oauth', :action => 'access_token'
+  map.request_token '/oauth/request_token', :controller => 'oauth', :action => 'request_token'
+  map.authorize '/oauth/authorize', :controller => 'oauth', :action => 'authorize'
+  map.oauth '/oauth', :controller => 'oauth', :action => 'index'
+  
   
   # Resources
   # =========
@@ -30,13 +37,14 @@ ActionController::Routing::Routes.draw do |map|
     :collection => { :switch => :get, :live => :get },
     :member => { :newitem => :post, :copy_move => [:put, :post], :show_options_menu => :post, :sort => :post, :print => :get, :reorder => :post, :unlink => :delete },
     :has_many => :scores
-  
+    
+  map.resources :oauth_clients
   map.resources :people, :as => 'pronouns'
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resources :scores, :collection => { :change_test_type => :get, :update_languages => :get, :update_tags => :get, :direction_for_list => :get }
   map.resources :statistics
   map.resources :transformations, :member => { :reorder => :post }
-  map.resources :users, :member => { :admin => :put, :password => :put, :statistics => [:get, :post] }, :has_many => [:scores, :lists]
+  map.resources :users, :collection => { :timeline => :get }, :member => { :admin => :put, :password => :put, :statistics => [:get, :post], :timeline => :get }, :has_many => [:scores, :lists]
   
   map.resources :vocabularies,
     :member => { :apply_conjugation => :put, :unapply_conjugation => :delete, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },

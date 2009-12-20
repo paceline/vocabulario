@@ -15,11 +15,21 @@ class ApplicationController < ActionController::Base
   # Security Features - Admin check
   helper_method :signed_in_as_admin?
   
+  # Ensure compatability with OAuth
+  def authorized?
+    true
+  end
+  
+  # Ensure compatability with OAuth
+  def current_user
+    @current_user ||= user_from_cookie
+  end
+  
   def signed_in_as_admin?
     signed_in? && current_user.admin?
   end
   
-  def users_only
+  def login_required
     deny_access("Please Login or Create an Account to Access that Feature.") unless signed_in?
   end
 

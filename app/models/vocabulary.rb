@@ -145,6 +145,17 @@ class Vocabulary < ActiveRecord::Base
     return to ? translations.delete_if {|t| t.language_id != to} : translations
   end
   
+  # Return updates for timline
+  def updates_for_timeline
+     Status[
+       :id => id,
+       :text => "Created the new #{language.word} vocabulary \"#{word}\"",
+       :created_at => created_at,
+       :url => "http://#{HOST}/#{permalink}",
+       :user => user.to_hash
+     ]
+  end
+  
   protected
     def all_translations(word = self, translations = [])
       new_translations = word.translation_to.find(:all, :conditions => ['language_id != ?', self.language_id]) + word.translation_from.find(:all, :conditions => ['language_id != ?', self.language_id])

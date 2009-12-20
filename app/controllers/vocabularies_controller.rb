@@ -1,7 +1,7 @@
 class VocabulariesController < ApplicationController
   
   # Filters
-  before_filter :users_only, :except => [:index, :latest, :refresh_language, :select, :show, :tags_for_language]
+  before_filter :login_required, :except => [:index, :latest, :refresh_language, :select, :show, :tags_for_language]
   before_filter :admin_only, :only => [:apply_conjugation, :apply_tags, :apply_type, :create, :destroy, :edit, :import, :new, :unapply_conjugation, :unlink]
   
   # Features
