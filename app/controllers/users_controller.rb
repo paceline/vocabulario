@@ -95,7 +95,7 @@ class UsersController < Clearance::UsersController
   # Show updates for current user
   def timeline
     user = params.key?(:id) ? User.find(params[:id]) : current_user
-    @timeline = params.key?(:since) ? user.timeline(DateTime.parse(params[:since])) : user.timeline
+    @timeline = params.key?(:since) ? user.timeline(Time.at(params[:since].to_f)) : user.timeline
     respond_to do |format|
       format.atom  { render :layout => false }
       format.json { render :json => @timeline }
