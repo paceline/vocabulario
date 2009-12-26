@@ -78,7 +78,7 @@ class UsersController < Clearance::UsersController
   #   /users/current.xml|json (Oauth required)
   def current
     respond_to do |format|
-      format.json { render :json => curren_user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
+      format.json { render :json => current_user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
       format.xml { render :xml => current_user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
     end
   end
