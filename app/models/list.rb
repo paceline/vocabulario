@@ -66,7 +66,7 @@ class List < ActiveRecord::Base
   def updates_for_timeline
     Status[
       :id => id,
-      :text => "Created a new vocabulary list \"#{name}\"",
+      :text => "created a new vocabulary list \"#{name}\"",
       :created_at => created_at,
       :url => "http://#{HOST}/lists/#{permalink}",
       :user => user.to_hash

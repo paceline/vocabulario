@@ -32,7 +32,18 @@ module VocabulariesHelper
     end
     grouped_options[0][1] << ['New vocabulary', new_vocabulary_path]
     grouped_options[0][1] << ['Import vocabularies', import_vocabularies_path]
-    
+    grouped_options_for_select(grouped_options)
+  end
+  
+  def user_options(vocabulary = nil)
+    grouped_options = [['Add',[]]]
+    if vocabulary && !vocabulary.new_record?
+      grouped_options[0][1] << ['New translation', edit_vocabulary_path(vocabulary.permalink)]
+      grouped_options << ['Copy', [['Apply tags to translations', apply_tags_vocabulary_path(vocabulary)], ['Apply type to translations',apply_type_vocabulary_path(vocabulary)]]]
+      grouped_options << ['Delete', [['Delete vocabulary',vocabulary_path(vocabulary)]]]
+    end
+    grouped_options[0][1] << ['New vocabulary', new_vocabulary_path]
+    grouped_options[0][1] << ['Import vocabularies', import_vocabularies_path]
     grouped_options_for_select(grouped_options)
   end
 

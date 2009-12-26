@@ -1,13 +1,13 @@
 class ListsController < ApplicationController
   
   # Filters
+  before_filter :browser_required, :except => [:index, :show]
   before_filter :login_required, :except => [:index, :print, :show, :sort]
   
   # Creates a new list
   def create
     type = params[:list].delete(:type) == 'true' ? 'DynamicList' : 'StaticList'
     tag_names = params[:list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ') unless params[:list][:tag_ids].blank?
-    
     @list = Object.const_get(type).new(params[:list])
     @list.user = current_user
     @list.tag_list = tag_names unless params[:list][:tag_ids].blank?
@@ -30,15 +30,24 @@ class ListsController < ApplicationController
   # Edit list
   def edit
     begin
-      @list = List.find_by_permalink(params[:id])
+      @list = List.find_by_id_or_permalink(params[:id])
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     end
   end
   
   # List all list (dynamic and static)
+  #
+  # API information - 
+  #   /lists.xml|json (No oauth required)
+  #   /users/#{id|permalink}/lists.xml|json (Oauth required)
   def index
-    redirect_to community_path
+    @lists = params.key?(:user_id) && current_user && (params[:user_id].to_i == current_user.id || params[:user_id] == current_user.permalink) ? current_user.lists : List.find_public(current_user)
+    respond_to do |format|
+      format.html { redirect_to community_path }
+      format.json { render :json => current_user ? @lists.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user]) : @lists.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => [:language_from, :language_to]) }
+      format.xml { render :xml => current_user ? @lists.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user]) : @lists.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => [:language_from, :language_to]) }
+    end
   end
   
   # Add a new list
@@ -87,7 +96,7 @@ class ListsController < ApplicationController
   # Render show view for printing
   def print
    begin
-      @list = List.find_by_permalink(params[:id])
+      @list = List.find_by_id_or_permalink(params[:id])
       if @list.public || @list.user == current_user
         @vocabularies = @list.vocabularies
         render :layout => 'print'
@@ -110,19 +119,25 @@ class ListsController < ApplicationController
   end
   
   # Shows list
+  #
+  # API information - 
+  #   /lists/#{id|permalink}.xml|json (No oauth required, if public)
   def show
     begin
-      @list = List.find_by_permalink(params[:id])
+      @list = List.find_by_id_or_permalink(params[:id])
       if @list.public || @list.user == current_user
         @vocabularies = @list.vocabularies
         respond_to do |format|
           format.html
           format.atom { render :layout => false }
-          format.json { render :json => @vocabularies.to_json(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_to ]) }
-          format.xml { render :xml => @vocabularies.to_xml(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_to ]) }
+          format.json { render :json => current_user ? @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies]) : @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies]) }
+          format.xml { render :xml => current_user ? @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies]) : @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies]) }
         end
       else
-        redirect_to '/login'
+        respond_to do |format|
+          format.html || format.atom { redirect_to '/login' }
+          format.json || format.xml { render :nothing => true, :status => 401 }
+        end
       end
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
@@ -150,7 +165,7 @@ class ListsController < ApplicationController
   
   # Update vocabulary list
   def update
-    @list = List.find_by_permalink(params[:id])
+    @list = List.find_by_id_or_permalink(params[:id])
 
     if @list.static?
       @list.update_attributes(params[:static_list])

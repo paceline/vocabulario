@@ -1,6 +1,6 @@
 atom_feed do |feed|
-  feed.title "#{@timeline.first[:user][:name]}'s recent activity"
-  feed.subtitle "#{@timeline.first[:user][:name]}'s recent activity on Vocabulario"
+  feed.title "Recent activity"
+  feed.subtitle "Recent activity on Vocabulario"
   feed.updated @timeline.first[:created_at]
  
   for item in @timeline

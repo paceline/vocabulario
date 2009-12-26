@@ -1,0 +1,17 @@
+- content_for :notice do
+  %h1 Welcome to Vocabulario
+  %p A very lo-fi vocabulary trainer I more or less wrote for personal use only
+
+- content_for :sidebar do
+  #list_stuff= render :partial => 'lists/list' if signed_in?
+
+%ul#latest.list
+  - @timeline.each do |status|
+    %li
+      %ul.inline
+        %li.highlight= "#{distance_of_time_in_words(status[:created_at], Time.now).capitalize} ago"
+        %li
+          = link_to(status[:user][:name], status[:user][:url])
+          = status[:text]
+        - if status.key?(:url)
+          %li= link_to('More', status[:url])

@@ -1,5 +1,8 @@
 class SearchController < ApplicationController
 
+  # Filters
+  before_filter :browser_required, :only => [:live]
+  
   # Live search of the vocabularies database
   def live
     @search = params[:word]
@@ -12,52 +15,76 @@ class SearchController < ApplicationController
   end
   
   # Display paged list of vocabularies with correspoding language
+  #
+  # API information - 
+  #   /vocabularies/by_language/#{id|permalink}.xml|json (No oauth required)
   def by_language
     begin
-      @language = Vocabulary.find_by_permalink(params[:id])
+      @language = Vocabulary.find_by_id_or_permalink(params[:id])
       @vocabularies = Vocabulary.paginate_by_language_id @language.id, :page => params[:page], :order => 'word'
-      render 'vocabularies/index'
+      respond
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     end
   end
   
   # Display paged list of vocabularies with correspoding tag
+  #
+  # API information - 
+  #   /vocabularies/by_tag/#{permalink}.xml|json (No oauth required)
   def by_tag
     begin
       if params[:id] == 'untagged'
         @tag = 'Untagged'
         @vocabularies = Vocabulary.paginate :all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :group => 'vocabularies.id', :having => 'COUNT(taggings.id) = 0', :page => params[:page], :order => 'word'
       else
-        @tag = Tag.find_by_permalink(params[:id])
+        @tag = Tag.find_by_id_or_permalink(params[:id])
         @vocabularies = Vocabulary.paginate :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :page => params[:page], :order => 'word'
       end
-      render 'vocabularies/index'
+      respond
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     end
   end
   
   # Display paged list of vocabularies with correspoding tag
+  #
+  # API information - 
+  #   /vocabularies/by_type/#{type}.xml|json (No oauth required)
   def by_type
     begin
       conditions = params[:id] == "other" ? "type IS NULL" : "type = '#{params[:id]}'"
       @vocabularies = Vocabulary.paginate :all, :conditions => conditions, :page => params[:page], :order => 'word'
-      render 'vocabularies/index'
+      respond
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     end
   end
   
   # Display paged list of vocabularies with correspoding tag
+  #
+  # API information - 
+  #   /vocabularies/by_user/#{id|permalink}.xml|json (No oauth required)
   def by_user
     begin
-      @user = User.find_by_permalink(params[:id])
+      @user = User.find_by_id_or_permalink(params[:id])
       @vocabularies = Vocabulary.paginate_by_user_id @user.id, :page => params[:page], :order => 'word'
-      render 'vocabularies/index'
-      rescue
-        render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-      end
+      respond
+    rescue
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
   end
+  
+  
+  private
+    
+    # Render is identical for all actions
+    def respond
+      respond_to do |format|
+        format.html { render 'vocabularies/index' }
+        format.json { render :json => @vocabularies.to_json(:except => [:user_id, :language_id], :include => [:language, :translation_from, :translation_to]) }
+        format.xml { render :xml => @vocabularies.to_xml(:except => [:user_id, :language_id], :include => [:language, :translation_from, :translation_to]) }
+      end
+    end
   
 end

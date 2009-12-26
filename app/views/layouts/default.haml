@@ -4,12 +4,10 @@
     %title VOCABULARIO - A simple, non-social vocabulary trainer
     - if @current_controller == 'lists' && @current_action == 'show'
       %link{ :href => list_path(@list.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
-    - if @current_controller == 'vocabularies' && @current_action == 'latest'
-      %link{ :href => latest_vocabularies_path(:format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
-    - if @current_controller == 'users' && @current_action == 'edit'
-      %link{ :href => timeline_users_path(:format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
-    - if @current_controller == 'users' && @current_action == 'show'
-      %link{ :href => timeline_user_path(@user, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+    - if @current_controller == 'status' && @current_action == 'index'
+      %link{ :href => timeline_path(:format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+    - if @current_controller == 'users' && (@current_action == 'edit' || @current_action == 'show')
+      %link{ :href => user_timeline_path(@user.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
     = javascript_include_tag :defaults
     = javascript_include_tag 'ierange-m2.js' if @current_controller == 'vocabularies' && @current_action == 'show'
     = javascript_include_tag "/vocabularies.js?language=#{@translation.language.id}" if @translation

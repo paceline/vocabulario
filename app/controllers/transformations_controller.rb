@@ -4,7 +4,7 @@ class TransformationsController < ApplicationController
   layout nil
   
   # Filters
-  before_filter :admin_only
+  before_filter :login_required
   
   # Creates new transformation
   def create

@@ -14,3 +14,13 @@ class Array
   end
   
 end
+
+
+class ActiveRecord::Base
+  
+  # Find object by id or permalink
+  def self.find_by_id_or_permalink(id)
+    id.to_i == 0 ? find_by_permalink(id) : find(id)
+  end
+  
+end

@@ -1,9 +1,10 @@
 class UsersController < Clearance::UsersController
   
   # Filters
-  before_filter :login_required, :only => [:show]
-  before_filter :login_or_oauth_required, :only => [:timeline]
-  before_filter :admin_only, :only => [:admin, :destroy]
+  before_filter :browser_required, :except => [:index, :show, :statistics]
+  before_filter :login_required, :except => [:create, :index, :new]
+  before_filter :web_service_authorization_required, :only => [:index, :show]
+  before_filter :admin_required, :only => [:admin, :destroy]
   
   # Make user an admin (one way only)
   def admin
@@ -23,14 +24,22 @@ class UsersController < Clearance::UsersController
   
   # Edit user profile
   def edit
-    @user = User.find_by_permalink(params[:id])
-    redirect_to user_path(@user.permalink) unless current_user == @user
+    @user = current_user.admin ? User.find_by_id_or_permalink(params[:id]) : current_user
+    redirect_to user_path(@user.permalink) unless current_user == @user || current_user.admin
   end
   
   # List users
+  #
+  # API information - 
+  #   /users.xml|json (Oauth required)
   def index
     @users = User.find(:all, :order => 'name')
     @lists = List.find_public(current_user)
+    respond_to do |format|
+      format.html
+      format.json { render :json => @users.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
+      format.xml { render :xml => @users.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
+    end
   end
   
   # FIX ME - copy/paste from clearance until I can find the routing error
@@ -47,9 +56,17 @@ class UsersController < Clearance::UsersController
   end
 
   # Show user profile and stats
+  #
+  # API information - 
+  #   /users/#{id|permalink}.xml|json (Oauth required)
   def show
     begin
-      @user = User.find_by_permalink(params[:id])
+      @user = User.find_by_id_or_permalink(params[:id])
+      respond_to do |format|
+        format.html
+        format.json { render :json => current_user == @user || current_user.admin ? @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt]) : @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
+        format.xml { render :xml => current_user == @user || current_user.admin ? @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt]) : @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
+      end
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     end
@@ -58,12 +75,12 @@ class UsersController < Clearance::UsersController
   # Statistics page
   # FIX ME - There's probably a better way to do this - i.e. this needs to be cleaned up
   def statistics
-    @user = User.find_by_permalink(params[:id])
+    @user = User.find_by_id_or_permalink(params[:id])
     if current_user == @user
       @tags = Score.tag_counts(:conditions => ["scores.user_id = ?", @user.id])
     
       if !params[:tag].blank?
-        @tag = Tag.find_by_permalink(params[:tag])
+        @tag = Tag.find_by_id_or_permalink(params[:tag])
         @page = params[:page].to_i == 0 ? Score.last_page_number(['user_id = ? AND taggings.tag_id = ?', @user.id, @tag.id], [ :taggings ]) : params[:page]
         @scores = Score.paginate_by_user_id @user.id, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :page => @page, :per_page => 25
       elsif !params[:type].blank?
@@ -92,20 +109,9 @@ class UsersController < Clearance::UsersController
     end
   end
   
-  # Show updates for current user
-  def timeline
-    user = params.key?(:id) ? User.find(params[:id]) : current_user
-    @timeline = params.key?(:since) ? user.timeline(Time.at(params[:since].to_f)) : user.timeline
-    respond_to do |format|
-      format.atom  { render :layout => false }
-      format.json { render :json => @timeline }
-      format.xml { render :xml => @timeline }
-    end
-  end
-
   # Update user profile
   def update
-    @user = User.find_by_permalink(params[:id])
+    @user = User.find_by_id_or_permalink(params[:id])
     redirect_to user_path(@user.permalink) unless current_user == @user
     begin
       @user.update_attributes!(params[:user])

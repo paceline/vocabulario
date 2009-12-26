@@ -1,7 +1,7 @@
 class ConjugationTimesController < ApplicationController
   
   # Filters
-  before_filter :admin_only, :except => [:index, :show]
+  before_filter :admin_required
   
   # Features
   in_place_edit_for :conjugation_time, :name

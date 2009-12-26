@@ -1,8 +1,9 @@
 class VocabulariesController < ApplicationController
   
   # Filters
-  before_filter :login_required, :except => [:index, :latest, :refresh_language, :select, :show, :tags_for_language]
-  before_filter :admin_only, :only => [:apply_conjugation, :apply_tags, :apply_type, :create, :destroy, :edit, :import, :new, :unapply_conjugation, :unlink]
+  before_filter :browser_required, :except => [:index, :show]
+  before_filter :login_required, :except => [:index, :refresh_language, :select, :show]
+  before_filter :admin_required, :only => [:destroy]
   
   # Features
   in_place_edit_for :vocabulary, :word
@@ -75,7 +76,7 @@ class VocabulariesController < ApplicationController
   
   # Add translation form
   def edit
-    @translation = Vocabulary.find_by_permalink(params[:id])
+    @translation = Vocabulary.find_by_id_or_permalink(params[:id])
   end
   
   # Delete vocabulary, including translation links
@@ -87,6 +88,9 @@ class VocabulariesController < ApplicationController
   end
   
   # Display paged list of vocabularies (html) / javascript array of vocabularies for input field suggestions (js)
+  #
+  # API information - 
+  #   /vocabularies.xml|json (No Oauth required)
   def index
     @vocabularies_list = params[:language] ? Vocabulary.find(:all, :order => 'word', :conditions => ['language_id != ?',params[:language]]) : Vocabulary.find(:all, :order => 'word')
     @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => 150
@@ -105,8 +109,8 @@ class VocabulariesController < ApplicationController
           end
         end
       }
-      format.json { render :json => @vocabularies_list.to_json(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_to ]) }
-      format.xml { render :xml => @vocabularies_list.to_xml(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_to ]) }
+      format.json { render :json => @vocabularies_list.to_json(:except => [:user_id, :language_id], :include => [ :language, :translation_to ]) }
+      format.xml { render :xml => @vocabularies_list.to_xml(:except => [:user_id, :language_id], :include => [ :language, :translation_to ]) }
     end
   end
   
@@ -139,15 +143,6 @@ class VocabulariesController < ApplicationController
     end
   end
   
-  # List latest vocabularies
-  def latest
-    @latest = Vocabulary.latest
-    respond_to do |format|
-      format.html
-      format.atom { render :layout => false }
-    end
-  end
-  
   # Make sure that language matches text entered on edit page
   def refresh_language
     @vocabulary = Vocabulary.find_by_word(params[:word])
@@ -162,9 +157,12 @@ class VocabulariesController < ApplicationController
   end
   
   # Display vocabulary attributes
+  #
+  # API information - 
+  #   /vocabularies/#{id|permalink}.xml|json (No Oauth required)
   def show
     begin
-      @vocabulary = Vocabulary.find_by_permalink(params[:id])
+      @vocabulary = Vocabulary.find_by_id_or_permalink(params[:id])
       @language = @vocabulary.language
       if @vocabulary.verb?
         @conjugations = @vocabulary.conjugations
@@ -181,8 +179,8 @@ class VocabulariesController < ApplicationController
             page.replace_html 'vocabulary_pane', render(:partial => params[:menu])
           end
         }
-        format.json { render :json => @vocabulary.to_json(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_from, :translation_to ]) }
-        format.xml { render :xml => @vocabulary.to_xml(:except => [ :user_id, :language_id, :permalink, :created_at, :updated_at ], :include => [ :language, :translation_from, :translation_to ]) }
+        format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }
+        format.xml { render :xml => @vocabulary.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }
       end
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404

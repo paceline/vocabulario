@@ -43,25 +43,6 @@ class Vocabulary < ActiveRecord::Base
   end
   identify_methods_for_subclasses
   
-  # Get latest vocabularies
-  def self.latest(limit = 15)
-    latest = taken = []
-    j = i = 0
-    
-    while i < limit do
-      vocabulary = find(:first, :offset => i+j, :order => 'updated_at DESC')
-      if taken.include?(vocabulary)
-        j += 1
-      else
-        latest << vocabulary
-        taken = (taken + [vocabulary] + vocabulary.translations).uniq
-        i += 1
-      end
-    end
-    
-    return latest
-  end
-  
   # Adds vocabulary to list
   def add_to_list(list_id, position = 1)
     lister = self.vocabulary_lists.build({ :list_id => list_id })
@@ -149,7 +130,7 @@ class Vocabulary < ActiveRecord::Base
   def updates_for_timeline
      Status[
        :id => id,
-       :text => "Created the new #{language.word} vocabulary \"#{word}\"",
+       :text => "created the new #{language.word} vocabulary \"#{word}\"",
        :created_at => created_at,
        :url => "http://#{HOST}/vocabularies/#{permalink}",
        :user => user.to_hash

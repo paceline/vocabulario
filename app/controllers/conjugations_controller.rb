@@ -1,7 +1,7 @@
 class ConjugationsController < ApplicationController
    
   # Filters
-  before_filter :admin_only, :except => [:show] 
+  before_filter :admin_required
    
   # Features
   in_place_edit_for :conjugation, :name
@@ -42,7 +42,7 @@ class ConjugationsController < ApplicationController
     @conjugation = Conjugation.new
     @path = conjugations_path
     if params[:vocabulary_id]
-      @vocabulary = Vocabulary.find_by_permalink(params[:vocabulary_id])
+      @vocabulary = Vocabulary.find_by_id_or_permalink(params[:vocabulary_id])
       @path = vocabulary_conjugations_path(@vocabulary)
     end
   end

@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
   validates_length_of :name, :within => 1..100
   validates_uniqueness_of :name
   
-  # Statistics - Numer of tests taken
-  def number_of_tests(percentile = 0)
-    return scores.count({ :conditions => ['points/questions >= ?',percentile] })
+  # Statistics - Average score
+  def average_score
+    return self.scores.average('points / questions * 100')
   end
   
   # Statistics - Contributor rank
@@ -29,28 +29,20 @@ class User < ActiveRecord::Base
     return top_list.index(self) + 1
   end
   
+  # Statistics - Numer of tests taken
+  def number_of_tests(percentile = 0)
+    return scores.count({ :conditions => ['points/questions >= ?',percentile] })
+  end
+  
   # Statistics - Score rank
   def score_rank
     top_list = User.find(:all, :include => 'scores', :group => 'users.id', :order => 'AVG(scores.points / scores.questions * 100) DESC')
     return top_list.index(self) + 1
   end
   
-  # Statistics - Average score
-  def average_score
-    return self.scores.average('points / questions * 100')
-  end
-  
-  # Timeline with all actions
-  def timeline(since = DateTime.now-30)
-    timeline = []
-    [:lists, :scores, :vocabularies].each do |association|
-      timeline += send(association).send("find", :all, :conditions => ['created_at >= ?', since], :order => 'created_at DESC').collect { |item| item.updates_for_timeline }
-    end
-    timeline.sort { |x,y| y[:created_at] <=> x[:created_at] }
-  end
-  
-  def to_hash
-    { :id => id, :name => name, :email => email, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" }
+  # Export as hash
+  def to_hash(admin = false)
+    admin ? { :id => id, :name => name, :email => email, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" } : { :id => id, :name => name, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" }
   end
   
 end

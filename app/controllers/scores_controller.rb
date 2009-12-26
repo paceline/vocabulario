@@ -1,5 +1,8 @@
 class ScoresController < ApplicationController
   
+  # Filters
+  before_filter :browser_required, :except => [:index]
+  
   # Open up a new language test
   def new
     @score = Score.new
@@ -23,9 +26,17 @@ class ScoresController < ApplicationController
     end
   end
   
-  # Return top scores
+  # Return the ten top scores
+  #
+  # API information - 
+  #   /scores.xml|json (No oauth required)
   def index
     @scores = Score.top_percentage(10)
+    respond_to do |format|
+      format.html
+      format.json { render :json => current_user ? @scores.to_json(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user]) : @scores.to_json(:except => [:language_from_id, :language_to_id, :user_id], :include => [:language_from, :language_to]) }
+      format.xml { render :xml => current_user ? @scores.to_xml(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user]) : @scores.to_xml(:except => [:language_from_id, :language_to_id, :user_id], :include => [:language_from, :language_to]) }
+    end
   end
   
   # Create a new vocabulary test (on "Let's go")

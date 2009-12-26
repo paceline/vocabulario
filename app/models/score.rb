@@ -45,7 +45,7 @@ class Score < ActiveRecord::Base
   def updates_for_timeline
     Status[
       :id => id,
-      :text => "Got #{ratio}% on a #{questions} question #{language_from.word} to #{language_to.word} test",
+      :text => "got #{ratio}% right on a #{questions} question #{language_from.word} to #{language_to.word} test",
       :created_at => created_at,
       :user => user.to_hash
     ]
