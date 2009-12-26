@@ -2,7 +2,6 @@ class StatusController < ApplicationController
   
   # Filters
   before_filter :web_service_authorization_required
-  before_filter :login_or_oauth_required, :only => [:user_timeline]
   
   # Gather status updates
   #

@@ -54,8 +54,6 @@ class ApplicationController < ActionController::Base
     end
     
     def web_service_authorization_required
-      if !current_user
-        render :file => "#{RAILS_ROOT}/public/401.html", :status => 401 if ['json','xml'].include?(params[:format]) 
-      end
+      login_or_oauth_required if ['json','xml'].include?(params[:format])
     end
 end
