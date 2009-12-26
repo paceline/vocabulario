@@ -47,7 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resources :scores, :collection => { :change_test_type => :get, :update_languages => :get, :update_tags => :get, :direction_for_list => :get }
   map.resources :statistics
-  map.resources :status
+  map.resources :status, :collection => { :user_timeline => :get }
   map.resources :transformations, :member => { :reorder => :post }
   map.resources :users,
     :collection => { :timeline => :get },
