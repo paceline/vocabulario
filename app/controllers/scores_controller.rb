@@ -2,6 +2,7 @@ class ScoresController < ApplicationController
   
   # Filters
   before_filter :browser_required, :except => [:index]
+  before_filter :web_service_authorization_required, :only => [:index]
   
   # Open up a new language test
   def new
@@ -34,8 +35,8 @@ class ScoresController < ApplicationController
     @scores = Score.top_percentage(10)
     respond_to do |format|
       format.html
-      format.json { render :json => current_user ? @scores.to_json(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user]) : @scores.to_json(:except => [:language_from_id, :language_to_id, :user_id], :include => [:language_from, :language_to]) }
-      format.xml { render :xml => current_user ? @scores.to_xml(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user]) : @scores.to_xml(:except => [:language_from_id, :language_to_id, :user_id], :include => [:language_from, :language_to]) }
+      format.json { render :json => @scores.to_json(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user])) }
+      format.xml { render :xml => @scores.to_xml(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user])) }
     end
   end
   

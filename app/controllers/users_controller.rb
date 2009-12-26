@@ -2,8 +2,8 @@ class UsersController < Clearance::UsersController
   
   # Filters
   before_filter :browser_required, :except => [:index, :show, :statistics]
-  before_filter :login_required, :except => [:create, :index, :new]
   before_filter :web_service_authorization_required, :only => [:index, :show]
+  before_filter :login_required, :except => [:create, :index, :new]
   before_filter :admin_required, :only => [:admin, :destroy]
   
   # Make user an admin (one way only)
