@@ -50,7 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :status, :collection => { :user_timeline => :get }
   map.resources :transformations, :member => { :reorder => :post }
   map.resources :users,
-    :collection => { :timeline => :get },
+    :collection => { :current => :get },
     :member => { :admin => :put, :password => :put, :statistics => [:get, :post] },
     :has_many => [:scores, :lists, :status]
   

@@ -34,6 +34,11 @@ class User < ActiveRecord::Base
     return scores.count({ :conditions => ['points/questions >= ?',percentile] })
   end
   
+  # Returns profile url
+  def profile_url
+    "http://#{HOST}/users/#{permalink}"
+  end
+  
   # Statistics - Score rank
   def score_rank
     top_list = User.find(:all, :include => 'scores', :group => 'users.id', :order => 'AVG(scores.points / scores.questions * 100) DESC')
@@ -42,7 +47,7 @@ class User < ActiveRecord::Base
   
   # Export as hash
   def to_hash(admin = false)
-    admin ? { :id => id, :name => name, :email => email, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" } : { :id => id, :name => name, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" }
+    admin ? { :id => id, :name => name, :email => email, :created_at => created_at, :url => profile_url } : { :id => id, :name => name, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" }
   end
   
 end

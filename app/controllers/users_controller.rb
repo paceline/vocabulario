@@ -1,8 +1,8 @@
 class UsersController < Clearance::UsersController
   
   # Filters
-  before_filter :browser_required, :except => [:index, :show, :statistics]
-  before_filter :web_service_authorization_required, :only => [:index, :show]
+  before_filter :browser_required, :except => [:current, :index, :show, :statistics]
+  before_filter :web_service_authorization_required, :only => [:current, :index, :show]
   before_filter :login_required, :except => [:create, :index, :new]
   before_filter :admin_required, :only => [:admin, :destroy]
   
@@ -64,11 +64,22 @@ class UsersController < Clearance::UsersController
       @user = User.find_by_id_or_permalink(params[:id])
       respond_to do |format|
         format.html
-        format.json { render :json => current_user == @user || current_user.admin ? @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt]) : @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
-        format.xml { render :xml => current_user == @user || current_user.admin ? @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt]) : @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
+        format.json { render :json => current_user == @user || current_user.admin ? @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) : @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
+        format.xml { render :xml => current_user == @user || current_user.admin ? @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) : @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
       end
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
+  end
+  
+  # Show user profile and stats
+  #
+  # API information - 
+  #   /users/current.xml|json (Oauth required)
+  def current
+    respond_to do |format|
+      format.json { render :json => curren_user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
+      format.xml { render :xml => current_user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
     end
   end
   
