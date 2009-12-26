@@ -35,8 +35,8 @@ class ScoresController < ApplicationController
     @scores = Score.top_percentage(10)
     respond_to do |format|
       format.html
-      format.json { render :json => @scores.to_json(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user])) }
-      format.xml { render :xml => @scores.to_xml(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user])) }
+      format.json { render :json => @scores.to_json(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user]) }
+      format.xml { render :xml => @scores.to_xml(:except => [:language_from_id, :language_to_id, :user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :include => [:language_from, :language_to, :user]) }
     end
   end
   
