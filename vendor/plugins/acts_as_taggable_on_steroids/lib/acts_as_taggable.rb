@@ -61,6 +61,7 @@ module ActiveRecord #:nodoc:
         #   :exclude - Find models that are not tagged with the given tags
         #   :match_all - Find models that match all of the given tags, not just one
         #   :conditions - A piece of SQL conditions to add to the query
+        #   :joins - Other models to join in
         def find_tagged_with(*args)
           options = find_options_for_find_tagged_with(*args)
           options.blank? ? [] : find(:all, options)
@@ -99,10 +100,11 @@ module ActiveRecord #:nodoc:
               conditions << tags_condition(tags, tags_alias)
             end
           end
+          joins = options.key?(:joins) ? " #{options.delete(:joins)}" : ""
           
           { :select => "DISTINCT #{table_name}.*",
             :joins => "INNER JOIN #{Tagging.table_name} #{taggings_alias} ON #{taggings_alias}.taggable_id = #{table_name}.#{primary_key} AND #{taggings_alias}.taggable_type = #{quote_value(base_class.name)} " +
-                      "INNER JOIN #{Tag.table_name} #{tags_alias} ON #{tags_alias}.id = #{taggings_alias}.tag_id",
+                      "INNER JOIN #{Tag.table_name} #{tags_alias} ON #{tags_alias}.id = #{taggings_alias}.tag_id#{joins}",
             :conditions => conditions.join(" AND "),
             :order => order
           }.reverse_merge!(options)

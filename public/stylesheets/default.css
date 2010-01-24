@@ -290,6 +290,10 @@ ul.list_options {
 
 /* "Forms"
    ======= */
+   
+#test_direction { font-size: .9em; }
+
+#test_direction li { margin: 0 0 10px 0; padding: 0; }
 
 label {
 	display:block;
@@ -302,7 +306,7 @@ fieldset { border: none; padding: 0; margin: 0; }
 
 fieldset ol { font-size: 1.1em; }
 
-fieldset ol li { margin: 25px 0 25px 0; }
+fieldset ol li { margin: 10px 0 25px 0; }
 
 fieldset.buttons ol { list-style: none; }
 

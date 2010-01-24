@@ -113,7 +113,7 @@ class ScoresController < ApplicationController
     @tags = @language_from.tags_for_language & @language_to.tags_for_language
     render :update do |page|
       page.replace_html 'test_to', options_for_select(@languages.collect {|p| [p.word, p.id ] }, @language_to.id)
-      page.replace_html 'test_tags', options_for_select(@tags.collect {|t| [t.name, t.id ] })
+      page.replace_html 'test_tags', options_for_select(@tags.collect {|t| t.name })
     end
   end
   
@@ -122,7 +122,7 @@ class ScoresController < ApplicationController
     @language_from = params.key?(:conjugation_time_id) ? ConjugationTime.find(params[:conjugation_time_id]).language : Vocabulary.find(params[:language_from_id])
     @language_to = Vocabulary.find(params[:language_to_id]) unless params.key?(:conjugation_time_id)
     @tags = params.key?(:conjugation_time_id) ? @language_from.tags_for_language : @language_from.tags_for_language & @language_to.tags_for_language
-    render(:update) { |page| page.replace_html 'test_tags', options_for_select(@tags.collect {|t| [t.name, t.id ] }) }
+    render(:update) { |page| page.replace_html 'test_tags', options_for_select(@tags.collect {|t| t.name }) }
   end
   
   # /scores/new support: Update directions based on list selected

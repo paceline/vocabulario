@@ -26,8 +26,8 @@ class VocabularyTest < LanguageTest
       @to = Vocabulary.find(options[:to])
       raise(ActiveRecord::RecordNotFound, "At least one of the languages not found. Probably either a typ-o or unsupported language.") unless @to && @from
       @limit = options[:limit].to_i if options.key?(:limit)
-      @tags = options[:tags].join(',') if options.key?(:tags)
-      options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? @from.vocabularies.find(:all, :conditions => "taggings.tag_id IN (#{@tags})", :include => [ :taggings ]) : @from.vocabularies)
+      @tags = options[:tags] if options.key?(:tags)
+      options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? Vocabulary.find_tagged_with(@tags, :match_all => Boolean(options[:all_or_any]), :conditions => "language_id = #{@from.id}") : @from.vocabularies)
     else
       raise(ArgumentError, "Missing options. :to and :from are required at minimum.")
     end

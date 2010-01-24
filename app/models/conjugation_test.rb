@@ -10,8 +10,8 @@ class ConjugationTest < LanguageTest
       @tense = ConjugationTime.find(options[:tense])
       raise(ActiveRecord::RecordNotFound, "Given tense not found. Probably either a typ-o or unsupported tense.") unless @tense
       @limit = options[:limit].to_i if options.key?(:limit)
-      @tags = options[:tags].join(',') if options.key?(:tags)
-      options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? clean_verb_selection(@tense.verbs_tagged_with(@tags), @tense.id) : clean_verb_selection(@tense.verbs, @tense.id))
+      @tags = options[:tags] if options.key?(:tags)
+      options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? clean_verb_selection(@tense.verbs_tagged_with(Boolean(options[:all_or_any]), @tags), @tense.id) : clean_verb_selection(@tense.verbs, @tense.id))
       super
     else
       raise(ArgumentError, "Missing options. :tense is required at minimum.")

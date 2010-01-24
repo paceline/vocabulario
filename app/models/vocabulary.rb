@@ -130,7 +130,7 @@ class Vocabulary < ActiveRecord::Base
   def updates_for_timeline
      Status[
        :id => id,
-       :text => "created the new #{language.word} vocabulary \"#{word}\"",
+       :text => "added the new #{language.word} vocabulary \"#{word}\"",
        :created_at => created_at,
        :url => "http://#{HOST}/vocabularies/#{permalink}",
        :user => user.to_hash

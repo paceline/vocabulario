@@ -1,22 +1,24 @@
-- form_remote_for @score, :url => scores_path(:type => 'VocabularyTest') do 
+- semantic_remote_form_for @score, :url => scores_path(:type => 'VocabularyTest') do |form|
+  = form.error_messages
 
-  .fields
-    %h2 1. Pick a list
-    I'd like to get tested on the vocabularies from the list
-    = select(:test, :list_id, @lists.collect {|l| [ l.name, l.id ] })
-    = observe_field(:test_list_id, :url => direction_for_list_scores_path, :update => "test_direction", :with => "list_id")
+  - form.inputs do
+    %li#test_tense_input.string
+      %label{ :for => "test_tense" } Pick a list
+      = select(:test, :list_id, @lists.collect {|l| [ l.name, l.id ] })
+      = observe_field(:test_list_id, :url => direction_for_list_scores_path, :update => "test_direction", :with => "list_id")
+      %p.inline-hints Pick a list as the basis for your vocabulary test
     
-  .fields
-    %h2 2. Direction
-    %ul#test_direction
-      = render :partial => 'direction_for_list'
-    
-  .fields
-    %h2 3. Number of questions
-    I'm up for
-    = select(:test, :limit, LanguageTest::LIMITS)
-    questions
-   
-  .fields
-    = submit_tag("Ready? Let's go!")
+    %li#test_limit_input.string
+      %label{ :for => "test_limit" } Direction
+      %ul#test_direction
+        = render :partial => 'direction_for_list'
+        
+    %li#test_limit_input.string
+      %label{ :for => "test_limit" } Number of Questions
+      = select(:test, :limit, LanguageTest::LIMITS)
+      %p.inline-hints You're up for how many questions?
+      
+  - form.buttons do
+    = form.commit_button "Ready? Let's go!"
+
   
