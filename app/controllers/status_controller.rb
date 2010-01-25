@@ -6,7 +6,7 @@ class StatusController < ApplicationController
   # Gather status updates
   #
   # API information - 
-  #   /status.xml|json or /timline.xml|json (Oauth required)
+  #   /status.xml|json or /timeline.xml|json (Oauth required)
   #   /users/#{id|permalink}/status.xml|json or /users/#{id|permalink}/timeline.xml|json (Oauth required)
   def index
     @timeline = params.key?(:since) ? Status.timeline(params[:user_id], Time.at(params[:since].to_f)) : Status.timeline(params[:user_id])

@@ -48,7 +48,7 @@ class Score < ActiveRecord::Base
       :id => id,
       :text => "got #{ratio}% right on a #{questions} question #{language_from.word} to #{language_to.word} test",
       :created_at => created_at,
-      :user => user.to_hash
+      :user => (user ? user.to_hash : "")
     ]
   end
   
