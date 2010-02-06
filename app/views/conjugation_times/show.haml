@@ -1,14 +1,16 @@
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-
-.content
+  
+- content_for :notice do
   %h1= signed_in_as_admin? ? in_place_editor_field(:conjugation_time, :name) : @conjugation_time.name
-  A
-  = signed_in_as_admin? ? in_place_select_field(:conjugation_time, :language_id, { :label => @conjugation_time.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @conjugation_time.language.word
-  tense
+  %p
+    A
+    = signed_in_as_admin? ? in_place_select_field(:conjugation_time, :language_id, { :label => @conjugation_time.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @conjugation_time.language.word
+    tense
 
 .content
   = label_tag 'Conjugations'
+  
   - if !@conjugation_time.conjugations.blank?
     %p The following conjugation patterns have already been defined for this tense. As an admin you can add more.
     %ul{ :id => "conjugations"}

@@ -7,7 +7,7 @@ class ListsController < ApplicationController
   
   # Creates a new list
   def create
-    type = params[:list].delete(:type) == 'true' ? 'DynamicList' : 'StaticList'
+    type = params[:list].delete(:type)
     tag_names = params[:list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ') unless params[:list][:tag_ids].blank?
     @list = Object.const_get(type).new(params[:list])
     @list.user = current_user
@@ -53,12 +53,8 @@ class ListsController < ApplicationController
   
   # Add a new list
   def new
-    begin
-      @user = current_user
-      @list = List.new
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-    end
+    @user = current_user
+    @list = List.new
   end
   
   # Moves or copies vocabulary from one list to another
@@ -71,7 +67,7 @@ class ListsController < ApplicationController
     else
       @params = params
       @list = List.find(params[:id])
-      @lists = StaticList.list("id != #{@list.id}")
+      @lists = Vocabulary.find(params[:vocabulary_id]).verb? ? List.list("id != #{@list.id} AND type LIKE 'Static%List'") : StaticVocabularyList.list("id != #{@list.id}")
       render :partial => 'copy_move_form'
     end
   end
@@ -82,7 +78,7 @@ class ListsController < ApplicationController
     position = params.key?(:insert_after) ? @list.ids.index(params[:insert_after])+2 : 1
     vocabulary = Vocabulary.find(params[:vocabulary_id])
     vocabulary = vocabulary.translations(list.language_from_id).first if @list.language_to == vocabulary.language
-    valid = vocabulary.add_to_list(@list.id, position)
+    valid = @list.add_vocabulary(vocabulary, position)
     if valid
       render :update do |page|
         page.hide :dropzone if @list.size <= 1
@@ -100,6 +96,7 @@ class ListsController < ApplicationController
       @list = List.find_by_id_or_permalink(params[:id])
       if @list.public || @list.user == current_user
         @vocabularies = @list.vocabularies
+        @tense_id = params[:tense_id] if params.key?(:tense_id)
         render :layout => 'print'
       else
         redirect_to '/login'
@@ -126,11 +123,18 @@ class ListsController < ApplicationController
   def show
     begin
       @list = List.find_by_id_or_permalink(params[:id])
+      @tense_id = params.key?(:tense_id) ? params[:tense_id] : @list.language_from.conjugation_times.first.id
       if @list.public || @list.user == current_user
         @vocabularies = @list.vocabularies
         respond_to do |format|
           format.html
           format.atom { render :layout => false }
+          format.js { 
+            render :update do |page|
+              page.replace_html "links", render(:partial => 'links')
+              page.replace_html "#{@list.static? && signed_in? && current_user == @list.user ? "static_list" : "regular_list"}", render(:partial => (@list.static? && signed_in? && current_user == @list.user ? "admin_list" : "regular_list"))
+            end
+          }
           format.json { render :json => current_user ? @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies]) : @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies]) }
           format.xml { render :xml => current_user ? @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies]) : @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies]) }
         end
@@ -160,7 +164,11 @@ class ListsController < ApplicationController
   def live
     list = List.find(params[:id])
     @search = params[:word]
-    @vocabularies = Vocabulary.find(:all, :conditions => ['(language_id = ? OR language_id = ?) AND word LIKE ?', list.language_from.id, list.language_to.id, "%#{params[:word]}%"], :limit => 10, :order => 'word') if params[:word].size >= 3
+    if list.verb?
+      @vocabularies = Vocabulary.find(:all, :conditions => ['language_id = ? AND word LIKE ?', list.language_from.id, "%#{params[:word]}%"], :limit => 10, :order => 'word') if params[:word].size >= 3
+    else
+      @vocabularies = Vocabulary.find(:all, :conditions => ['(language_id = ? OR language_id = ?) AND word LIKE ?', list.language_from.id, list.language_to.id, "%#{params[:word]}%"], :limit => 10, :order => 'word') if params[:word].size >= 3
+    end
     render :nothing => true if @vocabularies.blank?
   end
   
@@ -168,15 +176,11 @@ class ListsController < ApplicationController
   def update
     @list = List.find_by_id_or_permalink(params[:id])
 
-    if @list.static?
-      @list.update_attributes(params[:static_list])
-    else
-      if params[:dynamic_list][:tag_ids]
-        tag_names = params[:dynamic_list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ')
-        @list.tag_list = tag_names
-      end
-      @list.update_attributes(params[:dynamic_list])
+    if @list.smart? && params[@list.to_attribute][:tag_ids]
+      tag_names = params[@list.to_attribute].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ')
+      @list.tag_list = tag_names
     end
+    @list.update_attributes(params[@list.to_attribute])
     
     redirect_to list_path(@list.permalink)
   end
@@ -204,12 +208,18 @@ class ListsController < ApplicationController
   # /lists/new support: Hide tags menu when static is selected (and vice versa)
   def switch
     render :update do |page|
-      if params[:selected] == 'false'
+      if params[:selected][0..5] == 'Static'
         page.hide 'list_tags_input', 'list_time_input'
       else
         page.show 'list_tags_input', 'list_time_input'
         page.visual_effect :highlight, 'list_tags_input'
         page.visual_effect :highlight, 'list_time_input'
+      end
+      if params[:selected].include?('Verb')
+        page.hide 'list_language_to_input'
+      else
+        page.show 'list_language_to_input'
+        page.visual_effect :highlight, 'list_language_to_input'
       end
     end
   end

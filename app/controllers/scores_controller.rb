@@ -7,7 +7,7 @@ class ScoresController < ApplicationController
   # Open up a new language test
   def new
     @score = Score.new
-    if params[:menu] == 'translate_by_list'
+    if params[:menu] == '1'
       @lists = List.find_public(current_user)
       @from = @lists.first.language_from.word
       @to = @lists.first.language_to.word
@@ -17,13 +17,7 @@ class ScoresController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.js {
-        render :update do |page|
-          page << "['translate_by_tag','translate_by_list','conjugate'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
-          page << "$('#{params[:menu]}_link').addClassName('active')"
-          page.replace_html 'test_pane', render(:partial => "new_#{params[:menu]}")
-        end
-      }
+      format.js { render :partial => "new_test_tab_#{params[:menu]}" }
     end
   end
   

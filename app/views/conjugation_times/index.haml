@@ -3,17 +3,16 @@
 
 - content_for :notice do
   %h1 Explore Tenses
-  %p
-    There are currently
-    = ConjugationTime.count
-    times in the database.
+  %p= "There are currently #{ConjugationTime.count} tenses in the database."
+    
+.tabs
+  - @languages.each do |l|
+    %div{ :id => "tab_#{@languages.index(l)}_link", :class => set_link_class(@languages.index(l)) }= link_to_remote(l.word, :url => conjugation_times_path(:menu => @languages.index(l)), :before => "deactivateTab(#{@languages.size})", :loaded => "activateTab(#{@languages.index(l)},'tab_browser')", :method => :get)
 
-- @languages.each do |l|
-  .content
-    %h2= l.word
-    - if l.conjugation_times
-      %ul#conjugation_times
-        - l.conjugation_times.find(:all, :order => 'name').each do |t|
-          %li{ :id => "conjugation_time_#{t.id}" }
-            = link_to(t.name, t)
-            = link_to_remote('delete', { :url => conjugation_time_path(t.id), :confirm => 'Are you sure you want to delete this tense?', :method => :delete }, { :class => 'edit_link' }) if signed_in_as_admin?
+#tab_browser.content
+  = render :partial => "conjugation_times/list"
+
+%ul#patterns.inline
+  = render @conjugations
+    
+  

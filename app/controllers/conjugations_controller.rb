@@ -19,7 +19,7 @@ class ConjugationsController < ApplicationController
       @conjugation.save
       reference = Vocabulary.find(params[:vocabulary_id]) if params[:vocabulary_id]
       reference.conjugations << @conjugation if reference
-      flash[:great] = "\"#{@conjugation.name}\" has been added to the database."
+      flash[:success] = "\"#{@conjugation.name}\" has been added to the database."
       redirect_to @conjugation
     else
       render :action => 'new'
@@ -35,6 +35,13 @@ class ConjugationsController < ApplicationController
       page.remove "conjugation_#{params[:id]}"
       page.visual_effect :highlight, 'conjugations'
     end
+  end
+  
+  # List conjugations
+  def index
+    tense = ConjugationTime.find(params[:conjugation_time_id])
+    @conjugations = tense.conjugations
+    render @conjugations
   end
   
   # Present a new conjugation form (including link to :vocabulary_id if given)

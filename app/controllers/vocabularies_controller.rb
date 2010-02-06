@@ -97,16 +97,10 @@ class VocabulariesController < ApplicationController
     respond_to do |format|
       format.html { render :action => 'index' }
       format.js {
-        render :update do |page|
-          if params[:menu]
-            page.hide 'browser'
-            page << "['live_search','by_language','by_tag','by_type'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
-            page << "$('#{params[:menu]}_link').addClassName('active')"
-            page.replace_html 'browser', render(:partial => params[:menu])
-            page << "new Effect.BlindDown('browser')"
-          else
-            page << "var vocabularies = new Array('" + @vocabularies_list.collect { |v| v.word }.join("','") + "');"
-          end
+        if params[:menu]
+          render :partial => "index_tab_#{params[:menu]}"
+        else
+          render :text => "var vocabularies = new Array('" + @vocabularies_list.collect { |v| v.word }.join("','") + "');"
         end
       }
       format.json { render :json => @vocabularies_list.to_json(:except => [:user_id, :language_id], :include => [ :language, :translation_to ]) }
@@ -170,14 +164,10 @@ class VocabulariesController < ApplicationController
         @transformation = Transformation.new
       end
       respond_to do |format|
-        format.html { render :action => 'show' }
+        format.html
         format.js {
           @display_transformations = @conjugations.empty? ? "display: none;" : "display: visible;" if @vocabulary.verb?
-          render :update do |page|
-            page << "['overview','conjugations','translations'].collect(function(v) { $(v + '_link').className = 'tab_link'; })"
-            page << "$('#{params[:menu]}_link').addClassName('active')"
-            page.replace_html 'vocabulary_pane', render(:partial => params[:menu])
-          end
+          render :partial => "show_tab_#{params[:menu]}"
         }
         format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }
         format.xml { render :xml => @vocabulary.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }

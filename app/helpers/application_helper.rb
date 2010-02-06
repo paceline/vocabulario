@@ -23,4 +23,12 @@ module ApplicationHelper
     page.visual_effect :highlight, 'notice'
   end
   
+  def set_link_class(action)
+    action == 0 ? "tab_link active" : "tab_link"
+  end
+
+  def detect_elements
+    @vocabulary && !@vocabulary.new_record? ? "['add','copy','delete']" : "['add']"
+  end
+  
 end

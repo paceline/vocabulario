@@ -26,6 +26,10 @@ ActionController::Routing::Routes.draw do |map|
   map.authorize '/oauth/authorize', :controller => 'oauth', :action => 'authorize'
   map.oauth '/oauth', :controller => 'oauth', :action => 'index'
   
+  # List aliases
+  map.print_list_with_tense '/lists/:id/print/:tense_id.:format', :controller => 'lists', :action => 'print'
+  map.feed_list_with_tense '/lists/:id/feed/:tense_id.:format', :controller => 'lists', :action => 'show'
+  
   # Timeline aliases
   map.timeline '/timeline.:format', :controller => 'status', :action => 'index'
   map.user_timeline '/users/:user_id/timeline.:format', :controller => 'status', :action => 'index'
@@ -35,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   # =========
   
   map.resources :conjugations
-  map.resources :conjugation_times, :as => 'tenses'
+  map.resources :conjugation_times, :as => 'tenses', :has_many => :conjugations
   map.resources :languages, :controller => :vocabularies
   map.resources :lists,
     :collection => { :switch => :get, :live => :get },

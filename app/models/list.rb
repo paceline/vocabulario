@@ -14,7 +14,7 @@ class List < ActiveRecord::Base
   has_many :vocabularies, :through => :vocabulary_lists, :order => :position
   
   # Validations
-  validates_presence_of :user_id, :language_from_id, :language_to_id, :name
+  validates_presence_of :user_id, :language_from_id, :name
   
   
   # Find public lists
@@ -31,11 +31,19 @@ class List < ActiveRecord::Base
     attr_accessor *args
     args.each do |type|
       define_method "#{type}?" do
-        self.class.to_s == "#{type.to_s.capitalize}List"
+        if type.to_s.starts_with?('v')
+          self.class.to_s.include?(type.to_s.capitalize)
+        else
+          self.class.to_s.starts_with?(type.to_s.capitalize)
+        end
       end
     end
   end
-  identify_methods_for_subclasses :dynamic, :static
+  identify_methods_for_subclasses :smart, :static, :verb, :vocabulary
+  
+  def to_attribute
+    self.class.to_s.underscore.downcase.to_sym
+  end
   
   # Return all lists
   def self.list(conditions = "")

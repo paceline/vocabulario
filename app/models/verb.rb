@@ -8,6 +8,7 @@ class Verb < Vocabulary
   def conjugate(tense_id, person)
     tense = ConjugationTime.find(tense_id)
     pattern = self.conjugations.find(:first, :conditions => ['conjugation_time_id = ?',tense.id])
+    raise(Error, "In order conjugate a verb needs both a tense and a matching pattern") unless tense && pattern
     output = word.mb_chars
     transformations.each do |t|
       output = t.class == ReplaceEnding ? t.execute(self, output, pattern.send(person)) : t.execute(self, output, person)

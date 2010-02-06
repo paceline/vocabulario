@@ -32,6 +32,17 @@ class ConjugationTimesController < ApplicationController
   # List tenses
   def index
     @languages = Language.find(:all, :order => 'word')
+    @tenses = params.key?(:menu) ? @languages[params[:menu].to_i].conjugation_times : @languages.first.conjugation_times
+    @conjugations = @tenses.first.conjugations unless @tenses.blank?
+    respond_to do |format|
+      format.html
+      format.js {
+        render :update do |page|
+          page.replace_html :tab_browser, render(:partial => 'list')
+          page.replace_html :patterns, render(@conjugations)
+        end 
+      }
+    end
   end
   
   # Present a new tense form

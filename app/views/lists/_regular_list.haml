@@ -8,5 +8,12 @@
     %li
       %ul.inline
         %li= link_to(vocabulary.word, vocabulary_path(vocabulary.permalink))
-        - vocabulary.translations(@list.language_to_id).each do |i|
-          %li= i.word
+        - if @list.verb?
+          - begin
+            - vocabulary.conjugate_all(@tense_id).each do |i|
+              %li= i
+          - rescue
+            %li No conjugation patterns have been added yet
+        - else
+          - vocabulary.translations(@list.language_to_id).each do |i|
+            %li= i.word

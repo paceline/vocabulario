@@ -12,12 +12,15 @@
   %h1= @list.name
   %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}."
 
-- if @list.dynamic? && !@vocabularies.blank?
+- if @list.smart? && !@vocabularies.blank?
   = render :partial => 'sort_menu'
 
 %p.spacing
-  Know them by heart?
-  = link_to('Take a test!', test_path)  
+  - if @list.verb?
+    = render :partial => 'conjugation_menu'
+  - else
+    Know them by heart?
+    = link_to('Take a test!', test_path)
  
 - if @list.static? && signed_in? && current_user == @list.user
   %ul#static_list.list= render :partial => 'admin_list'
@@ -28,8 +31,5 @@
 - unless @vocabularies.blank?
   .content
     %h3 View in other formats
-    %ul.inline
-      %li= link_to('Print list', print_list_path(@list.permalink), :target => '_blank')
-      %li= link_to('Feed', list_path(@list.permalink, :format => :atom))
-      %li= link_to('Export as JSON', list_path(@list.permalink, :format => :json))
-      %li= link_to('Export as XML', list_path(@list.permalink, :format => :xml))
+    %ul#links.inline
+      = render :partial => 'links'

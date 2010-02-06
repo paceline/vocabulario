@@ -4,7 +4,29 @@
   .content
     .tabs.green
       %h1 Your lists
-    %p Pick a list:
-    %form
-      = select 'your', 'lists', lists_as_options(current_user.lists), { :include_blank => true }, { :style => 'max-width: 270px;' }
-      = observe_field(:your_lists, :function => "window.location = $A($('your_lists').options).find(function(option) { return option.selected; } ).value")
+    #scrollbox
+      #lists
+        %ul
+          - current_user.lists.each do |list|
+            %li= link_to shorten_text(list.name), list_path(list.permalink)
+      #wrap
+        #track-top
+        #track
+          #handle= image_tag 'scrollbar-handle-vertical.png'
+  
+  :javascript
+    var slider;
+    Event.observe(window, 'load', function() {
+      slider = new Control.Slider('handle', 'track', {
+        axis: 'vertical',
+        onSlide: function(v) { scrollVertical(v, $('lists'), slider);  },
+        onChange: function(v) { scrollVertical(v, $('lists'), slider); }
+      });
+      if ($('lists').scrollHeight <= $('lists').offsetHeight) {
+        slider.setDisabled();
+        $('wrap').hide();
+      }
+    });
+    function scrollVertical(value, element, slider) {
+      element.scrollTop = Math.round(value/slider.maximum*(element.scrollHeight-element.offsetHeight));
+    }      

@@ -155,7 +155,7 @@ ul.inline li { display: inline; padding-right: .6em; }
 
 a.active { color: #FFF; padding: 2px; text-decoration: none; }
 
-#browser {
+#tab_browser {
 	background-color: #DED;
 	padding: 1em;
 	margin-bottom: 40px;
@@ -225,9 +225,9 @@ ul.list_options {
   z-index: 100;
 }
 
-.list li ul.inline li.options_menu ul.list_options li { background-color: #02B8EA; display: block; }
+.list li ul.inline ul.list_options li { background-color: #02B8EA; display: block; }
 
-.list li ul.inline li.options_menu ul.list_options li a { color: #FFF; }
+.list li ul.inline ul.list_options li a { color: #FFF; }
 
 
 /* "Sidebar"
@@ -271,8 +271,70 @@ ul.list_options {
 	padding: .15em;
 }
 
-.gravatar_big {
-	margin-right: 25px;
+.gravatar_big { margin-right: 25px; }
+
+
+/* "Sidebar" -> "Manage stuff"
+   ========================== */
+      
+li.menu a {
+  border-bottom: 2px #C0ED00 solid;
+  display: block;
+  text-decoration: none;
+}
+
+li.menu p { border-bottom: 2px #DED solid; color: #DED; }
+
+ul.menuitems { padding: .25em 0 0 0; }
+
+.menuitems li { margin: 0; padding: 0; }
+
+.menuitems li a {
+  border-bottom: none;
+  font-size: .75em;
+  padding: .25em 0 0 0;
+  text-decoration: none;
+}
+
+.menuitems li a:hover { text-decoration: underline; }
+
+
+/* "Sidebar" -> "Lists"
+   ===================*/
+   
+#lists ul li { margin: 0 0 10px 0; }
+
+#lists {
+  float: left;
+  height: 137px;
+  margin: 0 15px 0 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#wrap {
+  float: left;
+  width: 8px;
+  height: 138px;
+  background: transparent url(../images/scrollbar-track-bottom.png) no-repeat bottom left;
+}
+
+#track-top {
+  position: absolute;
+  width: 8px;
+  height: 14px;
+  background: transparent url(../images/scrollbar-track-top.png) no-repeat top left;
+}
+
+#track {
+  position: absolute;
+  width: 8px;
+  height: 138px;
+}
+
+#handle {
+  width: 8px;
+  height: 16px;
 }
 
 

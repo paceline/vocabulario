@@ -52,6 +52,36 @@ function toggleListMenu(vocabulary_id) {
 }
 
 
+// Toggle manage stuff menu
+
+function toggleMenu(dom_id, elements) {
+  if ($(dom_id).visible()) {
+    $(dom_id).blindUp({ duration: 0.5 })
+	}
+	else {
+	  elements.each(function(s) {
+	    if ($(s).visible()) {
+        $(s).blindUp({ duration: 0.25 })
+      }
+    });
+	  $(dom_id).blindDown({ duration: 0.5 })
+	}
+}
+
+
+// Activates or deactivates given tab
+
+function activateTab(no, pane) {
+  if(pane != '') { $(pane).hide(); }
+  $('tab_' + no + '_link').addClassName('active');
+  if(pane != '') { new Effect.BlindDown(pane); }
+}
+
+function deactivateTab(length) {
+  for(i=0; i<length; i++) { $('tab_' + i + '_link').className = 'tab_link' };
+}
+
+
 // Get selected text
 // Requires ierange to work in IE (http://code.google.com/p/ierange/)
 
@@ -121,27 +151,4 @@ function paintNewGraph(scores, offset) {
 	graph.labels = labels.toObject();
 
   graph.draw();
-}
-
-
-// Redirects to given action
-
-function redirectTo(url, text) {
-	if (url != "") { 
-		if (text.substring(0,5) == 'Apply') {
-			if (confirm('Are you sure you want to copy these attributes to all translations?')) {
-				new Ajax.Request(url, { method: 'post', onSuccess: function() { highlight(); } });
-			}
-			$('redirect_to').selectedIndex = 0;
-		}
-		else if (text.substring(0,6) == 'Delete') {
-			if (confirm('Are you sure you want to delete his vocabulary?')) {
-				new Ajax.Request(url, { method: 'delete', onSuccess: function() { window.location = '/vocabularies' } });
-			}
-			$('redirect_to').selectedIndex = 0;
-		}
-		else {
-			window.location = url;
-		}
-	}
 }

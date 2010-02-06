@@ -1,0 +1,3 @@
+Pick a tense
+= select 'your', 'lists', @list.language_from.conjugation_times.collect { |t| [t.name,t.id] }
+= observe_field :your_lists, :url => list_path(@list), :with => 'tense_id', :method => :get

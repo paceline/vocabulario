@@ -1,13 +1,20 @@
 - form.inputs do
-  = form.input :type, :as => :select, :label => "Smart list", :hint => "Do you want a smart (yes) or regular (no) list?" unless @current_action == 'edit'
+  - unless @current_action == 'edit'
+    %li#list_type_input.string
+      %label{ :for => "list_type" } Type
+      = select :list, :type, [['Smart Vocabulary List','SmartVocabularyList'],['Static Vocabulary List','StaticVocabularyList'],['Smart Verb List','SmartVerbList'],['Static Verb List','StaticVerbList']]
+      %p.inline-hints What kind of list to you want? Static or dynamic? With verbs or vocabularies?
+  
   = form.input :name, :label => "Title", :hint => "Give your list a title"
+  
   - unless @list.static?
-    = form.input :language_from, :label => "Language (from)", :hint => "What language are your words supposed to be in?"
-    = form.input :language_to, :label => "Language (to)", :hint => "What languages should the translations be in?"
+    = form.input :language_from, :label => "Language", :hint => "What language are your words supposed to be in?"
+    = form.input :language_to, :label => "Translate to", :hint => "What languages should the translations be in?" unless @list.verb?
     = form.input :tags, :hint => "Match #{form.select :all_or_any, [['all',true],['any',false]]} of the above tags", :required => false 
     %li#list_time_input.string
       %label{ :for => "list_name" } Added within the last...
       = form.text_field :time_value, :size => 3
       = form.select :time_unit, List::TIMEUNITS
       %p.inline-hints Only include vocabularies that have been added recently
+  
   = form.input :public, :label => "Public?", :hint => "Do you want your list do be visible to other users?", :required => false

@@ -1,32 +1,49 @@
 - if signed_in?
 
-  - if signed_in_as_admin?
-  
-    .content
-      .tabs.green
-        %h1 Manage stuff
-      %p Select an action:  
-      %form
-        = select 'redirect', 'to', admin_options(@vocabulary), :include_blank => true
-        = observe_field(:redirect_to, :frequency => 0.5, :function => "redirectTo($A($('redirect_to').options).find(function(option) { return option.selected; } ).value, $A($('redirect_to').options).find(function(option) { return option.selected; } ).text)")
+  .content
+    .tabs.green
+      %h1 Manage stuff
+    %ul#manage
+      %li.menu
+        = link_to_function "Add", "toggleMenu('add',#{detect_elements})"
+        %ul#add.menuitems{:style => "display: none"}
+          - if signed_in_as_admin?
+            - if @vocabulary && @vocabulary.verb?
+              %li= link_to 'New conjugation', new_vocabulary_conjugation_path(@vocabulary.permalink)
+            - else
+              %li= link_to 'New conjugation', new_conjugation_path
+            - if @vocabulary && !@vocabulary.new_record?
+              %li= link_to 'New translation', edit_vocabulary_path(@vocabulary.permalink)
+            %li= link_to 'New language', new_vocabulary_path(:type => 'Language')
+            %li= link_to 'New set of pronouns', new_person_path
+            %li= link_to 'New tense', new_conjugation_time_path
+            %li= link_to 'Import vocabularies', import_vocabularies_path
+          - else
+            %li= link_to 'New vocabulary', new_vocabulary_path
+        
+      %li.menu
+        - if @vocabulary && !@vocabulary.new_record?
+          = link_to_function "Copy", "toggleMenu('copy',#{detect_elements})"
+          %ul#copy.menuitems{:style => "display: none"}
+            %li= link_to 'Apply tags to translations', apply_tags_vocabulary_path(@vocabulary)
+            %li= link_to 'Apply type to translations', apply_type_vocabulary_path(@vocabulary)
+        - else
+          %p Copy
+        
+      %li.menu
+        - if @vocabulary && !@vocabulary.new_record? && signed_in_as_admin?
+          = link_to_function "Delete", "toggleMenu('delete',#{detect_elements})"
+          %ul#delete.menuitems{:style => "display: none"}
+            %li= link_to 'Delete vocabulary', vocabulary_path(@vocabulary)
+        - else
+          %p Delete
 
-    .content
-      .tabs.green
-        %h1 List stuff
-      %p
-        = link_to('Pronouns', people_path)
-        |
-        = link_to('Tenses', conjugation_times_path)
-        |
-        = link_to('Vocabularies', vocabularies_path)
-      
-      
-  - else
-  
-    .content
-      .tabs.green
-        %h1 Manage stuff
-      %p Select an action:
-      %form
-        = select 'redirect', 'to', user_options(@vocabulary), :include_blank => true
-        = observe_field(:redirect_to, :frequency => 0.5, :function => "redirectTo($A($('redirect_to').options).find(function(option) { return option.selected; } ).value, $A($('redirect_to').options).find(function(option) { return option.selected; } ).text)")
+  .content
+    .tabs.green
+      %h1 List stuff
+    %p
+      = link_to('Pronouns', people_path)
+      |
+      = link_to('Tenses', conjugation_times_path)
+      |
+      = link_to('Vocabularies', vocabularies_path)

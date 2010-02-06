@@ -11,12 +11,12 @@
 = render :partial => 'shared/taglist', :object => @vocabulary
 
 .tabs
-  #overview_link.tab_link.active= link_to_remote("Overview", :url => vocabulary_path(@vocabulary.permalink, :menu => 'overview'), :method => :get)
+  #tab_0_link.tab_link.active= link_to_remote("Overview", :url => vocabulary_path(@vocabulary.permalink, :menu => 0), :update => 'vocabulary_pane', :before => "deactivateTab(3)", :loaded => "activateTab(0,'')", :method => :get)
   - if @vocabulary.verb? && signed_in?
-    #conjugations_link.tab_link= link_to_remote("Conjugations", :url => vocabulary_path(@vocabulary.permalink, :menu => 'conjugations'), :method => :get)
+    #tab_1_link.tab_link= link_to_remote("Conjugations", :url => vocabulary_path(@vocabulary.permalink, :menu => 1), :update => 'vocabulary_pane', :before => "deactivateTab(3)", :loaded => "activateTab(1,'')", :method => :get)
   - else
-    #conjugations_link.tab_link{ :style => 'display: none;' }
-  #translations_link.tab_link= link_to_remote("Translations", :url => vocabulary_path(@vocabulary.permalink, :menu => 'translations'), :method => :get)
+    #tab_1_link.tab_link{ :style => 'display: none;' }
+  #tab_2_link.tab_link= link_to_remote("Translations", :url => vocabulary_path(@vocabulary.permalink, :menu => 2), :update => 'vocabulary_pane', :before => "deactivateTab(3)", :loaded => "activateTab(2,'')", :method => :get)
   
 #vocabulary_pane.tab_content_pane
-  = render(:partial => 'vocabularies/overview')
+  = render(:partial => 'vocabularies/show_tab_0')

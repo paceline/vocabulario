@@ -1,0 +1,10 @@
+%ul.inline
+  
+  - if @tenses.blank?
+    %li
+      No tenses have been added yet.
+      = link_to "Add one now.", new_conjugation_time_path
+  
+  - else
+    = render @tenses
+    

@@ -1,8 +1,8 @@
-class DynamicList < List
+class SmartVerbList < List
   
   # Returns vocabularies associated with list
   def vocabularies(custom_attribute = "", custom_order = "")
-    conditions = ["vocabularies.language_id = #{language_from.id}"]
+    conditions = ["vocabularies.language_id = #{language_from.id}","vocabularies.type = 'Verb'"]
     order = custom_attribute.blank? ? ['vocabularies.word'] : ["#{custom_attribute} #{custom_order}"]
     
     unless time_value.blank? || time_unit.blank?
@@ -20,5 +20,5 @@ class DynamicList < List
       Vocabulary.find_tagged_with(tags, :match_all => all_or_any, :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
     end
   end
-
+  
 end
