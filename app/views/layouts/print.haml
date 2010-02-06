@@ -2,8 +2,7 @@
 %html
   %head
     %title
-      = @list.name
-      (powered by Vocabulario)
+      =  @list.name + (@list.verb? ? " (in #{ConjugationTime.find(@tense_id).name})" : "")
     = ANALYTICS_CODE
     = stylesheet_link_tag "print", :media => 'all'
   %body{ :onLoad => "javascript:print()" }

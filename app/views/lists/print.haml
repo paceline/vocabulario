@@ -1,4 +1,4 @@
-%h1= @list.name
+%h1= @list.name + (@list.verb? ? " (in #{ConjugationTime.find(@tense_id).name})" : "")
 %p
   A Vocabulario list by
   = @list.user.name
