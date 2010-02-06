@@ -11,7 +11,7 @@ class ListsController < ApplicationController
     tag_names = params[:list].delete(:tag_ids).collect { |t| Tag.find(t).name }.join(', ') unless params[:list][:tag_ids].blank?
     @list = Object.const_get(type).new(params[:list])
     @list.user = current_user
-    @list.tag_list = tag_names unless params[:list][:tag_ids].blank?
+    @list.tag_list = tag_names unless tag_names.blank?
     if @list.valid? && @list.errors.empty?
       @list.save
       redirect_to list_path(@list.permalink)
