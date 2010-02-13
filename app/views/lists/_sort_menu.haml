@@ -1,11 +1,10 @@
-%ul#order.inline
-  %li
-    #loading{:style => 'display: none;' }= image_tag('ajax-loader.gif')
-  %li
-    Alphabetically
-    = link_to_remote 'up&uarr;', :url => sort_list_path(@list, :attribute => 'vocabularies.word', :order => 'ASC'), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
-    = link_to_remote 'down&darr;', :url => sort_list_path(@list, :attribute => 'vocabularies.word', :order => 'DESC'), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
-  %li
-    Date added
-    = link_to_remote 'up&uarr;', :url => sort_list_path(@list, :attribute => 'vocabularies.created_at', :order => 'ASC'), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
-    = link_to_remote 'down&darr;', :url => sort_list_path(@list, :attribute => 'vocabularies.created_at', :order => 'DESC'), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
+%li
+  #loading{:style => 'display: none;' }= image_tag('ajax-loader.gif')
+%li
+  Alphabetically
+  = link_to_remote 'up&uarr;', :url => sort_list_path(@list, :attribute => 'vocabularies.word', :order => 'ASC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
+  = link_to_remote 'down&darr;', :url => sort_list_path(@list, :attribute => 'vocabularies.word', :order => 'DESC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
+%li
+  Date added
+  = link_to_remote 'up&uarr;', :url => sort_list_path(@list, :attribute => 'vocabularies.created_at', :order => 'ASC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
+  = link_to_remote 'down&darr;', :url => sort_list_path(@list, :attribute => 'vocabularies.created_at', :order => 'DESC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"

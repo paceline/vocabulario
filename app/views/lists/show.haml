@@ -13,15 +13,14 @@
   %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}."
 
 - if @list.smart? && !@vocabularies.blank?
-  = render :partial => 'sort_menu'
+  %ul#order.inline
+    = render :partial => 'sort_menu'
 
-%p.spacing
+%ul.inline.spacing
+  %li= link_to('Take a test', test_from_list_path(@list.permalink))
   - if @list.verb?
-    = render :partial => 'conjugation_menu'
-  - else
-    Know them by heart?
-    = link_to('Take a test!', test_from_list_path(@list.permalink))
- 
+    %li= render :partial => 'conjugation_menu'
+    
 - if @list.static? && signed_in? && current_user == @list.user
   %ul#static_list.list= render :partial => 'admin_list'
     

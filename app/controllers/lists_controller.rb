@@ -123,7 +123,7 @@ class ListsController < ApplicationController
   def show
     begin
       @list = List.find_by_id_or_permalink(params[:id])
-      @tense_id = params.key?(:tense_id) ? params[:tense_id] : @list.language_from.conjugation_times.first.id
+      @tense_id = params.key?(:tense_id) ? params[:tense_id] : @list.language_from.conjugation_times.first.id if @list.verb?
       if @list.public || @list.user == current_user
         @vocabularies = @list.vocabularies
         respond_to do |format|
@@ -131,6 +131,7 @@ class ListsController < ApplicationController
           format.atom { render :layout => false }
           format.js { 
             render :update do |page|
+              page.replace_html "order", render(:partial => 'sort_menu') if @list.smart? && !@vocabularies.blank?
               page.replace_html "links", render(:partial => 'links')
               page.replace_html "#{@list.static? && signed_in? && current_user == @list.user ? "static_list" : "regular_list"}", render(:partial => (@list.static? && signed_in? && current_user == @list.user ? "admin_list" : "regular_list"))
             end
@@ -153,6 +154,7 @@ class ListsController < ApplicationController
   def sort
     if params.key?(:attribute) && params.key?(:order)
       @list = List.find(params[:id])
+      @tense_id = params[:tense_id]
       @vocabularies = @list.vocabularies(params[:attribute], params[:order])
       render :partial => 'regular_list'
     else
