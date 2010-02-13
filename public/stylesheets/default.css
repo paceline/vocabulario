@@ -47,7 +47,7 @@ ul {
 	margin: 0; 
 	padding: 0;
 }
-li { margin: .75em 0 0 0 }
+li { margin: 0 0 .75em 0 }
 ol { font-size: 1.2em; margin: 0; }
 ol li { margin: 0 0 40px 0; }
 
@@ -110,13 +110,9 @@ th { background-color: #CCC; text-align: left; }
 /* "Main"
    ====== */
 
-#main	{
-	background-color: #FFF;
-	float: left;
-	min-height: 670px;
-	padding-right: 50px;
-	width: 75%;
-}
+#main	{ padding: 0 310px 0 0; }
+
+#sidebar { float: right; width: 270px; }
 
 .container { margin: 0 auto; width: 90%; }
 
@@ -187,8 +183,8 @@ em.tag {
 
 /* "Main" -> "Vocabulary list"
    ========================== */
-
-ul#latest.list { margin-top: -22px; }
+   
+ul#latest.list { margin-top: -9px; }
 
 ul.list li.item { cursor: move; }
 
@@ -261,7 +257,9 @@ ul.list_options {
 
 .green { border-bottom-color: #C0ED00; margin-bottom: 15px; }
 
-#user_bar li { margin: 5px 0 5px 0; }
+#user_bar { min-height: 140px; }
+
+#user_bar li { margin: 5px 0 5px 0 }
 
 .gravatar, .gravatar_big {
 	background-color: #FFF;
@@ -306,7 +304,7 @@ ul.menuitems { padding: .25em 0 0 0; }
 
 #lists {
   float: left;
-  height: 137px;
+  height: 142px;
   margin: 0 15px 0 0;
   overflow: hidden;
   white-space: nowrap;
@@ -315,7 +313,7 @@ ul.menuitems { padding: .25em 0 0 0; }
 #wrap {
   float: left;
   width: 8px;
-  height: 138px;
+  height: 143px;
   background: transparent url(../images/scrollbar-track-bottom.png) no-repeat bottom left;
 }
 
@@ -329,7 +327,7 @@ ul.menuitems { padding: .25em 0 0 0; }
 #track {
   position: absolute;
   width: 8px;
-  height: 138px;
+  height: 143px;
 }
 
 #handle {

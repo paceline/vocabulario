@@ -31,7 +31,6 @@
             = render :partial => 'layouts/flashes'
           - else
             .notice= yield(:notice)
-      #main= yield
       #sidebar
         #user_bar.content
           - if signed_in?
@@ -50,4 +49,5 @@
               %li= link_to 'Log in',  login_path,  { :title => 'Log in' }
               %li= link_to 'Sign up', signup_path, { :title => 'Create an account' }
         = yield :sidebar
+      #main= yield
       #footer Powered by <a href="http://github.com/paceline/vocabulario/tree/master">Vocabulario</a>, created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>
