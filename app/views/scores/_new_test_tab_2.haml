@@ -1,25 +1,20 @@
-- semantic_remote_form_for @score, :url => scores_path(:type => 'ConjugationTest') do |form|
+- semantic_remote_form_for @score, :url => scores_path do |form|
   = form.error_messages
 
   - form.inputs do
     %li#test_tense_input.string
-      %label{ :for => "test_tense" } Tenses
-      = select_tag('test[tense]', option_groups_from_collection_for_select(@languages, :conjugation_times, :word, :id, :name))
-      %p.inline-hints Pick a tense for your conjugation test
+      %label{ :for => "test_tense" } Pick a list
+      = select_tag 'test[list_id]', options_for_select(@lists.collect {|l| [ l.name, l.id ] }, [@list.name, @list.id])
+      = observe_field(:test_list_id, :url => options_for_list_scores_path, :update => "test_options_input", :with => "list_id", :loaded => "new Effect.Highlight('test_options_input')")
+      %p.inline-hints Pick a list as the basis for your vocabulary test
     
+    %li#test_options_input.string
+      = render :partial => 'options_for_list'
+      
     %li#test_limit_input.string
       %label{ :for => "test_limit" } Number of Questions
       = select(:test, :limit, LanguageTest::LIMITS)
       %p.inline-hints You're up for how many questions?
-    
-    %li#test_tags_input.string
-      %label{ :for => "test_tags" } Tags
-      = select(:test, :tags, @tags.collect {|t| t.name }, { }, { :multiple => true, :size => 5 })
-      %p.inline-hints= "I'd only like to see vocabularies that match #{select :test, :all_or_any, [['all',true],['any',false]]} of the above tags"
-      = observe_field(:test_tense, :url => update_tags_scores_path, :complete => visual_effect(:highlight, "test_tags"), :with => "conjugation_time_id")
-  
+      
   - form.buttons do
     = form.commit_button "Ready? Let's go!"
-
-
-

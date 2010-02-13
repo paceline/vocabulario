@@ -351,9 +351,9 @@ ul.menuitems { padding: .25em 0 0 0; }
 /* "Forms"
    ======= */
    
-#test_direction { font-size: .9em; }
+#test_options_input ul { font-size: .9em; }
 
-#test_direction li { margin: 0 0 10px 0; padding: 0; }
+#test_options_input ul li { margin: 0 0 10px 0; padding: 0; }
 
 label {
 	display:block;

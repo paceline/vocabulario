@@ -1,0 +1,21 @@
+- if @list.verb?
+  
+  %label{ :for => "test_options" } Tense
+  %ul
+    %li= select :test, :tense_id, @list.language_from.conjugation_times.collect { |t| [t.name,t.id] }
+  = hidden_field_tag 'type', 'ConjugationTest'
+  %p.inline-hints Pick a tense for the conjugation test
+
+
+- else
+
+  %label{ :for => "test_options" } Direction
+  %ul
+    %li
+      = radio_button(:test, :reverse, false, :checked => true)
+      = "Translate <strong>#{@list.language_from.word}</strong> to <strong>#{@list.language_to.word}</strong>"
+    %li
+      = radio_button(:test, :reverse, true)
+      = "Translate <strong>#{@list.language_to.word}</strong> to <strong>#{@list.language_from.word}</strong>"
+  = hidden_field_tag 'type', 'VocabularyTest'
+  %p.inline-hints Pick a direction for your vocabulary test

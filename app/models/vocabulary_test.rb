@@ -3,12 +3,6 @@ class VocabularyTest < LanguageTest
   # Readers for member variables
   attr_reader :from, :to
   
-  # Initialize new vocabulary test
-  def initialize(*args)
-    options = args.extract_options!
-    args.size == 1 ? setup_based_on_list(args.first, options) : setup_based_on_params(options)
-  end
-  
   # Setup a new vocabulary test based on a vocabulary list
   def setup_based_on_list(list_id, options)
     list = List.find(list_id)

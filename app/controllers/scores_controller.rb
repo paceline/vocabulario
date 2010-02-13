@@ -7,10 +7,9 @@ class ScoresController < ApplicationController
   # Open up a new language test
   def new
     @score = Score.new
-    if params[:menu] == '1'
+    if params[:menu] == '2' || params[:list_id]
       @lists = List.find_public(current_user)
-      @from = @lists.first.language_from.word
-      @to = @lists.first.language_to.word
+      @list = params[:list_id] ? List.find_by_id_or_permalink(params[:list_id]) : @lists.first
     else
       @languages = Language.list
       @tags = @languages.first.tags_for_language
@@ -120,11 +119,9 @@ class ScoresController < ApplicationController
   end
   
   # /scores/new support: Update directions based on list selected
-  def direction_for_list
-    list = List.find(params[:list_id])
-    @from = list.language_from.word
-    @to = list.language_to.word
-    render :partial => 'direction_for_list'
+  def options_for_list
+    @list = List.find(params[:list_id])
+    render :partial => 'options_for_list'
   end
 
 end

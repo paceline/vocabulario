@@ -15,10 +15,10 @@
     vocabularies in the database. Not too shabby...
 
 .tabs
-  #tab_0_link.tab_link.active= link_to_remote("Live search", :url => vocabularies_path(:menu => 0), :update => 'tab_browser', :before => "deactivateTab(4)", :loaded => "activateTab(0,'tab_browser')", :method => :get)
-  #tab_1_link.tab_link= link_to_remote("By language", :url => vocabularies_path(:menu => 1), :update => 'tab_browser', :before => "deactivateTab(4)", :loaded => "activateTab(1,'tab_browser')", :method => :get)
-  #tab_2_link.tab_link= link_to_remote("By tag", :url => vocabularies_path(:menu => 2), :update => 'tab_browser', :before => "deactivateTab(4)", :loaded => "activateTab(2,'tab_browser')", :method => :get)
-  #tab_3_link.tab_link= link_to_remote("By type", :url => vocabularies_path(:menu => 3), :update => 'tab_browser', :before => "deactivateTab(4)", :loaded => "activateTab(3,'tab_browser')", :method => :get)
+  #tab_0_link.tab_link.active= link_to_remote("Live search", :url => vocabularies_path(:menu => 0), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(0,'tab_browser')", :method => :get)
+  #tab_1_link.tab_link= link_to_remote("By language", :url => vocabularies_path(:menu => 1), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(1,'tab_browser')", :method => :get)
+  #tab_2_link.tab_link= link_to_remote("By tag", :url => vocabularies_path(:menu => 2), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(2,'tab_browser')", :method => :get)
+  #tab_3_link.tab_link= link_to_remote("By type", :url => vocabularies_path(:menu => 3), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(3,'tab_browser')", :method => :get)
 
 #tab_browser.content
   - if @current_action != 'index'

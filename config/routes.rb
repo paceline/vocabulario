@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'clearance/sessions', :action => 'new'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.community '/community', :controller => 'users', :action => 'index'
+  map.test_from_list '/lists/:list_id/test.:format', :controller => 'scores', :action => 'new'
   map.test '/test', :controller => 'scores', :action => 'new'
   
   # Vocabularies
@@ -49,7 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :oauth_clients
   map.resources :people, :as => 'pronouns'
   map.resource :search, :controller => :search, :member => { :live => :get }
-  map.resources :scores, :collection => { :change_test_type => :get, :update_languages => :get, :update_tags => :get, :direction_for_list => :get }
+  map.resources :scores, :collection => { :change_test_type => :get, :update_languages => :get, :update_tags => :get, :options_for_list => :get }
   map.resources :statistics
   map.resources :status, :collection => { :user_timeline => :get }
   map.resources :transformations, :member => { :reorder => :post }

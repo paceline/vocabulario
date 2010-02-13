@@ -20,7 +20,7 @@
     = render :partial => 'conjugation_menu'
   - else
     Know them by heart?
-    = link_to('Take a test!', test_path)
+    = link_to('Take a test!', test_from_list_path(@list.permalink))
  
 - if @list.static? && signed_in? && current_user == @list.user
   %ul#static_list.list= render :partial => 'admin_list'

@@ -4,6 +4,12 @@ class LanguageTest
   attr_reader :current, :limit, :tags
   LIMITS = [5,10,25,50,75,100,'all']
   
+  # Initialize new test
+  def initialize(*args)
+    options = args.extract_options!
+    args.size == 1 ? setup_based_on_list(args.first, options) : setup_based_on_params(options)
+  end
+  
   # Generate test questions
   def generate_test(words = nil)
     @limit = @limit && @limit <= words.size ? @limit : words.size
