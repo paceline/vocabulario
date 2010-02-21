@@ -8,5 +8,7 @@ config/initializers/site_keys.rb
 log/*.log
 db/*.db
 tmp/*/*
+vendor/plugins/acts_as_list
+vendor/plugins/gravatar
 vendor/plugins/viget_deployment
 mkmf.log
