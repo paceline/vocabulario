@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20100313125017) do
   add_index "client_applications", ["key"], :name => "index_client_applications_on_key", :unique => true
 
   create_table "comments", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.string   "text"

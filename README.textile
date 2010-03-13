@@ -2,6 +2,11 @@ h1. "Vocabulario":http://tuvocabulario.com
 
 Vocabulario is a very lo-fi vocabulary trainer I more or less wrote for personal use only. Feel free to try it!
 
-I'll try and add some documentation soon...
+In order for it to work you need to install the following plugins:
+* acts_as_list
+* acts_as_textiled
+* gravatar
+
+Required gems are listed in environment.rb.
 
 Ulf (hello@ufmoehring.net)

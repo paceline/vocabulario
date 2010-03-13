@@ -20,6 +20,7 @@ Rails::Initializer.run do |config|
   config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
   config.gem "oauth"
   config.gem "oauth-plugin"
+  config.gem "RedCloth"
   config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
   config.gem "thoughtbot-clearance", :lib => 'clearance', :source  => 'http://gems.github.com'
 

@@ -11,7 +11,7 @@ class CreateComments < ActiveRecord::Migration
     
     # Import comments from vocabularies
     Vocabulary.find(:all).each do |v|
-      v.commented.create({ :text => v.comment }) unless v.comment.blank? || v.comment == '-'
+      v.comments.create({ :text => v.comment }) unless v.comment.blank? || v.comment == '-'
     end
     
     # Remove comment column
@@ -27,7 +27,7 @@ class CreateComments < ActiveRecord::Migration
     execute "UPDATE vocabularies SET comment='-'"
     Comment.find(:all, :conditions => "commentable_type = 'Vocabulary'").each do |c|
       v = c.commentable
-      v.commented = c.text
+      v.comment = c.text
       v.save
     end
     
