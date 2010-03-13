@@ -14,6 +14,7 @@ class Vocabulary < ActiveRecord::Base
   belongs_to :user
   
   # Associations - Determine translations (to and from) for vocabulary. relations_to/from reference join model translation
+  has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :relations_to, :foreign_key => 'vocabulary1_id',  :class_name => 'Translation'
   has_many :relations_from, :foreign_key => 'vocabulary2_id', :class_name => 'Translation'
   has_many :transformations, :order => 'position'

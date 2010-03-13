@@ -1,0 +1,15 @@
+%ul#comments
+  -if @vocabulary.comments.blank?
+    %li.inline-hints No comments yet.
+  - else
+    = render @vocabulary.comments
+
+%h3 Got something to add?
+- if signed_in?
+  = render :partial => 'comments/form', :locals => { :object => @vocabulary, :update => 'comments' }
+- else
+  Please
+  = link_to 'log in', login_path
+  or 
+  = link_to 'sign up', signup_path
+  to post. You know, its the whole anti-spam thing.

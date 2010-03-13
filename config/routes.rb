@@ -39,6 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   # Resources
   # =========
   
+  map.resources :comments
   map.resources :conjugations
   map.resources :conjugation_times, :as => 'tenses', :has_many => :conjugations
   map.resources :languages, :controller => :vocabularies

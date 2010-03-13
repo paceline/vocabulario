@@ -16,9 +16,6 @@
       = label_tag 'article'
       = f.text_field :gender
     .fields
-      = label_tag 'comment'
-      = f.text_area :comment, { :cols => 50, :rows => 5 }
-    .fields
       = label_tag 'Language'
       = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }
     .fields

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100206131756) do
+ActiveRecord::Schema.define(:version => 20100313125017) do
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20100206131756) do
   end
 
   add_index "client_applications", ["key"], :name => "index_client_applications_on_key", :unique => true
+
+  create_table "comments", :force => true do |t|
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "conjugation_times", :force => true do |t|
     t.integer  "language_id"
@@ -176,7 +184,6 @@ ActiveRecord::Schema.define(:version => 20100206131756) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type",        :limit => 25
-    t.string   "comment",                   :default => "-"
   end
 
   create_table "vocabulary_lists", :force => true do |t|

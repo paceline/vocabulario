@@ -10,7 +10,6 @@ class VocabulariesController < ApplicationController
   in_place_edit_for :vocabulary, :gender
   in_place_edit_for :vocabulary, :language_id, { :method => :word }
   in_place_edit_for :vocabulary, :class_type
-  in_place_edit_for :vocabulary, :comment
   
   # Link vocabulary to a new conjugation
   def apply_conjugation

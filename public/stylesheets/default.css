@@ -203,7 +203,7 @@ ul.list li.item { cursor: move; }
 
 .list li.over_receiving_element ul.inline { background-color: #02B8EA; }
 
-.list a.delete { color: #C66; text-decoration: none; }
+a.delete { color: #C66; text-decoration: none; }
 
 ul#order { float: right; margin-right: -10px; }
 
@@ -224,6 +224,40 @@ ul.list_options {
 .list li ul.inline ul.list_options li { background-color: #02B8EA; display: block; }
 
 .list li ul.inline ul.list_options li a { color: #FFF; }
+
+
+/* "Main" -> "Vocabulary pane"
+   ========================== */
+
+#vocabulary_pane h2 { margin: 5px 0 10px 0; }
+
+#vocabulary_pane .no-floater { margin: 0 0 35px 0; }
+
+.floater { float: left; margin: 0 50px 0 0; }
+
+.floater h3, .no-floater h3 { margin-top: 0; }
+
+
+/* "Main" -> "Comments"
+   =================== */
+   
+#comments li { padding-bottom: 10px; }
+   
+#comments ol, #comments ul, #comments p, #comments h1, #comments h2, #comments h3, #comments h4, #comments h5 { color: #666; font-size: 1em; margin: 5px 0 5px 0; padding: 0; }
+
+#comments h1 { font-size: 1.25em; }
+
+#comments h2 { font-size: 1.2em; }
+
+#comments h3 { font-size: 1.15em; }
+
+#comments h4 { font-size: 1.1em; }
+
+#comments ol, #comments ul { margin-left: 35px; padding: 0; }
+
+#comments ul { list-style-type: square; }
+
+#comments ul li, #comments ol li { margin: 0; padding: 0; }
 
 
 /* "Sidebar"
@@ -509,6 +543,8 @@ a.edit_link, input[type="submit"].grey { margin-left: 3px; padding: .25em; }
 	cursor: move;
 	display: inline;
 }
+
+.strong { font-weight: bold; text-decoration: underline; }
 	
 #loading { float: left; margin-right: 10px; }
 
