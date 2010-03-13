@@ -11,7 +11,7 @@ class StatusController < ApplicationController
   def index
     @timeline = params.key?(:since) ? Status.timeline(params[:user_id], Time.at(params[:since].to_f)) : Status.timeline(params[:user_id])
     respond_to do |format|
-      format.html
+      format.html { redirect_to test_path if @timeline.blank? }
       format.atom { @timeline.first ? render(:layout => false) : render(:nothing => true) }
       format.json { render :json => @timeline }
       format.xml { render :xml => @timeline }

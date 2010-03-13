@@ -10,8 +10,10 @@ class CommentsController < ApplicationController
       comment =  object.comments.create({ :text => params[:comment][:text], :user_id => current_user.id })
       comment.save
       render :update do |page|
+        page.hide 'blank'
         page.insert_html :bottom, params[:update], render(comment)
         page << "new Effect.Highlight('#{comment.commentable_type.downcase}_comment_#{comment.id}')"
+        page << "$('comment_text').value = ''"
       end
     end
   end

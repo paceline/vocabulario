@@ -1,8 +1,6 @@
 %ul#comments
-  -if @vocabulary.comments.blank?
-    %li.inline-hints No comments yet.
-  - else
-    = render @vocabulary.comments
+  %li.inline-hints#blank{ :style => (@vocabulary.comments.blank? ? 'display: show;' : 'display: none;') } No comments yet.
+  = render @vocabulary.comments
 
 %h3 Got something to add?
 - if signed_in?
