@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title VOCABULARIO - A simple, non-social vocabulary trainer
+    %title VOCABULARIO - A simple, semi-social vocabulary trainer
     - if @current_controller == 'lists' && @current_action == 'show'
       %link{ :href => list_path(@list.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
     - if @current_controller == 'status' && @current_action == 'index'

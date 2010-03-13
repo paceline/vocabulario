@@ -7,6 +7,7 @@
       %li.menu
         = link_to_function "Add", "toggleMenu('add',#{detect_elements})"
         %ul#add.menuitems{:style => "display: none"}
+          %li= link_to 'New vocabulary', new_vocabulary_path
           - if signed_in_as_admin?
             - if @vocabulary && @vocabulary.verb?
               %li= link_to 'New conjugation', new_vocabulary_conjugation_path(@vocabulary.permalink)
@@ -18,8 +19,6 @@
             %li= link_to 'New set of pronouns', new_person_path
             %li= link_to 'New tense', new_conjugation_time_path
             %li= link_to 'Import vocabularies', import_vocabularies_path
-          - else
-            %li= link_to 'New vocabulary', new_vocabulary_path
         
       %li.menu
         - if @vocabulary && !@vocabulary.new_record?
