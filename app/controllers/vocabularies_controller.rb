@@ -29,10 +29,7 @@ class VocabulariesController < ApplicationController
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.apply_tags_to_translations
     flash.now[:success] = "#{@vocabulary.word}'s tags have been copied to all translations."
-    render :update do |page|
-      page.replace_html :notice, render(:partial => 'layouts/flashes')
-      page.show :notice
-    end
+    render :partial => 'layouts/flashes'
   end
   
   # Apply vocabulary's type to all translations
@@ -40,10 +37,7 @@ class VocabulariesController < ApplicationController
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.apply_type_to_translations
     flash.now[:success] = "#{@vocabulary.word}'s type has been copied to all translations."
-    render :update do |page|
-      page.replace_html :notice, render(:partial => 'layouts/flashes')
-      page.show :notice
-    end
+    render :partial => 'layouts/flashes'
   end
   
   # Create translation or new vocabulary
@@ -107,32 +101,52 @@ class VocabulariesController < ApplicationController
     end
   end
   
-  # Import CSV file using FasterCSV
+  # Import pre-parsed CSV data
   def import
     if request.post?
       begin
-        FasterCSV.parse(params[:vocabulary][:file].read, { :col_sep => ';', :row_sep => :auto }) do |row|
-          if @from && @to
-            vocabulary = Object.const_get(row[1].strip).find_or_initialize_by_word(row[0].strip) { |v| v.language = @from }
-            vocabulary.import(current_user, params[:vocabulary][:tags])
-            row[2..row.size-1].each do |translations|
-              if translations
-                translation = Object.const_get(row[1].strip).find_or_initialize_by_word(translations) { |v| v.language = @to }
-                translation.import(current_user, params[:vocabulary][:tags])
-                vocabulary.translation_to << translation if vocabulary.new_record? || translation.new_record?
-                translation.save
-              end
-            end
+        raise ArgumentError unless params.key?(:data) && params.key?(:languages)
+        languages = []
+        0.upto(params[:languages].size-1) { |i| languages << Language.find(params[:languages][i.to_s.to_sym]) }
+        params[:data].each_value do |row|
+          type = row.delete_at(0)
+          vocabularies = []
+          0.upto(row.size-1) do |i|
+            vocabulary = Object.const_get(type.blank? ? "Vocabulary" : type).find_or_initialize_by_word(row[i]) { |v| v.language = languages[i] }
+            vocabulary.import(current_user, (params[:vocabulary].key?(:tags) ? params[:vocabulary][:tags] : nil), params[:vocabulary][:new_tags])
+            vocabulary.translation_to << vocabularies.first unless vocabularies.blank?
             vocabulary.save
-          else
-            @from = Language.find_by_word(row[0].strip)
-            @to = Language.find_by_word(row[2].split(' ').first.strip)
+            vocabularies << vocabulary
           end
         end
-        flash.now[:success] = "Vocabularies have been imported to the database."
-      rescue Exception => @exception
-        flash.now[:failure] = "Something went wrong here..."
+        flash.now[:success] = "Seems like the import worked just fine."
+      rescue
+        flash.now[:failure] = "Didn't work. Please check your format and try again."
       end
+      render :partial => 'layouts/flashes'
+    else
+      render 'import'
+    end
+  end
+  
+  # Generates preview when importing vocabularies
+  def preview
+    begin
+      raise ArgumentError if params[:csv].blank? || (params[:csv].count(';') == 0 && params[:csv].count(',') == 0)
+      @data = []
+      @max_elements = 0
+      @languages = Language.list
+      sep = params[:csv].count(';') > params[:csv].count(',') ? ';' : ','
+      FasterCSV.parse(params[:csv], { :col_sep => sep, :row_sep => :auto }) do |row|
+        @data << row
+        @max_elements = row.size if row.size > @max_elements
+      end
+      render :update do |page|
+        page.replace_html 'preview', render(:partial => 'preview')
+        page.hide 'vocabulary_csv'
+      end
+    rescue Exception => @exception
+      render :nothing => true
     end
   end
   

@@ -21,10 +21,7 @@
   #tab_3_link.tab_link= link_to_remote("By type", :url => vocabularies_path(:menu => 3), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(3,'tab_browser')", :method => :get)
 
 #tab_browser.content
-  - if @current_action != 'index'
-    = render :partial => "vocabularies/#{@current_action}"
-  - else
-    = render :partial => "vocabularies/index_tab_0"
+  = render :partial => "vocabularies/#{map_action(@current_action)}"
 
 .content#vocabulary_results
   %ul.inline

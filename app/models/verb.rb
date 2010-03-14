@@ -2,7 +2,6 @@ class Verb < Vocabulary
   
   # Associations
   has_and_belongs_to_many :conjugations
-  has_many :conjugation_rules
   
   # Conjugates self based on tense and person given
   def conjugate(tense_id, person)

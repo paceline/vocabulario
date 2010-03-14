@@ -9,12 +9,21 @@ module ApplicationHelper
       end
       return ""
     end
-    return "highlight()"
+    return "highlightNotice()"
   end
   
   def interpret_flash_key(key)
     keys = { :failure => 'Nope', :success => 'Great', :notice => 'Done' }
     return keys[key]
+  end
+  
+  def map_action(action)
+    case action
+      when 'index' then 'index_tab_0'
+      when 'by_language' then 'index_tab_1'
+      when 'by_tag' then 'index_tab_2'
+      when 'by_type' then 'index_tab_3'
+    end
   end
   
   def update_notice()

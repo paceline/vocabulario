@@ -24,8 +24,8 @@
         - if @vocabulary && !@vocabulary.new_record?
           = link_to_function "Copy", "toggleMenu('copy',#{detect_elements})"
           %ul#copy.menuitems{:style => "display: none"}
-            %li= link_to 'Apply tags to translations', apply_tags_vocabulary_path(@vocabulary)
-            %li= link_to 'Apply type to translations', apply_type_vocabulary_path(@vocabulary)
+            %li= link_to_remote 'Apply tags to translations', :url => apply_tags_vocabulary_path(@vocabulary), :update => 'notice', :loaded => 'highlightNotice()'
+            %li= link_to_remote 'Apply type to translations', :url => apply_type_vocabulary_path(@vocabulary), :update => 'notice', :loaded => 'highlightNotice()'
         - else
           %p Copy
         

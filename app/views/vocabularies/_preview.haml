@@ -1,0 +1,19 @@
+%p#back= link_to_function '(Back to CSV input)', 'resetImportForm()'
+%table
+  %tr
+    %th
+    - 1.upto(@max_elements) do |i|
+      %th
+        - if i == 1
+          = select_tag "languages[#{i-1}]", options_for_select(@languages.collect {|p| [ p.word, p.id ] })
+        - else
+          = select_tag "languages[#{i-1}]", options_for_select(@languages.collect {|p| [ p.word, p.id ] }, @languages[1].id)
+  - @data.each do |row|
+    %tr
+      %td= select_tag "data[#{@data.index(row)}][]", options_for_select(Vocabulary.supported_types)
+      - 0.upto(@max_elements-1) do |i|
+        - if i < row.size
+          %td= text_field_tag "data[#{@data.index(row)}][]", row[i], :size => 10
+        - else
+          %td= text_field_tag "data[#{@data.index(row)}][]", "", :size => 10
+  

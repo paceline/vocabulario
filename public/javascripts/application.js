@@ -4,9 +4,8 @@
 
 // Highlight flash[:notice] and hide after a few seconds
 
-function highlight() {
-	Element.show('notice');
-	new Effect.Highlight('notice');
+function highlightNotice() {
+	$('notice').show();
 	setTimeout("new Effect.BlindUp('notice')",3000);
 }
 
@@ -151,4 +150,12 @@ function paintNewGraph(scores, offset) {
 	graph.labels = labels.toObject();
 
   graph.draw();
+}
+
+
+// Changes view after preview for import is loaded
+
+function resetImportForm() {
+  $('preview').innerHTML = "";
+  $('vocabulary_csv').show();
 }

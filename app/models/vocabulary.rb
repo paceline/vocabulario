@@ -116,9 +116,10 @@ class Vocabulary < ActiveRecord::Base
   end
   
   # Imports csv string
-  def import(user, tags)
+  def import(user, tags, new_tags)
     self.user = user if new_record?
     self.tag_list = (self.tag_list + tags).uniq unless tags.blank?
+    self.tag_list = (self.tag_list + new_tags.split(',')).uniq unless new_tags.blank?
   end
   
   # Gather all translations (to and from) for given vocabulary id

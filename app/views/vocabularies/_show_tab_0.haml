@@ -1,6 +1,11 @@
+- if  @vocabulary.verb? && signed_in? && !@vocabulary.conjugations.blank?
+  %p.error.content
+    %strong Please note:
+    Editing has been disabled. Making changes would most certainly break the conjugation patterns you (or someone else) have previously defined. Remove those first.
+
 .content
   %h2 Language
-  = signed_in? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word
+  = signed_in? && @vocabulary.conjugations.blank? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word
 
 .content
   %h2 Type
