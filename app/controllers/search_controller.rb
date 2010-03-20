@@ -33,7 +33,7 @@ class SearchController < ApplicationController
   # API information - 
   #   /vocabularies/by_tag/#{permalink}.xml|json (No oauth required)
   def by_tag
-    #begin
+    begin
       if params[:id] == 'untagged'
         @tag = 'Untagged'
         @vocabularies = Vocabulary.paginate :all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :group => 'vocabularies.id', :having => 'COUNT(taggings.id) = 0', :page => params[:page], :order => 'word'
@@ -42,9 +42,9 @@ class SearchController < ApplicationController
         @vocabularies = Vocabulary.paginate :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :page => params[:page], :order => 'word'
       end
       respond
-    #rescue
-    #  render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-    #end
+    rescue
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
   end
   
   # Display paged list of vocabularies with correspoding tag
