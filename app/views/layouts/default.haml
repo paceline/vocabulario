@@ -40,14 +40,14 @@
             %ul
               %li= link_to('My stats', statistics_user_path(current_user.permalink), { :title => 'My test stats' })
               %li= link_to('Profile', edit_user_path(current_user.permalink), { :title => 'Profile' })
-              %li= link_to('Log out', logout_path, { :title => 'Log out' })
+              %li= link_to('Log out', sign_out_path, { :title => 'Log out' })
           - else
             .tabs.green
               %h1 Hello, Guest
             = gravatar 'unknown@gravatar.com', { :size => '75' }
             %ul
-              %li= link_to 'Log in',  login_path,  { :title => 'Log in' }
-              %li= link_to 'Sign up', signup_path, { :title => 'Create an account' }
+              %li= link_to 'Log in',  sign_in_path,  { :title => 'Log in' }
+              %li= link_to 'Sign up', sign_up_path, { :title => 'Create an account' }
         = yield :sidebar
       #main= yield
       #footer Powered by <a href="http://github.com/paceline/vocabulario/tree/master">Vocabulario</a>, created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>

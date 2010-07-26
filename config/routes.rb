@@ -5,9 +5,9 @@ ActionController::Routing::Routes.draw do |map|
   # ============
   
   # User and login stuff
-  map.logout '/logout', :controller => 'clearance/sessions', :action => 'destroy'
-  map.login '/login', :controller => 'clearance/sessions', :action => 'new'
-  map.signup '/signup', :controller => 'users', :action => 'new'
+  map.sign_out '/logout', :controller => 'clearance/sessions', :action => 'destroy'
+  map.sign_in '/login', :controller => 'clearance/sessions', :action => 'new'
+  map.sign_up '/signup', :controller => 'users', :action => 'new'
   map.community '/community', :controller => 'users', :action => 'index'
   map.test_from_list '/lists/:list_id/test.:format', :controller => 'scores', :action => 'new'
   map.test '/test', :controller => 'scores', :action => 'new'
@@ -55,6 +55,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :statistics
   map.resources :status, :collection => { :user_timeline => :get }
   map.resources :transformations, :member => { :reorder => :post }
+  map.resource :password, :controller => 'clearance/passwords'
+  map.resource :session, :controller => 'clearance/sessions'
   map.resources :users,
     :collection => { :current => :get },
     :member => { :admin => :put, :password => :put, :statistics => [:get, :post] },
