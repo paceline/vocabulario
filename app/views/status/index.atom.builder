@@ -5,7 +5,7 @@ atom_feed do |feed|
  
   for item in @timeline
     next if item[:created_at].blank?
-    feed.entry(item, :url => item.key?(:url) ? item[:url] : (item[:user].blank? ? signup_url : item[:user][:url])) do |entry|
+    feed.entry(item, :url => item.key?(:url) ? item[:url] : (item[:user].blank? ? sign_up_url : item[:user][:url])) do |entry|
       entry.title "#{item[:user].blank? ? 'Guest' : item[:user][:name]} #{item[:text]}"
       entry.content "#{item[:user].blank? ? 'Guest' : item[:user][:name]} #{item[:text]}", :type => 'html'
       entry.updated item[:created_at].strftime("%Y-%m-%dT%H:%M:%SZ")

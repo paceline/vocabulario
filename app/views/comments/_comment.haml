@@ -5,6 +5,6 @@
     - if comment.user
       = link_to comment.user.name, comment.user.profile_url
     - else
-      = link_to 'Guest', signup_url
+      = link_to 'Guest', sign_up_url
     says:
   = comment.text

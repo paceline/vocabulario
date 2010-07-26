@@ -7,7 +7,7 @@
   = render :partial => 'comments/form', :locals => { :object => @vocabulary, :update => 'comments' }
 - else
   Please
-  = link_to 'log in', login_path
+  = link_to 'log in', sign_in_path
   or 
-  = link_to 'sign up', signup_path
+  = link_to 'sign up', sign_up_path
   to post. You know, its the whole anti-spam thing.
