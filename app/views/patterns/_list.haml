@@ -1,0 +1,14 @@
+- if @patterns.blank? 
+  %p
+    Sorry, no patterns have been added yet. Be the first and
+    = link_to 'add one', new_pattern_path
+    now.
+
+- else
+  .content
+    %h3 Live search
+    = text_field :pattern, :name, :size => 30
+    = observe_field :pattern_name, :url => live_conjugation_time_path(@tense), :method => :get, :update => 'pattern_list', :frequency => 0.5, :with => 'name', :before => "$('pattern_list').hide(); $('loading').show()", :loaded => "$('loading').hide(); $('pattern_list').show();"
+
+  %ul#pattern_list.inline
+    = render @patterns

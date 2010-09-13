@@ -159,3 +159,26 @@ function resetImportForm() {
   $('preview').innerHTML = "";
   $('vocabulary_csv').show();
 }
+
+
+// Resets form field containing hint
+function clearHint(dom_id, hint) {
+  if ($(dom_id).getValue() == hint) {
+    $(dom_id).setValue('');
+    $(dom_id).focus();
+  }
+}
+
+// Enhanced auto completer
+function getSelectionId(text, li) { 
+  new Ajax.Request('/rules/' + li.id + '.json', {
+    method: 'get',
+    onSuccess: function(transport) {
+      var rule = transport.responseText.evalJSON().rule;
+      $('rule_name').setValue(rule.name);
+      $('rule_replace').setValue(rule.replace);
+      new Effect.Highlight('rule_name');
+      new Effect.Highlight('rule_replace');
+    }
+  });
+}

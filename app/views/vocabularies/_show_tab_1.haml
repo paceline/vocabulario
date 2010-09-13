@@ -1,19 +1,8 @@
-- if @vocabulary.verb? && signed_in?
+- unless @vocabulary.language.conjugation_times.blank?
   .content
-    %p This page allows you to define conjugation patterns for verbs.
-    %p Since with many verbs there's a lot more to a conjugation than just exchanging the verb's last syllables you can define a set of transformations to get from infinitive to conjugated verb.
+    = render :partial => 'simple_list', :collection => @vocabulary.language.conjugation_times, :spacer_template => 'shared/simple_list_separator'
+
+= render :partial => 'shared/loading', :object => 'detecting patterns'
+
+#conjugation_menu
   
-  #transformations.content{ :style => @display_transformations }
-    %h2 Transformation rules
-    %ul#transformation-list
-      - @transformations.each do |t|
-        = render :partial => 'transformations/transformation', :object => t
-      - form_remote_for @transformation, :url => vocabulary_transformations_path(@vocabulary) do
-        = select_tag('type', options_for_select(Transformation.supported_types))
-        = submit_tag("New", :class => 'grey')
-      = sortable_element('transformation-list', :url => reorder_transformation_path(@vocabulary.id), :complete => visual_effect(:highlight,'transformation-list'), :handle => 'draggable')
-  
-  .content
-    %h2 Manage Patterns
-    %ul#conjugations
-      = render :partial => 'conjugation_menu'

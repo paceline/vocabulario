@@ -40,32 +40,32 @@ ActionController::Routing::Routes.draw do |map|
   # =========
   
   map.resources :comments
-  map.resources :conjugations
-  map.resources :conjugation_times, :as => 'tenses', :has_many => :conjugations
+  map.resources :patterns, :member => { :reorder => :post }, :has_many => :rules
+  map.resources :rules, :collection => { :autocomplete => :post, :test => :post }
+  map.resources :conjugation_times,
+    :as => 'tenses',
+    :member => { :live => :get },
+    :has_many => [:patterns, :vocabularies]
   map.resources :languages, :controller => :vocabularies
   map.resources :lists,
     :collection => { :switch => :get, :live => :get },
     :member => { :newitem => :post, :copy_move => [:put, :post], :show_options_menu => :post, :sort => :post, :print => :get, :reorder => :post, :unlink => :delete },
     :has_many => :scores
-    
   map.resources :oauth_clients
   map.resources :people, :as => 'pronouns'
   map.resource :search, :controller => :search, :member => { :live => :get }
   map.resources :scores, :collection => { :change_test_type => :get, :update_languages => :get, :update_tags => :get, :options_for_list => :get }
   map.resources :statistics
   map.resources :status, :collection => { :user_timeline => :get }
-  map.resources :transformations, :member => { :reorder => :post }
   map.resource :password, :controller => 'clearance/passwords'
   map.resource :session, :controller => 'clearance/sessions'
   map.resources :users,
     :collection => { :current => :get },
     :member => { :admin => :put, :password => :put, :statistics => [:get, :post] },
     :has_many => [:scores, :lists, :status]
-  
   map.resources :vocabularies,
-    :member => { :apply_conjugation => :put, :unapply_conjugation => :delete, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },
-    :collection => { :import => [:get, :post], :refresh_language => :get, :preview => :post, :review => :get, :redirect => :get },
-    :has_many => [:conjugations, :transformations]
+    :member => { :apply_conjugation => :put, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },
+    :collection => { :import => [:get, :post], :refresh_language => :get, :preview => :post, :review => :get, :redirect => :get }
     
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => 'status'

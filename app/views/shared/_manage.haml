@@ -9,10 +9,7 @@
         %ul#add.menuitems{:style => "display: none"}
           %li= link_to 'New vocabulary', new_vocabulary_path
           - if signed_in_as_admin?
-            - if @vocabulary && @vocabulary.verb?
-              %li= link_to 'New conjugation', new_vocabulary_conjugation_path(@vocabulary.permalink)
-            - else
-              %li= link_to 'New conjugation', new_conjugation_path
+            %li= link_to 'New conjugation pattern', new_pattern_path
             - if @vocabulary && !@vocabulary.new_record?
               %li= link_to 'New translation', edit_vocabulary_path(@vocabulary.permalink)
             %li= link_to 'New language', new_vocabulary_path(:type => 'Language')

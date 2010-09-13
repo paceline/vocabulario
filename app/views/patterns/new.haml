@@ -1,0 +1,43 @@
+- content_for :sidebar do
+  = render(:partial => 'shared/manage')
+  
+- content_for :notice do
+  %h1 New pattern
+  %p Add a new conjugation pattern
+
+.content
+  = error_messages_for :pattern
+  
+  - form_for @pattern do |f|
+    
+    .fields
+      = label_tag 'Name'
+      = f.text_field :name
+    
+    .fields
+      = label_tag 'Tense'
+      = select_tag('pattern[conjugation_time_id]', option_groups_from_collection_for_select(Language.list, :conjugation_times, :word, :id, :name))
+    
+    .fields
+      = label_tag 'Person'
+      %p
+        = f.radio_button :person, 0
+        First person singular  
+      %p
+        = f.radio_button :person, 1
+        Second person singular      
+      %p
+        = f.radio_button :person, 2
+        Third person singular
+      %p
+        = f.radio_button :person, 3
+        First person plural
+      %p
+        = f.radio_button :person, 4
+        Second person plural
+      %p
+        = f.radio_button :person, 5
+        Third person plural    
+
+    .fields
+      = f.submit 'Create'

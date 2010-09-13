@@ -32,8 +32,8 @@ module ApplicationHelper
     page.visual_effect :highlight, 'notice'
   end
   
-  def set_link_class(action)
-    action == 0 ? "tab_link active" : "tab_link"
+  def set_link_class(action,active=0)
+    action == active ? "tab_link active" : "tab_link"
   end
 
   def detect_elements

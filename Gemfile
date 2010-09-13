@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # Rails
-gem 'rails', '2.3.8'
+gem 'rails', '2.3.9'
 
 # Database
 gem 'mysql', '>= 2.8.1'
@@ -12,6 +12,7 @@ gem 'unicorn'
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'capistrano-ext'
+gem 'capistrano_rsync_with_remote_cache'
 
 # To use debugger
 # gem 'ruby-debug'

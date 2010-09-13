@@ -1,0 +1,3 @@
+%ul
+  - @rules.each do |rule|
+    %li{ :id => rule.id }= rule.find + "<span class='informal'>(-> " + rule.replace + ")</span>"

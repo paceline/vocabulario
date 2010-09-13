@@ -1,27 +1,53 @@
 class Verb < Vocabulary
   
   # Associations
-  has_and_belongs_to_many :conjugations
+  has_and_belongs_to_many :patterns do
+    
+    # Easier access to patterns (e.g. by_presente)
+    def for_tense(tense_id)
+      find :all, :conditions => { :conjugation_time_id => tense_id }, :order => 'person'
+    end
+      
+  end
+  
+  # Extra Variables
+  PERSONS = [:first_person_singular, :second_person_singular, :third_person_singular, :first_person_plural, :second_person_plural, :third_person_plural]
   
   # Conjugates self based on tense and person given
   def conjugate(tense_id, person)
-    tense = ConjugationTime.find(tense_id)
-    pattern = self.conjugations.find(:first, :conditions => ['conjugation_time_id = ?',tense.id])
-    raise(Error, "In order conjugate a verb needs both a tense and a matching pattern") unless tense && pattern
-    output = word.mb_chars
-    transformations.each do |t|
-      output = t.class == ReplaceEnding ? t.execute(self, output, pattern.send(person)) : t.execute(self, output, person)
-    end
-    return output
+    pattern = self.patterns.find :first, :conditions => ['conjugation_time_id = ? AND person = ?', tense_id, PERSONS.index(person)]
+    raise(RuntimeError, "In order conjugate a verb needs both a tense and a matching pattern") unless pattern
+    pattern.conjugate word
   end
   
   # Conjugates self for first person singular through third person plural
   def conjugate_all(tense_id)
     conjugation = []
-    [:first_person_singular, :second_person_singular, :third_person_singular, :first_person_plural, :second_person_plural, :third_person_plural].each do |person|
+    PERSONS.each do |person|
       conjugation << conjugate(tense_id, person)
     end
     return conjugation
+  end
+  
+  # Auto-detects matching patterns
+  def auto_detect_patterns(tense_id)
+    detected = []
+    0.upto(5) do |i|
+      temp = []
+      Pattern.find(:all, :conditions => ['conjugation_time_id = ? AND person = ?', tense_id, i]).each do |pattern|
+        temp << pattern if pattern.conjugate(word)
+      end
+      detected << temp
+    end
+    return detected.flatten.blank? ? nil : detected
+  end
+  
+  # Manages associated pattern pool
+  def update_pattern_links(tense_id, new_ids_pool)
+    old_pool = patterns.for_tense tense_id
+    new_pool = new_ids_pool.collect { |id| Pattern.find id }
+    (old_pool - new_pool).collect { |pattern| patterns.delete pattern }
+    (new_pool - old_pool).collect { |pattern| patterns << pattern }
   end
   
 end

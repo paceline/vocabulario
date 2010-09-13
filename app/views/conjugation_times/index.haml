@@ -4,15 +4,17 @@
 - content_for :notice do
   %h1 Explore Tenses
   %p= "There are currently #{ConjugationTime.count} tenses in the database."
-    
+
 .tabs
   - @languages.each do |l|
-    %div{ :id => "tab_#{@languages.index(l)}_link", :class => set_link_class(@languages.index(l)) }= link_to_remote(l.word, :url => conjugation_times_path(:menu => @languages.index(l)), :before => "deactivateTab(#{@languages.size})", :loaded => "activateTab(#{@languages.index(l)},'tab_browser')", :method => :get)
+    %div{ :id => "tab_#{@languages.index(l)}_link", :class => set_link_class(@languages.index(l),@active) }= link_to_remote(l.word, :url => conjugation_times_path(:menu => @languages.index(l)), :before => "deactivateTab(#{@languages.size})", :loaded => "activateTab(#{@languages.index(l)},'tab_browser')", :method => :get)
 
 #tab_browser.content
   = render :partial => "conjugation_times/list"
 
-%ul#patterns.inline
-  = render @conjugations
+#patterns
+  = render :partial => 'patterns/list'
+
+= render :partial => 'shared/loading', :object => 'loading patterns'
     
   

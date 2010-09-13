@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100313125017) do
+ActiveRecord::Schema.define(:version => 20100913191039) do
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -39,25 +39,7 @@ ActiveRecord::Schema.define(:version => 20100313125017) do
     t.string   "name",        :limit => 25
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "conjugations", :force => true do |t|
-    t.integer  "conjugation_time_id"
-    t.string   "name",                   :limit => 25
-    t.boolean  "regular",                              :default => true, :null => false
-    t.string   "first_person_singular",  :limit => 50
-    t.string   "second_person_singular", :limit => 50
-    t.string   "third_person_singular",  :limit => 50
-    t.string   "first_person_plural",    :limit => 50
-    t.string   "second_person_plural",   :limit => 50
-    t.string   "third_person_plural",    :limit => 50
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "conjugations_verbs", :id => false, :force => true do |t|
-    t.integer "conjugation_id"
-    t.integer "verb_id"
+    t.string   "permalink"
   end
 
   create_table "lists", :force => true do |t|
@@ -100,6 +82,23 @@ ActiveRecord::Schema.define(:version => 20100313125017) do
 
   add_index "oauth_tokens", ["token"], :name => "index_oauth_tokens_on_token", :unique => true
 
+  create_table "patterns", :force => true do |t|
+    t.string  "name"
+    t.integer "conjugation_time_id"
+    t.integer "person"
+  end
+
+  create_table "patterns_rules", :force => true do |t|
+    t.integer "pattern_id"
+    t.integer "rule_id"
+    t.integer "position"
+  end
+
+  create_table "patterns_verbs", :id => false, :force => true do |t|
+    t.integer "pattern_id"
+    t.integer "verb_id"
+  end
+
   create_table "people", :force => true do |t|
     t.integer  "language_id"
     t.string   "first_person_singular",  :limit => 50
@@ -111,6 +110,12 @@ ActiveRecord::Schema.define(:version => 20100313125017) do
     t.string   "pronoun",                :limit => 50
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "rules", :force => true do |t|
+    t.string "name"
+    t.string "find"
+    t.string "replace"
   end
 
   create_table "scores", :force => true do |t|
@@ -137,18 +142,6 @@ ActiveRecord::Schema.define(:version => 20100313125017) do
   create_table "tags", :force => true do |t|
     t.string "name"
     t.string "permalink"
-  end
-
-  create_table "transformations", :force => true do |t|
-    t.string   "type",                :limit => 50
-    t.integer  "vocabulary_id"
-    t.integer  "position"
-    t.integer  "pattern_start"
-    t.integer  "pattern_end"
-    t.integer  "insert_before"
-    t.boolean  "include_white_space",               :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "translations", :id => false, :force => true do |t|

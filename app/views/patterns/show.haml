@@ -1,0 +1,27 @@
+- content_for :sidebar do
+  = render :partial => 'shared/manage'
+
+- content_for :notice do
+  %h1= signed_in? ? in_place_editor_field(:pattern, :name) : @pattern.name
+  %p A conjugation pattern
+
+.content
+  %ul#rules.list
+    - @pattern.rules.each do |rule|
+      %li{ :id => "list_item_#{rule.id}", :class => 'item' }
+        %ul.inline
+          %li= link_to_remote 'X', { :url => pattern_rule_path(@pattern, rule), :method => :delete, :confirm => 'Are you sure you want to delete this comment?' }, { :class => 'delete' }
+          %li= link_to rule.name, edit_pattern_rule_path(@pattern, rule)  
+      
+= sortable_element 'rules', :url => reorder_pattern_path(@pattern)
+
+.content
+  = link_to 'New rule', new_pattern_rule_path(@pattern)
+  |
+  = link_to 'Back to tense', conjugation_time_path(@pattern.conjugation_time.permalink)
+
+.content
+  %p= !@pattern.verbs.blank? ? "It applies to the following verbs:" : "No verbs use this pattern. You can change this by selecting this pattern as any verb's conjugation" 
+  %ul.inline
+    - @pattern.verbs.each do |verb|
+      %li= link_to(verb.name, vocabulary_path(verb.permalink))

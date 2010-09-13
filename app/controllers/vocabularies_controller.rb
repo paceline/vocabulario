@@ -13,15 +13,10 @@ class VocabulariesController < ApplicationController
   
   # Link vocabulary to a new conjugation
   def apply_conjugation
-    @vocabulary = Vocabulary.find(params[:id])
-    conjugation = Conjugation.find(params[:conjugation_id])
-    @vocabulary.conjugations << conjugation if conjugation
-    @conjugations = @vocabulary.conjugations
-    render :update do |page|
-      page.show 'transformations'
-      page.replace_html 'conjugations', :partial => 'conjugation_menu'
-      page.visual_effect :highlight, "conjugation_#{params[:conjugation_id]}"
-    end
+    @vocabulary = Vocabulary.find params[:id]
+    @vocabulary.update_pattern_links params[:conjugation_time_id], params[:conjugations].values
+    flash.now[:success] = "Patterns for \"#{@vocabulary.word}\" have been saved."
+    render :partial => 'layouts/flashes'
   end
   
   # Tag vocabulary with new tag list
@@ -93,7 +88,7 @@ class VocabulariesController < ApplicationController
         if params[:menu]
           render :partial => "index_tab_#{params[:menu]}"
         else
-          render :text => "var vocabularies = new Array('" + @vocabularies_list.collect { |v| v.word }.join("','") + "');"
+          render :text => "var vocabularies = ['" + @vocabularies_list.collect { |v| v.word }.join("','") + "'];"
         end
       }
       format.json { render :json => @vocabularies_list.to_json(:except => [:user_id, :language_id], :include => [ :language, :translation_to ]) }
@@ -169,18 +164,21 @@ class VocabulariesController < ApplicationController
   #   /vocabularies/#{id|permalink}.xml|json (No Oauth required)
   def show
     begin
-      @vocabulary = Vocabulary.find_by_id_or_permalink(params[:id])
+      @vocabulary = Vocabulary.find_by_id_or_permalink(params.key?(:vocabulary_id) ? params[:vocabulary_id] : params[:id])
       @language = @vocabulary.language
       if @vocabulary.verb?
-        @conjugations = @vocabulary.conjugations
-        @transformations = @vocabulary.transformations
-        @transformation = Transformation.new
+        @conjugations = params.key?(:conjugation_time_id) ? @vocabulary.patterns.for_tense(params[:conjugation_time_id]) : @vocabulary.patterns
       end
       respond_to do |format|
         format.html
         format.js {
-          @display_transformations = @conjugations.empty? ? "display: none;" : "display: visible;" if @vocabulary.verb?
-          render :partial => "show_tab_#{params[:menu]}"
+          if params.key?(:conjugation_time_id)
+            @patterns = @vocabulary.auto_detect_patterns params[:conjugation_time_id]
+            @pronouns = @vocabulary.language.personal_pronouns
+            render :partial => 'assign_conjugation'
+          else
+            render :partial => "show_tab_#{params[:menu]}"
+          end
         }
         format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }
         format.xml { render :xml => @vocabulary.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }
@@ -196,18 +194,6 @@ class VocabulariesController < ApplicationController
     vocabulary.tag_list = params[:tag_list]
     vocabulary.save
     render :partial => "shared/taglist_detail", :object => vocabulary.tag_list
-  end
-  
-  # Remove conjugation from vocabulary
-  def unapply_conjugation
-    @vocabulary = Vocabulary.find(params[:id])
-    conjugation = Conjugation.find(params[:conjugation_id])
-    @vocabulary.conjugations.delete(conjugation) if conjugation
-    @conjugations = @vocabulary.conjugations
-    render :update do |page|
-      page.remove "conjugation_#{params[:conjugation_id]}"
-      page.visual_effect :highlight, 'conjugations'
-    end
   end
   
   # Remove translation object corresponding to two vocabularies

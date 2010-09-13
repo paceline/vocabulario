@@ -17,7 +17,6 @@ class Vocabulary < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :relations_to, :foreign_key => 'vocabulary1_id',  :class_name => 'Translation'
   has_many :relations_from, :foreign_key => 'vocabulary2_id', :class_name => 'Translation'
-  has_many :transformations, :order => 'position'
   has_many :translation_to, :through => :relations_to, :source => :vocabulary2
   has_many :translation_from, :through => :relations_from, :source => :vocabulary1
   has_many :vocabulary_lists
@@ -83,7 +82,7 @@ class Vocabulary < ActiveRecord::Base
   # Copy type to translations
   def apply_type_to_translations
     self.translations.each do |translation|
-      translation.conjugations.clear unless translation.conjugations.blank?
+      translation.patterns.clear unless translation.patterns.blank?
       translation.class_type = self.class_type
       translation.save
     end
@@ -100,7 +99,7 @@ class Vocabulary < ActiveRecord::Base
   end
   
   # Stub for conjugation realtionship
-  def conjugations
+  def patterns
     nil
   end
   

@@ -6,6 +6,6 @@ In order for it to work you need to install the following plugins:
 * acts_as_textiled
 * gravatar
 
-Required gems are listed in environment.rb.
+Required gems are listed in Gemfile.
 
 Ulf (hello@ufmoehring.net)

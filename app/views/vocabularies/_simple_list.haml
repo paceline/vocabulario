@@ -1,0 +1,1 @@
+= link_to_remote simple_list.name, :url => conjugation_time_vocabulary_path(simple_list.id, @vocabulary.id), :method => 'get', :update => 'conjugation_menu', :before => "$('conjugation_menu').hide(); $('loading').show()", :loaded => "$('loading').hide(); $('conjugation_menu').show();"

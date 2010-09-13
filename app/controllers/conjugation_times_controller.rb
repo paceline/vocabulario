@@ -33,15 +33,30 @@ class ConjugationTimesController < ApplicationController
   def index
     @languages = Language.find(:all, :order => 'word')
     @tenses = params.key?(:menu) ? @languages[params[:menu].to_i].conjugation_times : @languages.first.conjugation_times
-    @conjugations = @tenses.first.conjugations unless @tenses.blank?
+    @tense = @tenses.first
+    @active = 0
+    @patterns = @tense.patterns unless @tenses.blank?
     respond_to do |format|
       format.html
       format.js {
         render :update do |page|
           page.replace_html :tab_browser, render(:partial => 'list')
-          page.replace_html :patterns, render(@conjugations)
+          page.replace_html :patterns, render(:partial => 'patterns/list')
         end 
       }
+    end
+  end
+  
+  # Live search of the pattern database
+  def live
+    @tense = ConjugationTime.find_by_id_or_permalink params[:id]
+    @search = params[:name]
+    if @search.blank?
+      @patterns = @tense.patterns
+      render @patterns
+    else
+      @patterns = @tense.patterns.find :all, :conditions => ['name LIKE ?',"%#{@search}%"], :limit => 100
+      @patterns.blank? ? render(:nothing => true) : render(@patterns)
     end
   end
   
@@ -50,9 +65,14 @@ class ConjugationTimesController < ApplicationController
     @time = ConjugationTime.new
   end
   
-  # Shows details for a tense
+  # Show tense
   def show
-    @conjugation_time = ConjugationTime.find(params[:id])
+    @languages = Language.find(:all, :order => 'word')
+    @tense = ConjugationTime.find_by_id_or_permalink params[:id]
+    @active = @languages.index @tense.language
+    @tenses = @tense.language.conjugation_times
+    @patterns = @tense.patterns
+    render 'index'
   end
   
 end

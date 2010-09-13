@@ -1,3 +1,6 @@
+- content_for :custom_includes do
+  %link{ :href => user_timeline_path(@user.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+
 - content_for :sidebar do
   - if signed_in_as_admin? && @user != current_user
     .content

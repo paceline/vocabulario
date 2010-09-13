@@ -1,0 +1,6 @@
+- form.inputs do
+  = form.input :name, :hint => "A name, something self-explanatory"
+  = form.input :find, :hint => "Regular expression or string to look for in verb"
+  #find_lookup_auto_complete.auto_complete
+  = javascript_tag "new Ajax.Autocompleter('rule_find', 'find_lookup_auto_complete', '/rules/autocomplete', {frequency: 0, minChars: 2, paramName: 'find', afterUpdateElement: getSelectionId});"
+  = form.input :replace, :hint => "Regular expression or string to replace 'find' with"

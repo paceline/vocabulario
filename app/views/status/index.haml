@@ -1,3 +1,6 @@
+- content_for :custom_includes do
+  %link{ :href => timeline_path(:format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+  
 - content_for :notice do
   %h1 Welcome to Vocabulario
   %p A very lo-fi vocabulary trainer I more or less wrote for personal use only

@@ -2,16 +2,8 @@
 %html
   %head
     %title VOCABULARIO - A simple, semi-social vocabulary trainer
-    - if @current_controller == 'lists' && @current_action == 'show'
-      %link{ :href => list_path(@list.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
-    - if @current_controller == 'status' && @current_action == 'index'
-      %link{ :href => timeline_path(:format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
-    - if @current_controller == 'users' && (@current_action == 'edit' || @current_action == 'show')
-      %link{ :href => user_timeline_path(@user.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
     = javascript_include_tag :defaults, 'slider.js'
-    = javascript_include_tag 'ierange-m2.js' if @current_controller == 'vocabularies' && @current_action == 'show'
-    = javascript_include_tag "/vocabularies.js?language=#{@translation.language.id}" if @translation
-    = javascript_include_tag 'js-class.js', 'bluff-min.js', 'bluff-src.js', 'excanvas.js' if @current_action == 'statistics'
+    = yield :custom_includes
     = ANALYTICS_CODE
     = stylesheet_link_tag "default"
   %body{ :onLoad => on_load }

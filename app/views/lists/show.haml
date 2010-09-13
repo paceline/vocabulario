@@ -1,3 +1,6 @@
+- content_for :custom_includes do
+  %link{ :href => list_path(@list.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+
 - content_for :sidebar do
   - if @list.static? && current_user == @list.user
     .content

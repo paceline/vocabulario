@@ -11,6 +11,15 @@ class Language < Vocabulary
   # Associations - Determine vocabularies for every lanugage
   has_many :vocabularies, :foreign_key => 'language_id', :class_name => 'Vocabulary', :dependent => :delete_all
   
+  # Determine pronouns
+  def self.get_methods_for_pronouns
+    Person::SUPPORTED_PRONOUNS.each do |type|
+      define_method "#{type}_pronouns" do
+        people.find :first, :conditions => { :pronoun => type }
+      end
+    end
+  end
+  get_methods_for_pronouns
   
   # Return languages currently supported
   def self.list(conditions = "")

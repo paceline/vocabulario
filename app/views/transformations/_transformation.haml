@@ -1,5 +1,0 @@
-%li{ :id => "transformation_#{transformation.id}" }
-  %em= link_to_function('+', "toggleListItem('transformation_#{transformation.id}')", { :id => "transformation_#{transformation.id}_link" })
-  .draggable= transformation.class.to_s.underscore.humanize
-  %div{ :class => "transformation_details", :id => "transformation_#{transformation.id}_details", :style => "display: none" }
-    = render transformation

@@ -1,4 +1,26 @@
-- if !@vocabulary.language.conjugation_times.blank?
-  - form_remote_for @vocabulary, :url => apply_conjugation_vocabulary_path(:id => @vocabulary.id) do
-    = select_tag('conjugation_id', option_groups_from_collection_for_select(@vocabulary.language.conjugation_times, :conjugations, :name, :id, :name))
-    = submit_tag("Add", :class => 'grey')
+- if @patterns
+  - form_remote_for @vocabulary, :url => apply_conjugation_vocabulary_path(:conjugation_time_id => params[:conjugation_time_id]), :update => 'notice', :loaded => 'highlightNotice()' do
+    %table
+      %tr
+        %th Person
+        - 1.upto(max_array_length @patterns) do |i|
+          %th= "Alternative #{i}"
+      - 0.upto(@patterns.size-1) do |i|
+        %tr
+          %td
+            %strong= @pronouns.by_integer i
+          - 0.upto(max_array_length(@patterns)-1) do |j|
+            - if j < @patterns[i].size
+              %td
+                = radio_button_tag "conjugations[#{i}]", @patterns[i][j].id, (@conjugations.blank? ? j == 0 : @conjugations.include?(@patterns[i][j]))
+                = @patterns[i][j].conjugate @vocabulary.word
+                - if @conjugations.blank?
+                  (unsaved)
+            - else
+              %td -
+    = submit_tag "Save", :class => 'spacing'
+
+- else
+  %p Sorry, no matching patterns were found
+  
+    

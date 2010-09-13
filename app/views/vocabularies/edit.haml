@@ -1,3 +1,6 @@
+- content_for :custom_includes do
+  = javascript_include_tag "/vocabularies.js?language=#{@translation.language.id}"
+  
 - content_for :sidebar do
   = render :partial => 'shared/manage'
 

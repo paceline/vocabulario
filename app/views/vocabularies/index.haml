@@ -29,3 +29,5 @@
       %li= link_to(vocabulary.name, vocabulary_path(vocabulary.permalink))  
   <br />
   = will_paginate @vocabularies
+  
+= render :partial => 'shared/loading', :object => 'searching vocabularies'

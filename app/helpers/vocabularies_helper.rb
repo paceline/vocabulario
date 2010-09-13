@@ -4,14 +4,12 @@ module VocabulariesHelper
     return Language.list("id != #{translation.language_id}").collect {|p| [ p.word, p.id ] }
   end
   
-  def apply_transformations(rule, vocabulary)
-    tense = ConjugationTime.find(:first, :conditions => ['language_id = ?',vocabulary.language.id])
-    pattern = vocabulary.conjugations.find(:first, :conditions => ['conjugation_time_id = ?',tense.id])
-    output = vocabulary.word.mb_chars
-    vocabulary.transformations.each do |t|
-      return output if t == rule
-      output = t.class == ReplaceEnding ? t.execute(vocabulary, output, pattern.send(:first_person_singular)) : t.execute(vocabulary, output, :first_person_singular)
+  def max_array_length(multi_dimensional_array)
+    max_length = 0
+    multi_dimensional_array.each do |array|
+      max_length = array.size > max_length ? array.size : max_length
     end
+    return max_length
   end
   
 end

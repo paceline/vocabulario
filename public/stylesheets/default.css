@@ -51,6 +51,7 @@ li { margin: 0 0 .75em 0 }
 ol { font-size: 1.2em; margin: 0; }
 ol li { margin: 0 0 40px 0; }
 
+table { margin-left: -2px; }
 td, th { background-color: #EEE; padding: .3em; }
 th { background-color: #CCC; text-align: left; }
 
@@ -123,8 +124,6 @@ ul.inline { line-height: 1.5; padding: 0; }
 ul.inline li { display: inline; padding-right: .6em; }
 
 #scores p { font-size: .8em; margin-top: 10px; }
-
-.transformation_details { padding: 20px 0 25px 20px; }
 
 
 /* "Main" -> "Tabs"
@@ -448,6 +447,8 @@ fieldset.buttons ol { list-style: none; }
 
 .inline-hints { color: #AAA; font-style: italic; font-size: 0.85em; }
 
+input[type="submit"].spacing { margin: 25px 0 0 -1px; }
+
 
 /* "Forms" -> "Small"
    ================== */
@@ -536,6 +537,46 @@ form.inplaceeditor-form a:hover {
 a.edit_link, input[type="submit"].grey { margin-left: 3px; padding: .25em; }
 
 
+/* "Forms" -> "Regex tester"
+   ============================ */
+
+#regex { background-color: #DED; margin: -8px 0 40px 0; }
+   
+#regex_input form { float: left; }
+
+form.test_rule input, #modified_verb {
+  color: #999;
+  font-size: 1.25em;
+}
+
+form.test_rule input { 
+  margin: 17px 25px 25px 25px;
+  padding: .2em;
+}
+
+#regex_result {
+  min-height: 88px;
+  width: 100%;
+}
+
+#regex_result p {
+  float: left;
+  margin: 25px 25px 0 0; 
+}
+
+#modified_verb {
+  background-color: #FFF;
+  border: 1px #CCC solid;
+  float: left;
+  margin: 16px 0 0 0;
+  min-height: 20px;
+  padding: .3em;
+  text-align: left;
+  width: 250px;
+}
+
+
+
 /* "Various"
    ========= */
 
@@ -547,6 +588,10 @@ a.edit_link, input[type="submit"].grey { margin-left: 3px; padding: .25em; }
 .strong { font-weight: bold; text-decoration: underline; }
 	
 #loading { float: left; margin-right: 10px; }
+
+#loading img.with_text { float: left; margin-right: 10px; }
+
+#loading p { margin-top: 5px; width: 450px; }
 
 #graph_navigation { margin: 35px 0 0 20px; }
 
