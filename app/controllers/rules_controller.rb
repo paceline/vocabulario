@@ -53,6 +53,6 @@ class RulesController < ApplicationController
     @rule = Rule.find params[:id]
     @rule.update_attributes params[:rule]
     flash[:success] = "Rule has been updated."
-    render 'new'
+    redirect_to pattern_path(params[:pattern_id])
   end
 end

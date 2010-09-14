@@ -81,32 +81,6 @@ function deactivateTab(length) {
 }
 
 
-// Get selected text
-// Requires ierange to work in IE (http://code.google.com/p/ierange/)
-
-function getUserSelection() {
-	var userSelection = window.getSelection();
-	if (userSelection.toString() == "") {
-		return [-1, -1];
-	}
-	else {
-		var rangeObject = getRangeObject(userSelection);
-		return [rangeObject.startOffset, rangeObject.endOffset-1];
-	}
-}
-
-function getRangeObject(selectionObject) {
-	if (selectionObject.getRangeAt)
-		return selectionObject.getRangeAt(0);
-	else {
-		var range = document.createRange();
-		range.setStart(selectionObject.anchorNode,selectionObject.anchorOffset);
-		range.setEnd(selectionObject.focusNode,selectionObject.focusOffset);
-		return range;
-	}
-}
-
-
 // Paint a new graph
 // Sends Ajax request to retrieve data from server, then uses Bluff to paint graph
 
@@ -168,6 +142,7 @@ function clearHint(dom_id, hint) {
     $(dom_id).focus();
   }
 }
+
 
 // Enhanced auto completer
 function getSelectionId(text, li) { 

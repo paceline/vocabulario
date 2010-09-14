@@ -15,8 +15,13 @@ class VocabulariesController < ApplicationController
   def apply_conjugation
     @vocabulary = Vocabulary.find params[:id]
     @vocabulary.update_pattern_links params[:conjugation_time_id], params[:conjugations].values
-    flash.now[:success] = "Patterns for \"#{@vocabulary.word}\" have been saved."
-    render :partial => 'layouts/flashes'
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page << "['#{params[:conjugations].values.join('\',\'')}'].collect(function(n) { Effect.Puff('unsaved_' + n); })"
+        end
+      }
+    end
   end
   
   # Tag vocabulary with new tag list

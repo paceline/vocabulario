@@ -1,2 +1,5 @@
 %li{ :id => "conjugation_#{pattern.id}"}
+  - if @search
+    = link_to pattern.name.sub(@search,"<b>#{@search}</b>"), pattern
+  - else
     = link_to pattern.name, pattern

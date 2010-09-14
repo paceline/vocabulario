@@ -1,5 +1,5 @@
 - if @patterns
-  - form_remote_for @vocabulary, :url => apply_conjugation_vocabulary_path(:conjugation_time_id => params[:conjugation_time_id]), :update => 'notice', :loaded => 'highlightNotice()' do
+  - form_remote_for @vocabulary, :url => apply_conjugation_vocabulary_path(:conjugation_time_id => params[:conjugation_time_id]), :loaded => 'highlightNotice()' do
     %table
       %tr
         %th Person
@@ -15,7 +15,7 @@
                 = radio_button_tag "conjugations[#{i}]", @patterns[i][j].id, (@conjugations.blank? ? j == 0 : @conjugations.include?(@patterns[i][j]))
                 = @patterns[i][j].conjugate @vocabulary.word
                 - if @conjugations.blank?
-                  (unsaved)
+                  %span{ :id => "unsaved_#{@patterns[i][j].id}" } (not set)
             - else
               %td -
     = submit_tag "Save", :class => 'spacing'
