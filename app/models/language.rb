@@ -9,7 +9,9 @@ class Language < Vocabulary
   has_many :people
   
   # Associations - Determine vocabularies for every lanugage
-  has_many :vocabularies, :foreign_key => 'language_id', :class_name => 'Vocabulary', :dependent => :delete_all
+  has_many :nouns, :foreign_key => 'language_id', :class_name => 'Noun', :dependent => :delete_all, :order => 'word'
+  has_many :verbs, :foreign_key => 'language_id', :class_name => 'Verb', :dependent => :delete_all, :order => 'word'
+  has_many :vocabularies, :foreign_key => 'language_id', :class_name => 'Vocabulary', :dependent => :delete_all, :order => 'word'
   
   # Determine pronouns
   def self.get_methods_for_pronouns

@@ -4,6 +4,7 @@ class CreateScores < ActiveRecord::Migration
       t.references :user, :language
       t.integer :points, :default => 0
       t.integer :questions
+      t.string :test_type
       t.timestamps
     end
   end

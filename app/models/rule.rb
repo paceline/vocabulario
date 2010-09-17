@@ -19,8 +19,4 @@ class Rule < ActiveRecord::Base
     modified == text ? nil : modified
   end
   
-  # Searches database for matching verbs
-  def find_matching_verbs
-  end
-  
 end

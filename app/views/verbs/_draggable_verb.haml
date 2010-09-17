@@ -1,0 +1,4 @@
+%li{ :id => "unassigned_#{draggable_verb.id}" }
+  %span.draggable drag
+  = link_to(draggable_verb.name, vocabulary_path(draggable_verb.permalink))
+= draggable_element "unassigned_#{draggable_verb.id}", :revert => true

@@ -1,0 +1,3 @@
+%li{ :id => "assigned_#{verb.id}" }
+  = link_to_remote '(X)', { :url => remove_verb_pattern_path(@pattern, :verb_id => verb.id), :method => :delete }, { :class => 'delete' }
+  = link_to verb.name, vocabulary_path(verb.permalink)

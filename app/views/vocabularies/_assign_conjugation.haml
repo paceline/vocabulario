@@ -8,14 +8,15 @@
       - 0.upto(@patterns.size-1) do |i|
         %tr
           %td
-            %strong= @pronouns.by_integer i
+            %strong
+              = @pronouns.by_integer i
+              - if @conjugations.blank?
+                %span{ :id => "unsaved_#{i}" } (not set)
           - 0.upto(max_array_length(@patterns)-1) do |j|
             - if j < @patterns[i].size
               %td
                 = radio_button_tag "conjugations[#{i}]", @patterns[i][j].id, (@conjugations.blank? ? j == 0 : @conjugations.include?(@patterns[i][j]))
                 = @patterns[i][j].conjugate @vocabulary.word
-                - if @conjugations.blank?
-                  %span{ :id => "unsaved_#{@patterns[i][j].id}" } (not set)
             - else
               %td -
     = submit_tag "Save", :class => 'spacing'

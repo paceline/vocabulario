@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
     t.datetime "updated_at"
     t.integer  "time_value"
     t.string   "time_unit",        :limit => 10
-    t.boolean  "all_or_any",                     :default => false
+    t.boolean  "all_or_any"
   end
 
   create_table "oauth_nonces", :force => true do |t|
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
   add_index "oauth_tokens", ["token"], :name => "index_oauth_tokens_on_token", :unique => true
 
   create_table "patterns", :force => true do |t|
-    t.string  "name"
     t.integer "conjugation_time_id"
+    t.string  "name"
     t.integer "person"
   end
 
@@ -94,10 +94,15 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
     t.integer "position"
   end
 
+  add_index "patterns_rules", ["pattern_id"], :name => "index_patterns_rules_on_pattern_id"
+
   create_table "patterns_verbs", :id => false, :force => true do |t|
     t.integer "pattern_id"
     t.integer "verb_id"
   end
+
+  add_index "patterns_verbs", ["pattern_id"], :name => "index_patterns_verbs_on_pattern_id"
+  add_index "patterns_verbs", ["verb_id"], :name => "index_patterns_verbs_on_verb_id"
 
   create_table "people", :force => true do |t|
     t.integer  "language_id"
@@ -121,12 +126,12 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
   create_table "scores", :force => true do |t|
     t.integer  "user_id"
     t.integer  "language_from_id"
-    t.integer  "points",                         :default => 0
+    t.integer  "points",           :default => 0
     t.integer  "questions"
+    t.string   "test_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "language_to_id"
-    t.string   "test_type",        :limit => 50
   end
 
   create_table "taggings", :force => true do |t|
@@ -149,10 +154,11 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
     t.integer "vocabulary2_id", :null => false
   end
 
-  add_index "translations", ["vocabulary1_id", "vocabulary2_id"], :name => "vocabulary1_id_vocabulary2_id_index", :unique => true
+  add_index "translations", ["vocabulary1_id"], :name => "index_translations_on_vocabulary1_id"
+  add_index "translations", ["vocabulary2_id"], :name => "index_translations_on_vocabulary2_id"
 
   create_table "users", :force => true do |t|
-    t.string   "name",               :limit => 100
+    t.string   "name",               :limit => 100, :default => ""
     t.string   "email",              :limit => 100
     t.string   "salt",               :limit => 40
     t.datetime "created_at"
@@ -180,10 +186,15 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
     t.string   "type",        :limit => 25
   end
 
+  add_index "vocabularies", ["permalink"], :name => "index_vocabularies_on_permalink"
+
   create_table "vocabulary_lists", :force => true do |t|
     t.integer "list_id"
     t.integer "vocabulary_id"
     t.integer "position"
   end
+
+  add_index "vocabulary_lists", ["list_id"], :name => "index_vocabulary_lists_on_list_id"
+  add_index "vocabulary_lists", ["vocabulary_id"], :name => "index_vocabulary_lists_on_vocabulary_id"
 
 end

@@ -4,6 +4,8 @@ class CreateVocabularyLists < ActiveRecord::Migration
       t.references :list, :vocabulary
       t.integer :position
     end
+    add_index :vocabulary_lists, :list_id
+    add_index :vocabulary_lists, :vocabulary_id
   end
 
   def self.down

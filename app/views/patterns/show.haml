@@ -6,6 +6,11 @@
   %p A conjugation pattern
 
 .content
+  = link_to 'New rule', new_pattern_rule_path(@pattern)
+  |
+  = link_to 'Back to tense', conjugation_time_path(@pattern.conjugation_time.permalink)
+
+.content
   %ul#rules.list
     - @pattern.rules.each do |rule|
       %li{ :id => "list_item_#{rule.id}", :class => 'item' }
@@ -16,12 +21,16 @@
 = sortable_element 'rules', :url => reorder_pattern_path(@pattern)
 
 .content
-  = link_to 'New rule', new_pattern_rule_path(@pattern)
-  |
-  = link_to 'Back to tense', conjugation_time_path(@pattern.conjugation_time.permalink)
+  %p= !@pattern.verbs.blank? ? "Its currently used to conjugate the following verbs:" : "No verbs use this pattern." 
+  %ul#assigned.inline
+    %li{ :id => "assigned_none", :style => "display: #{@pattern.verbs.blank? ? 'inline' : 'none' };" } Drag verbs here
+    - @pattern.verbs.each do |verb|
+      = render verb
+  = drop_receiving_element "assigned", :hoverclass => 'over', :url => add_verb_pattern_path(@pattern), :with => "'verb_id=' + element.id.split('_')[1]"
 
 .content
-  %p= !@pattern.verbs.blank? ? "It applies to the following verbs:" : "No verbs use this pattern. You can change this by selecting this pattern as any verb's conjugation" 
-  %ul.inline
-    - @pattern.verbs.each do |verb|
-      %li= link_to(verb.name, vocabulary_path(verb.permalink))
+  %p It may also apply to the following verbs:
+  %ul#unassigned.inline
+    - @pattern.auto_detect_verbs.each do |verb|
+      = render :partial => 'verbs/draggable_verb', :object => verb
+      

@@ -9,6 +9,8 @@ class CreatePatterns < ActiveRecord::Migration
       t.references :pattern
       t.references :verb
     end
+    add_index :patterns_verbs, :pattern_id
+    add_index :patterns_verbs, :verb_id
   end
   
   def self.down

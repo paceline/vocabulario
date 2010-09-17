@@ -18,7 +18,7 @@ class VocabulariesController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page << "['#{params[:conjugations].values.join('\',\'')}'].collect(function(n) { Effect.Puff('unsaved_' + n); })"
+          page << "['#{params[:conjugations].keys.join('\',\'')}'].collect(function(n) { Effect.Puff('unsaved_' + n); })"
         end
       }
     end

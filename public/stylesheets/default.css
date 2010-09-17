@@ -585,6 +585,16 @@ form.test_rule input {
 	display: inline;
 }
 
+span.draggable {
+  background-color: #666;
+  color: #FFF;
+  font-size: .5em;
+  padding: .2em;
+  text-transform: uppercase;
+}
+
+.over { background-color: #666; }
+
 .strong { font-weight: bold; text-decoration: underline; }
 	
 #loading { float: left; margin-right: 10px; }

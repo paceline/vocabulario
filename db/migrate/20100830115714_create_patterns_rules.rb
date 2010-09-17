@@ -5,6 +5,7 @@ class CreatePatternsRules < ActiveRecord::Migration
       t.references :rule
       t.integer :position
     end
+    add_index :patterns_rules, :pattern_id
   end
 
   def self.down

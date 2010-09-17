@@ -8,6 +8,7 @@ class CreateVocabularies < ActiveRecord::Migration
       t.string :permalink
       t.timestamps
     end
+    add_index :vocabularies, :permalink
   end
 
   def self.down

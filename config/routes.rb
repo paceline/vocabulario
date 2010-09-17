@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # =========
   
   map.resources :comments
-  map.resources :patterns, :member => { :reorder => :post }, :has_many => :rules
+  map.resources :patterns, :member => { :reorder => :post, :add_verb => :post, :remove_verb => :delete }, :has_many => :rules
   map.resources :rules, :collection => { :autocomplete => :post, :test => :post }
   map.resources :conjugation_times,
     :as => 'tenses',

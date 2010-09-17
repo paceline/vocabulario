@@ -3,8 +3,9 @@ class CreateTranslations < ActiveRecord::Migration
     create_table :translations, :id => false do |t|
       t.integer :vocabulary1_id, :null => false
       t.integer :vocabulary2_id, :null => false
-      t.add_index [:vocabulary1_id, :vocabulary2_id], :unique => true
     end
+    add_index :translations, :vocabulary1_id
+    add_index :translations, :vocabulary2_id
   end
 
   def self.down
