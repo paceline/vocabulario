@@ -1,8 +1,8 @@
 class VocabulariesController < ApplicationController
   
   # Filters
-  before_filter :browser_required, :except => [:index, :show]
-  before_filter :login_required, :except => [:index, :refresh_language, :select, :show]
+  before_filter :browser_required, :except => [:index, :show, :translate]
+  before_filter :login_required, :except => [:index, :refresh_language, :select, :show, :translate]
   before_filter :admin_required, :only => [:destroy]
   
   # Features
@@ -185,8 +185,8 @@ class VocabulariesController < ApplicationController
             render :partial => "show_tab_#{params[:menu]}"
           end
         }
-        format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }
-        format.xml { render :xml => @vocabulary.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] }, :translation_from => {:include => {:language => {:only => [:id, :word]}}}, :translation_to => {:include => {:language => {:only => [:id, :word]}}}}) }
+        format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
+        format.xml { render :xml => @vocabulary.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
       end
     rescue
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
@@ -199,6 +199,24 @@ class VocabulariesController < ApplicationController
     vocabulary.tag_list = params[:tag_list]
     vocabulary.save
     render :partial => "shared/taglist_detail", :object => vocabulary.tag_list
+  end
+  
+  # Translate vocabulary
+  #
+  # API information - 
+  #   /vocabularies/#{id|permalink}/translate.xml|json (No Oauth required)
+  #   Optional parameter: language_id
+  def translate
+    begin
+      @vocabulary = Vocabulary.find_by_id_or_permalink(params.key?(:vocabulary_id) ? params[:vocabulary_id] : params[:id])
+      language_id = params.key?(:language_id) ? params[:language_id].to_i : nil
+      respond_to do |format|
+        format.json { render :json => @vocabulary.translations(language_id).to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } })  }
+        format.xml { render :xml => @vocabulary.translations(language_id).to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
+      end
+    rescue
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
   end
   
   # Remove translation object corresponding to two vocabularies

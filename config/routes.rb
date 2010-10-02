@@ -64,7 +64,7 @@ ActionController::Routing::Routes.draw do |map|
     :member => { :admin => :put, :password => :put, :statistics => [:get, :post] },
     :has_many => [:scores, :lists, :status]
   map.resources :vocabularies,
-    :member => { :apply_conjugation => :put, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete },
+    :member => { :apply_conjugation => :put, :apply_tags => :post, :apply_type => :post, :tag => :post, :unlink => :delete, :translate => :get },
     :collection => { :import => [:get, :post], :refresh_language => :get, :preview => :post, :review => :get, :redirect => :get }
     
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
