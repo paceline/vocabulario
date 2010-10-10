@@ -90,7 +90,6 @@ class VocabulariesController < ApplicationController
   # Add translation form
   def edit
     @translation = Vocabulary.find_by_id_or_permalink(params[:id])
-    format.all { invalid_request }
   end
   
   # Delete vocabulary, including translation links
