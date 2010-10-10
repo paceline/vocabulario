@@ -2,6 +2,7 @@ class PatternsController < ApplicationController
   
   # Filters
   before_filter :admin_required
+  before_filter :browser_required
   
   # Features
   in_place_edit_for :pattern, :name
@@ -27,6 +28,14 @@ class PatternsController < ApplicationController
     end
   end
   
+  # Delete a pattern
+  def destroy
+    pattern = Pattern.find params[:id]
+    conjugation_time = pattern.conjugation_time
+    pattern.destroy
+    redirect_to conjugation_time_path(conjugation_time.permalink)
+  end
+  
   # Add self to a verb
   def remove_verb
     pattern = Pattern.find params[:id]
@@ -37,7 +46,7 @@ class PatternsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.toggle "assigned_none" if pattern.verbs.size == 1
+          pattern.verbs.size >= 1 ? page.hide("assigned_none") : page.show("assigned_none")
           page.remove "assigned_#{verb.id}"
           if insert_at == -1
             page.insert_html :bottom, "unassigned", render(:partial => 'verbs/draggable_verb', :object => verb)

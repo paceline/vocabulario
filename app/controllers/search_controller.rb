@@ -23,8 +23,8 @@ class SearchController < ApplicationController
       @language = Vocabulary.find_by_id_or_permalink(params[:id])
       @vocabularies = Vocabulary.paginate_by_language_id @language.id, :page => params[:page], :order => 'word'
       respond
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    rescue ActiveRecord::RecordNotFound
+      file_not_found
     end
   end
   
@@ -42,8 +42,8 @@ class SearchController < ApplicationController
         @vocabularies = Vocabulary.paginate :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :page => params[:page], :order => 'word'
       end
       respond
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    rescue ActiveRecord::RecordNotFound
+      file_not_found
     end
   end
   
@@ -56,8 +56,8 @@ class SearchController < ApplicationController
       conditions = params[:id] == "other" ? "type IS NULL" : "type = '#{params[:id]}'"
       @vocabularies = Vocabulary.paginate :all, :conditions => conditions, :page => params[:page], :order => 'word'
       respond
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    rescue ActiveRecord::RecordNotFound
+      file_not_found
     end
   end
   
@@ -70,8 +70,8 @@ class SearchController < ApplicationController
       @user = User.find_by_id_or_permalink(params[:id])
       @vocabularies = Vocabulary.paginate_by_user_id @user.id, :page => params[:page], :order => 'word'
       respond
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    rescue ActiveRecord::RecordNotFound
+      file_not_found
     end
   end
   
@@ -80,10 +80,14 @@ class SearchController < ApplicationController
     
     # Render is identical for all actions
     def respond
-      respond_to do |format|
-        format.html { render 'vocabularies/index' }
-        format.json { render :json => @vocabularies.to_json(:except => [:user_id, :language_id], :include => [:language, :translation_from, :translation_to]) }
-        format.xml { render :xml => @vocabularies.to_xml(:except => [:user_id, :language_id], :include => [:language, :translation_from, :translation_to]) }
+      if @vocabularies.blank?
+        file_not_found
+      else
+        respond_to do |format|
+          format.html { render 'vocabularies/index' }
+          format.json { render :json => @vocabularies.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
+          format.xml { render :xml => @vocabularies.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
+        end
       end
     end
   

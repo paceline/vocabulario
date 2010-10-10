@@ -4,3 +4,5 @@
   #find_lookup_auto_complete.auto_complete
   = javascript_tag "new Ajax.Autocompleter('rule_find', 'find_lookup_auto_complete', '/rules/autocomplete', {frequency: 0, minChars: 2, paramName: 'find', afterUpdateElement: getSelectionId});"
   = form.input :replace, :hint => "Regular expression or string to replace 'find' with"
+  - unless @current_action == 'new'
+    = form.input :save_as_new, :as => :boolean

@@ -1,8 +1,8 @@
 class VocabulariesController < ApplicationController
   
   # Filters
-  before_filter :browser_required, :except => [:index, :show, :translate]
-  before_filter :login_required, :except => [:index, :refresh_language, :select, :show, :translate]
+  before_filter :browser_required, :except => [:conjugate, :index, :show, :translate]
+  before_filter :login_required, :except => [:conjugate, :index, :refresh_language, :select, :show, :translate]
   before_filter :admin_required, :only => [:destroy]
   
   # Features
@@ -40,6 +40,26 @@ class VocabulariesController < ApplicationController
     render :partial => 'layouts/flashes'
   end
   
+  # Conjugate verb
+  #
+  # API information - 
+  #   /vocabularies/#{id|permalink}/translate.xml|json (No Oauth required)
+  #   Required parameter: tense_id
+  def conjugate
+    begin
+      @vocabulary = Verb.find_by_id_or_permalink params[:id]
+      @vocabulary.conjugate_all params[:tense_id].to_i
+      respond_to do |format|
+        format.json { render :json => { :conjugation => @vocabulary.conjugation_to_hash.to_json } }
+        format.xml { render :xml => @vocabulary.conjugation_to_hash.to_xml(:root => 'conjugation') }
+      end
+    rescue ActiveRecord::RecordNotFound
+      file_not_found
+    rescue RuntimeError
+      invalid_request
+    end
+  end
+  
   # Create translation or new vocabulary
   def create
     if params[:translation]
@@ -70,6 +90,7 @@ class VocabulariesController < ApplicationController
   # Add translation form
   def edit
     @translation = Vocabulary.find_by_id_or_permalink(params[:id])
+    format.all { invalid_request }
   end
   
   # Delete vocabulary, including translation links
@@ -96,8 +117,8 @@ class VocabulariesController < ApplicationController
           render :text => "var vocabularies = ['" + @vocabularies_list.collect { |v| v.word }.join("','") + "'];"
         end
       }
-      format.json { render :json => @vocabularies_list.to_json(:except => [:user_id, :language_id], :include => [ :language, :translation_to ]) }
-      format.xml { render :xml => @vocabularies_list.to_xml(:except => [:user_id, :language_id], :include => [ :language, :translation_to ]) }
+      format.json { render :json => @vocabularies_list.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
+      format.xml { render :xml => @vocabularies_list.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
     end
   end
   
@@ -188,8 +209,8 @@ class VocabulariesController < ApplicationController
         format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
         format.xml { render :xml => @vocabulary.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
       end
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    rescue ActiveRecord::RecordNotFound
+      file_not_found
     end
   end
   
@@ -214,8 +235,8 @@ class VocabulariesController < ApplicationController
         format.json { render :json => @vocabulary.translations(language_id).to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } })  }
         format.xml { render :xml => @vocabulary.translations(language_id).to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
       end
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    rescue ActiveRecord::RecordNotFound
+      file_not_found
     end
   end
   

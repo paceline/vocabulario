@@ -9,6 +9,9 @@ class Rule < ActiveRecord::Base
   validates_uniqueness_of :find, :scope => 'replace', :message => 'already exists in database'
   validates_uniqueness_of :replace, :scope => 'find', :message => 'already exists in database'
   
+  # Additional attributes
+  attr_accessor :save_as_new
+  
   # Searches for find pattern and replaces with replace text
   def find_and_replace(text)
     modified = if find.first == '/' && find.last == '/'
@@ -17,6 +20,11 @@ class Rule < ActiveRecord::Base
         text.gsub find, replace
       end
     modified == text ? nil : modified
+  end
+  
+  # Shorthand for patterns.empty?
+  def has_patterns?
+    !patterns.empty?
   end
   
 end

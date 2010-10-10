@@ -3,6 +3,9 @@ class CommentsController < ApplicationController
   # Layout
   layout nil
   
+  # Filters
+  before_filter :browser_required
+  
   # Create a new comment
   def create
     if params.key?(:commentable_id) && params.key?(:commentable_type)

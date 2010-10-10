@@ -8,6 +8,8 @@
 .content
   = link_to 'New rule', new_pattern_rule_path(@pattern)
   |
+  = link_to 'Delete pattern', pattern_path(@pattern), :method => :delete, :confirm => 'Are you sure you want to delete this pattern?'
+  |
   = link_to 'Back to tense', conjugation_time_path(@pattern.conjugation_time.permalink)
 
 .content
@@ -15,7 +17,7 @@
     - @pattern.rules.each do |rule|
       %li{ :id => "list_item_#{rule.id}", :class => 'item' }
         %ul.inline
-          %li= link_to_remote 'X', { :url => pattern_rule_path(@pattern, rule), :method => :delete, :confirm => 'Are you sure you want to delete this comment?' }, { :class => 'delete' }
+          %li= link_to_remote 'X', { :url => pattern_rule_path(@pattern, rule), :method => :delete, :confirm => 'Are you sure you want to delete this rule?' }, { :class => 'delete' }
           %li= link_to rule.name, edit_pattern_rule_path(@pattern, rule)  
       
 = sortable_element 'rules', :url => reorder_pattern_path(@pattern)

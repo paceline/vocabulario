@@ -67,9 +67,9 @@ class UsersController < Clearance::UsersController
         format.json { render :json => current_user == @user || current_user.admin ? @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) : @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
         format.xml { render :xml => current_user == @user || current_user.admin ? @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) : @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
       end
-    rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-    end
+     rescue ActiveRecord::RecordNotFound
+        file_not_found
+     end
   end
   
   # Show user profile and stats
@@ -128,6 +128,7 @@ class UsersController < Clearance::UsersController
       @user.update_attributes!(params[:user])
       flash.now[:success] = "Your profile has been successfully updated."
     rescue
+      internal_server_error
     end
     render :edit
   end

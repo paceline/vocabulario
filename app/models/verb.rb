@@ -1,13 +1,13 @@
 class Verb < Vocabulary
   
   # Associations
-  has_and_belongs_to_many :patterns do
-    
-    # Easier access to patterns (e.g. by_presente)
+  has_and_belongs_to_many :patterns, :order => 'person' do
     def for_tense(tense_id)
       find :all, :conditions => { :conjugation_time_id => tense_id }, :order => 'person'
     end
-      
+    def for_tense_and_person(tense_id, person)
+      find :first, :conditions => { :conjugation_time_id => tense_id, :person => person }
+    end
   end
   
   # Extra Variables
@@ -15,18 +15,29 @@ class Verb < Vocabulary
   
   # Conjugates self based on tense and person given
   def conjugate(tense_id, person)
-    pattern = self.patterns.find :first, :conditions => ['conjugation_time_id = ? AND person = ?', tense_id, PERSONS.index(person)]
+    pattern = self.patterns.for_tense_and_person tense_id, PERSONS.index(person)
     raise(RuntimeError, "In order conjugate a verb needs both a tense and a matching pattern") unless pattern
     pattern.conjugate word
   end
   
   # Conjugates self for first person singular through third person plural
   def conjugate_all(tense_id)
-    conjugation = []
+    @conjugation = []
     PERSONS.each do |person|
-      conjugation << conjugate(tense_id, person)
+      @conjugation << conjugate(tense_id, person)
     end
-    return conjugation
+    return @conjugation
+  end
+  
+  # Spits out conjugation as hash for json/xml output
+  def conjugation_to_hash
+    hash = OrderedHash.new
+    if @conjugation
+      0.upto(@conjugation.size-1) do |i|
+        hash.merge!({ PERSONS[i] => @conjugation[i] })
+      end
+    end
+    return hash
   end
   
   # Auto-detects matching patterns

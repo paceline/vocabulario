@@ -449,6 +449,8 @@ fieldset.buttons ol { list-style: none; }
 
 input[type="submit"].spacing { margin: 25px 0 0 -1px; }
 
+.boolean input { margin-right: 8px; }
+
 
 /* "Forms" -> "Small"
    ================== */

@@ -2,7 +2,6 @@ class ListsController < ApplicationController
   
   # Filters
   before_filter :browser_required, :except => [:index, :show]
-  before_filter :web_service_authorization_required, :only => [:index, :show]
   before_filter :login_required, :except => [:index, :print, :show, :sort]
   
   # Creates a new list
@@ -140,13 +139,10 @@ class ListsController < ApplicationController
           format.xml { render :xml => current_user ? @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
         end
       else
-        respond_to do |format|
-          format.html || format.atom { redirect_to '/login' }
-          format.json || format.xml { render :nothing => true, :status => 401 }
-        end
+        unauthorized
       end
     rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+      file_not_found
     end
   end
   

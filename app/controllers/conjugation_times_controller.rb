@@ -2,6 +2,7 @@ class ConjugationTimesController < ApplicationController
   
   # Filters
   before_filter :admin_required
+  before_filter :browser_required
   
   # Features
   in_place_edit_for :conjugation_time, :name

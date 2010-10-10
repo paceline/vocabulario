@@ -9,7 +9,7 @@
   %body{ :onLoad => on_load }
     .container
       #header
-        .navigation.no-padding= link_to "Wiki", 'http://wiki.tuvocabulario.com'
+        .navigation.no-padding= link_to "API Wiki", 'http://paceline.github.com/vocabulario'
         .navigation= link_to "Community", community_path
         .navigation= link_to "Vocabularies", vocabularies_path
         .navigation= link_to "Test Center", test_path
@@ -42,4 +42,4 @@
               %li= link_to 'Sign up', sign_up_path, { :title => 'Create an account' }
         = yield :sidebar
       #main= yield
-      #footer Powered by <a href="http://github.com/paceline/vocabulario/tree/master">Vocabulario</a>, created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>
+      #footer Powered by <a href="http://github.com/paceline/vocabulario">Vocabulario</a>, created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>

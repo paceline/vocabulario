@@ -2,6 +2,7 @@ class RulesController < ApplicationController
   
   # Filters
   before_filter :admin_required
+  before_filter :browser_required, :except => :show
   
   # List alle rules
   def autocomplete
@@ -16,6 +17,17 @@ class RulesController < ApplicationController
     @pattern.rules << rule
     @pattern.save if rule.valid? && rule.errors.empty?
     redirect_to @pattern 
+  end
+  
+  # Delete a rule
+  def destroy
+    rule = Rule.find params[:id]
+    pattern = Pattern.find params[:pattern_id]
+    pattern.rules.delete rule
+    rule.destroy unless rule.has_patterns?
+    render :update do |page|
+      page << "Effect.DropOut('list_item_#{params[:id]}')"
+    end
   end
   
   # Edit a rule
@@ -33,6 +45,7 @@ class RulesController < ApplicationController
   def show
     rule = Rule.find params[:id]
     respond_to do |format|
+      format.html { redirect_to edit_pattern_rule_path(params[:pattern_id], params[:id]) }
       format.json { render :json => rule }
     end
   end
@@ -50,9 +63,23 @@ class RulesController < ApplicationController
   
   # Update current rule
   def update
-    @rule = Rule.find params[:id]
-    @rule.update_attributes params[:rule]
-    flash[:success] = "Rule has been updated."
-    redirect_to pattern_path(params[:pattern_id])
+    @current_rule = Rule.find params[:id]
+    if params[:rule][:save_as_new].to_i == 1
+      @pattern = Pattern.find params[:pattern_id]
+      @rule = Rule.new params[:rule]
+      if @rule.valid? && @rule.errors.empty?
+        @pattern.rules.delete @current_rule
+        @pattern.rules << @rule
+        @pattern.save
+        flash[:success] = "Rule has been saved as new."
+        redirect_to pattern_path(params[:pattern_id])
+      else
+        render 'new'
+      end
+    else
+      @current_rule.update_attributes params[:rule]
+      flash[:success] = "Rule has been updated."
+      redirect_to pattern_path(params[:pattern_id])
+    end
   end
 end

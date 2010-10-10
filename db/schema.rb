@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100913191039) do
+ActiveRecord::Schema.define(:version => 20101009200650) do
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
+  end
+
+  create_table "conjugations", :force => true do |t|
+    t.integer "pattern_id"
+    t.integer "verb_id"
   end
 
   create_table "lists", :force => true do |t|
@@ -95,14 +100,6 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
   end
 
   add_index "patterns_rules", ["pattern_id"], :name => "index_patterns_rules_on_pattern_id"
-
-  create_table "patterns_verbs", :id => false, :force => true do |t|
-    t.integer "pattern_id"
-    t.integer "verb_id"
-  end
-
-  add_index "patterns_verbs", ["pattern_id"], :name => "index_patterns_verbs_on_pattern_id"
-  add_index "patterns_verbs", ["verb_id"], :name => "index_patterns_verbs_on_verb_id"
 
   create_table "people", :force => true do |t|
     t.integer  "language_id"
