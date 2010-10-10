@@ -1,8 +1,8 @@
 class ConjugationTimesController < ApplicationController
   
   # Filters
-  before_filter :admin_required, :except => :index
-  before_filter :browser_required, :except => :index
+  before_filter :admin_required, :except => [:index, :show]
+  before_filter :browser_required, :except => [:index, :show]
   
   # Features
   in_place_edit_for :conjugation_time, :name
@@ -81,7 +81,11 @@ class ConjugationTimesController < ApplicationController
     @active = @languages.index @tense.language
     @tenses = @tense.language.conjugation_times
     @patterns = @tense.patterns
-    render 'index'
+    respond_to do |format|
+      format.html { render 'index' }
+      format.json { render :json => @tense.to_json(:except => :language_id, :include => { :language => { :only => [:id, :word] } }) }
+      format.xml { render :xml => @tense.to_xml(:except => :language_id, :include => { :language => { :only => [:id, :word] } }) }
+    end
   end
   
   # Switch tabs
