@@ -1,8 +1,8 @@
 class ConjugationTimesController < ApplicationController
   
   # Filters
-  before_filter :admin_required
-  before_filter :browser_required
+  before_filter :admin_required, :except => :index
+  before_filter :browser_required, :except => :index
   
   # Features
   in_place_edit_for :conjugation_time, :name
@@ -32,19 +32,27 @@ class ConjugationTimesController < ApplicationController
   
   # List tenses
   def index
-    @languages = Language.find(:all, :order => 'word')
-    @tenses = params.key?(:menu) ? @languages[params[:menu].to_i].conjugation_times : @languages.first.conjugation_times
-    @tense = @tenses.first
-    @active = 0
-    @patterns = @tense.patterns unless @tenses.blank?
-    respond_to do |format|
-      format.html
-      format.js {
-        render :update do |page|
-          page.replace_html :tab_browser, render(:partial => 'list')
-          page.replace_html :patterns, render(:partial => 'patterns/list')
-        end 
-      }
+    if params.key? :language_id
+      @tenses = Language.find(params[:language_id]).conjugation_times
+      respond_to do |format|
+        format.json { render :json => @tenses.to_json(:except => :language_id) }
+        format.xml { render :xml => @tenses.to_xml(:except => :language_id) }
+      end
+    else
+      if params.key? :all
+         @tenses = ConjugationTime.find :all, :order => "language_id, name"
+      else
+        @languages = Language.find(:all, :order => 'word')
+        @tenses = @languages.first.conjugation_times
+        @tense = @tenses.first
+        @active = 0
+        @patterns = @tense.patterns unless @tenses.blank?
+      end
+      respond_to do |format|
+        format.html
+        format.json { render :json => @tenses.to_json(:except => :language_id, :include => { :language => { :only => [:id, :word] } }) }
+        format.xml { render :xml => @tenses.to_xml(:except => :language_id, :include => { :language => { :only => [:id, :word] } }) }
+      end
     end
   end
   
@@ -74,6 +82,17 @@ class ConjugationTimesController < ApplicationController
     @tenses = @tense.language.conjugation_times
     @patterns = @tense.patterns
     render 'index'
+  end
+  
+  # Switch tabs
+  def tab
+    @tenses = Language.find(:all, :order => 'word')[params[:menu].to_i].conjugation_times
+    @tense = @tenses.first
+    @patterns = @tense.patterns unless @tenses.blank?
+    render :update do |page|
+      page.replace_html :tab_browser, render(:partial => 'list')
+      page.replace_html :patterns, render(:partial => 'patterns/list')
+    end
   end
   
 end

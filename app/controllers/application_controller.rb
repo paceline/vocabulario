@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
     before_filter :identify_controller_and_action
     
     def browser_required
-      invalid_request unless !params.key?(:format) || params[:format] == 'js'
+      invalid_request unless !params.key?(:format) || params[:format] == 'js' || params[:format] == 'html'
     end
 
     def identify_controller_and_action

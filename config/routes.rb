@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :rules, :collection => { :autocomplete => :post, :test => :post }
   map.resources :conjugation_times,
     :as => 'tenses',
+    :collection => { :tab => :get },
     :member => { :live => :get },
     :has_many => [:patterns, :vocabularies]
   map.resources :languages, :controller => :vocabularies

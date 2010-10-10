@@ -7,7 +7,7 @@
 
 .tabs
   - @languages.each do |l|
-    %div{ :id => "tab_#{@languages.index(l)}_link", :class => set_link_class(@languages.index(l),@active) }= link_to_remote(l.word, :url => conjugation_times_path(:menu => @languages.index(l)), :before => "deactivateTab(#{@languages.size})", :loaded => "activateTab(#{@languages.index(l)},'tab_browser')", :method => :get)
+    %div{ :id => "tab_#{@languages.index(l)}_link", :class => set_link_class(@languages.index(l),@active) }= link_to_remote(l.word, :url => tab_conjugation_times_path(:menu => @languages.index(l)), :before => "deactivateTab(#{@languages.size})", :loaded => "activateTab(#{@languages.index(l)},'tab_browser')", :method => :get)
 
 #tab_browser.content
   = render :partial => "conjugation_times/list"
