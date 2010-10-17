@@ -26,6 +26,5 @@ gem "formtastic", '>= 1.0.1'
 gem "haml"
 gem "oauth"
 gem "oauth-plugin"
-gem "orderedhash"
 gem "RedCloth"
 gem 'will_paginate', '2.3.14'

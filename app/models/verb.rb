@@ -31,13 +31,14 @@ class Verb < Vocabulary
   
   # Spits out conjugation as hash for json/xml output
   def conjugation_to_hash
-    hash = OrderedHash.new
+    result = []
+    pronouns = language.personal_pronouns
     if @conjugation
       0.upto(@conjugation.size-1) do |i|
-        hash.merge!({ PERSONS[i] => @conjugation[i] })
+        result << { "person" => pronouns.by_integer(i), "verb" => @conjugation[i] }
       end
     end
-    return hash
+    return result
   end
   
   # Auto-detects matching patterns

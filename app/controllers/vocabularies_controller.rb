@@ -50,7 +50,7 @@ class VocabulariesController < ApplicationController
       @vocabulary = Verb.find_by_id_or_permalink params[:id]
       @vocabulary.conjugate_all params[:tense_id].to_i
       respond_to do |format|
-        format.json { render :json => { :conjugation => @vocabulary.conjugation_to_hash.to_json } }
+        format.json { render :json => @vocabulary.conjugation_to_hash.to_json }
         format.xml { render :xml => @vocabulary.conjugation_to_hash.to_xml(:root => 'conjugation') }
       end
     rescue ActiveRecord::RecordNotFound
