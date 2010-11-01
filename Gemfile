@@ -1,4 +1,5 @@
-source 'http://rubygems.org'
+source "http://rubygems.org"
+source "http://gemcutter.org"
 
 # Rails
 gem 'rails', '~> 2.3.10'
@@ -24,6 +25,7 @@ gem "factory_girl"
 gem "fastercsv"
 gem "formtastic", '>= 1.0.1'
 gem "haml"
+gem "irwi"
 gem "oauth"
 gem "oauth-plugin"
 gem "RedCloth"

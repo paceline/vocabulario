@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101009200650) do
+ActiveRecord::Schema.define(:version => 20101031131833) do
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -40,11 +40,6 @@ ActiveRecord::Schema.define(:version => 20101009200650) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
-  end
-
-  create_table "conjugations", :force => true do |t|
-    t.integer "pattern_id"
-    t.integer "verb_id"
   end
 
   create_table "lists", :force => true do |t|
@@ -100,6 +95,14 @@ ActiveRecord::Schema.define(:version => 20101009200650) do
   end
 
   add_index "patterns_rules", ["pattern_id"], :name => "index_patterns_rules_on_pattern_id"
+
+  create_table "patterns_verbs", :id => false, :force => true do |t|
+    t.integer "pattern_id"
+    t.integer "verb_id"
+  end
+
+  add_index "patterns_verbs", ["pattern_id"], :name => "index_patterns_verbs_on_pattern_id"
+  add_index "patterns_verbs", ["verb_id"], :name => "index_patterns_verbs_on_verb_id"
 
   create_table "people", :force => true do |t|
     t.integer  "language_id"
@@ -193,5 +196,34 @@ ActiveRecord::Schema.define(:version => 20101009200650) do
 
   add_index "vocabulary_lists", ["list_id"], :name => "index_vocabulary_lists_on_list_id"
   add_index "vocabulary_lists", ["vocabulary_id"], :name => "index_vocabulary_lists_on_vocabulary_id"
+
+  create_table "wiki_page_versions", :force => true do |t|
+    t.integer  "page_id",    :null => false
+    t.integer  "updator_id"
+    t.integer  "number"
+    t.string   "comment"
+    t.string   "path"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "updated_at"
+  end
+
+  add_index "wiki_page_versions", ["page_id"], :name => "index_wiki_page_versions_on_page_id"
+  add_index "wiki_page_versions", ["updator_id"], :name => "index_wiki_page_versions_on_updator_id"
+
+  create_table "wiki_pages", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "updator_id"
+    t.integer  "language_id"
+    t.string   "path"
+    t.string   "title"
+    t.text     "content"
+    t.boolean  "public",      :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wiki_pages", ["creator_id"], :name => "index_wiki_pages_on_creator_id"
+  add_index "wiki_pages", ["path"], :name => "index_wiki_pages_on_path", :unique => true
 
 end

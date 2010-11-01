@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   # The priority is based upon order of creation: first created -> highest priority.
   
   # Named routes
@@ -35,6 +36,9 @@ ActionController::Routing::Routes.draw do |map|
   map.timeline '/timeline.:format', :controller => 'status', :action => 'index'
   map.user_timeline '/users/:user_id/timeline.:format', :controller => 'status', :action => 'index'
   
+  # Wiki stuff
+  map.wiki_by_tag '/wiki/by_tag/:id.:format', :controller => 'wiki_pages', :action => 'by_tag'
+  map.wiki_root '/wiki'
   
   # Resources
   # =========
@@ -65,8 +69,9 @@ ActionController::Routing::Routes.draw do |map|
     :member => { :admin => :put, :password => :put, :statistics => [:get, :post] },
     :has_many => [:scores, :lists, :status]
   map.resources :vocabularies,
-    :member => { :apply_conjugation => :put, :apply_tags => :post, :apply_type => :post, :conjugate => :get, :tag => :post, :unlink => :delete, :translate => :get },
+    :member => { :apply_conjugation => :put, :apply_tags => :post, :apply_type => :post, :conjugate => :get, :unlink => :delete, :translate => :get },
     :collection => { :import => [:get, :post], :refresh_language => :get, :preview => :post, :review => :get, :redirect => :get }
+  map.resources :tags
     
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => 'status'

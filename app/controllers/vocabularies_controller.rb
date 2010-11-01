@@ -213,14 +213,6 @@ class VocabulariesController < ApplicationController
     end
   end
   
-  # Tag vocabulary with new tag list
-  def tag
-    vocabulary = Vocabulary.find(params[:id])
-    vocabulary.tag_list = params[:tag_list]
-    vocabulary.save
-    render :partial => "shared/taglist_detail", :object => vocabulary.tag_list
-  end
-  
   # Translate vocabulary
   #
   # API information - 
