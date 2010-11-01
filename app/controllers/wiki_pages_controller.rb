@@ -5,7 +5,7 @@ class WikiPagesController < ApplicationController
   
   # Override access control (editing, deleting)
   def edit_allowed?
-    if (@page.new_record? || @page.public) && !@page.path.blank?
+    if (@page.new_record? || @page.public) && @page.id != 1
       current_user != nil
     else
       current_user && @page.creator_id == current_user.id

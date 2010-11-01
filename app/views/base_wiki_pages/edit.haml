@@ -17,7 +17,7 @@
     %br
     = f.text_field :title
   %p
-    Refers to language (optional)
+    Refers to language
     %br
     = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }
   %p
