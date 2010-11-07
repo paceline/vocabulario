@@ -7,6 +7,7 @@ config/database.yml
 config/deploy.rb
 config/deploy/*
 config/initializers/site_keys.rb
+config/unicorn.rb
 log/*.log
 db/*.db
 tmp/*/*
