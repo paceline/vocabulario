@@ -1,4 +1,5 @@
 *._*
+*.*~
 .bundle
 .rsync_cache
 *.DS_Store
