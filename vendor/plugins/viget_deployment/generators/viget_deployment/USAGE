@@ -1,0 +1,12 @@
+Description:
+    Creates the standard Viget Labs deployment configuration. The basename of RAILS_ROOT
+    is used as the name of the application. This can be overridden by passing an application
+    name as the first argument.
+
+Examples:
+    `./script/generate viget_deployment`
+
+        creates staging environment in config/environments by copying production
+        creates database.yml for mysql, with staging environment
+        creates Capfile, config/deploy.rb, config/deploy/production.rb
+            and config/deploy/staging.rb

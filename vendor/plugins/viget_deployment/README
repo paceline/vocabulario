@@ -1,0 +1,12 @@
+= VigetDeployment
+
+This is a repackaging of VLCapistrano and related gems into Rails plugin form.
+
+This plugin requires that the following gems be installed:
+
+* capistrano
+* capistrano-ext
+* tinder
+* capistrano_rsync_with_remote_cache (http://github.com/vigetlabs/capistrano_rsync_with_remote_cache/tree/master)
+
+After installing this plugin, run `./script/generate viget_deployment` to generate Capistrano configuration.
