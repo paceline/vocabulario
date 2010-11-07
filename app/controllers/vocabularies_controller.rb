@@ -106,12 +106,20 @@ class VocabulariesController < ApplicationController
   #   /vocabularies.xml|json (No Oauth required)
   def index
     @vocabularies_list = params[:language] ? Vocabulary.find(:all, :order => 'word', :conditions => ['language_id != ?',params[:language]]) : Vocabulary.find(:all, :order => 'word')
-    @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => 150
     respond_to do |format|
-      format.html { render :action => 'index' }
+      format.html { 
+        @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => Vocabulary.per_page
+        @page = params[:page] || 1
+        render :action => 'index'
+      }
       format.js {
         if params[:menu]
           render :partial => "index_tab_#{params[:menu]}"
+        elsif params[:last]
+          @last = params[:last].to_i
+          @vocabularies = @vocabularies_list.paginate :page => @last + 1, :per_page => Vocabulary.per_page     
+          @page = @last + 1
+          @vocabularies.empty? ? render(:nothing => true) : render(:partial => 'vocabularies', :object => @vocabularies, :locals => {:page => @page})
         else
           render :text => "var vocabularies = ['" + @vocabularies_list.collect { |v| v.word }.join("','") + "'];"
         end

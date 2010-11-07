@@ -85,8 +85,7 @@ class ApplicationController < ActionController::Base
     end
 
     def identify_controller_and_action
-      @current_action = action_name
-      @current_controller = controller_name
+      @parameters = request.parameters
     end
     
     def web_service_authorization_required

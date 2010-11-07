@@ -12,4 +12,11 @@ module VocabulariesHelper
     return max_length
   end
   
+  def build_pagination_url(parameters)
+    url = "/#{parameters[:controller]}"
+    url += "/#{parameters[:action]}" unless parameters[:action] == "index"
+    url += "/#{parameters[:id]}" if parameters.key?(:id)
+    return url + '.js'
+  end
+  
 end

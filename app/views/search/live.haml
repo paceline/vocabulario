@@ -1,7 +1,0 @@
-%ul.inline
-  - @vocabularies.each do |vocabulary|
-    %li= link_to(vocabulary.name.sub(@search,"<b>#{@search}</b>"), vocabulary_path(vocabulary.permalink))
-  
-- if @search.blank?
-  %br
-  = will_paginate @vocabularies, :params => { :controller => "vocabularies", :action => "index" }

@@ -4,11 +4,11 @@ class Status < Hash
   def self.timeline(user_id = nil, since = DateTime.now-30)
     timeline = []
     user = User.find_by_id_or_permalink(user_id) if user_id
-    ['comments','lists','scores','vocabularies'].each do |entity|
+    ['comments','lists','scores','vocabularies','wiki_pages'].each do |entity|
       timeline += if user
           user.send(entity).send("find", :all, :conditions => ['created_at >= ?', since], :order => 'created_at DESC').collect { |item| item.updates_for_timeline }
         else
-          Object.const_get(entity.capitalize.singularize).find(:all, :conditions => ['created_at >= ?', since], :order => 'created_at DESC').collect { |item| item.updates_for_timeline }
+          Object.const_get(entity.camelcase.singularize).find(:all, :conditions => ['created_at >= ?', since], :order => 'created_at DESC').collect { |item| item.updates_for_timeline }
         end
     end
     timeline.sort { |x,y| y[:created_at] <=> x[:created_at] }

@@ -27,3 +27,5 @@
 
 .content#graph_navigation
   = render :partial => 'statistics_navigation', :locals => { :tag => '', :type => '' }
+
+= javascript_tag "getGraphData('#{current_user.permalink}')"

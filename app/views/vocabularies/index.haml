@@ -1,3 +1,6 @@
+- content_for :custom_includes do
+  = javascript_include_tag 'endlesspage'
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
   .content
@@ -21,13 +24,10 @@
   #tab_3_link.tab_link= link_to_remote("By type", :url => vocabularies_path(:menu => 3), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(3,'tab_browser')", :method => :get)
 
 #tab_browser.content
-  = render :partial => "vocabularies/#{map_action(@current_action)}"
+  = render :partial => "vocabularies/#{map_action(@parameters[:action])}"
 
-.content#vocabulary_results
-  %ul.inline
-    - @vocabularies.each do |vocabulary|
-      %li= link_to(vocabulary.name, vocabulary_path(vocabulary.permalink))  
-  <br />
-  = will_paginate @vocabularies
+.content
+  %ul#vocabulary_results.inline
+    = render :partial => 'vocabularies/vocabularies', :object => @vocabularies, :locals => {:page => @page}
   
 = render :partial => 'shared/loading', :object => 'searching vocabularies'

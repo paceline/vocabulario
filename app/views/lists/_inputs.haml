@@ -1,5 +1,5 @@
 - form.inputs do
-  - unless @current_action == 'edit'
+  - unless @parameters[:action] == 'edit'
     %li#list_type_input.string
       %label{ :for => "list_type" } Type
       = select :list, :type, [['Smart Vocabulary List','SmartVocabularyList'],['Static Vocabulary List','StaticVocabularyList'],['Smart Verb List','SmartVerbList'],['Static Verb List','StaticVerbList']]

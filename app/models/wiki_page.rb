@@ -12,4 +12,14 @@ class WikiPage < ActiveRecord::Base
     content[0..120]
   end
   
+  # Return updates for timline
+  def updates_for_timeline
+     Status[
+       :id => id,
+       :text => "added the new page \"#{title}\"",
+       :created_at => created_at,
+       :url => "http://#{HOST}/wiki/#{path}",
+       :user => creator.to_hash
+     ]
+  end
 end

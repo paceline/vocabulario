@@ -6,7 +6,7 @@
     = yield :custom_includes
     = ANALYTICS_CODE
     = stylesheet_link_tag "default"
-  %body{ :onLoad => on_load }
+  %body
     .container
       #header
         .navigation.no-padding= link_to "Wiki", "/wiki" 
@@ -21,6 +21,7 @@
         #notice
           - unless flash.empty?
             = render :partial => 'layouts/flashes'
+            = javascript_tag "highlightNotice();"
           - else
             .notice= yield(:notice)
       #sidebar

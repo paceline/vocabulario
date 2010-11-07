@@ -7,11 +7,13 @@ class SearchController < ApplicationController
   def live
     @search = params[:word]
     if @search.blank?
-      @vocabularies = Vocabulary.paginate :all, :page => params[:page], :order => 'word'
+      @page = 1
+      @vocabularies = Vocabulary.paginate :all, :order => 'word', :page => params[:page], :per_page => Vocabulary.per_page
     else
-      @vocabularies = Vocabulary.find(:all, :conditions => ['word LIKE ?',"%#{@search}%"], :limit => 100, :order => 'word')
-      render :nothing => true if @vocabularies.blank?
+      @page = 0
+      @vocabularies = Vocabulary.find :all, :conditions => ['word LIKE ?',"%#{@search}%"], :order => 'word'
     end
+    @vocabularies.blank? ? render(:nothing => true) : render(:partial => 'vocabularies/vocabularies', :object => @vocabularies, :locals => {:page => @page})
   end
   
   # Display paged list of vocabularies with correspoding language
@@ -19,13 +21,9 @@ class SearchController < ApplicationController
   # API information - 
   #   /vocabularies/by_language/#{id|permalink}.xml|json (No oauth required)
   def by_language
-    begin
-      @language = Vocabulary.find_by_id_or_permalink(params[:id])
-      @vocabularies = Vocabulary.paginate_by_language_id @language.id, :page => params[:page], :order => 'word'
-      respond
-    rescue ActiveRecord::RecordNotFound
-      file_not_found
-    end
+    @language = Vocabulary.find_by_id_or_permalink(params[:id])
+    @vocabularies_list = @language.vocabularies
+    respond
   end
   
   # Display paged list of vocabularies with correspoding tag
@@ -33,18 +31,14 @@ class SearchController < ApplicationController
   # API information - 
   #   /vocabularies/by_tag/#{permalink}.xml|json (No oauth required)
   def by_tag
-    begin
-      if params[:id] == 'untagged'
-        @tag = 'Untagged'
-        @vocabularies = Vocabulary.paginate :all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :group => 'vocabularies.id', :having => 'COUNT(taggings.id) = 0', :page => params[:page], :order => 'word'
-      else
-        @tag = Tag.find_by_id_or_permalink(params[:id])
-        @vocabularies = Vocabulary.paginate :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :page => params[:page], :order => 'word'
-      end
-      respond
-    rescue ActiveRecord::RecordNotFound
-      file_not_found
+    if params[:id] == 'untagged'
+      @tag = 'Untagged'
+      @vocabularies_list = Vocabulary.find :all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :group => 'vocabularies.id', :having => 'COUNT(taggings.id) = 0', :order => 'word'
+    else
+      @tag = Tag.find_by_id_or_permalink(params[:id])
+      @vocabularies_list = Vocabulary.find :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :order => 'word'
     end
+    respond
   end
   
   # Display paged list of vocabularies with correspoding tag
@@ -52,13 +46,9 @@ class SearchController < ApplicationController
   # API information - 
   #   /vocabularies/by_type/#{type}.xml|json (No oauth required)
   def by_type
-    begin
-      conditions = params[:id] == "other" ? "type IS NULL" : "type = '#{params[:id]}'"
-      @vocabularies = Vocabulary.paginate :all, :conditions => conditions, :page => params[:page], :order => 'word'
-      respond
-    rescue ActiveRecord::RecordNotFound
-      file_not_found
-    end
+    conditions = params[:id] == "other" ? "type IS NULL" : "type = '#{params[:id]}'"
+    @vocabularies_list = Vocabulary.find :all, :conditions => conditions, :order => 'word'
+    respond
   end
   
   # Display paged list of vocabularies with correspoding tag
@@ -66,13 +56,9 @@ class SearchController < ApplicationController
   # API information - 
   #   /vocabularies/by_user/#{id|permalink}.xml|json (No oauth required)
   def by_user
-    begin
-      @user = User.find_by_id_or_permalink(params[:id])
-      @vocabularies = Vocabulary.paginate_by_user_id @user.id, :page => params[:page], :order => 'word'
-      respond
-    rescue ActiveRecord::RecordNotFound
-      file_not_found
-    end
+    @user = User.find_by_id_or_permalink(params[:id])
+    @vocabularies_list = Vocabulary.find_by_user_id @user.id, :order => 'word'
+    respond
   end
   
   
@@ -80,15 +66,24 @@ class SearchController < ApplicationController
     
     # Render is identical for all actions
     def respond
-      if @vocabularies.blank?
+      if @vocabularies_list.blank?
         file_not_found
       else
         respond_to do |format|
-          format.html { render 'vocabularies/index' }
+          format.html {
+            @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => Vocabulary.per_page
+            @page = params[:page] || 1
+            render 'vocabularies/index'
+          }
+          format.js {
+            @last = params[:last].to_i
+            @vocabularies = @vocabularies_list.paginate :page => @last + 1, :per_page => Vocabulary.per_page     
+            @page = @last + 1
+            @vocabularies.empty? ? render(:nothing => true) : render(:partial => 'vocabularies/vocabularies', :object => @vocabularies, :locals => {:page => @page})
+          }
           format.json { render :json => @vocabularies.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
           format.xml { render :xml => @vocabularies.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
         end
       end
     end
-  
 end
