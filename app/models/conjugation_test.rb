@@ -15,7 +15,7 @@ class ConjugationTest < LanguageTest
   def setup_based_on_params(options)
     setup_common_options(options)
     @tags = options[:tags] if options.key?(:tags)
-    options.key?(:current) && options.key?(:test) ? restore_test(options[:current], options[:test]) : generate_test(@tags ? clean_verb_selection(@tense.verbs_tagged_with(Boolean(options[:all_or_any]), @tags), @tense.id) : clean_verb_selection(@tense.verbs, @tense.id))
+    options.key?(:current) && options.key?(:test) ? restore_test(options[:current].to_i, options[:test]) : generate_test(@tags ? clean_verb_selection(@tense.verbs_tagged_with(Boolean(options[:all_or_any]), @tags), @tense.id) : clean_verb_selection(@tense.verbs, @tense.id))
   end
   
   # Counts correct results in given result array
@@ -38,6 +38,7 @@ class ConjugationTest < LanguageTest
   
   # Returns set of correct results for current question
   def correct_results
+    load_current_question
     return @test[@current][1]
   end
   
@@ -47,8 +48,55 @@ class ConjugationTest < LanguageTest
       :tense_id => @tense.id,
       :limit => @limit,
       :current => @current,
-      :test => @test.collect { |t| t.first.id }
+      :test => @test.collect { |t| t.class == Fixnum ? t : t.first.id }
     }
+  end
+  
+  # Returns json for web service calls
+  def as_json(options = {})
+    {
+      :conjugation_test => {
+        :tense => { :id => @tense.id, :name => @tense.name },
+        :answers => (options.key?(:answers) ? options[:answers].collect { |i| i } : []),
+        :next_question => { :id => current_question.id, :type => current_question.class_type, :word => current_question.word, :gender => current_question.gender },
+        :score => { :id => options[:score].id, :points => options[:score].points, :questions => options[:score].questions },
+        :current => @current,
+        :limit => @limit,
+        :continue => continue?
+      }
+    }
+  end
+  
+  # Returns xml for web service calls
+  def to_xml(options = {})
+    options[:indent] ||= 2
+    xml = options[:builder] ||= Builder::XmlMarkup.new(:indent => options[:indent])
+    xml.instruct! unless options[:skip_instruct]
+    xml.conjugation_test do
+      xml.tense do 
+        xml.tag!(:id, @tense.id)
+        xml.tag!(:name, @tense.name)
+      end
+      if options.key?(:answers)
+        xml.answers do
+          0.upto(options[:answers].size-1) { |i| xml.tag!("answer_#{i+1}", options[:answers][i]) }
+        end
+      end
+      xml.next_question do 
+        xml.tag!(:id, current_question.id)
+        xml.tag!(:type, current_question.class_type)
+        xml.tag!(:word, current_question.word)
+        xml.tag!(:gender, current_question.gender)
+      end
+      xml.score do
+        xml.tag!(:id, options[:score].id)
+        xml.tag!(:points, options[:score].points)
+        xml.tag!(:questions, options[:score].questions)
+      end
+      xml.tag!(:current, @current)
+      xml.tag!(:limit, @limit)
+      xml.tag!(:continue, continue?)
+    end
   end
   
   

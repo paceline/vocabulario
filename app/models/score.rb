@@ -22,6 +22,13 @@ class Score < ActiveRecord::Base
     return find(:all, :order => "points/questions*100 DESC, questions DESC", :limit => limit)
   end
   
+  # Evaluates result of a test answer
+  def evaluate_result(question, success, score = nil)
+    write_attribute :questions, read_attribute(:questions) + question
+    write_attribute :points, read_attribute(:points) + (score ? score : (success ? 1 : 0))
+    return success
+  end
+  
   # Get personal pronouns based on target language
   def personal_pronouns
     pronoun = Person.find(:first, :conditions => ["language_id = ? AND pronoun = 'personal'", self.language_to_id])
@@ -46,7 +53,7 @@ class Score < ActiveRecord::Base
   def updates_for_timeline
     Status[
       :id => id,
-      :text => "got #{ratio}% right on a #{questions} question " + (test_type == 'VocabularyTest' ? "#{language_from.word} to #{language_to.word} vocabulary test" : "conjugation test in #{language_from.word}"),
+      :text => "got #{'%.1f' % ratio}% right on a #{questions} question " + (test_type == 'VocabularyTest' ? "#{language_from.word} to #{language_to.word} vocabulary test" : "conjugation test in #{language_from.word}"),
       :created_at => created_at,
       :user => (user ? user.to_hash : "")
     ]

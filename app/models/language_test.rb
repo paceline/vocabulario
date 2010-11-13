@@ -1,7 +1,8 @@
 class LanguageTest
   
-  # Fetaures
-  attr_reader :current, :limit, :tags
+  # Features
+  attr_accessor :current
+  attr_reader :limit, :tags
   LIMITS = [5,10,25,50,75,100,'all']
   
   # Initialize new test
@@ -22,16 +23,12 @@ class LanguageTest
   # (Re-)generate test questions
   def restore_test(current, test)
     @current = current
-    @test = []
-    test.each do |test|
-      word = Vocabulary.find(test)
-      answers = self.class == VocabularyTest ? word.translations(@to.id) : word.conjugate_all(@tense.id)
-      @test << [ word, answers ] unless answers.empty?
-    end
+    @test = test.collect { |i| i.to_i }
   end
   
   # Returns question for current position
   def current_question
+    load_current_question
     return @test[@current][0]
   end
   
@@ -42,7 +39,7 @@ class LanguageTest
   
   # Returns true if over limit
   def continue?
-    return @test.size <= @current ? false : true
+    @test.size > @current
   end
   
   # Returns question for given position
@@ -62,9 +59,16 @@ class LanguageTest
       if i < @limit
         next_word = words.delete_at(rand(words.size-1))
         answers = self.class == VocabularyTest ? next_word.translations(@to.id) : next_word.conjugate_all(@tense.id)
-        @test << [ next_word, answers ] unless answers.empty?
+        @test << next_word.id unless answers.empty?
         generate_test_order(words, i+=1)
       end
     end
-  
+    
+    # Loads current questions
+    def load_current_question
+      if @test[@current].class == Fixnum
+        word = Vocabulary.find @test[@current]
+        @test[@current] = [ word, (self.class == VocabularyTest ? word.translations(@to.id) : word.conjugate_all(@tense.id)) ]
+      end
+    end  
 end

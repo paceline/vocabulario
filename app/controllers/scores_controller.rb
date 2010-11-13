@@ -1,8 +1,8 @@
 class ScoresController < ApplicationController
   
   # Filters
-  before_filter :browser_required, :except => [:index]
-  before_filter :web_service_authorization_required, :only => [:index]
+  before_filter :browser_required, :only => [:update_languages, :update_tags, :options_for_list]
+  before_filter :web_service_authorization_required
   
   # Open up a new language test
   def new
@@ -23,7 +23,7 @@ class ScoresController < ApplicationController
   # Return the ten top scores
   #
   # API information - 
-  #   /scores.xml|json (No oauth required)
+  #   /scores.xml|json (Oauth required)
   def index
     @scores = Score.top_percentage(10)
     respond_to do |format|
@@ -34,67 +34,59 @@ class ScoresController < ApplicationController
   end
   
   # Create a new vocabulary test (on "Let's go")
+  #
+  # API information - 
+  #   /scores.xml|json (post, Oauth required)
   def create
     params[:test].delete(:limit) if params[:test][:limit] == 'all'
     @test = params[:test][:list_id] ? Object.const_get(params[:type]).new(params[:test].delete(:list_id), params[:test]) : Object.const_get(params[:type]).new(params[:test])
     if @test.empty?
-      flash.now[:failure] = "Sorry, no vocabularies were found based on your selection."
-      render(:update) { |page| page.update_notice }
+      respond_to do |format|
+        format.js {
+          flash.now[:failure] = "Sorry, no vocabularies were found based on your selection."
+          render(:update) { |page| page.update_notice }
+        }
+        format.all { internal_server_error }
+      end
     else
       @score = Score.new({ :user_id => current_user, :questions => @test.current, :test_type => @test.class.to_s })
       @score.setup(@test)
       @score.save
-      session[:test] = @test.to_session_params
-      render :update do |page|
-        page.hide :test_tabs
-        page << "$('test_pane').className = ''"
-        page.replace_html 'test_pane', render(@test)
-        page.visual_effect :highlight, 'test_pane'
-        page.replace_html 'test_score', render(@score)
-        page.visual_effect :highlight, 'test_score'
+      respond_to do |format|
+        format.js
+        format.json { render :json => @test.as_json(:score => @score) }
+        format.xml { render :xml => @test.to_xml(:score => @score) }
       end
     end
   end
   
   # Update current vocabulary test (on answers)
+  #
+  # API information - 
+  #   /scores.xml|json (put, Oauth required)
   def update
-    @test = Object.const_get(params[:type]).new(session[:test])
-    @score = Score.find(params[:score_id])
+    @test = Object.const_get(params[:type]).new params[:test_object]
+    @score = Score.find params[:id]
     if @test.class == ConjugationTest
-      answers = []
-      1.upto(6) { |i| answers << params['test'][i.to_s] }
+      answers = Array.new(6) { |i| params['answers'][i.to_s] }
       @results = @test.result_for(answers)
-      @score.points += @test.count_correct_results(@results)
-      if !@results.include?(false)
-        flash.now[:success] = "You got everything right."
-      else
-        @correct_results = @test.correct_results
-        flash.now[:failure] = "Unfortunately you made some mistakes. See below for the correct answers."
-      end
-      @score.questions += 6
+      result = @score.evaluate_result 6, !@results.include?(false), @test.count_correct_results(@results)
     else
-      if @test.result_for(params[:test][:answer])
-        @score.points += 1
-        flash.now[:success] = "That's correct. Well done. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}."
-      else
-        flash.now[:failure] = "Unfortunately that's not correct. Its <strong>#{@test.correct_results.join(', ')}</strong> in #{@test.to.word}"
-      end
-      @score.questions += 1
+      result = @score.evaluate_result 1, @test.result_for(params[:answer])
     end
-    session[:test][:current] = @test.current += 1
+    @correct_results = @test.correct_results
+    @test.current += 1
     @score.save
-    
-    render :update do |page|
-      if @correct_results
-        page.replace_html 'error_pane', render(:partial => 'shared/correct_results')
-        page.show :error_pane
-      else
-        page.hide :error_pane
-      end
-      page.replace_html 'test_pane', render(@test)
-      page.replace_html 'test_score', render(@score)
-      page.update_notice
-      page.visual_effect :highlight, 'test_score'
+    respond_to do |format|
+      format.js {
+        if @test.class == ConjugationTest
+          result ? flash.now[:success] = "You got everything right." : flash.now[:failure] = "Unfortunately you made some mistakes. See below for the correct answers."
+        else
+          result ? flash.now[:success] = "That's correct. Well done. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}." : flash.now[:failure] = "Unfortunately that's not correct. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}"
+        end
+      }
+      format.json { render :json => @test.as_json(:score => @score, :answers => @test.correct_results) }
+      format.xml { render :xml => @test.to_xml(:score => @score, :answers => @test.correct_results) }
     end
   end
   
