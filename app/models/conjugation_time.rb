@@ -18,7 +18,7 @@ class ConjugationTime < ActiveRecord::Base
       tags,
       :match_all => all_or_any,
       :conditions => "conjugation_times.id = #{id}",
-      :joins => "INNER JOIN conjugations_verbs ON conjugations_verbs.verb_id = vocabularies.id INNER JOIN conjugations ON conjugations.id = conjugations_verbs.conjugation_id INNER JOIN conjugation_times ON conjugation_times.id = conjugations.id"
+      :joins => "LEFT JOIN patterns_verbs ON patterns_verbs.verb_id = vocabularies.id LEFT JOIN patterns ON patterns.id = patterns_verbs.pattern_id LEFT JOIN conjugation_times ON conjugation_times.id = patterns.conjugation_time_id"
     )
   end
   
