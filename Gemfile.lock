@@ -81,8 +81,8 @@ GEM
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     oauth (0.4.4)
-    oauth-plugin (0.3.14)
-      oauth (>= 0.3.5)
+    oauth-plugin (0.4.0.pre4)
+      oauth (>= 0.4.4)
     passenger (3.0.0)
       daemon_controller (>= 0.2.5)
       fastthread (>= 1.0.1)
@@ -137,7 +137,7 @@ DEPENDENCIES
   javascript_auto_include (~> 0.1.0)
   mysql2
   oauth
-  oauth-plugin
+  oauth-plugin (>= 0.4.0.pre1)
   passenger
   rails (~> 3.0.1)
   test-unit

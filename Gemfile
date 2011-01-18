@@ -17,7 +17,7 @@ gem 'factory_girl'
 gem 'formtastic', '~> 1.1.0'
 gem 'haml'
 gem 'oauth'
-gem 'oauth-plugin'
+gem 'oauth-plugin', ">=0.4.0.pre1"
 gem 'RedCloth'
 gem 'will_paginate', '~> 3.0.beta'
 

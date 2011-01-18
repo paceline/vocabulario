@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
     signed_in? && current_user.admin?
   end
   
+  # Security Festures - Alias for OAuth plugin
+  alias logged_in? signed_in?
+  
   def login_required
     deny_access("Please Login or Create an Account to Access that Feature.") unless signed_in?
   end
