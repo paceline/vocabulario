@@ -4,7 +4,7 @@
     %title VOCABULARIO - A simple, semi-social vocabulary trainer
     = javascript_auto_include_tag :defaults, :pattern => ':controller'
     = yield :custom_includes
-    = ANALYTICS_CODE
+    = ANALYTICS_CODE.html_safe
     = stylesheet_link_tag "default"
     = csrf_meta_tag
   %body
