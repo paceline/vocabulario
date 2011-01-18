@@ -10,5 +10,3 @@
   = render :partial => "inputs", :locals => { :form => form }
   - form.buttons do
     = form.commit_button "Save"
-
-= observe_field(:list_type, :url => switch_lists_path, :update => "test_to", :with => "'selected=' + $A($('list_type').options).find(function(option) { return option.selected; } ).value")

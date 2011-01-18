@@ -1,0 +1,10 @@
+var span_id = 'in_place_<%= @type.to_s.downcase %>-<%= @entity.id %>_<%= @attribute %>';
+var form_elements = $(span_id).next().childElements();
+var form_element = form_elements[form_elements.length-1];
+
+if ($(form_element).inspect().substr(1,6) == 'select') {
+  $(span_id).update(getSelectedOption(form_element).innerHTML);
+}
+else {
+  $(span_id).update($(form_element).getValue());
+}

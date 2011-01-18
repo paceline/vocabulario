@@ -1,0 +1,6 @@
+// Load graph data
+getGraphData('<%= @user.permalink %>','<%= @tag ? @tag.permalink : nil %>','<%= @type %>','<%= @page %>');
+
+// Update regular HTML
+$('description').update('<%= escape_javascript(render(:partial => "statistics_message", :locals => { :tag => (@tag ? @tag.name : nil), :type => @type })) %>');
+$('graph_navigation').update('<%= escape_javascript(render(:partial => "statistics_navigation", :locals => { :tag => (@tag ? @tag.permalink : nil), :type => @type })) %>');

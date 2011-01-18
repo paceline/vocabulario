@@ -2,26 +2,25 @@
 %html
   %head
     %title VOCABULARIO - A simple, semi-social vocabulary trainer
-    = javascript_include_tag :defaults, 'slider.js'
+    = javascript_auto_include_tag :defaults, :pattern => ':controller'
     = yield :custom_includes
     = ANALYTICS_CODE
     = stylesheet_link_tag "default"
+    = csrf_meta_tag
   %body
     .container
       #header
-        .navigation.no-padding= link_to "Wiki", "/wiki" 
-        .navigation= link_to "Community", community_path
+        .navigation.no-padding= link_to "Community", community_path
         .navigation= link_to "Vocabularies", vocabularies_path
         .navigation= link_to "Test Center", test_path
         .navigation= link_to "Home", "/"
         .navigation.no-floater= link_to "VOCABULARIO - a simple vocablary trainer", "/"
-      - unless !flash.empty? || yield(:notice)
+      - unless !flash.empty? || !yield(:notice).blank?
         #notice{ :style => "display: none;" }
       - else
         #notice
           - unless flash.empty?
             = render :partial => 'layouts/flashes'
-            = javascript_tag "highlightNotice();"
           - else
             .notice= yield(:notice)
       #sidebar
@@ -29,15 +28,15 @@
           - if signed_in?
             .tabs.green
               %h1= "Hello, #{current_user.name}"
-            = gravatar_for current_user, { :size => '75' }
+            = gravatar_for(current_user, { :size => '75' }).html_safe
             %ul
               %li= link_to('My stats', statistics_user_path(current_user.permalink), { :title => 'My test stats' })
               %li= link_to('Profile', edit_user_path(current_user.permalink), { :title => 'Profile' })
-              %li= link_to('Log out', sign_out_path, { :title => 'Log out' })
+              %li= link_to('Log out', signout_path, { :title => 'Log out' })
           - else
             .tabs.green
               %h1 Hello, Guest
-            = gravatar 'unknown@gravatar.com', { :size => '75' }
+            = gravatar('unknown@gravatar.com', { :size => '75' }).html_safe
             %ul
               %li= link_to 'Log in',  sign_in_path,  { :title => 'Log in' }
               %li= link_to 'Sign up', sign_up_path, { :title => 'Create an account' }

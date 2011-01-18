@@ -1,84 +1,157 @@
-ActionController::Routing::Routes.draw do |map|
-
-  # The priority is based upon order of creation: first created -> highest priority.
+Vocabulario::Application.routes.draw do
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
   
   # Named routes
   # ============
   
   # User and login stuff
-  map.sign_out '/logout', :controller => 'clearance/sessions', :action => 'destroy'
-  map.sign_in '/login', :controller => 'clearance/sessions', :action => 'new'
-  map.sign_up '/signup', :controller => 'users', :action => 'new'
-  map.community '/community', :controller => 'users', :action => 'index'
-  map.test_from_list '/lists/:list_id/test.:format', :controller => 'scores', :action => 'new'
-  map.test '/test', :controller => 'scores', :action => 'new'
+  match '/logout' => 'clearance/sessions#destroy', :as => :signout
+  match '/login' => 'clearance/sessions#new', :as => :sign_in
+  match '/signup' => 'users#new', :as => :sign_up
+  match '/community' => 'users#index', :as => :community
+  match '/lists/:list_id/test' => 'scores#new', :as => :test_from_list
+  match '/test' => 'scores#new', :as => :test
   
   # Vocabularies
-  map.vocabularies_unlink '/vocabularies/:id/unlink/:link', :controller => 'vocabularies', :action => 'unlink'
-  map.vocabularies_with_page '/vocabularies/page/:page', :controller => 'vocabularies', :action => 'index'
-  map.vocabularies_by_type '/vocabularies/by_type/:id.:format', :controller => 'search', :action => 'by_type'
-  map.vocabularies_by_tag '/vocabularies/by_tag/:id.:format', :controller => 'search', :action => 'by_tag'
-  map.vocabularies_by_language '/vocabularies/by_language/:id.:format', :controller => 'search', :action => 'by_language'
-  map.vocabularies_by_user '/vocabularies/by_user/:id.:format', :controller => 'search', :action => 'by_user'
-  
+  match '/vocabularies/:id/unlink/:link' => 'vocabularies#unlink', :as => :vocabularies_unlink
+  match '/vocabularies/page/:page' => 'vocabularies#index', :as => :vocabularies_with_page
+  match '/vocabularies/by_type/:id' => 'vocabularies#by_type', :as => :vocabularies_by_type
+  match '/vocabularies/by_tag/:id' => 'vocabularies#by_tag', :as => :vocabularies_by_tag
+  match '/vocabularies/by_language/:id' => 'vocabularies#by_language', :as => :vocabularies_by_language
+  match '/vocabularies/by_user/:id' => 'vocabularies#by_user', :as => :vocabularies_by_user
+ 
   # Oauth
-  map.test_request '/oauth/test_request', :controller => 'oauth', :action => 'test_request'
-  map.access_token '/oauth/access_token', :controller => 'oauth', :action => 'access_token'
-  map.request_token '/oauth/request_token', :controller => 'oauth', :action => 'request_token'
-  map.authorize '/oauth/authorize', :controller => 'oauth', :action => 'authorize'
-  map.oauth '/oauth', :controller => 'oauth', :action => 'index'
+  match '/oauth/test_request' => 'oauth#test_request', :as => :test_request
+  match '/oauth/access_token' => 'oauth#access_token', :as => :access_token
+  match '/oauth/request_token' => 'oauth#request_token', :as => :request_token
+  match '/oauth/authorize' => 'oauth#authorize', :as => :authorize
+  match '/oauth' => 'oauth#index', :as => :oauth
   
   # List aliases
-  map.print_list_with_tense '/lists/:id/print/:tense_id.:format', :controller => 'lists', :action => 'print'
-  map.feed_list_with_tense '/lists/:id/feed/:tense_id.:format', :controller => 'lists', :action => 'show'
+  match '/lists/:id/print/:tense_id' => 'lists#print', :as => :print_list_with_tense
+  match '/lists/:id/feed/:tense_id' => 'lists#show', :as => :feed_list_with_tense
   
   # Timeline aliases
-  map.timeline '/timeline.:format', :controller => 'status', :action => 'index'
-  map.user_timeline '/users/:user_id/timeline.:format', :controller => 'status', :action => 'index'
+  match '/timeline' => 'status#index', :as => :timeline
+  match '/users/:user_id/timeline' => 'status#index', :as => :user_timeline
   
-  # Wiki stuff
-  map.wiki_by_tag '/wiki/by_tag/:id.:format', :controller => 'wiki_pages', :action => 'by_tag'
-  map.wiki_root '/wiki'
   
   # Resources
   # =========
   
-  map.resources :comments
-  map.resources :patterns, :member => { :reorder => :post, :add_verb => :post, :remove_verb => :delete }, :has_many => :rules
-  map.resources :rules, :collection => { :autocomplete => :post, :test => :post }
-  map.resources :conjugation_times,
-    :as => 'tenses',
-    :collection => { :tab => :get },
-    :member => { :live => :get },
-    :has_many => [:patterns, :vocabularies]
-  map.resources :languages, :controller => :vocabularies
-  map.resources :lists,
-    :collection => { :switch => :get, :live => :get },
-    :member => { :newitem => :post, :copy_move => [:put, :post], :show_options_menu => :post, :sort => :post, :print => :get, :reorder => :post, :unlink => :delete },
-    :has_many => :scores
-  map.resources :oauth_clients
-  map.resources :people, :as => 'pronouns'
-  map.resource :search, :controller => :search, :member => { :live => :get }
-  map.resources :scores, :collection => { :change_test_type => :get, :update_languages => :get, :update_tags => :get, :options_for_list => :get }
-  map.resources :statistics
-  map.resources :status, :collection => { :user_timeline => :get }
-  map.resource :password, :controller => 'clearance/passwords'
-  map.resource :session, :controller => 'clearance/sessions'
-  map.resources :users,
-    :collection => { :current => :get },
-    :member => { :admin => :put, :password => :put, :statistics => [:get, :post] },
-    :has_many => [:scores, :lists, :status]
-  map.resources :vocabularies,
-    :member => { :apply_conjugation => :put, :apply_tags => :post, :apply_type => :post, :conjugate => :get, :unlink => :delete, :translate => :get },
-    :collection => { :import => [:get, :post], :refresh_language => :get, :preview => :post, :review => :get, :redirect => :get }
-  map.resources :tags
+  resource :in_place_editor, :controller => 'in_place_editor'
+  
+  resources :comments
+  
+  resources :patterns do
+      member do
+        post 'reorder'
+        post 'add_verb'
+        delete 'remove_verb'
+      end
+      resources :rules
+  end
+  
+  resources :rules do
+    collection do
+      post 'autocomplete'
+      get 'test'
+    end
+  end
+  
+  resources :tenses, :controller => 'conjugation_times', :as => 'tenses' do
+    collection do
+      get 'tab'
+      get 'tabs'
+    end
+    member do
+      get 'live'
+    end
+    resources :patterns, :vocabularies
+  end
+  
+  resources :languages, :controller => :vocabularies
+  
+  resources :lists do
+    collection do
+      get 'switch'
+    end
+    member do
+      post 'newitem'
+      post 'copy_move'
+      put 'copy_move'
+      get 'live'
+      get 'show_options_menu'
+      get 'sort'
+      get 'print'
+      post 'reorder'
+      delete 'unlink'
+    end
+    resources :scores
+  end
+  
+  resources :oauth_clients
+  
+  resources :pronouns, :controller => 'people', :as => 'pronouns'
+  
+  resources :scores do
+    collection do
+      get 'change_test_type'
+      get 'update_languages'
+      get 'update_tags'
+      get 'options_for_list'
+    end
+  end
+  
+  resources :statistics
+  
+  resources :status do 
+    collection do
+      get 'user_timeline'
+    end
+  end
+  
+  resource :password, :controller => 'clearance/passwords'
+  
+  resource :session, :controller => 'clearance/sessions'
+  
+  resources :users do
+    collection do
+      get 'current'
+    end
+    member do
+      put 'admin'
+      put 'password'
+      get 'statistics'
+      post 'statistics'
+    end
+    resources :scores, :lists, :status
+  end
     
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => 'status'
+  resources :vocabularies do
+    collection do
+      get 'import'
+      post 'import'
+      get 'live'
+      get 'refresh_language'
+      get 'preview'
+      get 'review'
+      get 'redirect'
+    end
+    member do
+      put 'apply_conjugation'
+      post 'apply_tags'
+      post 'apply_type'
+      get 'conjugate'
+      delete 'unlink'
+      get 'translate'
+    end
+  end
+    
+  resources :tags
 
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing the them or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => "status#index"
 end

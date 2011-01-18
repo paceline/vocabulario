@@ -2,9 +2,9 @@
   #loading{:style => 'display: none;' }= image_tag('ajax-loader.gif')
 %li
   Alphabetically
-  = link_to_remote 'up&uarr;', :url => sort_list_path(@list, :attribute => 'vocabularies.word', :order => 'ASC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
-  = link_to_remote 'down&darr;', :url => sort_list_path(@list, :attribute => 'vocabularies.word', :order => 'DESC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
+  = link_to 'up&uarr;'.html_safe, sort_list_path(@list.permalink, :attribute => 'vocabularies.word', :order => 'ASC', :tense_id => @tense_id), :remote => true, :class => 'lengthy'
+  = link_to 'down&darr;'.html_safe, sort_list_path(@list.permalink, :attribute => 'vocabularies.word', :order => 'DESC', :tense_id => @tense_id), :remote => true, :class => 'lengthy'
 %li
   Date added
-  = link_to_remote 'up&uarr;', :url => sort_list_path(@list, :attribute => 'vocabularies.created_at', :order => 'ASC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
-  = link_to_remote 'down&darr;', :url => sort_list_path(@list, :attribute => 'vocabularies.created_at', :order => 'DESC', :tense_id => @tense_id), :update => 'regular_list', :before => "$('loading').show()", :loaded => "$('loading').hide()"
+  = link_to 'up&uarr;'.html_safe, sort_list_path(@list.permalink, :attribute => 'vocabularies.created_at', :order => 'ASC', :tense_id => @tense_id), :remote => true, :class => 'lengthy'
+  = link_to 'down&darr;'.html_safe, sort_list_path(@list.permalink, :attribute => 'vocabularies.created_at', :order => 'DESC', :tense_id => @tense_id), :remote => true, :class => 'lengthy'

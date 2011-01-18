@@ -8,7 +8,7 @@ class Pattern < ActiveRecord::Base
   has_and_belongs_to_many :verbs, :order => 'word'
   
   # Validations
-  validates_presence_of :name, :person
+  validates :name, :person, :presence => true 
   
   # Conjugate based on tense, person and associated rules
   def conjugate(verb)

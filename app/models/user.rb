@@ -13,12 +13,10 @@ class User < ActiveRecord::Base
   has_many :languages
   has_many :client_applications
   has_many :tokens, :class_name => "OauthToken", :order => "authorized_at desc", :include => [:client_application]
-  has_many :wiki_pages, :foreign_key => 'creator_id'
   
   # Validations
-  validates_presence_of :email, :name
-  validates_length_of :name, :within => 1..100
-  validates_uniqueness_of :name
+  validates :email, :presence => true
+  validates :name, :presence => true, :uniqueness => true, :length => { :minimum => 1, :maximum => 100 }
   
   # Statistics - Average score
   def average_score

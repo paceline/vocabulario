@@ -1,0 +1,3 @@
+$('taglist').update('<%= escape_javascript(render :partial => "shared/taglist_detail", :object => @object) %>');
+$('taglist','tag_form').invoke('toggle');
+new Effect.Highlight('taglist',{});

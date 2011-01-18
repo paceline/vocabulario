@@ -1,6 +1,26 @@
 = render :partial => 'lists/manage'
   
 - unless !current_user || current_user.lists.blank?
+
+  - content_for :custom_includes do
+    = javascript_include_tag 'slider.js'
+    :javascript
+      var slider;
+      Event.observe(window, 'load', function() {
+        slider = new Control.Slider('handle', 'track', {
+          axis: 'vertical',
+          onSlide: function(v) { scrollVertical(v, $('lists'), slider);  },
+          onChange: function(v) { scrollVertical(v, $('lists'), slider); }
+        });
+        if ($('lists').scrollHeight <= $('lists').offsetHeight) {
+          slider.setDisabled();
+          $('wrap').hide();
+        }
+      });
+      function scrollVertical(value, element, slider) {
+        element.scrollTop = Math.round(value/slider.maximum*(element.scrollHeight-element.offsetHeight));
+      }
+    
   .content
     .tabs.green
       %h1 Your lists
@@ -13,20 +33,3 @@
         #track-top
         #track
           #handle= image_tag 'scrollbar-handle-vertical.png'
-  
-  :javascript
-    var slider;
-    Event.observe(window, 'load', function() {
-      slider = new Control.Slider('handle', 'track', {
-        axis: 'vertical',
-        onSlide: function(v) { scrollVertical(v, $('lists'), slider);  },
-        onChange: function(v) { scrollVertical(v, $('lists'), slider); }
-      });
-      if ($('lists').scrollHeight <= $('lists').offsetHeight) {
-        slider.setDisabled();
-        $('wrap').hide();
-      }
-    });
-    function scrollVertical(value, element, slider) {
-      element.scrollTop = Math.round(value/slider.maximum*(element.scrollHeight-element.offsetHeight));
-    }      

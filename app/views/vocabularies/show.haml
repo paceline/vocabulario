@@ -7,18 +7,18 @@
       %li= link_to('Vocabulary as JSON', vocabulary_path(:format => :json))
       %li= link_to('Vocabulary as XML', vocabulary_path(:format => :xml))
   
-%h1= signed_in? && @vocabulary.patterns.blank? ? in_place_editor_field(:vocabulary, :word) : @vocabulary.word
+%h1= in_place_input @vocabulary, :word
 .content
   = render :partial => 'shared/taglist', :object => @vocabulary
 
 .tabs
-  #tab_0_link.tab_link.active= link_to_remote("Overview", :url => vocabulary_path(@vocabulary.permalink, :menu => 0), :update => 'vocabulary_pane', :loading => "deactivateTab(4)", :loaded => "activateTab(0,'')", :method => :get)
+  #tab_0_link.tab_link.active= link_to "Overview", vocabulary_path(@vocabulary.permalink, :menu => 0), :remote => true, :id => 'tab_0'
   - if @vocabulary.verb? && signed_in?
-    #tab_1_link.tab_link= link_to_remote("Conjugations", :url => vocabulary_path(@vocabulary.permalink, :menu => 1), :update => 'vocabulary_pane', :loading => "deactivateTab(4)", :loaded => "activateTab(1,'')", :method => :get)
+    #tab_1_link.tab_link= link_to "Conjugations", vocabulary_path(@vocabulary.permalink, :menu => 1), :remote => true, :id => 'tab_1'
   - else
     #tab_1_link.tab_link{ :style => 'display: none;' }
-  #tab_2_link.tab_link= link_to_remote("Translations", :url => vocabulary_path(@vocabulary.permalink, :menu => 2), :update => 'vocabulary_pane', :loading => "deactivateTab(4)", :loaded => "activateTab(2,'')", :method => :get)
-  #tab_3_link.tab_link= link_to_remote("Comments", :url => vocabulary_path(@vocabulary.permalink, :menu => 3), :update => 'vocabulary_pane', :loading => "deactivateTab(4)", :loaded => "activateTab(3,'')", :method => :get)
+  #tab_2_link.tab_link= link_to "Translations", vocabulary_path(@vocabulary.permalink, :menu => 2), :remote => true, :id => 'tab_2'
+  #tab_3_link.tab_link= link_to "Comments", vocabulary_path(@vocabulary.permalink, :menu => 3), :remote => true, :id => 'tab_3'
   
 #vocabulary_pane.tab_content_pane
   = render(:partial => 'vocabularies/show_tab_0')

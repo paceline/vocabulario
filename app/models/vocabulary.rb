@@ -23,9 +23,9 @@ class Vocabulary < ActiveRecord::Base
   has_many :lists, :through => :vocabulary_lists
   
   # Validations
-  validates_inclusion_of :type, :in => TYPES, :message => "{{value}} is not a supported vocabulary type"
-  validates_presence_of :word, :language_id
-  validates_uniqueness_of :word, :scope => ['language_id','gender'], :message => 'already exists in database'
+  validates :type, :inclusion => { :in => TYPES, :message => "{{value}} is not a supported vocabulary type" }
+  validates :language_id, :presence => true
+  validates :word, :presence => true, :uniqueness => { :scope => ['language_id','gender'], :message => 'already exists in database' }
   
   
   # Check for untagged vocabularies FIMXE - Wonder if there's a better way to do this, jus couldn't get count to work
@@ -73,7 +73,7 @@ class Vocabulary < ActiveRecord::Base
   
   # Copy tags to translations
   def apply_tags_to_translations
-    self.translations.each do |translation|
+    translations.each do |translation|
       translation.tag_list = (translation.tag_list + self.tag_list).uniq
       translation.save
     end
@@ -81,7 +81,7 @@ class Vocabulary < ActiveRecord::Base
   
   # Copy type to translations
   def apply_type_to_translations
-    self.translations.each do |translation|
+    translations.each do |translation|
       translation.patterns.clear unless translation.patterns.blank?
       translation.class_type = self.class_type
       translation.save
@@ -130,7 +130,7 @@ class Vocabulary < ActiveRecord::Base
   # Return updates for timline
   def updates_for_timeline
      Status[
-       :id => id,
+       :id => 1,
        :text => "added the new #{language.word} vocabulary \"#{word}\"",
        :created_at => created_at,
        :url => "http://#{HOST}/vocabularies/#{permalink}",
@@ -140,7 +140,7 @@ class Vocabulary < ActiveRecord::Base
   
   protected
     def all_translations(word = self, translations = [])
-      new_translations = word.translation_to.find(:all, :conditions => ['language_id != ?', self.language_id]) + word.translation_from.find(:all, :conditions => ['language_id != ?', self.language_id])
+      new_translations = word.translation_to.find(:all, :conditions => ['language_id != ?', self.language_id], :readonly => false) + word.translation_from.find(:all, :conditions => ['language_id != ?', self.language_id], :readonly => false)
       new_translations -= (translations & new_translations)
       translations += new_translations
       new_translations.each do |t|

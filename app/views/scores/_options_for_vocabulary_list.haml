@@ -1,0 +1,10 @@
+%label{ :for => "test_options" } Direction
+%ul
+  %li
+    = radio_button(:test, :reverse, false, :checked => true)
+    = ("Translate <strong>#{@list.language_from.word}</strong> to <strong>#{@list.language_to.word}</strong>").html_safe
+  %li
+    = radio_button(:test, :reverse, true)
+    = ("Translate <strong>#{@list.language_to.word}</strong> to <strong>#{@list.language_from.word}</strong>").html_safe
+= hidden_field_tag 'type', 'VocabularyTest'
+%p.inline-hints Pick a direction for your vocabulary test

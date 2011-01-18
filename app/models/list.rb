@@ -14,7 +14,7 @@ class List < ActiveRecord::Base
   has_many :vocabularies, :through => :vocabulary_lists, :order => :position
   
   # Validations
-  validates_presence_of :user_id, :language_from_id, :name
+  validates :user_id, :language_from_id, :name, :presence => true
   
   
   # Find public lists

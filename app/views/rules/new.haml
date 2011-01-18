@@ -13,12 +13,10 @@
     %p > &nbsp;> &nbsp;>
     #modified_verb &nbsp;
 
-= observe_field :rule_test_string, :frequency => 2, :url => test_rules_path, :with => "'verb=' + value + '&rule[find]=' + $('rule_find').getValue() + '&rule[replace]=' + $('rule_replace').getValue()", :update => 'modified_verb', :condition => "$('rule_test_string').getValue() != '' && $('rule_find').getValue() != '' && $('rule_replace').getValue() != ''", :loaded => "new Effect.Highlight('modified_verb')"
-
 .content
-  - semantic_form_for @rule, :url => (@rule.new_record? ? pattern_rules_path(params[:pattern_id]) : pattern_rule_path(params[:pattern_id],params[:id])) do |form|
+  = semantic_form_for @rule, :url => (@rule.new_record? ? pattern_rules_path(params[:pattern_id]) : pattern_rule_path(params[:pattern_id],params[:id])) do |form|
     = form.error_messages
     = render :partial => "inputs", :locals => { :form => form }
-    - form.buttons do
+    = form.buttons do
       = form.commit_button "Save"
       = link_to '(back to pattern)', pattern_path(params[:pattern_id])

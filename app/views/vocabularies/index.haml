@@ -1,14 +1,11 @@
-- content_for :custom_includes do
-  = javascript_include_tag 'endlesspage'
-
 - content_for :sidebar do
   = render :partial => 'shared/manage'
   .content
     .tabs.green
       %h1 Export
     %ul
-      %li= link_to('Vocabularies as JSON', vocabularies_path(:format => :json))
-      %li= link_to('Vocabularies as XML', vocabularies_path(:format => :xml))
+      %li= link_to 'Vocabularies as JSON', vocabularies_path(:format => :json)
+      %li= link_to 'Vocabularies as XML', vocabularies_path(:format => :xml)
 
 - content_for :notice do
   %h1 Explore
@@ -18,13 +15,13 @@
     vocabularies in the database. Not too shabby...
 
 .tabs
-  #tab_0_link.tab_link.active= link_to_remote("Live search", :url => vocabularies_path(:menu => 0), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(0,'tab_browser')", :method => :get)
-  #tab_1_link.tab_link= link_to_remote("By language", :url => vocabularies_path(:menu => 1), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(1,'tab_browser')", :method => :get)
-  #tab_2_link.tab_link= link_to_remote("By tag", :url => vocabularies_path(:menu => 2), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(2,'tab_browser')", :method => :get)
-  #tab_3_link.tab_link= link_to_remote("By type", :url => vocabularies_path(:menu => 3), :update => 'tab_browser', :loading => "deactivateTab(4)", :loaded => "activateTab(3,'tab_browser')", :method => :get)
+  #tab_0_link{ :class => ($ACTION == 'index' ? "tab_link active" : "tab_link") }= link_to "Live search", vocabularies_path(:menu => 0), :remote => true, :id => 'tab_0'
+  #tab_1_link{ :class => ($ACTION == 'by_language' ? "tab_link active" : "tab_link") }= link_to "By language", vocabularies_path(:menu => 1), :remote => true, :id => 'tab_1'
+  #tab_2_link{ :class => ($ACTION == 'by_tag' ? "tab_link active" : "tab_link") }= link_to "By tag", vocabularies_path(:menu => 2), :remote => true, :id => 'tab_2'
+  #tab_3_link{ :class => ($ACTION == 'by_type' ? "tab_link active" : "tab_link") }= link_to "By type", vocabularies_path(:menu => 3), :remote => true, :id => 'tab_3'
 
 #tab_browser.content
-  = render :partial => "vocabularies/#{map_action(@parameters[:action])}"
+  = render :partial => "vocabularies/#{map_action($ACTION)}"
 
 .content
   %ul#vocabulary_results.inline

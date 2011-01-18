@@ -4,16 +4,6 @@ class PeopleController < ApplicationController
   before_filter :admin_required
   before_filter :browser_required
   
-  # Features
-  in_place_edit_for :person, :pronoun
-  in_place_edit_for :person, :language_id, { :method => :word }
-  in_place_edit_for :person, :first_person_singular
-  in_place_edit_for :person, :second_person_singular
-  in_place_edit_for :person, :third_person_singular
-  in_place_edit_for :person, :first_person_plural
-  in_place_edit_for :person, :second_person_plural
-  in_place_edit_for :person, :third_person_plural
-  
   # Create a new set of pronouns
   def create
     @person = Person.new(params[:person])

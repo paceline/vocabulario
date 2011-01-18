@@ -10,13 +10,13 @@
     .tabs.green
       %h1 By tag
     - tag_cloud @tags, %w(css1 css2 css3 css4) do |tag, css_class|
-      = link_to_remote tag.name, :url => statistics_user_path(@user.permalink, :tag => tag.permalink), :before => "$('loading').show(); getGraphData('#{@user.permalink}','#{tag.permalink}')", :html => { :class => css_class }
+      = link_to tag.name, statistics_user_path(@user.permalink, :tag => tag.permalink), :remote => true, :class => "lengthy #{css_class}"
   .content
     .tabs.green
       %h1 By type
     %ul
-      %li= link_to_remote "Conjugation Tests", :url => statistics_user_path(@user.permalink, :type => 'ConjugationTest'), :before => "$('loading').show(); getGraphData('#{@user.permalink}','','ConjugationTest')"
-      %li= link_to_remote "Vocabulary Tests", :url => statistics_user_path(@user.permalink, :type => 'VocabularyTest'), :before => "$('loading').show(); getGraphData('#{@user.permalink}','','VocabularyTest')"
+      %li= link_to "Conjugation Tests", statistics_user_path(@user.permalink, :type => 'ConjugationTest'), :remote => true, :class => "lengthy"
+      %li= link_to "Vocabulary Tests", statistics_user_path(@user.permalink, :type => 'VocabularyTest'), :remote => true, :class => "lengthy"
 
 %h1
   Learning curve

@@ -1,0 +1,5 @@
+%label{ :for => "test_options" } Tense
+%ul
+  %li= select :test, :tense_id, @list.language_from.conjugation_times.collect { |t| [t.name,t.id] }
+= hidden_field_tag 'type', 'ConjugationTest'
+%p.inline-hints Pick a tense for the conjugation test

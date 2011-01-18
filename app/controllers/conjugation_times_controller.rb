@@ -1,12 +1,11 @@
 class ConjugationTimesController < ApplicationController
   
   # Filters
-  before_filter :admin_required, :except => [:index, :show]
+  before_filter :admin_required, :except => [:index, :show, :tabs]
   before_filter :browser_required, :except => [:index, :show]
   
-  # Features
-  in_place_edit_for :conjugation_time, :name
-  in_place_edit_for :conjugation_time, :language_id, { :method => :word }
+  # Standard formats
+  respond_to :js
   
   # Create a new tense
   def create
@@ -14,7 +13,7 @@ class ConjugationTimesController < ApplicationController
     if @time.valid? && @time.errors.empty?
       @time.save
       flash[:success] = "\"#{@time.name}\" has been added to the database."
-      redirect_to conjugation_times_path
+      redirect_to tenses_path
     else
       render :action => 'new'
     end
@@ -93,10 +92,12 @@ class ConjugationTimesController < ApplicationController
     @tenses = Language.find(:all, :order => 'word')[params[:menu].to_i].conjugation_times
     @tense = @tenses.first
     @patterns = @tense.patterns unless @tenses.blank?
-    render :update do |page|
-      page.replace_html :tab_browser, render(:partial => 'list')
-      page.replace_html :patterns, render(:partial => 'patterns/list')
-    end
+    respond_with(@tenses, @tense, @patterns)
+  end
+  
+  # Dynamic loading of tabs
+  def tabs
+    respond_with(@languages = Language.count, @tense = Language.find(:first, :order => 'word').conjugation_times.first)
   end
   
 end

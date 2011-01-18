@@ -1,0 +1,6 @@
+<% if @list.verb? %>
+  $('test_options_input').update('<%= escape_javascript(render :partial => "options_for_verb_list") %>');
+<% else %>
+  $('test_options_input').update('<%= escape_javascript(render :partial => "options_for_vocabulary_list") %>');
+<% end %>
+  

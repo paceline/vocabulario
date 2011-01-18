@@ -7,6 +7,7 @@ class ScoresController < ApplicationController
   # Open up a new language test
   def new
     @score = Score.new
+    @menu = params[:menu]
     if params[:menu] == '2' || params[:list_id]
       @lists = List.find_public(current_user)
       @list = params[:list_id] ? List.find_by_id_or_permalink(params[:list_id]) : @lists.first
@@ -16,7 +17,7 @@ class ScoresController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.js { render :partial => "new_test_tab_#{params[:menu]}" }
+      format.js { render :layout => false }
     end
   end
   
@@ -53,7 +54,7 @@ class ScoresController < ApplicationController
       @score.setup(@test)
       @score.save
       respond_to do |format|
-        format.js
+        format.js { render :layout => false }
         format.json { render :json => @test.as_json(:score => @score) }
         format.xml { render :xml => @test.to_xml(:score => @score) }
       end
@@ -84,6 +85,7 @@ class ScoresController < ApplicationController
         else
           result ? flash.now[:success] = "That's correct. Well done. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}." : flash.now[:failure] = "Unfortunately that's not correct. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}"
         end
+        render :layout => false
       }
       format.json { render :json => @test.as_json(:score => @score, :answers => @test.correct_results) }
       format.xml { render :xml => @test.to_xml(:score => @score, :answers => @test.correct_results) }
@@ -113,7 +115,6 @@ class ScoresController < ApplicationController
   # /scores/new support: Update directions based on list selected
   def options_for_list
     @list = List.find(params[:list_id])
-    render :partial => 'options_for_list'
   end
 
 end

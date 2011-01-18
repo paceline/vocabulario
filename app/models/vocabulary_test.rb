@@ -3,6 +3,16 @@ class VocabularyTest < LanguageTest
   # Readers for member variables
   attr_reader :from, :to
   
+  # Own class name
+  def self.model_name
+    VocabularyTest
+  end
+  
+  # Path to partial
+  def self.partial_path
+    'vocabulary_test'
+  end
+  
   # Setup a new vocabulary test based on a vocabulary list
   def setup_based_on_list(list_id, options)
     list = List.find(list_id)

@@ -12,6 +12,5 @@ log/*.log
 db/*.db
 tmp/*/*
 vendor/plugins/acts_as_textiled
-vendor/plugins/gravatar
-vendor/plugins/viget_deployment
+vendor/plugins/gravatar-plugin
 mkmf.log

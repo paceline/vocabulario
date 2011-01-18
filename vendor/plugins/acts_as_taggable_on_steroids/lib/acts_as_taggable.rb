@@ -11,7 +11,9 @@ module ActiveRecord #:nodoc:
           has_many :tags, :through => :taggings
           
           before_save :save_cached_tag_list
-          after_save :save_tags
+          
+          after_create :save_tags
+          after_update :save_tags
           
           include ActiveRecord::Acts::Taggable::InstanceMethods
           extend ActiveRecord::Acts::Taggable::SingletonMethods
@@ -61,7 +63,6 @@ module ActiveRecord #:nodoc:
         #   :exclude - Find models that are not tagged with the given tags
         #   :match_all - Find models that match all of the given tags, not just one
         #   :conditions - A piece of SQL conditions to add to the query
-        #   :joins - Other models to join in
         def find_tagged_with(*args)
           options = find_options_for_find_tagged_with(*args)
           options.blank? ? [] : find(:all, options)
@@ -76,9 +77,12 @@ module ActiveRecord #:nodoc:
           conditions = []
           conditions << sanitize_sql(options.delete(:conditions)) if options[:conditions]
           
-          order = options[:order] ? options.delete(:order) : "#{table_name}.id"
-          
           taggings_alias, tags_alias = "#{table_name}_taggings", "#{table_name}_tags"
+          
+          joins = [
+            "INNER JOIN #{Tagging.table_name} #{taggings_alias} ON #{taggings_alias}.taggable_id = #{table_name}.#{primary_key} AND #{taggings_alias}.taggable_type = #{quote_value(base_class.name)}",
+            "INNER JOIN #{Tag.table_name} #{tags_alias} ON #{tags_alias}.id = #{taggings_alias}.tag_id"
+          ]
           
           if options.delete(:exclude)
             conditions << <<-END
@@ -89,25 +93,38 @@ module ActiveRecord #:nodoc:
             END
           else
             if options.delete(:match_all)
-              conditions << <<-END
-                (SELECT COUNT(*) FROM #{Tagging.table_name}
-                 INNER JOIN #{Tag.table_name} ON #{Tagging.table_name}.tag_id = #{Tag.table_name}.id
-                 WHERE #{Tagging.table_name}.taggable_type = #{quote_value(base_class.name)} AND
-                 taggable_id = #{table_name}.id AND
-                 #{tags_condition(tags)}) = #{tags.size}
-              END
+              joins << joins_for_match_all_tags(tags)
             else
               conditions << tags_condition(tags, tags_alias)
             end
           end
-          joins = options.key?(:joins) ? " #{options.delete(:joins)}" : ""
           
           { :select => "DISTINCT #{table_name}.*",
-            :joins => "INNER JOIN #{Tagging.table_name} #{taggings_alias} ON #{taggings_alias}.taggable_id = #{table_name}.#{primary_key} AND #{taggings_alias}.taggable_type = #{quote_value(base_class.name)} " +
-                      "INNER JOIN #{Tag.table_name} #{tags_alias} ON #{tags_alias}.id = #{taggings_alias}.tag_id#{joins}",
-            :conditions => conditions.join(" AND "),
-            :order => order
+            :joins => joins.join(" "),
+            :conditions => conditions.join(" AND ")
           }.reverse_merge!(options)
+        end
+        
+        def joins_for_match_all_tags(tags)
+          joins = []
+          
+          tags.each_with_index do |tag, index|
+            taggings_alias, tags_alias = "taggings_#{index}", "tags_#{index}"
+
+            join = <<-END
+              INNER JOIN #{Tagging.table_name} #{taggings_alias} ON
+                #{taggings_alias}.taggable_id = #{table_name}.#{primary_key} AND
+                #{taggings_alias}.taggable_type = #{quote_value(base_class.name)}
+
+              INNER JOIN #{Tag.table_name} #{tags_alias} ON
+                #{taggings_alias}.tag_id = #{tags_alias}.id AND
+                #{tags_alias}.name = ?
+            END
+
+            joins << sanitize_sql([join, tag])
+          end
+          
+          joins.join(" ")
         end
         
         # Calculate the tag counts for all tags.
@@ -119,7 +136,13 @@ module ActiveRecord #:nodoc:
         
         def find_options_for_tag_counts(options = {})
           options = options.dup
-          scope = scope(:find)
+          # Probably a bad way to do this, but #scope has changed in Rails 3 and
+          # I'm not sure what to use instead.
+          scope = if ActiveRecord::VERSION::MAJOR >= 3
+                    {}
+                  else
+                    scope(:find) || {}
+                  end
           
           conditions = []
           conditions << send(:sanitize_conditions, options.delete(:conditions)) if options[:conditions]
@@ -130,8 +153,8 @@ module ActiveRecord #:nodoc:
           conditions = conditions.join(" AND ")
           
           joins = ["INNER JOIN #{table_name} ON #{table_name}.#{primary_key} = #{Tagging.table_name}.taggable_id"]
-          joins << options.delete(:joins) if options[:joins]
-          joins << scope[:joins] if scope && scope[:joins]
+          joins << options.delete(:joins) if options[:joins].present?
+          joins << scope[:joins] if scope && scope[:joins].present?
           joins = joins.join(" ")
           
           options = { :conditions => conditions, :joins => joins }.update(options)

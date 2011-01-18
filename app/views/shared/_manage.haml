@@ -13,16 +13,16 @@
             - if @vocabulary && !@vocabulary.new_record?
               %li= link_to 'New translation', edit_vocabulary_path(@vocabulary.permalink)
             %li= link_to 'New language', new_vocabulary_path(:type => 'Language')
-            %li= link_to 'New set of pronouns', new_person_path
-            %li= link_to 'New tense', new_conjugation_time_path
+            %li= link_to 'New set of pronouns', new_pronoun_path
+            %li= link_to 'New tense', new_tense_path
             %li= link_to 'Import vocabularies', import_vocabularies_path
         
       %li.menu
         - if @vocabulary && !@vocabulary.new_record?
           = link_to_function "Copy", "toggleMenu('copy',#{detect_elements})"
           %ul#copy.menuitems{:style => "display: none"}
-            %li= link_to_remote 'Apply tags to translations', :url => apply_tags_vocabulary_path(@vocabulary), :update => 'notice', :loaded => 'highlightNotice()'
-            %li= link_to_remote 'Apply type to translations', :url => apply_type_vocabulary_path(@vocabulary), :update => 'notice', :loaded => 'highlightNotice()'
+            %li= link_to 'Apply tags to translations', apply_tags_vocabulary_path(@vocabulary.permalink), :method => :post, :remote => true
+            %li= link_to 'Apply type to translations', apply_type_vocabulary_path(@vocabulary.permalink), :method => :post, :remote => true
         - else
           %p Copy
         
@@ -30,7 +30,7 @@
         - if @vocabulary && !@vocabulary.new_record? && signed_in_as_admin?
           = link_to_function "Delete", "toggleMenu('delete',#{detect_elements})"
           %ul#delete.menuitems{:style => "display: none"}
-            %li= link_to 'Delete vocabulary', vocabulary_path(@vocabulary)
+            %li= link_to 'Delete vocabulary', vocabulary_path(@vocabulary.permalink)
         - else
           %p Delete
 
@@ -38,8 +38,8 @@
     .tabs.green
       %h1 List stuff
     %p
-      = link_to('Pronouns', people_path)
+      = link_to('Pronouns', pronouns_path)
       |
-      = link_to('Tenses', conjugation_times_path)
+      = link_to('Tenses', tenses_path)
       |
       = link_to('Vocabularies', vocabularies_path)

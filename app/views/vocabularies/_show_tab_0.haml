@@ -5,15 +5,15 @@
 
 .content
   %h2 Language
-  = signed_in? && @vocabulary.patterns.blank? ? in_place_select_field(:vocabulary, :language_id, { :label => @vocabulary.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @vocabulary.language.word
+  = in_place_select @vocabulary, :language
 
 .content
   %h2 Type
-  = signed_in? && @vocabulary.patterns.blank? ? in_place_editor_field(:vocabulary, :class_type) : @vocabulary.class_type
+  = in_place_select @vocabulary, :class_type, Vocabulary.supported_types
 
 .content
   %h2 Article
   - if @vocabulary.class == Noun
-    = signed_in? ? in_place_editor_field(:vocabulary, :gender) : @vocabulary.gender
+    = in_place_input @vocabulary, :gender
   - else
     N/A

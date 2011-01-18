@@ -1,8 +1,7 @@
-= javascript_tag "var url = '#{build_pagination_url(@parameters)}';"
 = @page == 0 ? javascript_tag("live_search = true;") : javascript_tag("live_search = false;")
 - vocabularies.each do |vocabulary|
   %li{ :class => "vocabulary page-#{@page}", :id => "vocabulary-#{@page}" }
     - if @search
-      = link_to vocabulary.name.sub(@search,"<b>#{@search}</b>"), vocabulary_path(vocabulary.permalink)
+      = link_to vocabulary.name.sub(@search,"<b>#{@search}</b>").html_safe, vocabulary_path(vocabulary.permalink)
     - else
       = link_to vocabulary.name, vocabulary_path(vocabulary.permalink)

@@ -1,4 +1,3 @@
-# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   include TagsHelper
   
@@ -16,7 +15,7 @@ module ApplicationHelper
     end
   end
   
-  def update_notice()
+  def update_notice
     page.replace_html :notice, render(:partial => 'layouts/flashes')
     page.show :notice
     page.visual_effect :highlight, 'notice'

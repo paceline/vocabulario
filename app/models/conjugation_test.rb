@@ -3,6 +3,16 @@ class ConjugationTest < LanguageTest
   # Readers for member variables
   attr_reader :tense
   
+  # Own class name
+  def self.model_name
+    ConjugationTest
+  end
+  
+  # Path to partial
+  def self.partial_path
+    'conjugation_test'
+  end
+  
   # Setup a new vocabulary test based on a vocabulary list
   def setup_based_on_list(list_id, options)
     setup_common_options(options)

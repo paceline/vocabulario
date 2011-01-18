@@ -1,5 +1,5 @@
 if @test.class == ConjugationTest && @results.include?(false)
-  page.replace_html 'error_pane', render(:partial => 'shared/correct_results')
+  page.replace_html 'error_pane', render(:partial => 'correct_results')
   page.show :error_pane
 else
   page.hide :error_pane

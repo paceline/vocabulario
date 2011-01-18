@@ -1,7 +1,7 @@
-- semantic_remote_form_for @score, :url => scores_path(:type => 'ConjugationTest') do |form|
+= semantic_remote_form_for @score, :url => scores_path(:type => 'ConjugationTest') do |form|
   = form.error_messages
 
-  - form.inputs do
+  = form.inputs do
     %li#test_tense_input.string
       %label{ :for => "test_tense" } Tenses
       = select_tag('test[tense_id]', option_groups_from_collection_for_select(@languages, :conjugation_times, :word, :id, :name))
@@ -15,9 +15,10 @@
     %li#test_tags_input.string
       %label{ :for => "test_tags" } Tags
       = select(:test, :tags, @tags.collect {|t| t.name }, { }, { :multiple => true, :size => 5 })
-      %p.inline-hints= "I'd only like to see vocabularies that match #{select :test, :all_or_any, [['all',true],['any',false]]} of the above tags"
-      = observe_field(:test_tense_id, :url => update_tags_scores_path, :complete => visual_effect(:highlight, "test_tags"), :with => "conjugation_time_id")
+      %p.inline-hints
+        I'd only like to see vocabularies that match
+        = select :test, :all_or_any, [['all',true],['any',false]]
+        of the above tags
   
-  - form.buttons do
+  = form.buttons do
     = form.commit_button "Ready? Let's go!"
-  

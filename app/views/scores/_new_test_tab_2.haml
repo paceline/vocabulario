@@ -1,20 +1,22 @@
-- semantic_remote_form_for @score, :url => scores_path do |form|
+= semantic_remote_form_for @score, :url => scores_path do |form|
   = form.error_messages
 
-  - form.inputs do
+  = form.inputs do
     %li#test_tense_input.string
       %label{ :for => "test_tense" } Pick a list
       = select_tag 'test[list_id]', options_for_select(@lists.collect {|l| [ l.name, l.id ] }, [@list.name, @list.id])
-      = observe_field(:test_list_id, :url => options_for_list_scores_path, :update => "test_options_input", :with => "list_id", :loaded => "new Effect.Highlight('test_options_input')")
       %p.inline-hints Pick a list as the basis for your vocabulary test
     
     %li#test_options_input.string
-      = render :partial => 'options_for_list'
+      - if @list.verb?
+        = render :partial => "options_for_verb_list"
+      - else 
+        = render :partial => "options_for_vocabulary_list"
       
     %li#test_limit_input.string
       %label{ :for => "test_limit" } Number of Questions
       = select(:test, :limit, LanguageTest::LIMITS)
       %p.inline-hints You're up for how many questions?
       
-  - form.buttons do
+  = form.buttons do
     = form.commit_button "Ready? Let's go!"

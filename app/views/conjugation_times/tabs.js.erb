@@ -1,0 +1,16 @@
+// Dynamic JavaScript functions for creating ConjugationTimes tabs
+
+document.observe("dom:loaded", function() {
+  
+  // Initialize tabs once document is loaded
+  <% 0.upto(@languages-1) do |i| %>
+  document.on('ajax:before', '#tab_<%= i %>', function(event) { deactivateTab(<%= @languages %>); });
+  document.on('ajax:complete', '#tab_<%= i %>', function(event) { activateTab(<%= i %>); });
+  <% end %>
+  
+  <% unless @tense.patterns.blank? %>
+  // Start observing live search
+  startObservingFrequently('pattern_name','pattern_list',0.5,'<%= live_tense_path(@tense.permalink) %>','name');
+  <% end %>
+  
+});

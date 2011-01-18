@@ -1,6 +1,6 @@
 - if signed_in?
   %ul.inline
     - @vocabularies.each do |vocabulary|
-      %li{ :class => "draggable", :id => "word_#{vocabulary.id}" }= vocabulary.name.sub(@search,"<b>#{@search}</b>")
+      %li{ :class => "draggable", :id => "word_#{vocabulary.id}" }= vocabulary.name.sub(@search,"<b>#{@search}</b>").html_safe
       = draggable_element "word_#{vocabulary.id}", :revert => true
     

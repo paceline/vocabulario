@@ -7,13 +7,12 @@
       .tabs.green
         %h1 Search & drag
       = text_field :vocabulary, :word, :size => 15
-      = observe_field :vocabulary_word, :url => live_lists_path, :update => 'search_and_drag', :after => "$('search_and_drag').show()", :frequency => 0.5, :with => "'word=' + value + '&id=#{@list.id}'"
-      #search_and_drag{ :style => 'display: none;' }
+      #search_and_drag
   =  render :partial => 'list'
   
 - content_for :notice do
   %h1= @list.name
-  %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}."
+  %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}.".html_safe
 
 - if @list.smart? && !@vocabularies.blank?
   %ul#order.inline
@@ -22,7 +21,9 @@
 %ul.inline.spacing
   %li= link_to('Take a test', test_from_list_path(@list.permalink))
   - if @list.verb?
-    %li= render :partial => 'conjugation_menu'
+    %li
+      View in
+      = select 'your', 'lists', @list.language_from.conjugation_times.collect { |t| [t.name,t.id] }
     
 - if @list.static? && signed_in? && current_user == @list.user
   %ul#static_list.list= render :partial => 'admin_list'

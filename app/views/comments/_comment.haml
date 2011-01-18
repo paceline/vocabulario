@@ -1,10 +1,10 @@
 %li{ :id => "#{comment.commentable_type.downcase}_comment_#{comment.id}" }
-  .strong{ :onmouseover => "$('delete_#{comment.commentable_type.downcase}_comment_#{comment.id}').show()", :onmouseout => "$('delete_#{comment.commentable_type.downcase}_comment_#{comment.id}').hide()" }
+  .strong
     - if signed_in_as_admin?
-      = link_to_remote('(X)', { :url => comment_path(comment), :method => :delete, :confirm => 'Are you sure you want to delete this comment?' }, { :class => 'delete', :id => "delete_#{comment.commentable_type.downcase}_comment_#{comment.id}", :style => 'display: none;' })
+      = link_to '(X)', comment_path(comment), :remote => true, :method => :delete, :confirm => 'Are you sure you want to delete this comment?', :class => 'delete', :style => 'display: none;'
     - if comment.user
       = link_to comment.user.name, comment.user.profile_url
     - else
       = link_to 'Guest', sign_up_url
     says:
-  = comment.text
+  = comment.text.html_safe

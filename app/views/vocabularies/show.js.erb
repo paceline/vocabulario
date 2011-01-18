@@ -1,0 +1,5 @@
+<% if @menu %>
+  $('vocabulary_pane').update('<%= escape_javascript(render :partial => "show_tab_#{@menu}") %>');
+<% else %>
+  $('conjugation_menu').update('<%= escape_javascript(render :partial => "assign_conjugation") %>');
+<% end %>

@@ -4,9 +4,6 @@ class PatternsController < ApplicationController
   before_filter :admin_required
   before_filter :browser_required
   
-  # Features
-  in_place_edit_for :pattern, :name
-  
   # Add self to a verb
   def add_verb
     pattern = Pattern.find params[:id]
@@ -33,7 +30,7 @@ class PatternsController < ApplicationController
     pattern = Pattern.find params[:id]
     conjugation_time = pattern.conjugation_time
     pattern.destroy
-    redirect_to conjugation_time_path(conjugation_time.permalink)
+    redirect_to tense_path(conjugation_time.permalink)
   end
   
   # Add self to a verb
@@ -60,9 +57,11 @@ class PatternsController < ApplicationController
   
   # List conjugations
   def index
-    @tense = ConjugationTime.find(params[:conjugation_time_id])
+    @tense = ConjugationTime.find_by_id_or_permalink params[:tense_id]
     @patterns = @tense.patterns
-    render :partial => 'list'
+    respond_to do |format|
+      format.js { render(:update) { |page| page.replace_html 'patterns', render(:partial => 'list') } }
+    end
   end
   
   # Create a new conjugation (including link to :vocabulary_id if given)

@@ -2,11 +2,35 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 
+// Run highlight function when appropriate
+
+document.observe("dom:loaded", function() {
+  if ($('notice').visible() && $('notice').childElements().first().identify().startsWith('flash_')) {
+    highlightNotice();
+  }
+})
+
+
 // Highlight flash[:notice] and hide after a few seconds
 
 function highlightNotice() {
 	$('notice').show();
 	setTimeout("new Effect.BlindUp('notice')",3000);
+}
+
+
+// Enable showing/hiding spinner
+
+document.observe("dom:loaded", function() {
+  enableSpinner('.lengthy');
+});
+function enableSpinner(selector) {
+  document.on('ajax:before', selector, function(event) { preSpinner(); $('loading').show(); });
+  document.on('ajax:complete', selector, function(event) { $('loading').hide(); preSpinner(); });
+}
+function preSpinner() {
+  if ($('conjugation_menu') != undefined) { $('conjugation_menu').toggle(); };
+  if ($('patterns') != undefined) { $('patterns').toggle(); };
 }
 
 
@@ -70,10 +94,10 @@ function toggleMenu(dom_id, elements) {
 
 // Activates or deactivates given tab
 
-function activateTab(no, pane) {
-  if(pane != '') { $(pane).hide(); }
+function activateTab(no) {
+  if($('tab_browser') != undefined) { $('tab_browser').hide(); }
   $('tab_' + no + '_link').addClassName('active');
-  if(pane != '') { new Effect.BlindDown(pane); }
+  if($('tab_browser') != undefined) { new Effect.BlindDown('tab_browser'); }
 }
 
 function deactivateTab(length) {
@@ -81,61 +105,18 @@ function deactivateTab(length) {
 }
 
 
-// Paint a new graph
-// Sends Ajax request to retrieve data from server, then uses Bluff to paint graph
+// Display and hide admin options
 
-function getGraphData(user, tag, type, page) {
-	tag = (tag === undefined) ? '' : tag;
-	type = (type === undefined) ? '' : type;
-	page = (page === undefined) ? 0 : page;
-	
-	new Ajax.Request('/users/' + user + '/statistics.json', {
-	  method: 'get',
-		parameters: {tag: tag, type: type, page: page},
-	  onSuccess: function(transport) {
-	  	var data = transport.responseText.evalJSON();
-			paintNewGraph(data.scores, (data.page-1)*25);
-			$('loading').hide();
-	  }
-	});
-}
-
-function paintNewGraph(scores, offset) {
-	var graph = new Bluff.Line('scores_as_timeline', '800x350');
-  graph.hide_legend = true;
-	graph.hide_title = true;
-  graph.maximum_value = 100;
-  graph.minimum_value = 0;
-  graph.set_margins(0);
-	graph.set_theme({
-	    colors: ['#C0ED00', '#CCC', '#666', '#444'],
-	    marker_color: '#02B8EA',
-	    font_color: 'black',
-	    background_colors: ['#fff', '#fff']
-	});
-  graph.tooltips = true;
-
-	graph.data("Score: ", scores.collect(function(s) { return (s.score.questions > 0) ? s.score.points / s.score.questions * 100 : 0 }));
-	var labels = new Hash();
-	limit = (scores.size() < 25) ? scores.size() : 25;
-	for (i=0; i<=limit; i=i+1) {
-		labels.set(i, offset+i+1);
-	}
-	graph.labels = labels.toObject();
-
-  graph.draw();
-}
-
-
-// Changes view after preview for import is loaded
-
-function resetImportForm() {
-  $('preview').innerHTML = "";
-  $('vocabulary_csv').show();
+function enableHiddenOptions(root, klass) {
+  $$(root).each(function(element) {
+    element.observe('mouseover', function(event) { element.select(klass)[0].show(); });
+    element.observe('mouseout', function(event) { element.select(klass)[0].hide(); });
+  });
 }
 
 
 // Resets form field containing hint
+
 function clearHint(dom_id, hint) {
   if ($(dom_id).getValue() == hint) {
     $(dom_id).setValue('');
@@ -145,6 +126,7 @@ function clearHint(dom_id, hint) {
 
 
 // Enhanced auto completer
+
 function getSelectionId(text, li) { 
   new Ajax.Request('/rules/' + li.id + '.json', {
     method: 'get',
@@ -156,4 +138,100 @@ function getSelectionId(text, li) {
       new Effect.Highlight('rule_replace');
     }
   });
+}
+
+
+// Javascript replacement for observe_field
+
+function startObserving(dom_id, path, highlight, attr_name, optional) {
+  attr_name = (attr_name === undefined) ? dom_id : attr_name;
+  new Form.Element.EventObserver(dom_id, function(element, value) {
+    params = attr_name + '=' + value;
+    if ($('loading') != undefined) { $('loading').show(); };
+    if (!(optional === undefined)) {
+      optional.each(function(pair) { params += '&' + pair.value + '=' + $A($(pair.key).options).find(function(option) { return option.selected; } ).value });
+    }
+    new Ajax.Request(path, { 
+      method:'get', asynchronous:true, evalScripts:true,
+      onComplete:function(request){new Effect.Highlight(highlight,{}); },
+      onLoaded:function(request) { if ($('loading') != undefined) { $('loading').hide(); }; },
+      parameters: params
+    });
+  });
+}
+
+
+// Javascript replacement for observe_field with frequency
+
+function startObservingFrequently(dom_id, target_id, timer, path, attr_name, snippet) {
+  new Form.Element.Observer(dom_id, timer, function(element, value) {
+    params = (attr_name === undefined) ? dom_id + '=' + encodeURIComponent(value) : attr_name + '=' + encodeURIComponent(value);
+    params = (snippet === undefined) ? params : params + '&' + eval(snippet);
+    if ($(target_id) != undefined) { $(target_id).hide(); };
+    if ($('loading') != undefined) { $('loading').show(); };
+    new Ajax.Updater(target_id, path, {
+      method:'get', asynchronous:true, evalScripts:true,
+      onLoaded:function(request) {
+        if ($('loading') != undefined) { $('loading').hide(); };
+        if ($(target_id) != undefined) { $(target_id).show(); };
+      },
+      parameters: params
+    });
+  });
+}
+
+
+// Javascript replacement for in_place_editing
+
+function discoverEditables() {
+  var editables = $A($$(".editable"));
+
+  editables.each(function(text) {
+    var form = Element.next(text);
+    text.observe('click', function() {
+      text.hide();
+      form.show();
+      form.focusFirstElement();
+ 
+      // when clicking outside of the form
+      var clickObserver = function(event) {
+        var element = Event.element(event);
+        if(element == text || element.descendantOf(form))
+          return;
+          if(form.style.display == "") {
+            form.fire("ajax:before");
+            form.request();
+          }
+          Event.stopObserving(document, "click", clickObserver);
+        };
+        Event.observe(document, "click", clickObserver);
+ 
+        // when escape key
+        Event.observe(document, "keyup", function(event) {
+          if (event.keyCode == Event.KEY_ESC) {
+            form.hide();
+            text.show();
+        }
+      });
+ 
+      // when form submit
+      form.observe("ajax:before", function() {
+        form.hide();
+        text.show();
+        text.update("(saving ...)");
+      });
+    });
+  });
+};
+
+function getSelectedOption(select) {
+   var selectedOptions = $(select).getElementsBySelector('option');
+   var selection  = null;
+   for (var i = 0; i < selectedOptions.length; i++) {
+      if (selectedOptions[i].selected) {
+         selection = selectedOptions[i];
+         break;
+      }
+   }
+   return selection;
 }

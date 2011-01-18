@@ -33,7 +33,7 @@ class ListsController < ApplicationController
     begin
       @list = List.find_by_id_or_permalink(params[:id])
     rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+      render :file => "#{::Rails.root.to_s}/public/404.html", :status => 404
     end
   end
   
@@ -68,7 +68,7 @@ class ListsController < ApplicationController
       @params = params
       @list = List.find(params[:id])
       @lists = Vocabulary.find(params[:vocabulary_id]).verb? ? List.list("id != #{@list.id} AND type LIKE 'Static%List'") : StaticVocabularyList.list("id != #{@list.id}")
-      render :partial => 'copy_move_form'
+      render(:update) { |page| page.replace_html "options_for_#{params[:vocabulary_id]}", render(:partial => 'copy_move_form') }
     end
   end
   
@@ -102,7 +102,7 @@ class ListsController < ApplicationController
         redirect_to '/login'
       end
     rescue
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+      render :file => "#{::Rails.root.to_s}/public/404.html", :status => 404
     end
   end
   
@@ -121,7 +121,7 @@ class ListsController < ApplicationController
   # API information - 
   #   /lists/#{id|permalink}.xml|json (No oauth required, if public)
   def show
-    begin
+    #begin
       @list = List.find_by_id_or_permalink(params[:id])
       @tense_id = params.key?(:tense_id) ? params[:tense_id] : @list.language_from.conjugation_times.first.id if @list.verb?
       if @list.public || @list.user == current_user
@@ -142,18 +142,17 @@ class ListsController < ApplicationController
       else
         unauthorized
       end
-    rescue
-      file_not_found
-    end
+    #rescue
+    #  file_not_found
+    #end
   end
   
   # Sort a dynamic list by different attributes
   def sort
     if params.key?(:attribute) && params.key?(:order)
-      @list = List.find(params[:id])
+      @list = List.find_by_permalink params[:id]
       @tense_id = params[:tense_id]
       @vocabularies = @list.vocabularies(params[:attribute], params[:order])
-      render :partial => 'regular_list'
     else
       render :nothing => true
     end
@@ -161,7 +160,7 @@ class ListsController < ApplicationController
   
   # Live search of the vocabularies database
   def live
-    list = List.find(params[:id])
+    list = List.find_by_permalink params[:id]
     @search = params[:word]
     if list.verb?
       @vocabularies = Vocabulary.find(:all, :conditions => ['language_id = ? AND word LIKE ?', list.language_from.id, "%#{params[:word]}%"], :limit => 10, :order => 'word') if params[:word].size >= 3

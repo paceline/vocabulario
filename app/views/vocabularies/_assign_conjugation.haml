@@ -1,5 +1,5 @@
 - if @patterns
-  - form_remote_for @vocabulary, :url => apply_conjugation_vocabulary_path(:conjugation_time_id => params[:conjugation_time_id]), :loaded => 'highlightNotice()' do
+  = form_for @vocabulary, :as => :vocabulary, :url => apply_conjugation_vocabulary_path(:tense_id => params[:tense_id]), :remote => true do
     %table
       %tr
         %th Person

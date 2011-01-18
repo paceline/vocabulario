@@ -20,5 +20,6 @@
   %h1 Users
   %p A list of this very exclusive sites' current members.
   %br
-  = @users.collect { |user| render user }
+    - @users.each do |user|
+      = render user
 

@@ -8,6 +8,6 @@ class VocabularyList < ActiveRecord::Base
   belongs_to :vocabulary
   
   # Validations
-  validates_uniqueness_of :vocabulary_id, :scope => :list_id
+  validates :vocabulary_id, :presence => true, :uniqueness => { :scope => :list_id }
   
 end

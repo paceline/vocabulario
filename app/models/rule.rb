@@ -5,9 +5,9 @@ class Rule < ActiveRecord::Base
   has_many :patterns, :through => :patterns_rules
   
   # Validations
-  validates_presence_of :name, :find, :replace
-  validates_uniqueness_of :find, :scope => 'replace', :message => 'already exists in database'
-  validates_uniqueness_of :replace, :scope => 'find', :message => 'already exists in database'
+  validates :name, :presence => true
+  validates :find, :presence => true, :uniqueness => {:scope => 'replace', :message => 'already exists in database'}
+  validates :replace, :presence => true, :uniqueness => {:scope => 'find', :message => 'already exists in database'}
   
   # Additional attributes
   attr_accessor :save_as_new

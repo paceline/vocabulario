@@ -15,7 +15,7 @@
   %h1 User profile
 
 .content
-  = gravatar_for @user, { :class => 'gravatar_big', :size => '75' }
+  = gravatar_for(@user, { :class => 'gravatar_big', :size => '75' }).html_safe
   %h1= @user.name
   %p
     - if @user.admin
@@ -43,8 +43,8 @@
 .content
   %h2 Test stats
   %ul
-    %li= "Took a <strong>total</strong> of <strong>#{@user.number_of_tests} tests</strong>"
-    %li= "Got <strong>100%</strong> right on <strong>#{@user.number_of_tests(1)} tests</strong>"
-    %li= "Got <strong>75%</strong> or more right on <strong>#{@user.number_of_tests(0.75)} tests</strong>"
-    %li= "Got <strong>50%</strong> or more right on <strong>#{@user.number_of_tests(0.5)} tests</strong>"
-    %li= "Got <strong>25%</strong> or more right on <strong>#{@user.number_of_tests(0.25)} tests</strong>"
+    %li= "Took a <strong>total</strong> of <strong>#{@user.number_of_tests} tests</strong>".html_safe
+    %li= "Got <strong>100%</strong> right on <strong>#{@user.number_of_tests(1)} tests</strong>".html_safe
+    %li= "Got <strong>75%</strong> or more right on <strong>#{@user.number_of_tests(0.75)} tests</strong>".html_safe
+    %li= "Got <strong>50%</strong> or more right on <strong>#{@user.number_of_tests(0.5)} tests</strong>".html_safe
+    %li= "Got <strong>25%</strong> or more right on <strong>#{@user.number_of_tests(0.25)} tests</strong>".html_safe

@@ -2,7 +2,7 @@
   = render :partial => 'shared/manage'
 
 - content_for :notice do
-  %h1= signed_in? ? in_place_editor_field(:pattern, :name) : @pattern.name
+  %h1= @pattern.name
   %p A conjugation pattern
 
 .content
@@ -10,14 +10,14 @@
   |
   = link_to 'Delete pattern', pattern_path(@pattern), :method => :delete, :confirm => 'Are you sure you want to delete this pattern?'
   |
-  = link_to 'Back to tense', conjugation_time_path(@pattern.conjugation_time.permalink)
+  = link_to 'Back to tense', tense_path(@pattern.conjugation_time.permalink)
 
 .content
   %ul#rules.list
     - @pattern.rules.each do |rule|
       %li{ :id => "list_item_#{rule.id}", :class => 'item' }
         %ul.inline
-          %li= link_to_remote 'X', { :url => pattern_rule_path(@pattern, rule), :method => :delete, :confirm => 'Are you sure you want to delete this rule?' }, { :class => 'delete' }
+          %li= link_to 'X', pattern_rule_path(@pattern, rule), :remote => true, :method => :delete, :confirm => 'Are you sure you want to delete this rule?', :class => 'delete'
           %li= link_to rule.name, edit_pattern_rule_path(@pattern, rule)  
       
 = sortable_element 'rules', :url => reorder_pattern_path(@pattern)

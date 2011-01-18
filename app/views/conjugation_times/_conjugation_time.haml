@@ -1,1 +1,1 @@
-%li= link_to_remote conjugation_time.name, :url => conjugation_time_patterns_path(conjugation_time), :update => 'patterns', :method => :get, :before => "$('patterns').hide(); $('loading').show()", :loaded => "$('loading').hide(); $('patterns').show();"
+%li= link_to conjugation_time.name, tense_patterns_path(conjugation_time.permalink), :remote => true, :class => 'lengthy'

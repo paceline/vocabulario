@@ -1,7 +1,7 @@
-- semantic_remote_form_for @score, :url => scores_path(:type => 'VocabularyTest') do |form|
+= semantic_remote_form_for @score, :url => scores_path(:type => 'VocabularyTest') do |form|
   = form.error_messages
 
-  - form.inputs do
+  = form.inputs do
     %li#test_tense_input.string
       %label{ :for => "test_tense" } Languages
       %p.inline-hints
@@ -9,9 +9,7 @@
         = select(:test, :from, @languages.collect {|p| [ p.word, p.id ] })
         and I'll translate them into and I'll translate them into
         = select(:test, :to, Language.list.collect {|p| [ p.word, p.id ] }, { :selected => Language.list[1].id })
-      = observe_field(:test_from, :url => update_languages_scores_path, :complete => visual_effect(:highlight, "test_tags"), :with => "'language_from_id=' + value + '&language_to_id=' + $A($('test_to').options).find(function(option) { return option.selected; } ).value")
-      = observe_field(:test_to, :url => update_tags_scores_path, :complete => visual_effect(:highlight, "test_tags"), :with => "'language_to_id=' + value + '&language_from_id=' + $A($('test_from').options).find(function(option) { return option.selected; } ).value")
-    
+            
     %li#test_limit_input.string
       %label{ :for => "test_limit" } Number of Questions
       = select(:test, :limit, LanguageTest::LIMITS)
@@ -20,8 +18,10 @@
     %li#test_tags_input.string
       %label{ :for => "test_tags" } Tags
       = select(:test, :tags, @tags.collect {|t| t.name }, { }, { :multiple => true, :size => 5 })
-      %p.inline-hints= "I'd only like to see vocabularies that match #{select :test, :all_or_any, [['all',true],['any',false]]} of the above tags"
-      = observe_field(:test_tense, :url => update_tags_scores_path, :complete => visual_effect(:highlight, "test_tags"), :with => "conjugation_time_id")
-  
-  - form.buttons do
+      %p.inline-hints
+        I'd only like to see vocabularies that match
+        = select :test, :all_or_any, [['all',true],['any',false]]
+        of the above tags
+    
+  = form.buttons do
     = form.commit_button "Ready? Let's go!"

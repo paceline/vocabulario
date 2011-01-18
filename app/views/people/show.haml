@@ -2,25 +2,25 @@
   = render :partial => 'shared/manage'
 
 .content
-  %h1= signed_in_as_admin? ? in_place_editor_field(:person, :pronoun) : @person.pronoun
+  %h1= @person.pronoun
   A set of
-  = signed_in_as_admin? ? in_place_select_field(:person, :language_id, { :label => @person.language.word }, :collection => Language.list.collect {|p| [ p.word, p.id ] }) : @person.language.word
+  = @person.language.word
   pronouns
 
 .content
   %table
     %tr
       %th 1st person singular
-      %td= signed_in_as_admin? ? in_place_editor_field(:person, :first_person_singular) : @person.first_person_singular
+      %td= @person.first_person_singular
       %th 1st person plural
-      %td= signed_in_as_admin? ? in_place_editor_field(:person, :first_person_plural) : @person.first_person_plural
+      %td= @person.first_person_plural
     %tr
       %th 2nd person singular
-      %td= signed_in_as_admin? ? in_place_editor_field(:person, :second_person_singular) : @person.second_person_singular
+      %td= @person.second_person_singular
       %th 2nd person plural
-      %td= signed_in_as_admin? ? in_place_editor_field(:person, :second_person_plural) : @person.second_person_plural
+      %td= @person.second_person_plural
     %tr
       %th 3rd person singular
-      %td= signed_in_as_admin? ? in_place_editor_field(:person, :third_person_singular) : @person.third_person_singular
+      %td= @person.third_person_singular
       %th 3rd person plural
-      %td= signed_in_as_admin? ? in_place_editor_field(:person, :third_person_plural) : @person.third_person_plural
+      %td= @person.third_person_plural

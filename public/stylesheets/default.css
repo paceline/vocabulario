@@ -236,6 +236,8 @@ ul.list_options {
 
 .floater h3, .no-floater h3 { margin-top: 0; }
 
+#taglist { cursor: pointer; }
+
 
 /* "Main" -> "Comments"
    =================== */
@@ -514,6 +516,8 @@ input[type="submit"].reverse { background: #FFF; color: #02B8EA; }
 
 /* "Forms" -> "In Place Editor"
    ============================ */
+   
+.editable:hover { background: #ff6; cursor: pointer }
 
 form.inplaceeditor-form { display: inline; }
 
