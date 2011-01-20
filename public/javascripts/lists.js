@@ -12,7 +12,7 @@ document.observe("dom:loaded", function() {
   
   // Start observing tense selector
   if ($('your_lists') != undefined) {
-    startObserving('your_lists','/lists/' + id_or_action,null,'tense_id');
+    startObserving('your_lists','/lists/' + id_or_action + '/tense',null,'tense_id');
   }
   
   // Start observering search and drag

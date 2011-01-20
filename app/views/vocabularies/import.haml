@@ -6,7 +6,7 @@
   %p Just try it out and see what happens!
   
 .content
-  = form_for :vocabulary, :url => import_vocabularies_path, :remote => true do |f|
+  = form_for :vocabulary, :url => import_vocabularies_path, :remote => true, :method => :post do |f|
     %p
       #loading{:style => 'display: none;' }= image_tag('ajax-loader.gif')
       = label_tag 'Paste your data'

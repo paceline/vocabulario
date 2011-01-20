@@ -144,7 +144,7 @@ function getSelectionId(text, li) {
 // Javascript replacement for observe_field
 
 function startObserving(dom_id, path, highlight, attr_name, optional) {
-  attr_name = (attr_name === undefined) ? dom_id : attr_name;
+  var attr_name = (attr_name === undefined) ? dom_id : attr_name;
   new Form.Element.EventObserver(dom_id, function(element, value) {
     params = attr_name + '=' + value;
     if ($('loading') != undefined) { $('loading').show(); };
@@ -152,10 +152,10 @@ function startObserving(dom_id, path, highlight, attr_name, optional) {
       optional.each(function(pair) { params += '&' + pair.value + '=' + $A($(pair.key).options).find(function(option) { return option.selected; } ).value });
     }
     new Ajax.Request(path, { 
-      method:'get', asynchronous:true, evalScripts:true,
+      asynchronous:true, evalScripts:true,
       onComplete:function(request){new Effect.Highlight(highlight,{}); },
       onLoaded:function(request) { if ($('loading') != undefined) { $('loading').hide(); }; },
-      parameters: params
+      parameters: encodeURIComponent(params)
     });
   });
 }
@@ -170,7 +170,7 @@ function startObservingFrequently(dom_id, target_id, timer, path, attr_name, sni
     if ($(target_id) != undefined) { $(target_id).hide(); };
     if ($('loading') != undefined) { $('loading').show(); };
     new Ajax.Updater(target_id, path, {
-      method:'get', asynchronous:true, evalScripts:true,
+      asynchronous:true, evalScripts:true,
       onLoaded:function(request) {
         if ($('loading') != undefined) { $('loading').hide(); };
         if ($(target_id) != undefined) { $(target_id).show(); };

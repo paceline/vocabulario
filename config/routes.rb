@@ -56,7 +56,7 @@ Vocabulario::Application.routes.draw do
   resources :rules do
     collection do
       post 'autocomplete'
-      get 'test'
+      post 'test'
     end
   end
   
@@ -66,7 +66,7 @@ Vocabulario::Application.routes.draw do
       get 'tabs'
     end
     member do
-      get 'live'
+      post 'live'
     end
     resources :patterns, :vocabularies
   end
@@ -75,17 +75,18 @@ Vocabulario::Application.routes.draw do
   
   resources :lists do
     collection do
-      get 'switch'
+      post 'switch'
     end
     member do
       post 'newitem'
       post 'copy_move'
       put 'copy_move'
-      get 'live'
+      post 'live'
       get 'show_options_menu'
       get 'sort'
       get 'print'
       post 'reorder'
+      post 'tense'
       delete 'unlink'
     end
     resources :scores
@@ -98,9 +99,9 @@ Vocabulario::Application.routes.draw do
   resources :scores do
     collection do
       get 'change_test_type'
-      get 'update_languages'
-      get 'update_tags'
-      get 'options_for_list'
+      post 'update_languages'
+      post 'update_tags'
+      post 'options_for_list'
     end
   end
   
@@ -133,10 +134,9 @@ Vocabulario::Application.routes.draw do
     collection do
       get 'import'
       post 'import'
-      get 'live'
-      get 'refresh_language'
-      get 'preview'
-      get 'review'
+      post 'live'
+      post 'refresh_language'
+      post 'preview'
       get 'redirect'
     end
     member do

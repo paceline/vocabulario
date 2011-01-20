@@ -132,13 +132,13 @@ DEPENDENCIES
   clearance (>= 0.9.0.rc9)
   dynamic_form
   factory_girl
-  formtastic (~> 1.1.0)
+  formtastic (>= 1.1.0)
   haml
-  javascript_auto_include (~> 0.1.0)
+  javascript_auto_include (>= 0.1.0)
   mysql2
   oauth
   oauth-plugin (>= 0.4.0.pre1)
   passenger
   rails (~> 3.0.1)
   test-unit
-  will_paginate (~> 3.0.beta)
+  will_paginate (>= 3.0.beta)

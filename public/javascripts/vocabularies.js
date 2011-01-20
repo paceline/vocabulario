@@ -26,7 +26,7 @@ document.observe("dom:loaded", function() {
   if ($('vocabulary_lookup_auto_complete') != undefined) {
     // Autocomplete for translation dialog
     new Autocompleter.Local('vocabulary_word','vocabulary_lookup_auto_complete', vocabularies, {frequency: 0, minChars: 1});
-    
+    dom_id, path, highlight, attr_name, optional
     // Refresh on switching language
     startObservingFrequently('vocabulary_word','',0.5,'/vocabularies/refresh_language','word');
   }

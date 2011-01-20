@@ -1,8 +1,8 @@
 class ListsController < ApplicationController
   
   # Filters
-  before_filter :browser_required, :except => [:index, :show]
-  before_filter :login_required, :except => [:index, :print, :show, :sort]
+  before_filter :browser_required, :except => [:index, :show, :tense]
+  before_filter :login_required, :except => [:index, :print, :show, :sort, :tense]
   before_filter :web_service_authorization_required, :only => [:index, :show]
   
   # Creates a new list
@@ -121,7 +121,7 @@ class ListsController < ApplicationController
   # API information - 
   #   /lists/#{id|permalink}.xml|json (No oauth required, if public)
   def show
-    #begin
+    begin
       @list = List.find_by_id_or_permalink(params[:id])
       @tense_id = params.key?(:tense_id) ? params[:tense_id] : @list.language_from.conjugation_times.first.id if @list.verb?
       if @list.public || @list.user == current_user
@@ -129,22 +129,31 @@ class ListsController < ApplicationController
         respond_to do |format|
           format.html
           format.atom { render :layout => false }
-          format.js { 
-            render :update do |page|
-              page.replace_html "order", render(:partial => 'sort_menu') if @list.smart? && !@vocabularies.blank?
-              page.replace_html "links", render(:partial => 'links')
-              page.replace_html "#{@list.static? && signed_in? && current_user == @list.user ? "static_list" : "regular_list"}", render(:partial => (@list.static? && signed_in? && current_user == @list.user ? "admin_list" : "regular_list"))
-            end
-          }
           format.json { render :json => current_user ? @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
           format.xml { render :xml => current_user ? @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
         end
       else
         unauthorized
       end
-    #rescue
-    #  file_not_found
-    #end
+    rescue
+      file_not_found
+    end
+  end
+  
+  # Show conjugation list in approriate tense
+  def tense
+    @list = List.find_by_id_or_permalink(params[:id])
+    @tense_id = params.key?(:tense_id) ? params[:tense_id] : @list.language_from.conjugation_times.first.id if @list.verb?
+    @vocabularies = @list.vocabularies
+    respond_to do |format|
+      format.js { 
+        render :update do |page|
+          page.replace_html "order", render(:partial => 'sort_menu') if @list.smart? && !@vocabularies.blank?
+          page.replace_html "links", render(:partial => 'links')
+          page.replace_html "#{@list.static? && signed_in? && current_user == @list.user ? "static_list" : "regular_list"}", render(:partial => (@list.static? && signed_in? && current_user == @list.user ? "admin_list" : "regular_list"))
+        end
+      }
+    end
   end
   
   # Sort a dynamic list by different attributes
