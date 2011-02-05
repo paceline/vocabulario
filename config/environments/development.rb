@@ -24,7 +24,7 @@ Vocabulario::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
   
   # Default host to include in emails
-  HOST = "big-sur:3000"
+  config.action_mailer.default_url_options = { :host => "big-sur:3000" }
 
   # Google Analytics tracking
   ANALYTICS_CODE = ""

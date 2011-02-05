@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   # Features
   include Clearance::User
-  attr_accessible :email, :name
+  attr_accessible :email, :password, :password_confirmation, :name
   has_permalink :name
   
   # Associations
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   
   # Returns profile url
   def profile_url
-    "http://#{HOST}/users/#{permalink}"
+    "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/users/#{permalink}"
   end
   
   # Statistics - Score rank
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   
   # Export as hash
   def to_hash(admin = false)
-    admin ? { :id => id, :name => name, :email => email, :created_at => created_at, :url => profile_url } : { :id => id, :name => name, :created_at => created_at, :url => "http://#{HOST}/users/#{permalink}" }
+    admin ? { :id => id, :name => name, :email => email, :created_at => created_at, :url => profile_url } : { :id => id, :name => name, :created_at => created_at, :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/users/#{permalink}" }
   end
   
 end

@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/paceline/permalink_fu
+  revision: 17caa7e4aca06e231d436e29d216b2c9df9e736c
+  tag: v1.1.0
+  specs:
+    permalink_fu (1.1.0)
+      activerecord (>= 2.3.5)
+      activerecord (>= 2.3.5)
+      activesupport (>= 2.3.5)
+      activesupport (>= 2.3.5)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -139,6 +150,7 @@ DEPENDENCIES
   oauth
   oauth-plugin (>= 0.4.0.pre1)
   passenger
+  permalink_fu!
   rails (~> 3.0.1)
   test-unit
   will_paginate (>= 3.0.beta)

@@ -133,7 +133,7 @@ class Vocabulary < ActiveRecord::Base
        :id => 1,
        :text => "added the new #{language.word} vocabulary \"#{word}\"",
        :created_at => created_at,
-       :url => "http://#{HOST}/vocabularies/#{permalink}",
+       :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/vocabularies/#{permalink}",
        :user => user.to_hash
      ]
   end

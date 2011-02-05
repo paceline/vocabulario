@@ -5,9 +5,9 @@
   %h1 Edit list
   %p Edit list of vocabularies
 
-- semantic_form_for @list, :url => list_path(@list.permalink) do |form|
+= semantic_form_for @list, :url => list_path(@list.permalink) do |form|
   = form.error_messages
   = render :partial => "inputs", :locals => { :form => form }
-  - form.buttons do
+  = form.buttons do
     = form.commit_button "Save"
     

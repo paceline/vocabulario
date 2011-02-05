@@ -48,7 +48,7 @@ Vocabulario::Application.configure do
   config.active_support.deprecation = :notify
   
   # Default host to include in emails
-  HOST = "tuvocabulario.com"
+  config.action_mailer.default_url_options = { :host => "tuvocabulario.com" }
 
   # Google Analytics tracking
   ANALYTICS_CODE = "<script type=\"text/javascript\">

@@ -16,5 +16,5 @@
         %li
           = status[:user].blank? ?  link_to("Guest", sign_up_url) : link_to(status[:user][:name], status[:user][:url])
           = status[:text]
-        - if status.key?(:url)
-          %li= link_to('More', status[:url])
+          - if status.key?(:url)
+            %li= link_to('More', status[:url])

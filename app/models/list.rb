@@ -76,7 +76,7 @@ class List < ActiveRecord::Base
       :id => id,
       :text => "created a new vocabulary list \"#{name}\"",
       :created_at => created_at,
-      :url => "http://#{HOST}/lists/#{permalink}",
+      :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/lists/#{permalink}",
       :user => user.to_hash
     ]
   end

@@ -7,8 +7,8 @@
     Change OAuth settings for
     = "\"#{@client_application.name}\""
     
-- semantic_form_for @client_application, :url => oauth_client_path(@client_application) do |form|
+= semantic_form_for @client_application, :url => oauth_client_path(@client_application) do |form|
   = form.error_messages
   = render :partial => "inputs", :locals => { :form => form }
-  - form.buttons do
+  = form.buttons do
     = form.commit_button "Save"

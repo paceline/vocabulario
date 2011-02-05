@@ -34,7 +34,7 @@ Vocabulario::Application.configure do
   config.active_support.deprecation = :stderr
   
   # Default host to include in emails
-  HOST = "localhost:3000"
+  config.action_mailer.default_url_options = { :host => "big-sur:3000" }
 
   # Google Analytics tracking
   ANALYTICS_CODE = ""

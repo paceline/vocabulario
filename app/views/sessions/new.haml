@@ -5,9 +5,9 @@
   to you.
     
 .content
-  - semantic_form_for :session, :url => session_path do |form|
-    - form.inputs do
+  = semantic_form_for :session, :url => session_path do |form|
+    = form.inputs do
       = form.input :email
       = form.input :password, :as => :password
-    - form.buttons do
+    = form.buttons do
       = form.commit_button "Sign in"

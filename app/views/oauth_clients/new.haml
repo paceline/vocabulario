@@ -5,8 +5,8 @@
   %h1 New application
   %p Register your app to access the vocabulario api
   
-- semantic_form_for @client_application, :url => oauth_clients_path do |form|
+= semantic_form_for @client_application, :url => oauth_clients_path do |form|
   = form.error_messages
   = render :partial => "inputs", :locals => { :form => form }
-  - form.buttons do
+  = form.buttons do
     = form.commit_button "Register"

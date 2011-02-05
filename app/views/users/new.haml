@@ -4,9 +4,9 @@
     Already have an account? Click here to
     = link_to "log in", "/login"
 
-- semantic_form_for @user do |form|
+= semantic_form_for @user do |form|
   = form.error_messages
   = render :partial => "/users/inputs", :locals => { :form => form }
-  - form.buttons do
+  = form.buttons do
     = form.commit_button "Sign up"
 
