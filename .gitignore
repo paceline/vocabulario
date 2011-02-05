@@ -11,6 +11,7 @@ config/initializers/site_keys.rb
 log/*.log
 db/*.db
 tmp/*/*
+vendor/plugins/acts_as_taggable_on_steroids
 vendor/plugins/acts_as_textiled
 vendor/plugins/gravatar-plugin
 mkmf.log

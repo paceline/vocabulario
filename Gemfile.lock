@@ -9,6 +9,11 @@ GIT
       activesupport (>= 2.3.5)
       activesupport (>= 2.3.5)
 
+PATH
+  remote: /var/www/acts_as_taggable_on_steroids
+  specs:
+    acts_as_taggable_on_steroids (1.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -137,6 +142,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   acts_as_list
+  acts_as_taggable_on_steroids!
   capistrano
   capistrano-ext
   capistrano_rsync_with_remote_cache

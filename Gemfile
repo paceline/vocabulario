@@ -26,5 +26,6 @@ gem 'RedCloth'
 gem 'will_paginate', '>= 3.0.beta'
 
 # Own gems
+gem 'acts_as_taggable_on_steroids', :path => '/var/www/acts_as_taggable_on_steroids'
 gem 'javascript_auto_include', '>= 0.1.0'
 gem 'permalink_fu', :git => 'git://github.com/paceline/permalink_fu', :tag => 'v1.1.0'
