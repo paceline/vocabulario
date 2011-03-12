@@ -137,7 +137,6 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   acts_as_list
-  acts_as_taggable_on_steroids!
   capistrano
   capistrano-ext
   capistrano_rsync_with_remote_cache

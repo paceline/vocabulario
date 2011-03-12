@@ -100,20 +100,15 @@ class VocabulariesController < ApplicationController
   #   /vocabularies.xml|json (No Oauth required)
   def index
     @vocabularies_list = params[:language] ? Vocabulary.find(:all, :order => 'word', :conditions => ['language_id != ?',params[:language]]) : Vocabulary.find(:all, :order => 'word')
+    @page = params.key?(:last) ? params[:last].to_i + 1 : 1
+    @vocabularies = @vocabularies_list.paginate :page => @page, :per_page => Vocabulary.per_page
     respond_to do |format|
-      format.html { 
-        @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => Vocabulary.per_page
-        @page = params[:page] || 1
-        render :action => 'index'
-      }
+      format.html
       format.js {
         if params[:menu]
           @menu = params[:menu]
           render :layout => false
         elsif params[:last]
-          @last = params[:last].to_i
-          @vocabularies = @vocabularies_list.paginate :page => @last + 1, :per_page => Vocabulary.per_page     
-          @page = @last + 1
           @vocabularies.empty? ? render(:nothing => true) : render(:partial => 'vocabularies', :object => @vocabularies, :locals => {:page => @page})
         else
           render :text => "var vocabularies = ['" + @vocabularies_list.collect { |v| v.word }.join("','") + "'];"
@@ -240,9 +235,11 @@ class VocabulariesController < ApplicationController
   
   # Remove translation object corresponding to two vocabularies
   def unlink
-    Translation.delete_all(['(vocabulary1_id = ? AND vocabulary2_id = ?) OR (vocabulary1_id = ? AND vocabulary2_id = ?)', params[:id], params[:link], params[:link], params[:id]])
+    vocabulary1 = Vocabulary.find_by_id_or_permalink(params[:id])
+    vocabulary2 = Vocabulary.find_by_id_or_permalink(params[:link])
+    Translation.delete_all(['(vocabulary1_id = ? AND vocabulary2_id = ?) OR (vocabulary1_id = ? AND vocabulary2_id = ?)', vocabulary1.id, vocabulary2.id, vocabulary2.id, vocabulary1.id])
     render :update do |page|
-      page.remove "translation_#{params[:link]}"
+      page.remove "translation_#{vocabulary2.id}"
       page.visual_effect :highlight, 'translations'
     end
   end

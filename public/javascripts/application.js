@@ -155,7 +155,7 @@ function startObserving(dom_id, path, highlight, attr_name, optional) {
       asynchronous:true, evalScripts:true,
       onComplete:function(request){new Effect.Highlight(highlight,{}); },
       onLoaded:function(request) { if ($('loading') != undefined) { $('loading').hide(); }; },
-      parameters: encodeURIComponent(params)
+      parameters: params
     });
   });
 }
@@ -234,4 +234,52 @@ function getSelectedOption(select) {
       }
    }
    return selection;
+}
+
+
+// Endless page stuff
+
+var live_search = false;
+
+function enableEndlessPage(results_dom_id, element_class) {
+  
+  // from http://codesnippets.joyent.com/posts/show/835
+  Position.GetWindowSize = function(w) {
+      var width, height;
+          w = w ? w : window;
+          this.width = w.innerWidth || (w.document.documentElement.clientWidth || w.document.body.clientWidth);
+          this.height = w.innerHeight || (w.document.documentElement.clientHeight || w.document.body.clientHeight);
+          return this;
+  }
+
+  // find to events that could fire loading items at the bottom
+  Event.observe(window, 'scroll', function(e){
+    loadRemainingItems(results_dom_id, element_class);
+  });
+
+  Event.observe(window, 'resize', function(e){
+    loadRemainingItems(results_dom_id, element_class);
+  }); 
+}
+
+function loadRemainingItems(results_dom_id, element_class){
+  // infer url from browser location
+  var url = (window.location.href.split('/').last() === '') ? '/status.js' : window.location.href + '.js';
+  // compute amount of page below the current scroll position
+  var remaining = ($(results_dom_id).viewportOffset()[1] + $(results_dom_id).getHeight()) - Position.GetWindowSize().height;
+  // compute height of bottom element
+  var last = $$('.' + element_class).last().getHeight();
+
+  if(remaining < last*2 && !live_search){
+    if(Ajax.activeRequestCount == 0){
+      var last = $$('.' + element_class).last().className.match(/[0-9]+/)[0];
+      new Ajax.Request(url, {
+        method: 'get',
+        parameters: 'last=' + last,
+        onSuccess: function(xhr){
+          $(results_dom_id).insert({bottom : xhr.responseText})
+        }
+      });
+    }
+  }
 }
