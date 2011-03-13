@@ -35,7 +35,4 @@ Vocabulario::Application.configure do
   
   # Default host to include in emails
   config.action_mailer.default_url_options = { :host => "big-sur:3000" }
-
-  # Google Analytics tracking
-  ANALYTICS_CODE = ""
 end

@@ -19,5 +19,33 @@ document.observe("dom:loaded", function() {
   if ($('vocabulary_word') != undefined) {
     startObservingFrequently('vocabulary_word','search_and_drag',0.5,'/lists/' + id_or_action + '/live','word');
   }
+  
+  // Enable div list scrolling
+  if ($('lists') != undefined) {
+    enableSlider();
+  }
 
 });
+
+
+// Start slider
+
+function enableSlider() {
+  var slider;
+  
+  Event.observe(window, 'load', function() {
+    slider = new Control.Slider('handle', 'track', {
+      axis: 'vertical',
+      onSlide: function(v) { scrollVertical(v, $('lists'), slider);  },
+      onChange: function(v) { scrollVertical(v, $('lists'), slider); }
+    });
+    if ($('lists').scrollHeight <= $('lists').offsetHeight) {
+      slider.setDisabled();
+      $('wrap').hide();
+    }
+  });
+  
+  function scrollVertical(value, element, slider) {
+    element.scrollTop = Math.round(value/slider.maximum*(element.scrollHeight-element.offsetHeight));
+  }
+}

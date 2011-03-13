@@ -4,22 +4,7 @@
 
   - content_for :custom_includes do
     = javascript_include_tag 'slider.js'
-    :javascript
-      var slider;
-      Event.observe(window, 'load', function() {
-        slider = new Control.Slider('handle', 'track', {
-          axis: 'vertical',
-          onSlide: function(v) { scrollVertical(v, $('lists'), slider);  },
-          onChange: function(v) { scrollVertical(v, $('lists'), slider); }
-        });
-        if ($('lists').scrollHeight <= $('lists').offsetHeight) {
-          slider.setDisabled();
-          $('wrap').hide();
-        }
-      });
-      function scrollVertical(value, element, slider) {
-        element.scrollTop = Math.round(value/slider.maximum*(element.scrollHeight-element.offsetHeight));
-      }
+    = javascript_include_tag 'lists.js'
     
   .content
     .tabs.green
