@@ -7,7 +7,7 @@
 
 .content
   = error_messages_for :vocabulary
-  - form_for :vocabulary, :url => vocabularies_path do |f|
+  - form_for @vocabulary do |f|
     = f.hidden_field :type, :value => params[:type] if params[:type]
     .fields
       = label_tag 'word'
@@ -20,6 +20,6 @@
       = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }
     .fields
       = label_tag 'Type'
-      = f.select :type, Vocabulary.supported_types
+      = f.select :type, Vocabulary.supported_types, { :selected => 'Noun' }
     .fields
       = submit_tag 'Save'

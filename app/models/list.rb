@@ -16,6 +16,8 @@ class List < ActiveRecord::Base
   # Validations
   validates :user_id, :language_from_id, :name, :presence => true
   
+  # Hooks
+  after_initialize :apply_user_defaults
   
   # Find public lists
   def self.find_public(user = nil)
@@ -80,5 +82,13 @@ class List < ActiveRecord::Base
       :user => user.to_hash
     ]
   end
+  
+  private
+    def apply_user_defaults
+      if new_record? && user
+        self.language_from_id = user.default_from
+        self.language_to_id = user.default_to
+      end
+    end
 
 end

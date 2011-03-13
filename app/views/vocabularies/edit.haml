@@ -12,7 +12,7 @@
 
 .content
   = error_messages_for :vocabulary
-  - form_for :vocabulary, :url => vocabularies_path do |f|
+  = form_for @vocabulary do |f|
     = hidden_field :translation, :vocabulary2_id, :value => @translation.id
     .fields
       = label_tag 'word'

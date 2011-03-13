@@ -8,6 +8,7 @@
         = link_to_function "Add", "toggleMenu('add',#{detect_elements})"
         %ul#add.menuitems{:style => "display: none"}
           %li= link_to 'New vocabulary', new_vocabulary_path
+          %li= link_to 'New list', new_list_path
           - if signed_in_as_admin?
             %li= link_to 'New conjugation pattern', new_pattern_path
             - if @vocabulary && !@vocabulary.new_record?

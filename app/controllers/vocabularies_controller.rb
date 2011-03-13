@@ -54,6 +54,11 @@ class VocabulariesController < ApplicationController
     end
   end
   
+  # Render new vocabulary form
+  def new
+    @vocabulary = Vocabulary.new(:user => current_user)
+  end
+  
   # Create translation or new vocabulary
   def create
     if params[:translation]
@@ -84,6 +89,7 @@ class VocabulariesController < ApplicationController
   # Add translation form
   def edit
     @translation = Vocabulary.find_by_id_or_permalink(params[:id])
+    @vocabulary = Vocabulary.new(:user => current_user, :language_id => @translation.language_id)
   end
   
   # Delete vocabulary, including translation links

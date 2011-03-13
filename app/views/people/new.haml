@@ -8,7 +8,7 @@
 .content
   = error_messages_for :person
   
-  - form_for @person do |f|
+  = form_for @person, :url => pronouns_path do |f|
   
     .fields
       = label_tag 'pronoun'
@@ -18,7 +18,7 @@
     .fields
       = label_tag 'Language'
       %p Please select the appropriate language:
-      = f.select(:language_id, Language.list.collect {|p| [ p.word, p.id ] })
+      = select_with_defaults(:test, :language_id, Language.list.collect {|p| [ p.word, p.id ] }, {}, :from)
      
     .fields
       = label_tag 'Forms'

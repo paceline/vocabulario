@@ -12,7 +12,7 @@
     #scrollbox
       #lists
         %ul
-          - current_user.lists.each do |list|
+          - current_user.lists('id != NULL').each do |list|
             %li= link_to shorten_text(list.name), list_path(list.permalink)
       #wrap
         #track-top

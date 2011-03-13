@@ -54,7 +54,7 @@ class ListsController < ApplicationController
   # Add a new list
   def new
     @user = current_user
-    @list = List.new
+    @list = List.new(:user_id => @user.id)
   end
   
   # Moves or copies vocabulary from one list to another

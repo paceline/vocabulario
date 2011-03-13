@@ -6,9 +6,11 @@
       %label{ :for => "test_tense" } Languages
       %p.inline-hints
         Show me vocabularies in
-        = select(:test, :from, @languages.collect {|p| [ p.word, p.id ] })
+        = select_with_defaults(:test, :from, @languages.collect {|p| [ p.word, p.id ] })
         and I'll translate them into and I'll translate them into
-        = select(:test, :to, Language.list.collect {|p| [ p.word, p.id ] }, { :selected => Language.list[1].id })
+        = select_with_defaults(:test, :to, @languages.collect {|p| [ p.word, p.id ] }, { :selected => Language.list[1].id })
+        %br
+        = link_to '(set default)', defaults_user_path(current_user.permalink), :id => 'set_default' if signed_in?  
             
     %li#test_limit_input.string
       %label{ :for => "test_limit" } Number of Questions

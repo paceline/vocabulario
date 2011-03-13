@@ -8,7 +8,6 @@ class Score < ActiveRecord::Base
   belongs_to :language_to, :foreign_key => 'language_to_id', :class_name => 'Language'
   belongs_to :user
   
-  
   # Return % of correct answers
   def ratio
     return questions > 0 ? points.to_f/questions.to_f*100 : 0

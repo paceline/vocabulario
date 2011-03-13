@@ -19,6 +19,14 @@ function highlightNotice() {
 }
 
 
+// Revert back to old content after a timeout
+
+function revertUpdate(element, content) {
+  var command = "$('" + element + "').update('" + content.replace(/\n/g,'') + "')";
+  setTimeout(command,3000); 
+}
+
+
 // Enable showing/hiding spinner
 
 document.observe("dom:loaded", function() {

@@ -123,4 +123,17 @@ class UsersController < Clearance::UsersController
     render :edit
   end
   
+  # Sets defaults for language pair
+  def defaults
+    @user = User.find_by_id_or_permalink(params[:id])
+    redirect_to user_path(@user.permalink) unless current_user == @user
+    begin
+      @user.update_attributes!(params[:user])
+      flash.now[:success] = "Your preferences have been successfully saved."
+    rescue
+      internal_server_error
+    end
+    render :partial => 'layouts/flashes'
+  end
+  
 end

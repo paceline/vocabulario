@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100913191039) do
+ActiveRecord::Schema.define(:version => 20110313112733) do
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -150,6 +150,18 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
     t.string "permalink"
   end
 
+  create_table "transformations", :force => true do |t|
+    t.string   "type",                :limit => 50
+    t.integer  "vocabulary_id"
+    t.integer  "position"
+    t.integer  "pattern_start"
+    t.integer  "pattern_end"
+    t.integer  "insert_before"
+    t.boolean  "include_white_space",               :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "translations", :id => false, :force => true do |t|
     t.integer "vocabulary1_id", :null => false
     t.integer "vocabulary2_id", :null => false
@@ -170,6 +182,8 @@ ActiveRecord::Schema.define(:version => 20100913191039) do
     t.string   "encrypted_password", :limit => 128
     t.string   "confirmation_token", :limit => 128
     t.boolean  "email_confirmed",                   :default => false, :null => false
+    t.integer  "default_from"
+    t.integer  "default_to"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

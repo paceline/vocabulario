@@ -7,12 +7,12 @@
 
 .content
   = error_messages_for :time
-  - form_for @time do |f|
+  - form_for @time, :url => tenses_path do |f|
     .content
       = label_tag 'Name'
       = f.text_field :name
     .content
       = label_tag 'Language'
-      = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }
+      = select_with_defaults(:test, :language_id, Language.list.collect {|p| [ p.word, p.id ] }, {}, :from)
     .content
       = submit_tag 'Save'

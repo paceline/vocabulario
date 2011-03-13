@@ -20,6 +20,7 @@ document.observe("dom:loaded", function() {
 function observeDefault() {
   startObserving('test_from','/scores/update_languages','test_tags','language_from_id',$H({test_to:'language_to_id'}));
   startObserving('test_to','/scores/update_tags','test_tags','language_to_id',$H({test_from:'language_from_id'}));
+  observeSetDefaults();
 }
 
 
@@ -37,3 +38,21 @@ function observeListTestTab() {
 }
 
 
+// Save default language pair
+
+function observeSetDefaults() {
+  Event.observe('set_default', 'click', setDefaults, false);
+  
+  function setDefaults(e) {
+    var old_notice = $('notice').innerHTML;
+    var params = new Hash();
+    params.set('user[default_from]', $A($('test_from').options).find(function(option) { return option.selected; } ).value);
+    params.set('user[default_to]', $A($('test_to').options).find(function(option) { return option.selected; } ).value);
+    new Ajax.Updater('notice', $('set_default').readAttribute('href'), {
+      asynchronous:true, evalScripts:true,
+      onLoaded: revertUpdate('notice',old_notice),
+      parameters: params
+    });
+    Event.stop(e);
+  }
+}

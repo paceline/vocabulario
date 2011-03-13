@@ -29,4 +29,11 @@ module ApplicationHelper
     @vocabulary && !@vocabulary.new_record? ? "['add','copy','delete']" : "['add']"
   end
   
+  def select_with_defaults(object, method, collection, selected = {}, default = nil)
+    if current_user && current_user.send("default_#{default ? default : method}")
+      selected = { :selected => current_user.send("default_#{default ? default : method}") }
+    end
+    select(object, method, collection, selected)
+  end
+  
 end

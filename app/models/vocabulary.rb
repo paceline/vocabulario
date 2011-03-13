@@ -3,6 +3,7 @@ class Vocabulary < ActiveRecord::Base
   # Features
   acts_as_taggable
   has_permalink :word, :update => true
+  attr_accessor :copy_tags
   cattr_reader :per_page
   @@per_page = 250
   TYPES = ['Language','Noun','Verb',nil]
@@ -27,6 +28,8 @@ class Vocabulary < ActiveRecord::Base
   validates :language_id, :presence => true
   validates :word, :presence => true, :uniqueness => { :scope => ['language_id','gender'], :message => 'already exists in database' }
   
+  # Hooks
+  after_initialize :apply_user_defaults
   
   # Check for untagged vocabularies FIMXE - Wonder if there's a better way to do this, jus couldn't get count to work
   def self.exist_untagged?
@@ -147,6 +150,13 @@ class Vocabulary < ActiveRecord::Base
         translations = all_translations(t, translations)
       end
       return translations
+    end
+    
+  private
+    def apply_user_defaults
+      if new_record? && user
+        self.language_id = language_id == user.default_from ? user.default_to : user.default_from
+      end
     end
 
 end

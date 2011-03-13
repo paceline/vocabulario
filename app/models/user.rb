@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   # Features
   include Clearance::User
-  attr_accessible :email, :password, :password_confirmation, :name
+  attr_accessible :email, :password, :password_confirmation, :name, :default_to, :default_from
   has_permalink :name
   
   # Associations
