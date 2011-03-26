@@ -94,10 +94,10 @@ class VocabulariesController < ApplicationController
   
   # Delete vocabulary, including translation links
   def destroy
-    @vocabulary = Vocabulary.find(params[:id])
+    @vocabulary = Vocabulary.find_by_permalink(params[:id])
     @vocabulary.destroy
     flash[:notice] = "You wanted it. Vocabulary has been deleted from to the database."
-    render :nothing => true
+    redirect_to vocabularies_path
   end
   
   # Display paged list of vocabularies (html) / javascript array of vocabularies for input field suggestions (js)

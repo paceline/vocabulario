@@ -31,7 +31,7 @@
         - if @vocabulary && !@vocabulary.new_record? && signed_in_as_admin?
           = link_to_function "Delete", "toggleMenu('delete',#{detect_elements})"
           %ul#delete.menuitems{:style => "display: none"}
-            %li= link_to 'Delete vocabulary', vocabulary_path(@vocabulary.permalink)
+            %li= link_to 'Delete vocabulary', vocabulary_path(@vocabulary.permalink), :confirm => 'Are you sure you want to delete this vocabulary?', :method => :delete
         - else
           %p Delete
 
