@@ -15,7 +15,7 @@ atom_feed do |feed|
             "No conjugation patterns have been added yet"
           end
         else
-          vocabulary.translations(@list.language_to.id).collect { |t| t.word }.join(', ')
+          vocabulary.translations.all(@list.language_to.id).collect { |t| t.word }.join(', ')
         end
       )
       entry.updated vocabulary.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ")

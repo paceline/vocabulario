@@ -31,7 +31,7 @@ class VocabularyTest < LanguageTest
       raise(ActiveRecord::RecordNotFound, "At least one of the languages not found. Probably either a typ-o or unsupported language.") unless @to && @from
       @limit = options[:limit].to_i if options.key?(:limit)
       @tags = options[:tags] if options.key?(:tags)
-      options.key?(:current) && options.key?(:test) ? restore_test(options[:current].to_i, options[:test]) : generate_test(@tags ? Vocabulary.find_tagged_with(@tags, :match_all => Boolean(options[:all_or_any]), :conditions => "language_id = #{@from.id}") : @from.vocabularies)
+      options.key?(:current) && options.key?(:test) ? restore_test(options[:current].to_i, options[:test]) : generate_test(@tags ? Vocabulary.find_tagged_with(@tags, :match_all => Boolean(options[:all_or_any]), :joins => 'LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id) ', :conditions => "(translations.vocabulary1_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{@to.id}) OR translations.vocabulary2_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{@to.id})) AND language_id = #{@from.id}") : @from.vocabularies_with_translation_to(@to))
     else
       raise(ArgumentError, "Missing options. :to and :from are required at minimum.")
     end

@@ -231,8 +231,8 @@ class VocabulariesController < ApplicationController
       @vocabulary = Vocabulary.find_by_id_or_permalink(params.key?(:vocabulary_id) ? params[:vocabulary_id] : params[:id])
       language_id = params.key?(:language_id) ? params[:language_id].to_i : nil
       respond_to do |format|
-        format.json { render :json => @vocabulary.translations(language_id).to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } })  }
-        format.xml { render :xml => @vocabulary.translations(language_id).to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
+        format.json { render :json => @vocabulary.translations.all(language_id).to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } })  }
+        format.xml { render :xml => @vocabulary.translations.all(language_id).to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
       end
     rescue ActiveRecord::RecordNotFound
       file_not_found

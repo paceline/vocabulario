@@ -56,11 +56,11 @@ class LanguageTest
   protected
     # Generates random order of test questions w/ respective results
     def generate_test_order(words, i=0)
-      if i < @limit
+      if i < @limit && !words.blank?
         next_word = words.delete_at(rand(words.size-1))
-        answers = self.class == VocabularyTest ? next_word.translations(@to.id) : next_word.conjugate_all(@tense.id)
+        answers = self.class == VocabularyTest ? next_word.translations.all(@to.id) : next_word.conjugate_all(@tense.id)
         @test << next_word.id unless answers.empty?
-        generate_test_order(words, i+=1)
+        generate_test_order(words, (answers.empty? ? i : i+=1))
       end
     end
     

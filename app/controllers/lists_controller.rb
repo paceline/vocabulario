@@ -77,7 +77,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     position = params.key?(:insert_after) ? @list.ids.index(params[:insert_after])+2 : 1
     vocabulary = Vocabulary.find(params[:vocabulary_id])
-    vocabulary = vocabulary.translations(list.language_from_id).first if @list.language_to == vocabulary.language
+    vocabulary = vocabulary.translations.all(list.language_from_id).first if @list.language_to == vocabulary.language
     valid = @list.add_vocabulary(vocabulary, position)
     if valid
       render :update do |page|

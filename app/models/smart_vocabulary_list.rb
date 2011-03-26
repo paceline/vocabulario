@@ -2,7 +2,7 @@ class SmartVocabularyList < List
   
   # Returns vocabularies associated with list
   def vocabularies(custom_attribute = "", custom_order = "")
-    conditions = ["vocabularies.language_id = #{language_from.id}"]
+    conditions = ["(translations.vocabulary1_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{language_to.id}) OR translations.vocabulary2_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{language_to.id})) AND language_id = #{language_from.id}"]
     order = custom_attribute.blank? ? ['vocabularies.word'] : ["#{custom_attribute} #{custom_order}"]
     
     unless time_value.blank? || time_unit.blank?
@@ -15,9 +15,9 @@ class SmartVocabularyList < List
     end
     
     if tag_list.blank?
-      Vocabulary.find(:all, :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
+      Vocabulary.find(:all, :joins => 'LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)', :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
     else
-      Vocabulary.find_tagged_with(tags, :match_all => all_or_any, :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
+      Vocabulary.find_tagged_with(tags, :match_all => all_or_any, :joins => 'LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)', :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
     end
   end
 

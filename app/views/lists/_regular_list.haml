@@ -15,5 +15,5 @@
           - rescue
             %li No conjugation patterns have been added yet
         - else
-          - vocabulary.translations(@list.language_to_id).each do |i|
+          - vocabulary.translations.all(@list.language_to_id).each do |i|
             %li= i.word

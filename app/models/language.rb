@@ -32,5 +32,13 @@ class Language < Vocabulary
   def tags_for_language
     return Tag.find(:all, :joins => 'LEFT JOIN taggings ON taggings.tag_id = tags.id LEFT JOIN vocabularies ON taggings.taggable_id = vocabularies.id', :conditions => ['vocabularies.language_id = ?',self.id], :group => 'tags.id', :order => 'tags.name')
   end
+  
+  # Get only vocabularies with translations to this language
+  def vocabularies_with_translation_to(to)
+    vocabularies.find(:all,
+      :from => 'vocabularies, translations',
+      :conditions => "(translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id) AND (translations.vocabulary1_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{to.id}) OR translations.vocabulary2_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{to.id}))"
+    )
+  end
 
 end

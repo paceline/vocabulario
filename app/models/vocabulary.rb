@@ -20,6 +20,17 @@ class Vocabulary < ActiveRecord::Base
   has_many :relations_from, :foreign_key => 'vocabulary2_id', :class_name => 'Translation'
   has_many :translation_to, :through => :relations_to, :source => :vocabulary2
   has_many :translation_from, :through => :relations_from, :source => :vocabulary1
+  has_many :translations, :class_name => 'Vocabulary', :finder_sql => 'SELECT vocabularies.* FROM vocabularies LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id) WHERE (translations.vocabulary1_id = #{id} OR translations.vocabulary2_id = #{id}) AND vocabularies.id != #{id} ORDER BY vocabularies.word' do
+    def all(to = nil)
+      in_clause = self.collect { |v| v.id } << proxy_owner.id
+      Vocabulary.all(
+        :select => 'DISTINCT vocabularies.*',
+        :joins => "LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)",
+        :conditions => "(translations.vocabulary1_id IN ('#{in_clause.join("','")}') OR translations.vocabulary2_id IN ('#{in_clause.join("','")}')) AND vocabularies.id != #{proxy_owner.id}#{to ? " AND vocabularies.language_id = #{to}" : ""}",
+        :order => "vocabularies.word"
+      )
+    end
+  end 
   has_many :vocabulary_lists
   has_many :lists, :through => :vocabulary_lists
   
@@ -124,12 +135,6 @@ class Vocabulary < ActiveRecord::Base
     self.tag_list = (self.tag_list + new_tags.split(',')).uniq unless new_tags.blank?
   end
   
-  # Gather all translations (to and from) for given vocabulary id
-  def translations(to = nil)
-    translations = all_translations.sort { |x,y| x.word.downcase <=> y.word.downcase }
-    return to ? translations.delete_if {|t| t.language_id != to} : translations
-  end
-  
   # Return updates for timline
   def updates_for_timeline
      Status[
@@ -141,17 +146,6 @@ class Vocabulary < ActiveRecord::Base
      ]
   end
   
-  protected
-    def all_translations(word = self, translations = [])
-      new_translations = word.translation_to.find(:all, :conditions => ['language_id != ?', self.language_id], :readonly => false) + word.translation_from.find(:all, :conditions => ['language_id != ?', self.language_id], :readonly => false)
-      new_translations -= (translations & new_translations)
-      translations += new_translations
-      new_translations.each do |t|
-        translations = all_translations(t, translations)
-      end
-      return translations
-    end
-    
   private
     def apply_user_defaults
       if new_record? && user

@@ -11,7 +11,7 @@ gem 'capistrano-ext'
 gem 'capistrano_rsync_with_remote_cache'
 
 # Testing
-gem 'test-unit'
+gem 'test-unit', '= 1.2.3'
 
 # More gems
 gem 'acts_as_list'
@@ -27,4 +27,4 @@ gem 'will_paginate', '>= 3.0.beta'
 
 # Own gems
 gem 'javascript_auto_include', '>= 0.1.0'
-gem 'permalink_fu', :git => 'git://github.com/paceline/permalink_fu', :tag => 'v1.1.0'
+gem 'permalink_fu', :path => '/usr/local/rvm/gems/ruby-1.9.2-p180/gems/permalink_fu-1.1.0'
