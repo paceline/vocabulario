@@ -68,7 +68,7 @@ class LanguageTest
     def load_current_question
       if @test[@current].class == Fixnum
         word = Vocabulary.find @test[@current]
-        @test[@current] = [ word, (self.class == VocabularyTest ? word.translations(@to.id) : word.conjugate_all(@tense.id)) ]
+        @test[@current] = [ word, (self.class == VocabularyTest ? word.translations.all(@to.id) : word.conjugate_all(@tense.id)) ]
       end
     end  
 end
