@@ -1,0 +1,7 @@
+- if signed_in?
+
+  .content
+    .tabs.green
+      %h1 Manage stuff
+    %ul#manage
+      %li= link_to 'New page', new_wiki_page_path(:path => 'untitled')

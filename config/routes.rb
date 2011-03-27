@@ -36,6 +36,9 @@ Vocabulario::Application.routes.draw do
   match '/timeline' => 'status#index', :as => :timeline
   match '/users/:user_id/timeline' => 'status#index', :as => :user_timeline
   
+  # Wiki
+  wiki_root '/wiki'
+  match '/wiki/by_tag' => 'wiki_pages#by_tag', :as => :wiki_by_tag
   
   # Resources
   # =========

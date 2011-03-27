@@ -28,3 +28,4 @@ gem 'will_paginate', '>= 3.0.beta'
 # Own gems
 gem 'javascript_auto_include', '>= 0.1.0'
 gem 'permalink_fu', :path => '/usr/local/rvm/gems/ruby-1.9.2-p180/gems/permalink_fu-1.1.0'
+gem 'irwi', '= 0.4.1'

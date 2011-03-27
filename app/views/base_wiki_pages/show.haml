@@ -1,0 +1,27 @@
+= wiki_page_style
+
+- content_for :sidebar do
+  = render :partial => 'wiki_pages/manage'
+  = render :partial => 'base_wiki_pages/tagcloud'
+
+- content_for :notice do
+  %h1= @page.title
+
+= wiki_page_info
+= wiki_page_actions
+  
+.wiki_content
+  =wiki_content @page.content
+
+%h3 Tags
+= render :partial => 'shared/taglist', :object => @page
+  
+- unless @page.tag_list.blank?
+  %h3 Related vocabularies
+  %ul#regular_list.list
+    - (@page.language ? Vocabulary.find_tagged_with(@page.tag_list, :conditions => "language_id = #{@page.language.id}", :order => "word") : Vocabulary.find_tagged_with(@page.tag_list, :order => "word")).each do |vocabulary|
+      %li
+        %ul.inline
+          %li= link_to(vocabulary.word, vocabulary_path(vocabulary.permalink))
+          - vocabulary.translations.each do |i|
+            %li= i.word

@@ -1,0 +1,22 @@
+- content_for :sidebar do
+  = render :partial => 'base_wiki_pages/tagcloud'
+
+- content_for :notice do
+  %h1 Wiki pages
+  %p
+    Pages tagged with
+    = link_to params[:id], wiki_by_tag_path(params[:id])
+
+.content
+  %h2 Search results
+
+%ul#regular_list.list
+  - if @pages.blank?
+    %li= "Looks like now pages haven been tagged with #{params[:id]}. Sorry."
+
+  - else
+    - @pages.each do |page|
+      %li
+        %ul.inline
+          %li= link_to(page.title, "/wiki/#{page.path}")
+          %li= page.preview

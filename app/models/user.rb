@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :languages
   has_many :client_applications
   has_many :tokens, :class_name => "OauthToken", :order => "authorized_at desc", :include => [:client_application]
+  has_many :wiki_pages, :foreign_key => 'creator_id'
   
   # Validations
   validates :email, :presence => true

@@ -42,6 +42,16 @@ function preSpinner() {
 }
 
 
+// Enable show and hide for tag list editor
+
+function enableTagListEditor() {
+  // Listen to click action to enter tag edit mode
+  document.on('click', '#taglist', function(event) { $('taglist','tag_form').invoke('toggle'); $('tag_list').focus(); });
+  // Listen to Esc to exit out of tag edit mode
+  document.on('keydown', '#tag_list', function(event) { toggleElementsOnEscape(event, ['tag_form','taglist']) });
+}
+
+
 // Toggle given elements when ESC key is hit
 
 function toggleElementsOnEscape(event, forms) {
