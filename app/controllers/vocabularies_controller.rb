@@ -184,6 +184,7 @@ class VocabulariesController < ApplicationController
     if @vocabulary
       @language = @vocabulary.language
       render :update do |page|
+        page << "$('vocabulary_gender').value = '#{@vocabulary.gender}'"
         page << "$('vocabulary_language_id').selectedIndex = #{Language.list.index(@language)}"
       end
     else
