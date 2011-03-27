@@ -18,7 +18,7 @@ class WikiPage < ActiveRecord::Base
       :id => id,
       :text => "added the new page \"#{title}\"",
       :created_at => created_at,
-      :url => "http://#{HOST}/wiki/#{path}",
+      :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/wiki/#{path}",
       :user => creator.to_hash
     ]
   end
