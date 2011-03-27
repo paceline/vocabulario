@@ -18,6 +18,7 @@
   
 - unless @page.tag_list.blank?
   %h3 Related vocabularies
+  %p= link_to '(take a test)', test_from_page_path(@page.path)
   %ul#regular_list.list
     - (@page.language ? Vocabulary.find_tagged_with(@page.tag_list, :conditions => "language_id = #{@page.language.id}", :order => "word") : Vocabulary.find_tagged_with(@page.tag_list, :order => "word")).each do |vocabulary|
       %li

@@ -13,7 +13,15 @@ class ScoresController < ApplicationController
       @list = params[:list_id] ? List.find_by_id_or_permalink(params[:list_id]) : @lists.first
     else
       @languages = Language.list
-      @tags = @languages.first.tags_for_language
+      if params.key?(:path)
+        page = WikiPage.find_by_path(params[:path])
+        second_language = page.guess_second_language
+        @tags = page.language.tags_for_language & second_language.tags_for_language
+        @selected = { :test_to => page.language_id, :test_from => second_language.id, :test_tags => page.tags.collect { |t| t.name } }
+      else
+        @selected = { :test_to => current_user.default_to, :test_from => current_user.default_from, :test_tags => nil }
+        @tags = Language.find(current_user.default_to).tags_for_language & Language.find(current_user.default_from).tags_for_language
+      end
     end
     respond_to do |format|
       format.html

@@ -11,6 +11,7 @@ Vocabulario::Application.routes.draw do
   match '/signup' => 'users#new', :as => :sign_up
   match '/community' => 'users#index', :as => :community
   match '/lists/:list_id/test' => 'scores#new', :as => :test_from_list
+  match '/wiki/:path/test' => 'scores#new', :as => :test_from_page
   match '/test' => 'scores#new', :as => :test
   
   # Vocabularies
