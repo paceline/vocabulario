@@ -18,7 +18,7 @@
     .fields
       = label_tag 'Language'
       %p Please select the appropriate language:
-      = select_with_defaults(:test, :language_id, Language.list.collect {|p| [ p.word, p.id ] }, {}, :from)
+      = select_with_defaults(:person, :language_id, Language.list.collect {|p| [ p.word, p.id ] }, {}, :from)
      
     .fields
       = label_tag 'Forms'

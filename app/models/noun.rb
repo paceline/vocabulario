@@ -15,5 +15,10 @@ class Noun < Vocabulary
     end
     super
   end
+  
+  # Always returns article with word
+  def word
+    gender ? "#{gender} #{read_attribute(:word)}" : read_attribute(:word)
+  end
 
 end
