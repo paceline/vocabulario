@@ -13,6 +13,6 @@
       = f.text_field :name
     .content
       = label_tag 'Language'
-      = select_with_defaults(:test, :language_id, Language.list.collect {|p| [ p.word, p.id ] }, {}, :from)
+      = select_with_defaults(:conjugation_time, :language_id, Language.list.collect {|p| [ p.word, p.id ] }, {}, :from)
     .content
       = submit_tag 'Save'
