@@ -18,10 +18,6 @@
       = label_tag 'word'
       = f.text_field :word, :size => 50
       #vocabulary_lookup_auto_complete.auto_complete
-    - unless @translation.gender == "N/A"
-      .fields
-        = label_tag 'article'
-        = f.text_field :gender
     .fields
       = label_tag 'Language'
       = f.select :language_id, languages_for_translation(@translation)

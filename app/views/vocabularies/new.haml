@@ -13,9 +13,6 @@
       = label_tag 'word'
       = f.text_field :word
     .fields
-      = label_tag 'article'
-      = f.text_field :gender
-    .fields
       = label_tag 'Language'
       = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }
     .fields

@@ -7,7 +7,7 @@
       %li= link_to('Vocabulary as JSON', vocabulary_path(:format => :json))
       %li= link_to('Vocabulary as XML', vocabulary_path(:format => :xml))
   
-%h1= in_place_input @vocabulary, :word
+%h1= in_place_input @vocabulary, :name
 .content
   = render :partial => 'shared/taglist', :object => @vocabulary
 

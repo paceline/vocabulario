@@ -2,7 +2,7 @@ class Vocabulary < ActiveRecord::Base
   
   # Features
   acts_as_taggable
-  has_permalink :word, :update => true
+  has_permalink :name, :update => true
   attr_accessor :copy_tags
   cattr_reader :per_page
   @@per_page = 250
@@ -112,6 +112,11 @@ class Vocabulary < ActiveRecord::Base
     return self[:type] ? self[:type] : "Vocabulary"
   end
   
+  # Return true if gender is set
+  def gender?
+    gender && gender != 'N/A'
+  end
+  
   # Stub for conjugation realtionship
   def patterns
     nil
@@ -125,7 +130,12 @@ class Vocabulary < ActiveRecord::Base
   
   # Alias for word
   def name
-    return word
+    read_attribute(:word)
+  end
+  
+  # Alias for word
+  def name=(value)
+    write_attribute(:word, value)
   end
   
   # Imports csv string

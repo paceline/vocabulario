@@ -2,7 +2,6 @@
   %h1.spacing= "Question #{@test.current + 1} / #{@test.limit}"
   %h2
     = @test.current_question.word
-    = "(#{@test.current_question.gender})" unless @test.current_question.gender == "N/A"
   = form_for(@score, :url => score_path(@score, :test_object => @test.to_session_params, :type => 'VocabularyTest'), :html => { :method => :put }, :remote => true)  do
     %p
       = text_field_tag 'answer'
