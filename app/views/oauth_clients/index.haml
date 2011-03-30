@@ -21,9 +21,11 @@
           %td= link_to token.client_application.name, token.client_application.url
           %td= token.authorized_at
           %td
-            - form_tag :controller => 'oauth', :action => 'revoke' do
-              = hidden_field_tag 'token', token.token
-              = submit_tag "Revoke!"
+            - form_tag oauth_consumer_path(token.id),:method=>:delete do
+              = submit_tag "Disconnect"
+              or
+              = submit_tag "Reconnect"
+              if you experienced a problem. 
 
 .content
   %h2 Developers
@@ -35,6 +37,6 @@
     - @client_applications.each do |client|
       - div_for client do
         = link_to client.name, oauth_client_path(client)
-        = '(' + link_to('Edit', edit_oauth_client_path(client)) + ', '
+        = ('(' + link_to('Edit', edit_oauth_client_path(client)) + ', ').html_safe
         = link_to('Delete', oauth_client_path(client), :confirm => "Are you sure?", :method => :delete) + ')'
  

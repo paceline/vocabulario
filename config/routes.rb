@@ -97,6 +97,7 @@ Vocabulario::Application.routes.draw do
   end
   
   resources :oauth_clients
+  resources :oauth_consumers
   
   resources :pronouns, :controller => 'people', :as => 'pronouns'
   
