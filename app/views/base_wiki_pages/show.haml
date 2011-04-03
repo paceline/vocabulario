@@ -11,7 +11,7 @@
 = wiki_page_actions
   
 .wiki_content
-  =wiki_content @page.content
+  =wiki_content @page.content.html_safe
 
 %h3 Tags
 = render :partial => 'shared/taglist', :object => @page

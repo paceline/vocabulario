@@ -41,5 +41,8 @@ module Vocabulario
     
     # Default reply to address when sends mails
     DO_NOT_REPLY = "Soulless machine <hello@tuvocabulario.com>"
+    
+    # Allow table tags
+    config.action_view.sanitized_allowed_tags = 'table', 'tr', 'th', 'td'
   end
 end
