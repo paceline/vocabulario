@@ -34,10 +34,6 @@
             %li= link_to 'Delete vocabulary', vocabulary_path(@vocabulary.permalink), :confirm => 'Are you sure you want to delete this vocabulary?', :method => :delete
         - else
           %p Delete
-
-  .content
-    .tabs.green
-      %h1 List stuff
     %p
       = link_to('Pronouns', pronouns_path)
       |

@@ -1,11 +1,6 @@
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-  .content
-    .tabs.green
-      %h1 Export
-    %ul
-      %li= link_to 'Vocabularies as JSON', vocabularies_path(:format => :json)
-      %li= link_to 'Vocabularies as XML', vocabularies_path(:format => :xml)
+  #list_stuff= render :partial => 'lists/list' if signed_in?
 
 - content_for :notice do
   %h1 Explore

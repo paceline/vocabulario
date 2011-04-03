@@ -57,6 +57,11 @@ class Vocabulary < ActiveRecord::Base
   end
   identify_methods_for_subclasses
   
+  # Count self grouped by language
+  def self.count_by_language
+    count(:include => 'language', :group => 'languages_vocabularies.permalink', :order => 'COUNT(*) DESC')
+  end
+  
   # Adds vocabulary to list
   def add_to_list(list_id, position = 1)
     lister = self.vocabulary_lists.build({ :list_id => list_id })

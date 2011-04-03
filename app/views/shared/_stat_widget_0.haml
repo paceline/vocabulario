@@ -1,0 +1,4 @@
+%p Language ranking in terms of number of vocabularies:
+%ol
+  - Vocabulary.count_by_language.each_pair do |language,count|
+    %li= link_to "#{language.capitalize} (#{count})", vocabularies_by_language_path(language)

@@ -6,7 +6,7 @@
   %p A very lo-fi vocabulary trainer I more or less wrote for personal use only
 
 - content_for :sidebar do
-  #list_stuff= render :partial => 'lists/list' if signed_in?
+  = render :partial => 'shared/stat_widget'
 
 %ul#latest.list
   = render :partial => 'timeline'
