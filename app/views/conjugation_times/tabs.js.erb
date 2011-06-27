@@ -8,7 +8,7 @@ document.observe("dom:loaded", function() {
   document.on('ajax:complete', '#tab_<%= i %>', function(event) { activateTab(<%= i %>); });
   <% end %>
   
-  <% unless @tense.patterns.blank? %>
+  <% unless @tense.blank? || @tense.patterns.blank? %>
   // Start observing live search
   startObservingFrequently('pattern_name','pattern_list',0.5,'<%= live_tense_path(@tense.permalink) %>','name');
   <% end %>

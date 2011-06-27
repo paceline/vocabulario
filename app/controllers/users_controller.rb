@@ -45,7 +45,7 @@ class UsersController < Clearance::UsersController
   # FIX ME - copy/paste from clearance until I can find the routing error
   def password
     @user = User.find_by_id_and_confirmation_token(params[:id], params[:token])
-    if @user.update_password(params[:user][:password], params[:user][:password_confirmation])
+    if @user.update_password(params[:user][:password], params[:user][:password_changing])
       @user.confirm_email!
       sign_in(@user)
       flash[:success] = "Password has now been changed."

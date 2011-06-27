@@ -35,12 +35,13 @@ class Vocabulary < ActiveRecord::Base
   has_many :lists, :through => :vocabulary_lists
   
   # Validations
-  validates :type, :inclusion => { :in => TYPES, :message => "{{value}} is not a supported vocabulary type" }
-  validates :language_id, :presence => true
-  validates :word, :presence => true, :uniqueness => { :scope => ['language_id','gender'], :message => 'already exists in database' }
+  validates_inclusion_of :type, :in => TYPES, :message => "{{value}} is not a supported vocabulary type"
+  validates_presence_of :language_id, :word
+  validates_uniqueness_of :word, :scope => ['language_id','gender'], :message => 'already exists in database'
   
   # Hooks
   after_initialize :apply_user_defaults
+  default_scope order('`vocabularies`.`word`')
   
   # Check for untagged vocabularies FIMXE - Wonder if there's a better way to do this, jus couldn't get count to work
   def self.exist_untagged?
@@ -60,6 +61,17 @@ class Vocabulary < ActiveRecord::Base
   # Count self grouped by language
   def self.count_by_language
     count(:include => 'language', :group => 'languages_vocabularies.permalink', :order => 'COUNT(*) DESC')
+  end
+  
+  # Imports csv string
+  def self.import(data, language, user, tags, new_tags)
+    temp = new({ :word => data, :user_id => user.id })
+    temp.language = language
+    vocabulary = find_by_word_and_language_id(temp.name, temp.language_id) || temp
+    vocabulary.save if vocabulary.new_record?
+    vocabulary.tag_list = (self.tag_list + tags).uniq unless tags.blank?
+    vocabulary.tag_list = (self.tag_list + new_tags.split(',')).uniq unless new_tags.blank?
+    return vocabulary
   end
   
   # Adds vocabulary to list
@@ -141,13 +153,6 @@ class Vocabulary < ActiveRecord::Base
   # Alias for word
   def name=(value)
     write_attribute(:word, value)
-  end
-  
-  # Imports csv string
-  def import(user, tags, new_tags)
-    self.user = user if new_record?
-    self.tag_list = (self.tag_list + tags).uniq unless tags.blank?
-    self.tag_list = (self.tag_list + new_tags.split(',')).uniq unless new_tags.blank?
   end
   
   # Return updates for timline

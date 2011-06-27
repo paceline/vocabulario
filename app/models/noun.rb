@@ -1,5 +1,8 @@
 class Noun < Vocabulary
   
+  # Features
+  has_permalink :name, :update => true
+  
   # Supported articles
   ARTICLES = ["la","le","el","il","l'","lo","i","der","die","das","the","les"]
   

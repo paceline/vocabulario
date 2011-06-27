@@ -62,15 +62,12 @@ class VocabulariesController < ApplicationController
   # Create translation or new vocabulary
   def create
     if params[:translation]
-      copy_tags = params[:vocabulary].delete(:copy_tags)
-      @translation = Vocabulary.find(params[:translation][:vocabulary2_id])
-      @vocabulary = Vocabulary.find_by_word(params[:vocabulary][:word])
-      @vocabulary = Object.const_get(@translation.class.to_s).new(params[:vocabulary]) unless @vocabulary
-      @vocabulary.user = current_user
-      @vocabulary.tag_list = (@vocabulary.tag_list + @translation.tag_list).uniq if copy_tags
-      @translation.translation_to << @vocabulary
-      flash[:success] = "Translation has been successfully saved."
-      redirect_to vocabulary_path(@translation.permalink)
+      @vocabulary = Vocabulary.find(params[:translation][:vocabulary2_id])
+      translation = Vocabulary.find_by_word_and_language_id(params[:vocabulary][:word], params[:vocabulary][:language_id]) || Object.const_get(@vocabulary.class.to_s).new(params[:vocabulary])
+      translation.user = current_user
+      translation.tag_list = (@vocabulary.tag_list + translation.tag_list).uniq
+      @vocabulary.translation_to << translation
+      render 'create', :layout => false
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
       type = params[:vocabulary][:type].blank? ? 'Vocabulary' : params[:vocabulary].delete(:type)
@@ -84,12 +81,6 @@ class VocabulariesController < ApplicationController
         render :action => 'new'
       end
     end
-  end
-  
-  # Add translation form
-  def edit
-    @translation = Vocabulary.find_by_id_or_permalink(params[:id])
-    @vocabulary = Vocabulary.new(:user => current_user, :language_id => @translation.language_id)
   end
   
   # Delete vocabulary, including translation links
@@ -106,18 +97,25 @@ class VocabulariesController < ApplicationController
   #   /vocabularies.xml|json (No Oauth required)
   def index
     @vocabularies_list = params[:language] ? Vocabulary.find(:all, :order => 'word', :conditions => ['language_id != ?',params[:language]]) : Vocabulary.find(:all, :order => 'word')
-    @page = params.key?(:last) ? params[:last].to_i + 1 : 1
+    @page = params.key?(:last) ? params[:last].to_i + 1 : (params.key?(:page) ? params[:page] : 1)
     @vocabularies = @vocabularies_list.paginate :page => @page, :per_page => Vocabulary.per_page
     respond_to do |format|
       format.html
       format.js {
-        if params[:menu]
-          @menu = params[:menu]
-          render :layout => false
-        elsif params[:last]
-          @vocabularies.empty? ? render(:nothing => true) : render(:partial => 'vocabularies', :object => @vocabularies, :locals => {:page => @page})
+        if params[:last]
+          if @vocabularies.empty?
+            render(:nothing => true)
+          else
+            render :update do |page|
+              page.insert_html :bottom, 'vocabulary_results', render(:partial => 'vocabularies', :object => @vocabularies, :locals => {:page => @page})
+              page.replace_html 'pagination', will_paginate(@vocabularies)
+            end
+          end
         else
-          render :text => "var vocabularies = ['" + @vocabularies_list.collect { |v| v.word }.join("','") + "'];"
+          @menu = params[:menu]
+          render :update do |page|
+            page.replace_html 'tab_browser', render(:partial => "index_tab_#{@menu}")
+          end
         end
       }
       format.json { render :json => @vocabularies_list.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
@@ -135,11 +133,9 @@ class VocabulariesController < ApplicationController
         params[:data].each_value do |row|
           type = row.delete_at(0)
           vocabularies = []
-          0.upto(row.size-1) do |i|
-            vocabulary = Object.const_get(type.blank? ? "Vocabulary" : type).find_or_initialize_by_word(row[i]) { |v| v.language = languages[i] }
-            vocabulary.import(current_user, (params[:vocabulary].key?(:tags) ? params[:vocabulary][:tags] : nil), params[:vocabulary][:new_tags])
+          0.upto(row.size-1) do |j|
+            vocabulary = Object.const_get(type.blank? ? "Vocabulary" : type).import(row[j], languages[j], current_user, (params[:vocabulary].key?(:tags) ? params[:vocabulary][:tags] : nil), params[:vocabulary][:new_tags])
             vocabulary.translation_to << vocabularies.first unless vocabularies.blank?
-            vocabulary.save
             vocabularies << vocabulary
           end
         end
@@ -148,7 +144,13 @@ class VocabulariesController < ApplicationController
         flash.now[:failure] = "Didn't work. Please check your format and try again."
       end
       respond_to do |format|
-        format.js { render(:update) { |page| page.replace_html 'notice', render(:partial => 'layouts/flashes') } }
+        format.js {
+          render :update do |page|
+            page.replace_html 'notice', render(:partial => 'layouts/flashes')
+            page << "enableCsvObserver();"
+            page << "$('import').setAttribute('disabled','disabled');"
+          end
+        }
       end
     else
       render 'import'
@@ -171,6 +173,7 @@ class VocabulariesController < ApplicationController
       render :update do |page|
         page.replace_html 'preview', render(:partial => 'preview')
         page.hide 'vocabulary_csv'
+        page << "$('import').removeAttribute('disabled');"
       end
     rescue Exception => @exception
       raise @exception.inspect
@@ -178,18 +181,11 @@ class VocabulariesController < ApplicationController
     end
   end
   
-  # Make sure that language matches text entered on edit page
-  def refresh_language
-    @vocabulary = Vocabulary.find_by_word(params[:word])
-    if @vocabulary
-      @language = @vocabulary.language
-      render :update do |page|
-        page << "$('vocabulary_gender').value = '#{@vocabulary.gender}'"
-        page << "$('vocabulary_language_id').selectedIndex = #{Language.list.index(@language)}"
-      end
-    else
-      render :nothing => true
-    end
+  # Set language hidden field in translate form
+  def set_language
+    @language = Language.find_by_permalink(params[:id])
+    @vocabularies = Object.const_get(params[:type]).where(['language_id = ?',@language.id]).order('vocabularies.word')
+    render :layout => false
   end
   
   # Display vocabulary attributes
@@ -211,6 +207,11 @@ class VocabulariesController < ApplicationController
             @pronouns = @vocabulary.language.personal_pronouns
           else
             @menu = params[:menu]
+            if @menu == '2'
+              @translation = Object.const_get(@vocabulary.class.to_s).new
+              @languages = Language.list(['id != ?', @vocabulary.language.id])
+              @language = @languages.first
+            end
           end
           render :layout => false
         }

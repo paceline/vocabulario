@@ -1,0 +1,13 @@
+// Update language
+$('vocabulary_language_id').value = '<%= @language.id %>';
+
+// Load vocabularies
+var vocabularies = <%= "['" + @vocabularies.collect { |v| escape_javascript(v.name) }.join("','") + "']" %>;
+new Autocompleter.Local('vocabulary_word','vocabulary_lookup_auto_complete', vocabularies, {frequency: 0, minChars: 1});
+
+// Set active
+$$('span.active').each(function(item) { $(item).className = 'inactive' });
+$('language_<%= @language.id %>').className = 'active';
+
+// Enable text field
+$('vocabulary_word').removeAttribute('disabled');

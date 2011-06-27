@@ -11,16 +11,16 @@
   %table
     %tr
       %th 1st person singular
-      %td= @person.first_person_singular
+      %td= in_place_input @person, :first_person_singular
       %th 1st person plural
-      %td= @person.first_person_plural
+      %td= in_place_input @person, :first_person_plural
     %tr
       %th 2nd person singular
-      %td= @person.second_person_singular
+      %td= in_place_input @person, :second_person_singular
       %th 2nd person plural
-      %td= @person.second_person_plural
+      %td= in_place_input @person, :second_person_plural
     %tr
       %th 3rd person singular
-      %td= @person.third_person_singular
+      %td= in_place_input @person, :third_person_singular
       %th 3rd person plural
-      %td= @person.third_person_plural
+      %td= in_place_input @person, :third_person_plural

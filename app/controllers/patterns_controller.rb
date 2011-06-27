@@ -60,7 +60,12 @@ class PatternsController < ApplicationController
     @tense = ConjugationTime.find_by_id_or_permalink params[:tense_id]
     @patterns = @tense.patterns
     respond_to do |format|
-      format.js { render(:update) { |page| page.replace_html 'patterns', render(:partial => 'list') } }
+      format.js {
+        render :update do |page|
+          page.replace_html 'patterns', render(:partial => 'list') }
+          page << "startObservingFrequently('pattern_name','pattern_list',0.5,'#{live_tense_path(@tense.permalink)}','name');"
+        end
+      }
     end
   end
   

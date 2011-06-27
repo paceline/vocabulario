@@ -1,5 +1,8 @@
 class SmartVerbList < List
   
+  # Features
+  has_permalink :name, :update => true
+  
   # Returns vocabularies associated with list
   def vocabularies(custom_attribute = "", custom_order = "")
     conditions = ["vocabularies.language_id = #{language_from.id}","vocabularies.type = 'Verb'"]

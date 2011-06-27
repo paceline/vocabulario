@@ -21,5 +21,6 @@
 .content
   %ul#vocabulary_results.inline
     = render :partial => 'vocabularies/vocabularies', :object => @vocabularies, :locals => {:page => @page}
+  #pagination= will_paginate @vocabularies
   
 = render :partial => 'shared/loading', :object => 'searching vocabularies'

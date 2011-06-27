@@ -1,5 +1,8 @@
 class SmartVocabularyList < List
   
+  # Features
+  has_permalink :name, :update => true
+  
   # Returns vocabularies associated with list
   def vocabularies(custom_attribute = "", custom_order = "")
     conditions = ["(translations.vocabulary1_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{language_to.id}) OR translations.vocabulary2_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{language_to.id})) AND language_id = #{language_from.id}"]

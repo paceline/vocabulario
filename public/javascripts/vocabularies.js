@@ -19,22 +19,9 @@ document.observe("dom:loaded", function() {
     enableTagListEditor();
   }
   
-  if ($('vocabulary_lookup_auto_complete') != undefined) {
-    // Autocomplete for translation dialog
-    new Autocompleter.Local('vocabulary_word','vocabulary_lookup_auto_complete', vocabularies, {frequency: 0, minChars: 1});
-    // Re-populate form after autocomplete
-    startObservingFrequently('vocabulary_word','',0.5,'/vocabularies/refresh_language','word');
-  }
-  
   if ($('vocabulary_csv') != undefined) {
-    // Refresh on switching language
-    startObserving('vocabulary_csv','/vocabularies/preview','preview','csv');
-    
-    // Enable remote form hooks
-    document.on('ajax:before', 'form[data-remote]', function(event) { $('vocabulary_csv').value = ''; $('back').remove(); });
-    document.on('ajax:complete', 'form[data-remote]', function(event) { resetImportForm(); highlightNotice(); });
+    enableCsvObserver();
   }
-   
 });
 
 
@@ -48,9 +35,21 @@ function observeDefault() {
   enableEndlessPage('vocabulary_results','vocabulary');
 }
 
+
 // Changes view after preview for import is loaded
 
 function resetImportForm() {
   $('preview').innerHTML = "";
   $('vocabulary_csv').show();
+  $('import').setAttribute('disabled','disabled');
+}
+
+
+function enableCsvObserver() {
+  // Refresh on switching language
+  startObserving('vocabulary_csv','/vocabularies/preview','preview','csv');
+  
+  // Enable remote form hooks
+  document.on('ajax:before', 'form[data-remote]', function(event) { $('vocabulary_csv').value = ''; $('back').remove(); });
+  document.on('ajax:complete', 'form[data-remote]', function(event) { resetImportForm(); highlightNotice(); });
 }

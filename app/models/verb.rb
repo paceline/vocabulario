@@ -10,6 +10,9 @@ class Verb < Vocabulary
     end
   end
   
+  # Features
+  has_permalink :name, :update => true
+  
   # Extra Variables
   PERSONS = [:first_person_singular, :second_person_singular, :third_person_singular, :first_person_plural, :second_person_plural, :third_person_plural]
   

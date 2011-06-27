@@ -1,5 +1,8 @@
 class StaticVerbList < List
   
+  # Features
+  has_permalink :name, :update => true
+  
   # Get the ids of vocabularies on list
   def ids
     vocabulary_lists.collect { |i| i.vocabulary_id.to_s }

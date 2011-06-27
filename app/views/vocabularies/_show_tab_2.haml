@@ -1,12 +1,13 @@
-.content
-  = @vocabulary.translations.empty? ? "No translations have been defined yet. If you're an admin you should change this." : "The following translations have already been added. As an admin you can add new and delete existing ones."
+#translations_pane= render 'translations'
 
-- unless @vocabulary.translations.empty? 
+- if signed_in?
   .content
-    %ul#translations
-      - @vocabulary.translations.all.each do |translation|
-        %li{:id => "translation_#{translation.id}"}
-          = link_to translation.word, vocabulary_path(translation.permalink)
-          in
-          = translation.language.word
-          = link_to('remove', vocabularies_unlink_path(@vocabulary.permalink, translation.permalink), :confirm => 'Are you sure you want to remove this translation?', :method => :delete, :remote => true, :class => 'edit_link') if signed_in? && @vocabulary.translations.include?(translation) 
+    %h3 Add translation
+    = form_tag('/vocabularies.js', :remote => true) do
+      = hidden_field_tag 'translation[vocabulary2_id]', @vocabulary.id
+      = hidden_field_tag 'vocabulary[language_id]'
+      #languages
+        - @languages.each do |language|
+          %span{ :id => "language_#{language.id}" }= link_to(language.name.downcase, set_language_vocabulary_path(language.permalink, :type => @vocabulary.class_type), :remote => true)
+      %p= text_field_tag 'vocabulary[word]', nil, :size => 40, :class => 'spacing_top', :disabled => true
+      #vocabulary_lookup_auto_complete.auto_complete

@@ -4,7 +4,7 @@ $('tab_browser').update('<%= escape_javascript(render(:partial => "list")) %>');
 // Update patterns
 $('patterns').update('<%= escape_javascript(render(:partial => "patterns/list")) %>');
 
-<% unless @tense.patterns.blank? %>
+<% unless @tense.blank? || @tense.patterns.blank? %>
 // Start observing live search
 startObservingFrequently('pattern_name','pattern_list',0.5,'<%= live_tense_path(@tense.permalink) %>','name');
 <% end %>

@@ -41,6 +41,7 @@ p { margin: 5px 0 15px 0; }
 p.small, ul.small {font-size: .8em; }
 p.small { font-style: italic; }
 .spacing { margin-bottom: 30px; }
+.spacing_top { margin: 5px 0 0 0; }
 
 ul {
 	list-style-type: none;
@@ -107,6 +108,8 @@ th { background-color: #CCC; text-align: left; }
 
 .error, .error h3 { color: #C66; }
 
+#pagination { margin: 25px 0 15px 0; }
+
 
 /* "Main"
    ====== */
@@ -148,7 +151,7 @@ ul.inline li { display: inline; padding-right: .6em; }
 
 .active { border: none; background-color: #02B8EA; }
 
-a.active { color: #FFF; padding: 2px; text-decoration: none; }
+a.active, .active a { color: #FFF; padding: 2px; text-decoration: none; }
 
 #tab_browser {
 	background-color: #DED;
@@ -457,6 +460,8 @@ fieldset.buttons ol { list-style: none; }
 .inline-hints { color: #AAA; font-style: italic; font-size: 0.85em; }
 
 input[type="submit"].spacing { margin: 25px 0 0 -1px; }
+
+input[type="submit"][disabled="disabled"] { background-color: #CCC; color: #AAA; }
 
 .boolean input { margin-right: 8px; }
 

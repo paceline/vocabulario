@@ -75,6 +75,7 @@ class ListsController < ApplicationController
   # Adds new item to a static list
   def newitem
     @list = List.find(params[:id])
+    @tense_id = params[:tense_id] if params[:tense_id]
     position = params.key?(:insert_after) ? @list.ids.index(params[:insert_after])+2 : 1
     vocabulary = Vocabulary.find(params[:vocabulary_id])
     vocabulary = vocabulary.translations.all(list.language_from_id).first if @list.language_to == vocabulary.language

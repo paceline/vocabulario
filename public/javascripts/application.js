@@ -293,10 +293,7 @@ function loadRemainingItems(results_dom_id, element_class){
       var last = $$('.' + element_class).last().className.match(/[0-9]+/)[0];
       new Ajax.Request(url, {
         method: 'get',
-        parameters: 'last=' + last,
-        onSuccess: function(xhr){
-          $(results_dom_id).insert({bottom : xhr.responseText})
-        }
+        parameters: 'last=' + last
       });
     }
   }

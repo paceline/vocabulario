@@ -19,8 +19,8 @@ class ScoresController < ApplicationController
         @tags = page.language.tags_for_language & second_language.tags_for_language
         @selected = { :test_to => page.language_id, :test_from => second_language.id, :test_tags => page.tags.collect { |t| t.name } }
       else
-        @selected = { :test_to => current_user.default_to, :test_from => current_user.default_from, :test_tags => nil }
-        @tags = Language.find(current_user.default_to).tags_for_language & Language.find(current_user.default_from).tags_for_language
+        @selected = { :test_to => (signed_in? ? current_user.default_to : @languages[0].id), :test_from => (signed_in? ? current_user.default_from : @languages[1].id), :test_tags => nil }
+        @tags = signed_in? ? Language.find(current_user.default_to).tags_for_language & Language.find(current_user.default_from).tags_for_language : Tag.all
       end
     end
     respond_to do |format|

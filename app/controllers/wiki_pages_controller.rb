@@ -28,7 +28,7 @@ class WikiPagesController < ApplicationController
 
   # Find pages by tag
   def by_tag
-    @pages = WikiPage.find_tagged_with params[:id], :order => "name"
+    @pages = WikiPage.find_tagged_with Tag.find_by_permalink(params[:id]).name, :order => "name"
   end
 
 end

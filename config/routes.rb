@@ -38,8 +38,8 @@ Vocabulario::Application.routes.draw do
   match '/users/:user_id/timeline' => 'status#index', :as => :user_timeline
   
   # Wiki
+  match '/wiki/by_tag/:id' => 'wiki_pages#by_tag', :as => :wiki_by_tag
   wiki_root '/wiki'
-  match '/wiki/by_tag' => 'wiki_pages#by_tag', :as => :wiki_by_tag
   
   # Resources
   # =========
@@ -141,7 +141,6 @@ Vocabulario::Application.routes.draw do
       get 'import'
       post 'import'
       post 'live'
-      post 'refresh_language'
       post 'preview'
       get 'redirect'
     end
@@ -152,6 +151,7 @@ Vocabulario::Application.routes.draw do
       get 'conjugate'
       delete 'unlink'
       get 'translate'
+      get 'set_language'
     end
   end
     

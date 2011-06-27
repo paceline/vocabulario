@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 # Core
 gem 'rails', '~> 3.0.1'
-gem 'mysql2'
+gem 'mysql2', '~> 0.2.7'
 gem 'passenger'
 
 # Deployment
@@ -27,5 +27,5 @@ gem 'will_paginate', '>= 3.0.beta'
 
 # Own gems
 gem 'javascript_auto_include', '>= 0.1.0'
-gem 'permalink_fu', :path => '/usr/local/rvm/gems/ruby-1.9.2-p180/gems/permalink_fu-1.1.0'
+gem 'permalink_fu', :git => 'git://github.com/paceline/permalink_fu.git'
 gem 'irwi', '= 0.4.1'

@@ -13,6 +13,9 @@ class Language < Vocabulary
   has_many :verbs, :foreign_key => 'language_id', :class_name => 'Verb', :dependent => :delete_all, :order => 'word'
   has_many :vocabularies, :foreign_key => 'language_id', :class_name => 'Vocabulary', :dependent => :delete_all, :order => 'word'
   
+  # Features
+  has_permalink :name, :update => true
+  
   # Determine pronouns
   def self.get_methods_for_pronouns
     Person::SUPPORTED_PRONOUNS.each do |type|

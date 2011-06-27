@@ -10,14 +10,15 @@ class List < ActiveRecord::Base
   belongs_to :language_from, :class_name => 'Language'
   belongs_to :language_to, :class_name => 'Language'
   belongs_to :user
-  has_many :vocabulary_lists, :dependent => :destroy, :order => :position
-  has_many :vocabularies, :through => :vocabulary_lists, :order => :position
+  has_many :vocabulary_lists, :dependent => :destroy, :order => [:position,:word]
+  has_many :vocabularies, :through => :vocabulary_lists, :order => [:position,:word]
   
   # Validations
   validates :user_id, :language_from_id, :name, :presence => true
   
   # Hooks
   after_initialize :apply_user_defaults
+  default_scope order('`lists`.`name`')
   
   # Find public lists
   def self.find_public(user = nil)

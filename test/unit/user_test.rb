@@ -42,8 +42,8 @@ class UserTest < ActiveSupport::TestCase
 
   def test_should_require_password_confirmation
     assert_no_difference 'User.count' do
-      u = create_user(:password_confirmation => nil)
-      assert u.errors.on(:password_confirmation)
+      u = create_user(:password_changing => nil)
+      assert u.errors.on(:password_changing)
     end
   end
 
@@ -55,7 +55,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_should_reset_password
-    users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
+    users(:quentin).update_attributes(:password => 'new password', :password_changing => 'new password')
     assert_equal users(:quentin), User.authenticate('quentin', 'new password')
   end
 
@@ -108,9 +108,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_should_register_passive_user
-    user = create_user(:password => nil, :password_confirmation => nil)
+    user = create_user(:password => nil, :password_changing => nil)
     assert user.passive?
-    user.update_attributes(:password => 'new password', :password_confirmation => 'new password')
+    user.update_attributes(:password => 'new password', :password_changing => 'new password')
     user.register!
     assert user.pending?
   end
@@ -157,7 +157,7 @@ class UserTest < ActiveSupport::TestCase
 
 protected
   def create_user(options = {})
-    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_changing => 'quire69' }.merge(options))
     record.register! if record.valid?
     record
   end

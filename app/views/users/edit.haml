@@ -10,7 +10,7 @@
 .content
   %p Use the form below to update your profile. Remember not to leave the password confirmation field blank.
   %p BTW: Your user icon is automatically loaded from Gravatar based on your email address. Be sure to <a href="http://gravatar.com">sign up</a> with them!
-  - @user.password = @user.password_confirmation = nil
+  - @user.password = @user.password_changing = nil
 
 = semantic_form_for @user, :url => user_path(@user.permalink) do |form|
   = form.error_messages

@@ -13,7 +13,7 @@
       - else
         - vocabulary.translations.all(@list.language_to_id).each do |i|
           %li= i.word
-    = drop_receiving_element "list_item_#{vocabulary.id}", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1] + '&insert_after=#{vocabulary.id}'"
+    = drop_receiving_element "list_item_#{vocabulary.id}", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => (@tense_id ? newitem_list_path(@list, :tense_id => @tense_id) : newitem_list_path(@list)), :with => "'vocabulary_id=' + element.id.split('_')[1] + '&insert_after=#{vocabulary.id}'"
 
 = sortable_element 'static_list', :url => reorder_list_path(@list), :handle => 'item'
 
