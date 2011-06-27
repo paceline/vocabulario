@@ -62,7 +62,7 @@ class PatternsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html 'patterns', render(:partial => 'list') }
+          page.replace_html 'patterns', render(:partial => 'list')
           page << "startObservingFrequently('pattern_name','pattern_list',0.5,'#{live_tense_path(@tense.permalink)}','name');"
         end
       }

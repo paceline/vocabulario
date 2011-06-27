@@ -41,7 +41,6 @@ class Vocabulary < ActiveRecord::Base
   
   # Hooks
   after_initialize :apply_user_defaults
-  default_scope order('`vocabularies`.`word`')
   
   # Check for untagged vocabularies FIMXE - Wonder if there's a better way to do this, jus couldn't get count to work
   def self.exist_untagged?
