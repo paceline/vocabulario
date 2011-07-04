@@ -30,7 +30,6 @@ Vocabulario::Application.routes.draw do
   match '/oauth' => 'oauth#index', :as => :oauth
   
   # List aliases
-  match '/lists/:id/print/:tense_id' => 'lists#print', :as => :print_list_with_tense
   match '/lists/:id/feed/:tense_id' => 'lists#show', :as => :feed_list_with_tense
   
   # Timeline aliases
@@ -88,7 +87,6 @@ Vocabulario::Application.routes.draw do
       post 'live'
       get 'show_options_menu'
       get 'sort'
-      get 'print'
       post 'reorder'
       post 'tense'
       delete 'unlink'

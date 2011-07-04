@@ -24,6 +24,9 @@ document.observe("dom:loaded", function() {
   if ($('lists') != undefined) {
     enableSlider();
   }
+  
+  // Enable printing
+  enablePrinting();
 
 });
 

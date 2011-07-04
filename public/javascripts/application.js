@@ -298,3 +298,15 @@ function loadRemainingItems(results_dom_id, element_class){
     }
   }
 }
+
+
+// Print current page
+
+function enablePrinting() {
+  $$('a.print').each(function(item) {
+    $(item).observe('click', function(event) { 
+      window.print();
+      Event.stop(event);
+    });
+  });
+}

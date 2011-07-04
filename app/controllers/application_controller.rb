@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   # Layout
-  layout 'default', :except => [:apply_tags, :apply_type, :live, :options_for_list, :print, :sort, :tab, :tabs]
+  layout 'default', :except => [:apply_tags, :apply_type, :live, :options_for_list, :sort, :tab, :tabs]
   
   # Security Features - Include Clearance
   include Clearance::Authentication

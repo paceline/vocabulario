@@ -36,3 +36,5 @@ ul { list-style-type: none; }
 	display: inline;
 	margin: 0 1em 0 0;
 }
+
+#header, #notice, #sidebar, #footer, #order, ul.inline.spacing, .content h3, #links, .options_link, .wiki_page_info, .wiki_page_actions { display: none; }

@@ -4,7 +4,8 @@
     %title VOCABULARIO - A simple, semi-social vocabulary trainer
     = ENV['RAILS_ENV'] == 'production' ? javascript_auto_include_tag(:defaults, 'tracker.js', :pattern => ':controller') : javascript_auto_include_tag(:defaults, :pattern => ':controller')
     = yield :custom_includes
-    = stylesheet_link_tag "default"
+    = stylesheet_link_tag 'default'
+    = stylesheet_link_tag 'print', :media => 'print'
     = csrf_meta_tag
   %body
     .container

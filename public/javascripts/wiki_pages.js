@@ -5,5 +5,6 @@ document.observe("dom:loaded", function() {
   if ($('taglist') != undefined) {
     enableTagListEditor();
   }
-
+  enablePrinting();
+  
 })

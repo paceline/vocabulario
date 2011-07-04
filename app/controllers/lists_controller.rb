@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   
   # Filters
   before_filter :browser_required, :except => [:index, :show, :tense]
-  before_filter :login_required, :except => [:index, :print, :show, :sort, :tense]
+  before_filter :login_required, :except => [:index, :show, :sort, :tense]
   before_filter :web_service_authorization_required, :only => [:index, :show]
   
   # Creates a new list
@@ -88,22 +88,6 @@ class ListsController < ApplicationController
       end
     else
       render :nothing => true
-    end
-  end
-  
-  # Render show view for printing
-  def print
-   begin
-      @list = List.find_by_id_or_permalink(params[:id])
-      if @list.public || @list.user == current_user
-        @vocabularies = @list.vocabularies
-        @tense_id = params[:tense_id] if params.key?(:tense_id)
-        render :layout => 'print'
-      else
-        redirect_to '/login'
-      end
-    rescue
-      render :file => "#{::Rails.root.to_s}/public/404.html", :status => 404
     end
   end
   

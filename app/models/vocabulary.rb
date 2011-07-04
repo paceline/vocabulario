@@ -20,15 +20,10 @@ class Vocabulary < ActiveRecord::Base
   has_many :relations_from, :foreign_key => 'vocabulary2_id', :class_name => 'Translation'
   has_many :translation_to, :through => :relations_to, :source => :vocabulary2
   has_many :translation_from, :through => :relations_from, :source => :vocabulary1
-  has_many :translations, :class_name => 'Vocabulary', :finder_sql => 'SELECT vocabularies.* FROM vocabularies LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id) WHERE (translations.vocabulary1_id = #{id} OR translations.vocabulary2_id = #{id}) AND vocabularies.id != #{id} ORDER BY vocabularies.word' do
+  has_many :translations, :class_name => 'Vocabulary', :finder_sql => proc { "SELECT vocabularies.* FROM vocabularies LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id) WHERE (translations.vocabulary1_id = #{id} OR translations.vocabulary2_id = #{id}) AND vocabularies.id != #{id} ORDER BY vocabularies.word" } do
     def all(to = nil)
       in_clause = self.collect { |v| v.id } << proxy_owner.id
-      Vocabulary.all(
-        :select => 'DISTINCT vocabularies.*',
-        :joins => "LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)",
-        :conditions => "(translations.vocabulary1_id IN ('#{in_clause.join("','")}') OR translations.vocabulary2_id IN ('#{in_clause.join("','")}')) AND vocabularies.id != #{proxy_owner.id}#{to ? " AND vocabularies.language_id = #{to}" : ""}",
-        :order => "vocabularies.word"
-      )
+      Vocabulary.select('DISTINCT vocabularies.*').joins("LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)").where("(translations.vocabulary1_id IN ('#{in_clause.join("','")}') OR translations.vocabulary2_id IN ('#{in_clause.join("','")}')) AND vocabularies.id != #{proxy_owner.id}#{to ? " AND vocabularies.language_id = #{to}" : ""}").order("vocabularies.word")
     end
   end 
   has_many :vocabulary_lists
