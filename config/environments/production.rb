@@ -48,5 +48,5 @@ Vocabulario::Application.configure do
   config.active_support.deprecation = :notify
   
   # Default host to include in emails
-  config.action_mailer.default_url_options = { :host => "tuvocabulario.com" }
+  config.action_mailer.default_url_options = { :host => "vocabulario.me" }
 end
