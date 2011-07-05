@@ -127,8 +127,6 @@ Vocabulario::Application.routes.draw do
     member do
       put 'admin'
       put 'password'
-      get 'statistics'
-      post 'statistics'
       post 'defaults'
     end
     resources :scores, :lists, :status

@@ -1,24 +1,21 @@
-= wiki_page_style
+- content_for :custom_includes do
+  = stylesheet_link_tag 'wiki', :media => 'all'
 
 - content_for :sidebar do
   = render :partial => 'wiki_pages/manage'
   = render :partial => 'base_wiki_pages/tagcloud'
-
-- content_for :notice do
-  %h1= @page.title
-
-= wiki_page_info
-= wiki_page_actions
   
-.wiki_content
-  =wiki_content @page.content.html_safe
-
-%h3 Tags
+%h1= @page.title
 = render :partial => 'shared/taglist', :object => @page
+
+.wiki_content
+  = wiki_page_actions
+  = wiki_content @page.content.html_safe
+= wiki_page_info
   
 - unless @page.tag_list.blank?
   %h3 Related vocabularies
-  %p= link_to '(take a test)', test_from_page_path(@page.path)
+  %p.no-print= link_to '(take a test)', test_from_page_path(@page.path)
   %ul#regular_list.list
     - (@page.language ? Vocabulary.find_tagged_with(@page.tag_list, :conditions => "language_id = #{@page.language.id}", :order => "word") : Vocabulary.find_tagged_with(@page.tag_list, :order => "word")).each do |vocabulary|
       %li

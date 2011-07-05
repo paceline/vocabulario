@@ -1,8 +1,5 @@
 - content_for :custom_includes do
   %link{ :href => user_timeline_path(@user.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
-  
-- content_for :sidebar do
-  = render :partial => '/oauth_clients/applications'
 
 - content_for :notice do
   %h1 Edit profile

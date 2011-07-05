@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   
   # Features
   include Clearance::User
+  include Gravtastic
+  gravtastic :size => 75
   attr_accessible :email, :password, :password_changing, :name, :default_to, :default_from
   has_permalink :name
   

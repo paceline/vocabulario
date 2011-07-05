@@ -1,5 +1,6 @@
-= wiki_page_style
-
+- content_for :custom_includes do
+  = stylesheet_link_tag 'wiki', :media => 'all'
+  
 - content_for :sidebar do
   = render :partial => 'wiki_pages/manage'
   = render :partial => 'base_wiki_pages/tagcloud'

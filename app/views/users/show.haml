@@ -15,7 +15,7 @@
   %h1 User profile
 
 .content
-  = gravatar_for(@user, { :class => 'gravatar_big', :size => '75' }).html_safe
+  = image_tag current_user.gravatar_url, :class => 'gravatar_big'
   %h1= @user.name
   %p
     - if @user.admin

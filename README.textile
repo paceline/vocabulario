@@ -1,11 +1,10 @@
-h1. "Vocabulario":http://tuvocabulario.com
+h1. "Vocabulario":http://vocabulario.me
 
 Vocabulario is a very lo-fi vocabulary trainer I more or less wrote for personal use only. Feel free to try it!
 
 In order for it to work you need to install the following plugins:
 * "acts_as_taggable_on_steroids":https://github.com/paceline/acts_as_taggable_on_steroids
 * "acts_as_textiled":https://github.com/defunkt/acts_as_textiled
-* "gravatar":https://github.com/westarete/gravatar-plugin
 
 Required gems are listed in Gemfile.
 

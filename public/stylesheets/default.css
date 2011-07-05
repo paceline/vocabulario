@@ -305,6 +305,8 @@ ul.list_options {
 	float: left;
 	margin: 0 20px 0 0;
 	padding: .15em;
+	width: 75px;
+	height: 75px;
 }
 
 .gravatar_big { margin-right: 25px; }
@@ -592,7 +594,6 @@ form.test_rule input {
   text-align: left;
   width: 250px;
 }
-
 
 
 /* "Various"

@@ -1,0 +1,97 @@
+#taglist { margin: 0; padding: 3px 0 0 0; }
+
+.wiki_page_info {
+  font-style: italic;
+  float: left;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.wiki_page_actions li {
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+}
+
+.wiki_content, .wiki_diff, .wiki_history, .wiki_form { border: 4px solid #000; }
+
+.wiki_content a, .wiki_form a { background-color: #EEE; padding: .1em; color: #666; }
+.wiki_page_actions a { color: #02B8EA; background-color: #FFF; padding: 0px; }
+
+.wiki_diff,
+.wiki_history {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.wiki_history {  
+  width: 100%;
+}
+
+.wiki_history_header td {
+  border-bottom: 2px dashed black; 
+}
+
+.wiki_content, .wiki_form {
+  display: block;
+  margin: 35px 0 25px 0;
+  padding: 15px;
+}
+
+.wiki_form p {
+  font-weight: bold;
+  padding: 0 0 10px 0;
+}
+
+.wiki_form p input, .wiki_form p select, .wiki_form p textarea { margin-top: 10px; }
+.wiki_form p input, .wiki_form p textarea { width: 100%; }
+
+.wiki_diff span.added {
+  background: #D4FFAB;
+  color: #509A05;
+}
+
+.wiki_diff span.removed {
+  background: #FFD8D8;
+  color: #EF2828;
+}
+
+.wiki_content {
+  font-family: monaco, courier, monospace;
+  margin-bottom: 15px;
+}
+
+.wiki_content h1, .wiki_content h2, .wiki_content h3, .wiki_content h4, .wiki_content h5, .wiki_content ul, .wiki_content ol, .wiki_content p  {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.wiki_content h1 { color: #000; font-size: 1.6em; margin-bottom: 15px; }
+
+.wiki_content h2 { color: #333; font-size: 1.3em; margin: 25px 0 10px 0; }
+
+.wiki_content h3 { color: #555; font-size: 1.15em; margin: 20px 0 10px 0; }
+
+.wiki_content h4 { color: #999; font-size: 1em; margin: 5px 0 5px 0; text-decoration: underline; font-weight: bold; }
+
+.wiki_content h5 { color: #999; font-size: 1em; margin: 5px 0 5px 0; text-decoration: underline; }
+
+.wiki_content ul { margin: 0 0 0 35px; }
+
+.wiki_content ol { margin: 0 0 0 55px; font-size: .9em; }
+
+.wiki_content ul { list-style-type: square; }
+
+.wiki_content ul li, .wiki_content ol li { margin: 0; padding: 5px 0 5px 0; }
+
+.wiki_content p { margin: 10px 0 10px 0; }
+
+ul.wiki_page_actions {
+  font-family: Helvetica, Geneva, 'Lucida Grande';
+  font-size: .8em;
+  float: right;
+  margin: -5px -5px 0 0;
+}
+ul.wiki_page_actions li { padding-left: 10px; }

@@ -1,7 +1,7 @@
 class UsersController < Clearance::UsersController
   
   # Filters
-  before_filter :browser_required, :except => [:current, :index, :show, :statistics]
+  before_filter :browser_required, :except => [:current, :index, :show]
   before_filter :web_service_authorization_required, :only => [:current, :index, :show]
   before_filter :login_required, :except => [:create, :index, :new]
   before_filter :admin_required, :only => [:admin, :destroy]
@@ -80,33 +80,6 @@ class UsersController < Clearance::UsersController
     respond_to do |format|
       format.json { render :json => current_user.to_json(:except => [:confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
       format.xml { render :xml => current_user.to_xml(:except => [:confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
-    end
-  end
-  
-  # Statistics page
-  def statistics
-    @user = User.find_by_id_or_permalink(params[:id])
-    if current_user == @user
-      
-      if !params[:tag].blank?
-        @tag = Tag.find_by_id_or_permalink(params[:tag])
-        @page = params[:page].to_i == 0 ? Score.last_page_number(['user_id = ? AND taggings.tag_id = ?', @user.id, @tag.id], [ :taggings ]) : params[:page]
-        @scores = Score.paginate :conditions => ['user_id = ? AND taggings.tag_id = ?', @user.id, @tag.id], :include => [ :taggings ], :page => @page, :per_page => 25
-      elsif !params[:type].blank?
-        @page = params[:page].to_i == 0 ? Score.last_page_number(['user_id = ? AND test_type = ?', @user.id, params[:type]]) : params[:page]
-        @scores = Score.paginate :conditions => ['user_id = ? AND test_type = ?', @user.id, params[:type]], :page => @page, :per_page => 25
-      else
-        @page = params[:page].to_i == 0 ? Score.last_page_number(['user_id = ?', @user.id]) : params[:page]
-        @scores = Score.paginate :conditions => ['user_id = ?', @user.id], :page => @page, :per_page => 25
-      end
-    
-      respond_to do |format|
-        format.html { @tags = Score.tag_counts(:conditions => ["scores.user_id = ?", @user.id]) }
-        format.js { render :layout => false }
-        format.json { render :json => { :scores => @scores, :page => @page } }
-      end
-    else
-      redirect_to user_path(@user.permalink)
     end
   end
   

@@ -29,15 +29,15 @@
           - if signed_in?
             .tabs.green
               %h1= "Hello, #{current_user.name}"
-            = gravatar_for(current_user, { :size => '75' }).html_safe
+            = image_tag current_user.gravatar_url, :class => 'gravatar'
             %ul
-              %li= link_to('My stats', statistics_user_path(current_user.permalink), { :title => 'My test stats' })
+              %li= link_to 'Applications', oauth_clients_path
               %li= link_to('Profile', edit_user_path(current_user.permalink), { :title => 'Profile' })
               %li= link_to('Log out', signout_path, { :title => 'Log out' })
           - else
             .tabs.green
               %h1 Hello, Guest
-            = gravatar('unknown@gravatar.com', { :size => '75' }).html_safe
+            = image_tag 'no_avatar.png', :class => 'gravatar'
             %ul
               %li= link_to 'Log in',  sign_in_path,  { :title => 'Log in' }
               %li= link_to 'Sign up', sign_up_path, { :title => 'Create an account' }

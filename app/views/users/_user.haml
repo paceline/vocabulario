@@ -1,3 +1,3 @@
 .user_list
- = gravatar_for(user).html_safe
+ = image_tag user.gravatar_url, :class => 'gravatar'
  %strong= link_to user.name, user_path(user.permalink)

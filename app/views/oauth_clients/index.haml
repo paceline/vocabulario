@@ -1,6 +1,3 @@
-- content_for :sidebar do
-  = render :partial => 'applications'
-
 - content_for :notice do
   %h1 Client applications
   %p 3rd party apps you gave access to or developed yourself
@@ -39,4 +36,6 @@
         = link_to client.name, oauth_client_path(client)
         = ('(' + link_to('Edit', edit_oauth_client_path(client)) + ', ').html_safe
         = link_to('Delete', oauth_client_path(client), :confirm => "Are you sure?", :method => :delete) + ')'
+
+.content= link_to "New application", new_oauth_client_path
  
