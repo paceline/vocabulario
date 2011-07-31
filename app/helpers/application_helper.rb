@@ -2,7 +2,7 @@ module ApplicationHelper
   include TagsHelper
   
   def interpret_flash_key(key)
-    keys = { :failure => 'Nope', :success => 'Great', :notice => 'Done' }
+    keys = { :alert => 'Sorry', :notice => 'Great' }
     return keys[key]
   end
   

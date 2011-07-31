@@ -1,14 +1,9 @@
 Vocabulario::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-  
   # Named routes
   # ============
   
   # User and login stuff
-  match '/logout' => 'clearance/sessions#destroy', :as => :signout
-  match '/login' => 'clearance/sessions#new', :as => :sign_in
-  match '/signup' => 'users#new', :as => :sign_up
+  devise_for :users
   match '/community' => 'users#index', :as => :community
   match '/lists/:list_id/test' => 'scores#new', :as => :test_from_list
   match '/wiki/:path/test' => 'scores#new', :as => :test_from_page
@@ -21,13 +16,6 @@ Vocabulario::Application.routes.draw do
   match '/vocabularies/by_tag/:id' => 'vocabularies#by_tag', :as => :vocabularies_by_tag
   match '/vocabularies/by_language/:id' => 'vocabularies#by_language', :as => :vocabularies_by_language
   match '/vocabularies/by_user/:id' => 'vocabularies#by_user', :as => :vocabularies_by_user
- 
-  # Oauth
-  match '/oauth/test_request' => 'oauth#test_request', :as => :test_request
-  match '/oauth/access_token' => 'oauth#access_token', :as => :access_token
-  match '/oauth/request_token' => 'oauth#request_token', :as => :request_token
-  match '/oauth/authorize' => 'oauth#authorize', :as => :authorize
-  match '/oauth' => 'oauth#index', :as => :oauth
   
   # List aliases
   match '/lists/:id/feed/:tense_id' => 'lists#show', :as => :feed_list_with_tense
@@ -35,6 +23,16 @@ Vocabulario::Application.routes.draw do
   # Timeline aliases
   match '/timeline' => 'status#index', :as => :timeline
   match '/users/:user_id/timeline' => 'status#index', :as => :user_timeline
+  
+  # Oauth stuff
+  resources :oauth_clients
+  match '/oauth/test_request',  :to => 'oauth#test_request',  :as => :test_request
+  match '/oauth/token',         :to => 'oauth#token',         :as => :token
+  match '/oauth/access_token',  :to => 'oauth#access_token',  :as => :access_token
+  match '/oauth/request_token', :to => 'oauth#request_token', :as => :request_token
+  match '/oauth/authorize',     :to => 'oauth#authorize',     :as => :authorize
+  match '/oauth/revoke',        :to => 'oauth#revoke',        :as => :revoke
+  match '/oauth',               :to => 'oauth#index',         :as => :oauth
   
   # Wiki
   match '/wiki/by_tag/:id' => 'wiki_pages#by_tag', :as => :wiki_by_tag
@@ -94,9 +92,6 @@ Vocabulario::Application.routes.draw do
     resources :scores
   end
   
-  resources :oauth_clients
-  resources :oauth_consumers
-  
   resources :pronouns, :controller => 'people', :as => 'pronouns'
   
   resources :scores do
@@ -115,18 +110,13 @@ Vocabulario::Application.routes.draw do
       get 'user_timeline'
     end
   end
-  
-  resource :password, :controller => 'clearance/passwords'
-  
-  resource :session, :controller => 'clearance/sessions'
-  
+    
   resources :users do
     collection do
       get 'current'
     end
     member do
       put 'admin'
-      put 'password'
       post 'defaults'
     end
     resources :scores, :lists, :status

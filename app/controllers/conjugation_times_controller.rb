@@ -1,7 +1,7 @@
 class ConjugationTimesController < ApplicationController
   
   # Filters
-  before_filter :admin_required, :except => [:index, :show, :tabs]
+  before_filter :admin_required
   before_filter :browser_required, :except => [:index, :show]
   
   # Standard formats
@@ -12,7 +12,7 @@ class ConjugationTimesController < ApplicationController
     @time = ConjugationTime.new(params[:conjugation_time])
     if @time.valid? && @time.errors.empty?
       @time.save
-      flash[:success] = "\"#{@time.name}\" has been added to the database."
+      flash[:notice] = "\"#{@time.name}\" has been added to the database."
       redirect_to tenses_path
     else
       render :action => 'new'

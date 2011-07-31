@@ -10,7 +10,7 @@
         and I'll translate them into and I'll translate them into
         = select :test, :to, @languages.collect {|p| [ p.word, p.id ] }, { :selected => @selected[:test_to] }
         %br
-        = link_to '(set default)', defaults_user_path(current_user.permalink), :id => 'set_default' if signed_in?  
+        = link_to '(set default)', defaults_user_path(current_user.permalink), :id => 'set_default' if user_signed_in?  
             
     %li#test_limit_input.string
       %label{ :for => "test_limit" } Number of Questions

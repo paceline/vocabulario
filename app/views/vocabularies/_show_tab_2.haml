@@ -1,6 +1,6 @@
 #translations_pane= render 'translations'
 
-- if signed_in?
+- if user_signed_in?
   .content
     %h3 Add translation
     = form_tag('/vocabularies.js', :remote => true) do

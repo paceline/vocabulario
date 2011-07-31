@@ -13,7 +13,7 @@
 
 .tabs
   #tab_0_link.tab_link.active= link_to "Overview", vocabulary_path(@vocabulary.permalink, :menu => 0), :remote => true, :id => 'tab_0'
-  - if @vocabulary.verb? && signed_in?
+  - if @vocabulary.verb? && user_signed_in?
     #tab_1_link.tab_link= link_to "Conjugations", vocabulary_path(@vocabulary.permalink, :menu => 1), :remote => true, :id => 'tab_1'
   - else
     #tab_1_link.tab_link{ :style => 'display: none;' }

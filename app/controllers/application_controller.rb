@@ -1,44 +1,30 @@
 class ApplicationController < ActionController::Base
+  
+  # Alias
+  alias :logged_in? :user_signed_in?
+  alias :login_required :authenticate_user!
+  
   # Defaults
   protect_from_forgery
   
   # Layout
   layout 'default', :except => [:apply_tags, :apply_type, :live, :options_for_list, :sort, :tab, :tabs]
   
-  # Security Features - Include Clearance
-  include Clearance::Authentication
-  
   # Security Features - Admin check
   helper_method :signed_in_as_admin?
   def signed_in_as_admin?
-    signed_in? && current_user.admin?
+    current_user.try(:admin?)
   end
   
-  # Security Festures - Alias for OAuth plugin
-  alias logged_in? signed_in?
-  
-  def login_required
-    deny_access("Please Login or Create an Account to Access that Feature.") unless signed_in?
-  end
-
-  def admin_required
-    deny_access("Please Login as an administrator to Access that Feature.") unless signed_in_as_admin?
-  end
-  
-  # Ensure compatability with OAuth plugin
-  def authorized?
-    true
-  end
-  
-  # Ensure compatability with OAuth plugin
-  def current_user
-    @current_user ||= user_from_cookie
+  # Set current user (required for oauth-plugin)
+  def current_user=(user)
+    current_user = user
   end
   
   # Error handlers - 401
   def unauthorized
     respond_to do |format|
-      format.html { redirect_to '/login' }
+      format.html { redirect_to '/users/sign_in' }
       format.json { render :json => { :error => { :status => '401', :message => "You're not authorized to access this page. Sorry." } }, :status => 401 }
       format.xml { render :xml => { :status => '401', :message => "You're not authorized to access this page. Sorry." }.to_xml(:root => 'error'), :status => 401 }
     end
@@ -73,11 +59,13 @@ class ApplicationController < ActionController::Base
   
   # Filters
   private
+    def admin_required
+      redirect_to root_path, :alert => 'You have to be an admin to access this feature.' unless signed_in_as_admin?
+    end
     def browser_required
       invalid_request unless !params.key?(:format) || params[:format] == 'js' || params[:format] == 'html'
     end
-
-    def web_service_authorization_required
-      login_or_oauth_required if ['json','xml'].include?(params[:format])
+    def authorization_for_web_services_required
+      oauth_required if params[:format] == 'json' && params[:format] == 'xml'
     end
 end

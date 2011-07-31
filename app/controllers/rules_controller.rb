@@ -71,14 +71,14 @@ class RulesController < ApplicationController
         @pattern.rules.delete @current_rule
         @pattern.rules << @rule
         @pattern.save
-        flash[:success] = "Rule has been saved as new."
+        flash[:notice] = "Rule has been saved as new."
         redirect_to pattern_path(params[:pattern_id])
       else
         render 'new'
       end
     else
       @current_rule.update_attributes params[:rule]
-      flash[:success] = "Rule has been updated."
+      flash[:notice] = "Rule has been updated."
       redirect_to pattern_path(params[:pattern_id])
     end
   end

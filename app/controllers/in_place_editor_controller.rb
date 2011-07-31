@@ -3,6 +3,9 @@ class InPlaceEditorController < ApplicationController
   # Layout
   layout nil
   
+  # Filters
+  before_filter :login_required
+  
   # Globally Handle in_place_edit update requests
   def update
     @type = Object.const_get(find_type_in_params(params))

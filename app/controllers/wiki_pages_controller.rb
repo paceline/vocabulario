@@ -20,7 +20,7 @@ class WikiPagesController < ApplicationController
       current_user && @page.creator_id == current_user.id
     end
   end
-
+  
   # Override access control (history)
   def history_allowed?
     show_allowed?

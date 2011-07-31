@@ -22,7 +22,7 @@ class VocabulariesController < ApplicationController
   def apply_tags
     @vocabulary = Vocabulary.find_by_id_or_permalink params[:id]
     @vocabulary.apply_tags_to_translations
-    flash.now[:success] = "#{@vocabulary.word}'s tags have been copied to all translations."
+    flash.now[:notice] = "#{@vocabulary.word}'s tags have been copied to all translations."
     render 'shared/notify'
   end
   
@@ -30,7 +30,7 @@ class VocabulariesController < ApplicationController
   def apply_type
     @vocabulary = Vocabulary.find_by_id_or_permalink params[:id]
     @vocabulary.apply_type_to_translations
-    flash.now[:success] = "#{@vocabulary.word}'s type has been copied to all translations."
+    flash.now[:notice] = "#{@vocabulary.word}'s type has been copied to all translations."
     render 'shared/notify'
   end
   
@@ -75,7 +75,7 @@ class VocabulariesController < ApplicationController
       if @vocabulary.valid? && @vocabulary.errors.empty?
         @vocabulary.user = current_user
         @vocabulary.save
-        flash[:success] = "\"#{@vocabulary.word}\" has been added to the database."
+        flash[:notice] = "\"#{@vocabulary.word}\" has been added to the database."
         redirect_to vocabulary_path(@vocabulary.permalink)
       else
         render :action => 'new'
@@ -139,9 +139,9 @@ class VocabulariesController < ApplicationController
             vocabularies << vocabulary
           end
         end
-        flash.now[:success] = "Seems like the import worked just fine."
+        flash.now[:notice] = "Seems like the import worked just fine."
       rescue
-        flash.now[:failure] = "Didn't work. Please check your format and try again."
+        flash.now[:alert] = "Didn't work. Please check your format and try again."
       end
       respond_to do |format|
         format.js {

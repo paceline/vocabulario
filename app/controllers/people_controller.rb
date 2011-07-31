@@ -9,7 +9,7 @@ class PeopleController < ApplicationController
     @person = Person.new(params[:person])
     if @person.valid? && @person.errors.empty?
       @person.save
-      flash[:success] = "Your set of #{@person.pronoun} pronouns has been added to the database."
+      flash[:notice] = "Your set of #{@person.pronoun} pronouns has been added to the database."
       redirect_to pronoun_path(@person)
     else
       render :action => 'new'

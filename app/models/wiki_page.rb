@@ -6,7 +6,7 @@ class WikiPage < ActiveRecord::Base
 
   # Associations
   belongs_to :language
-
+  
   # Get most popular language
   def guess_second_language
     if language

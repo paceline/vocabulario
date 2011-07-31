@@ -74,7 +74,7 @@ class PatternsController < ApplicationController
     @pattern = Pattern.new(params[:pattern])  
     if @pattern.valid? && @pattern.errors.empty?
       @pattern.save
-      flash[:success] = "New pattern has been added to the database."
+      flash[:notice] = "New pattern has been added to the database."
       redirect_to @pattern
     else
       render :action => 'new'

@@ -1,11 +1,11 @@
 .content
   %h1 Please log in to continue.
   Forgot your password? Not to worry. Have a new one
-  = link_to "emailed", new_password_path
+  = link_to "emailed", new_user_password_path
   to you.
     
 .content
-  = semantic_form_for :session, :url => session_path do |form|
+  = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
     = form.inputs do
       = form.input :email
       = form.input :password, :as => :password

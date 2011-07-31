@@ -1,6 +1,6 @@
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-  #list_stuff= render :partial => 'lists/list' if signed_in?
+  #list_stuff= render :partial => 'lists/list' if user_signed_in?
 
 - content_for :notice do
   %h1 Explore

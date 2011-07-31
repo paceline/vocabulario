@@ -1,4 +1,4 @@
-- if  @vocabulary.verb? && signed_in? && !@vocabulary.patterns.blank?
+- if  @vocabulary.verb? && user_signed_in? && !@vocabulary.patterns.blank?
   %p.error.content
     %strong Please note:
     Editing has been disabled. Making changes would most certainly break the conjugation patterns you (or someone else) have previously defined. Remove those first.

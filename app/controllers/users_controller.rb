@@ -1,8 +1,8 @@
-class UsersController < Clearance::UsersController
+class UsersController < ApplicationController
   
   # Filters
   before_filter :browser_required, :except => [:current, :index, :show]
-  before_filter :web_service_authorization_required, :only => [:current, :index, :show]
+  before_filter :authorization_for_web_services_required, :only => [:current, :index, :show]
   before_filter :login_required, :except => [:create, :index, :new]
   before_filter :admin_required, :only => [:admin, :destroy]
   
@@ -13,19 +13,6 @@ class UsersController < Clearance::UsersController
     @user.save
     flash[:notice] = "#{@user.name} is now an admin."
     redirect_to user_path(@user.permalink)
-  end
-  
-  # Destroy user (entirely)
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    redirect_to users_path
-  end
-  
-  # Edit user profile
-  def edit
-    @user = current_user.admin ? User.find_by_id_or_permalink(params[:id]) : current_user
-    redirect_to user_path(@user.permalink) unless current_user == @user || current_user.admin
   end
   
   # List users
@@ -39,19 +26,6 @@ class UsersController < Clearance::UsersController
       format.html
       format.json { render :json => @users.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
       format.xml { render :xml => @users.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
-    end
-  end
-  
-  # FIX ME - copy/paste from clearance until I can find the routing error
-  def password
-    @user = User.find_by_id_and_confirmation_token(params[:id], params[:token])
-    if @user.update_password(params[:user][:password], params[:user][:password_changing])
-      @user.confirm_email!
-      sign_in(@user)
-      flash[:success] = "Password has now been changed."
-      redirect_to '/'
-    else
-      render :template => 'passwords/edit'
     end
   end
 
@@ -83,30 +57,16 @@ class UsersController < Clearance::UsersController
     end
   end
   
-  # Update user profile
-  def update
-    @user = User.find_by_id_or_permalink(params[:id])
-    redirect_to user_path(@user.permalink) unless current_user == @user
-    begin
-      @user.update_attributes!(params[:user])
-      flash.now[:success] = "Your profile has been successfully updated."
-    rescue
-      internal_server_error
-    end
-    render :edit
-  end
-  
   # Sets defaults for language pair
   def defaults
     @user = User.find_by_id_or_permalink(params[:id])
     redirect_to user_path(@user.permalink) unless current_user == @user
     begin
       @user.update_attributes!(params[:user])
-      flash.now[:success] = "Your preferences have been successfully saved."
+      flash.now[:notice] = "Your preferences have been successfully saved."
     rescue
       internal_server_error
     end
     render :partial => 'layouts/flashes'
   end
-  
 end

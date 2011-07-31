@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   # Filters
   before_filter :browser_required, :except => [:index, :show, :tense]
   before_filter :login_required, :except => [:index, :show, :sort, :tense]
-  before_filter :web_service_authorization_required, :only => [:index, :show]
+  before_filter :authorization_for_web_services_required, :only => [:index, :show]
   
   # Creates a new list
   def create
@@ -115,7 +115,7 @@ class ListsController < ApplicationController
           format.html
           format.atom { render :layout => false }
           format.json { render :json => current_user ? @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
-          format.xml { render :xml => current_user ? @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
+          format.xml { render :xml => current_user ? @list.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
         end
       else
         unauthorized
@@ -135,7 +135,7 @@ class ListsController < ApplicationController
         render :update do |page|
           page.replace_html "order", render(:partial => 'sort_menu') if @list.smart? && !@vocabularies.blank?
           page.replace_html "links", render(:partial => 'links')
-          page.replace_html "#{@list.static? && signed_in? && current_user == @list.user ? "static_list" : "regular_list"}", render(:partial => (@list.static? && signed_in? && current_user == @list.user ? "admin_list" : "regular_list"))
+          page.replace_html "#{@list.static? && user_signed_in? && current_user == @list.user ? "static_list" : "regular_list"}", render(:partial => (@list.static? && user_signed_in? && current_user == @list.user ? "admin_list" : "regular_list"))
         end
       }
     end

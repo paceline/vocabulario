@@ -25,7 +25,7 @@
       View in
       = select 'your', 'lists', @list.language_from.conjugation_times.collect { |t| [t.name,t.id] }
     
-- if @list.static? && signed_in? && current_user == @list.user
+- if @list.static? && user_signed_in? && current_user == @list.user
   %ul#static_list.list= render :partial => 'admin_list'
     
 - else

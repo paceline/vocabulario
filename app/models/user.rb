@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   
   # Features
-  include Clearance::User
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   include Gravtastic
   gravtastic :size => 75
-  attr_accessible :email, :password, :password_changing, :name, :default_to, :default_from
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :default_to, :default_from
   has_permalink :name
   
   # Associations

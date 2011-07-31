@@ -1,7 +1,7 @@
 class StatusController < ApplicationController
   
   # Filters
-  before_filter :web_service_authorization_required
+  before_filter :authorization_for_web_services_required
   
   # Gather status updates
   #

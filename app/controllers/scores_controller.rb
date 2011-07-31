@@ -2,7 +2,7 @@ class ScoresController < ApplicationController
   
   # Filters
   before_filter :browser_required, :only => [:update_languages, :update_tags, :options_for_list]
-  before_filter :web_service_authorization_required
+  before_filter :authorization_for_web_services_required
   
   # Open up a new language test
   def new
@@ -19,8 +19,8 @@ class ScoresController < ApplicationController
         @tags = page.language.tags_for_language & second_language.tags_for_language
         @selected = { :test_to => page.language_id, :test_from => second_language.id, :test_tags => page.tags.collect { |t| t.name } }
       else
-        @selected = { :test_to => (signed_in? ? current_user.default_to : @languages[0].id), :test_from => (signed_in? ? current_user.default_from : @languages[1].id), :test_tags => nil }
-        @tags = signed_in? ? Language.find(current_user.default_to).tags_for_language & Language.find(current_user.default_from).tags_for_language : Tag.all
+        @selected = { :test_to => (user_signed_in? ? current_user.default_to : @languages[0].id), :test_from => (user_signed_in? ? current_user.default_from : @languages[1].id), :test_tags => nil }
+        @tags = user_signed_in? ? Language.find(current_user.default_to).tags_for_language & Language.find(current_user.default_from).tags_for_language : Tag.all
       end
     end
     respond_to do |format|
@@ -52,7 +52,7 @@ class ScoresController < ApplicationController
     if @test.empty?
       respond_to do |format|
         format.js {
-          flash.now[:failure] = "Sorry, no vocabularies were found based on your selection."
+          flash.now[:alert] = "Sorry, no vocabularies were found based on your selection."
           render(:update) { |page| page.update_notice }
         }
         format.all { internal_server_error }
@@ -89,9 +89,9 @@ class ScoresController < ApplicationController
     respond_to do |format|
       format.js {
         if @test.class == ConjugationTest
-          result ? flash.now[:success] = "You got everything right." : flash.now[:failure] = "Unfortunately you made some mistakes. See below for the correct answers."
+          result ? flash.now[:notice] = "You got everything right." : flash.now[:alert] = "Unfortunately you made some mistakes. See below for the correct answers."
         else
-          result ? flash.now[:success] = "That's correct. Well done. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}." : flash.now[:failure] = "Unfortunately that's not correct. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}"
+          result ? flash.now[:notice] = "That's correct. Well done. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}." : flash.now[:alert] = "Unfortunately that's not correct. Its <strong>#{@correct_results.join(', ')}</strong> in #{@test.to.word}"
         end
         render :layout => false
       }

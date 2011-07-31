@@ -3,11 +3,11 @@
   = render @vocabulary.comments
 
 %h3 Got something to add?
-- if signed_in?
+- if user_signed_in?
   = render :partial => 'comments/form', :locals => { :object => @vocabulary, :update => 'comments' }
 - else
   Please
-  = link_to 'log in', sign_in_path
+  = link_to 'log in', new_user_session_path
   or 
-  = link_to 'sign up', sign_up_path
+  = link_to 'sign up', new_user_registration_path
   to post. You know, its the whole anti-spam thing.

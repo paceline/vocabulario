@@ -94,7 +94,7 @@
 
       onComplete:    function(request) { element.fire("ajax:complete", request); },
       onSuccess:     function(request) { element.fire("ajax:success",  request); },
-      onFailure:     function(request) { element.fire("ajax:failure",  request); }
+      onFailure:     function(request) { element.fire("ajax:alert",  request); }
     });
 
     element.fire("ajax:after");

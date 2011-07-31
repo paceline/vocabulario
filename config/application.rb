@@ -1,6 +1,6 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
+require 'oauth/rack/oauth_filter'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -40,9 +40,12 @@ module Vocabulario
     config.filter_parameters += [:password]
     
     # Default reply to address when sends mails
-    DO_NOT_REPLY = "Soulless machine <hello@tuvocabulario.com>"
+    DO_NOT_REPLY = "Soulless machine <hello@vocabulario.me>"
     
     # Allow table tags
     config.action_view.sanitized_allowed_tags = 'table', 'tr', 'th', 'td'
+    
+    # Oauth
+    config.middleware.use OAuth::Rack::OAuthFilter
   end
 end
