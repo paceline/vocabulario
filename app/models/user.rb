@@ -32,6 +32,11 @@ class User < ActiveRecord::Base
     return top_list.index(self) + 1
   end
   
+  # Check whether defaults are set
+  def defaults?
+    self.default_to && self.default_from
+  end
+  
   # Statistics - Numer of tests taken
   def number_of_tests(percentile = 0)
     return scores.count({ :conditions => ['points/questions >= ?',percentile] })

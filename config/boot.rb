@@ -1,5 +1,9 @@
 require 'rubygems'
 
+# MONKEY PATCH - Require alternative YAML parser (http://stackoverflow.com/questions/4980877/rails-error-couldnt-parse-yaml)
+require 'yaml'
+YAML::ENGINE.yamler= 'syck'
+
 # Set up gems listed in the Gemfile.
 gemfile = File.expand_path('../../Gemfile', __FILE__)
 begin
