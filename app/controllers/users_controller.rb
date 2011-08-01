@@ -24,8 +24,8 @@ class UsersController < ApplicationController
     @lists = List.find_public(current_user)
     respond_to do |format|
       format.html
-      format.json { render :json => @users.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
-      format.xml { render :xml => @users.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt]) }
+      format.json { render :json => @users.to_json(:except => [:encrypted_password, :email]) }
+      format.xml { render :xml => @users.to_xml(:except => [:encrypted_password, :email]) }
     end
   end
 
@@ -38,8 +38,8 @@ class UsersController < ApplicationController
       @user = User.find_by_id_or_permalink(params[:id])
       respond_to do |format|
         format.html
-        format.json { render :json => current_user == @user || current_user.admin ? @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) : @user.to_json(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
-        format.xml { render :xml => current_user == @user || current_user.admin ? @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) : @user.to_xml(:except => [:user_id, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
+        format.json { render :json => current_user == @user || current_user.admin ? @user.to_json(:except => [:encrypted_password], :methods => :profile_url) : @user.to_json(:except => [:encrypted_password, :email], :methods => :profile_url) }
+        format.xml { render :xml => current_user == @user || current_user.admin ? @user.to_xml(:except => [:encrypted_password], :methods => :profile_url) : @user.to_xml(:except => [:encrypted_password, :email], :methods => :profile_url) }
       end
      rescue ActiveRecord::RecordNotFound
         file_not_found
@@ -52,8 +52,8 @@ class UsersController < ApplicationController
   #   /users/current.xml|json (Oauth required)
   def current
     respond_to do |format|
-      format.json { render :json => current_user.to_json(:except => [:confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
-      format.xml { render :xml => current_user.to_xml(:except => [:confirmation_token, :encrypted_password, :email_confirmed, :remember_token, :salt], :methods => :profile_url) }
+      format.json { render :json => current_user.to_json(:except => [:encrypted_password], :methods => :profile_url) }
+      format.xml { render :xml => current_user.to_xml(:except => [:encrypted_password], :methods => :profile_url) }
     end
   end
   

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   include Gravtastic
   gravtastic :size => 75
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :default_to, :default_from
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :default_to, :default_from, :permalink, :admin, :id
   has_permalink :name
   
   # Associations

@@ -1,7 +1,7 @@
 class ConjugationTimesController < ApplicationController
   
   # Filters
-  before_filter :admin_required
+  before_filter :admin_required, :except => [:index, :show, :tab]
   before_filter :browser_required, :except => [:index, :show]
   
   # Standard formats
