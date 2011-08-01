@@ -62,9 +62,9 @@ class Vocabulary < ActiveRecord::Base
     temp = new({ :word => data, :user_id => user.id })
     temp.language = language
     vocabulary = find_by_word_and_language_id(temp.name, temp.language_id) || temp
-    vocabulary.save if vocabulary.new_record?
-    vocabulary.tag_list = (self.tag_list + tags).uniq unless tags.blank?
-    vocabulary.tag_list = (self.tag_list + new_tags.split(',')).uniq unless new_tags.blank?
+    vocabulary.tag_list = (vocabulary.tag_list + tags).uniq unless tags.blank?
+    vocabulary.tag_list = (vocabulary.tag_list + new_tags.split(',')).uniq unless new_tags.blank?
+    vocabulary.save    
     return vocabulary
   end
   
