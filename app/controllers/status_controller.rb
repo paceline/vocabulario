@@ -35,15 +35,15 @@ class StatusController < ApplicationController
   # API information - 
   #   /status/user_timeline.xml|json (Oauth required)
   def user_timeline
-    begin
+    #begin
       @timeline = Status.timeline(current_user.id)
       respond_to do |format|
         format.json { render :json => @timeline }
         format.xml { render :xml => @timeline }
       end
-    rescue Exception
-      internal_server_error
-    end
+    #rescue Exception
+    #  internal_server_error
+    #end
   end  
   
 end

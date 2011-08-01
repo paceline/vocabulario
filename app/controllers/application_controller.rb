@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   
   # Set current user (required for oauth-plugin)
   def current_user=(user)
-    current_user = user
+    sign_in(user)
   end
   
   # Error handlers - 401
@@ -66,6 +66,6 @@ class ApplicationController < ActionController::Base
       invalid_request unless !params.key?(:format) || params[:format] == 'js' || params[:format] == 'html'
     end
     def authorization_for_web_services_required
-      oauth_required if params[:format] == 'json' && params[:format] == 'xml'
+      oauth_required if params[:format] == 'json' || params[:format] == 'xml'
     end
 end
