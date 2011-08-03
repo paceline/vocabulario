@@ -32,6 +32,16 @@ class Verb < Vocabulary
     return @conjugation
   end
   
+  # Conjugate for inclusion in parameter-less to_json/to_xml calls
+  def conjugations
+    begin
+      conjugate_all(ConjugationTime.current.id)
+      conjugation_to_hash
+    rescue
+      return {}
+    end
+  end
+  
   # Spits out conjugation as hash for json/xml output
   def conjugation_to_hash
     result = []

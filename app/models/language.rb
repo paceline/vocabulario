@@ -17,31 +17,25 @@ class Language < Vocabulary
   has_permalink :name, :update => true
   
   # Determine pronouns
-  def self.get_methods_for_pronouns
-    Person::SUPPORTED_PRONOUNS.each do |type|
-      define_method "#{type}_pronouns" do
-        people.find :first, :conditions => { :pronoun => type }
-      end
+  Person::SUPPORTED_PRONOUNS.each do |type|
+    define_method "#{type}_pronouns" do
+      people.find :first, :conditions => { :pronoun => type }
     end
   end
-  get_methods_for_pronouns
   
   # Return languages currently supported
   def self.list(conditions = "")
-    return conditions.empty? ? find(:all, :order => 'word') : find(:all, :conditions => conditions, :order => 'word') 
+    return conditions.empty? ? all : where(conditions)
   end
   
   # Get all tags for current language
   def tags_for_language
-    return Tag.find(:all, :joins => 'LEFT JOIN taggings ON taggings.tag_id = tags.id LEFT JOIN vocabularies ON taggings.taggable_id = vocabularies.id', :conditions => ['vocabularies.language_id = ?',self.id], :group => 'tags.id', :order => 'tags.name')
+    Tag.joins('LEFT JOIN taggings ON taggings.tag_id = tags.id LEFT JOIN vocabularies ON taggings.taggable_id = vocabularies.id').where(['vocabularies.language_id = ?', self.id]).group('tags.id').order('tags.name')
   end
   
   # Get only vocabularies with translations to this language
   def vocabularies_with_translation_to(to)
-    vocabularies.find(:all,
-      :from => 'vocabularies, translations',
-      :conditions => "(translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id) AND (translations.vocabulary1_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{to.id}) OR translations.vocabulary2_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{to.id}))"
-    )
+    vocabularies.from('vocabularies, translations').where("(translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id) AND (translations.vocabulary1_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{to.id}) OR translations.vocabulary2_id IN (SELECT vocabularies.id FROM vocabularies WHERE vocabularies.language_id = #{to.id}))")
   end
 
 end

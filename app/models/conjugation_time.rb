@@ -22,4 +22,12 @@ class ConjugationTime < ActiveRecord::Base
     )
   end
   
+  # Make current tense available 
+  def self.current
+    Thread.current[:conjugation_time]
+  end
+  def self.current=(tense)
+    Thread.current[:conjugation_time] = tense
+  end
+  
 end

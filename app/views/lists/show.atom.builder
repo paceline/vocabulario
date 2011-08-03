@@ -1,9 +1,9 @@
 atom_feed do |feed|
   feed.title @list.name + (@list.verb? ? " (in #{ConjugationTime.find(@tense_id).name})" : "")
   feed.subtitle "A Vocabulario list by #{@list.user.name}"
-  feed.updated @list.static? ? @list.updated_at : @vocabularies.first.created_at
+  feed.updated @list.static? ? @list.updated_at : @list.vocabularies.first.created_at
  
-  for vocabulary in @vocabularies
+  for vocabulary in @list.vocabularies
     next if vocabulary.updated_at.blank?
     feed.entry(vocabulary, :url => vocabulary_path(vocabulary.permalink)) do |entry|
       entry.title vocabulary.word

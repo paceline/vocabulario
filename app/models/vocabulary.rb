@@ -43,14 +43,11 @@ class Vocabulary < ActiveRecord::Base
   end
   
   # Quick way to determine type of vocabulary
-  def self.identify_methods_for_subclasses
-    TYPES[0..TYPES.size-2].each do |type|
-      define_method "#{type.downcase}?" do
-        self.class.to_s == type
-      end
+  TYPES[0..TYPES.size-2].each do |type|
+    define_method "#{type.downcase}?" do
+      self.class.to_s == type
     end
   end
-  identify_methods_for_subclasses
   
   # Count self grouped by language
   def self.count_by_language
@@ -147,6 +144,12 @@ class Vocabulary < ActiveRecord::Base
   # Alias for word
   def name=(value)
     write_attribute(:word, value)
+  end
+  
+  # Translations for inclusion in parameter-less to_json/to_xml calls
+  def translation
+    result = List.current ? translations.all(List.current.language_to.id) : self.translations.all
+    result.collect { |r| { :id => r.id, :word => r.word, :language => { :id => r.language.id, :word => r.language.word } } }
   end
   
   # Return updates for timline

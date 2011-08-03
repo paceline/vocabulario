@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   
   # Filters
-  before_filter :browser_required, :except => [:index, :show, :tense]
+  before_filter :browser_required, :except => [:index, :show, :tense, :translations]
   before_filter :login_required, :except => [:index, :show, :sort, :tense]
   before_filter :authorization_for_web_services_required, :only => [:index, :show]
   
@@ -46,8 +46,8 @@ class ListsController < ApplicationController
     @lists = params.key?(:user_id) && current_user && (params[:user_id].to_i == current_user.id || params[:user_id] == current_user.permalink) ? current_user.lists : List.find_public(current_user)
     respond_to do |format|
       format.html { redirect_to community_path }
-      format.json { render :json => current_user ? @lists.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user], :methods => :size) : @lists.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => [:language_from, :language_to], :methods => :size) }
-      format.xml { render :xml => current_user ? @lists.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user], :methods => :size) : @lists.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => [:language_from, :language_to], :methods => :size) }
+      format.json { render :json => @lists.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :encrypted_password, :email, :user_id], :include => { :language_from => { :only => [:id, :word] }, :language_to => { :only => [:id, :word] }, :user => { :only => [:id, :name] }}, :methods => :size) }
+      format.xml { render :xml => @lists.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :encrypted_password, :email, :user_id], :include => { :language_from => { :only => [:id, :word] }, :language_to => { :only => [:id, :word] }, :user => { :only => [:id, :name] }}, :methods => :size) }
     end
   end
   
@@ -109,13 +109,13 @@ class ListsController < ApplicationController
     begin
       @list = List.find_by_id_or_permalink(params[:id])
       @tense_id = params.key?(:tense_id) ? params[:tense_id] : @list.language_from.conjugation_times.first.id if @list.verb?
-      if @list.public || @list.user == current_user
-        @vocabularies = @list.vocabularies
+      if @list.accessible?(current_user)
         respond_to do |format|
-          format.html
+          format.html { @vocabularies = @list.vocabularies }
           format.atom { render :layout => false }
-          format.json { render :json => current_user ? @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_json(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
-          format.xml { render :xml => current_user ? @list.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :user, :vocabularies], :methods => :size) : @list.to_xml(:except => [:all_or_any, :language_id, :language_from_id, :language_to_id, :time_unit, :time_value, :confirmation_token, :encrypted_password, :email, :email_confirmed, :remember_token, :salt, :user_id], :include => [:language_from, :language_to, :vocabularies], :methods => :size) }
+          @tense_id ? ConjugationTime.current = ConjugationTime.find(@tense_id) : List.current = @list
+          format.json { render :json => @list.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => { :language_from => {:only => [:id, :word]}, :language_to => {:only => [:id, :word]}, :user => {:only => [:id,:name]}, :vocabularies => { :only => [:id, :word], :methods => (@tense_id ? :conjugations : :translation) }}, :methods => :size) }
+          format.xml { render :xml => @list.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => { :language_from => {:only => [:id, :word]}, :language_to => {:only => [:id, :word]}, :user => {:only => [:id,:name]}, :vocabularies => { :only => [:id, :word], :methods => (@tense_id ? :conjugations : :translation) }}, :methods => :size) }
         end
       else
         unauthorized

@@ -53,6 +53,11 @@ class List < ActiveRecord::Base
     return conditions.empty? ? find(:all) : find(:all, :conditions => conditions) 
   end
   
+  # Check whether list is accessable to a certain user
+  def accessible?(user)
+    public? || self.user == user
+  end
+  
   # Checks whether list is public or private
   def public?
     public ? "public" : "private"
@@ -82,6 +87,14 @@ class List < ActiveRecord::Base
       :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/lists/#{permalink}",
       :user => user.to_hash
     ]
+  end
+  
+  # Make current list available 
+  def self.current
+    Thread.current[:list]
+  end
+  def self.current=(list)
+    Thread.current[:list] = list
   end
   
   private
