@@ -26,7 +26,7 @@
   %p
     Refers to language
     %br
-    = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }, { :include_blank => true, :selected => current_user.default_to }
+    = f.select :language_id, Language.list.collect {|p| [ p.word, p.id ] }, { :include_blank => true }
   %p
     Public:
     %br

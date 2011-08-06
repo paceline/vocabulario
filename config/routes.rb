@@ -36,6 +36,7 @@ Vocabulario::Application.routes.draw do
   
   # Wiki
   match '/wiki/by_tag/:id' => 'wiki_pages#by_tag', :as => :wiki_by_tag
+  match '/wiki/prefix' => 'wiki_pages#prefix'
   wiki_root '/wiki'
   
   # Resources

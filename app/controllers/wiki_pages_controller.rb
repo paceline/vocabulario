@@ -30,5 +30,20 @@ class WikiPagesController < ApplicationController
   def by_tag
     @pages = WikiPage.find_tagged_with Tag.find_by_permalink(params[:id]).name, :order => "name"
   end
+  
+  # Insert prefix before path
+  def prefix
+    unless params[:language_id].blank?
+      language = Language.find(params[:language_id])
+      prefix = (language.translations.all(language.id).first || language).permalink
+    end
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page << "appendOrReplace('path', '#{prefix ? prefix : ""}', '-')"
+        end
+      }
+    end
+  end
 
 end
