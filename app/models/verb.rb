@@ -38,7 +38,7 @@ class Verb < Vocabulary
       conjugate_all(ConjugationTime.current.id)
       conjugation_to_hash
     rescue
-      return {}
+      return []
     end
   end
   

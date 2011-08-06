@@ -6,6 +6,7 @@
     
 .content
   = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
+    = form.hidden_field :remember_me, :value => true
     = form.inputs do
       = form.input :email
       = form.input :password, :as => :password

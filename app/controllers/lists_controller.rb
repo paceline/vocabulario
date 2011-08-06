@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   # Filters
   before_filter :browser_required, :except => [:index, :show, :tense, :translations]
   before_filter :login_required, :except => [:index, :show, :sort, :tense]
-  before_filter :authorization_for_web_services_required, :only => [:index, :show]
+  #before_filter :authorization_for_web_services_required, :only => [:index, :show]
   
   # Creates a new list
   def create
@@ -114,7 +114,7 @@ class ListsController < ApplicationController
           format.html { @vocabularies = @list.vocabularies }
           format.atom { render :layout => false }
           @tense_id ? ConjugationTime.current = ConjugationTime.find(@tense_id) : List.current = @list
-          format.json { render :json => @list.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => { :language_from => {:only => [:id, :word]}, :language_to => {:only => [:id, :word]}, :user => {:only => [:id,:name]}, :vocabularies => { :only => [:id, :word], :methods => (@tense_id ? :conjugations : :translation) }}, :methods => :size) }
+          format.json { render :json => @list.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => { :language_from => {:only => [:id, :word]}, :language_to => {:only => [:id, :word]}, :user => {:only => [:id,:name]}, :vocabularies => { :only => [:id, :word], :methods => [:kind, (@tense_id ? :conjugations : :translation)] }}, :methods => :size) }
           format.xml { render :xml => @list.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :user_id], :include => { :language_from => {:only => [:id, :word]}, :language_to => {:only => [:id, :word]}, :user => {:only => [:id,:name]}, :vocabularies => { :only => [:id, :word], :methods => (@tense_id ? :conjugations : :translation) }}, :methods => :size) }
         end
       else

@@ -8,6 +8,6 @@
       = hidden_field_tag 'vocabulary[language_id]'
       #languages
         - @languages.each do |language|
-          %span{ :id => "language_#{language.id}" }= link_to(language.name.downcase, set_language_vocabulary_path(language.permalink, :type => @vocabulary.class_type), :remote => true)
+          %span{ :id => "language_#{language.id}" }= link_to(language.name.downcase, set_language_vocabulary_path(language.permalink, :type => @vocabulary.kind), :remote => true)
       %p= text_field_tag 'vocabulary[word]', nil, :size => 40, :class => 'spacing_top', :disabled => true
       #vocabulary_lookup_auto_complete.auto_complete

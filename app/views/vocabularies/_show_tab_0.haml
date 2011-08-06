@@ -9,7 +9,7 @@
 
 .content
   %h2 Type
-  = in_place_select @vocabulary, :class_type, Vocabulary.supported_types
+  = in_place_select @vocabulary, :kind, Vocabulary.supported_types
 
 .content
   %h2 Article

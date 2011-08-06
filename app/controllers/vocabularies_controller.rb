@@ -215,7 +215,7 @@ class VocabulariesController < ApplicationController
           end
           render :layout => false
         }
-        format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
+        format.json { render :json => @vocabulary.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }, :methods => :kind) }
         format.xml { render :xml => @vocabulary.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
       end
     rescue ActiveRecord::RecordNotFound

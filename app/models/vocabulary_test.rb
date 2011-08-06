@@ -66,7 +66,7 @@ class VocabularyTest < LanguageTest
         :from => { :id => @from.id, :word => @from.word },
         :to => { :id => @to.id, :word => @to.word },
         :answers => (options.key?(:answers) ? options[:answers].collect { |i| i } : []),
-        :next_question => { :id => current_question.id, :type => current_question.class_type, :word => current_question.word, :gender => current_question.gender },
+        :next_question => { :id => current_question.id, :type => current_question.kind, :word => current_question.word, :gender => current_question.gender },
         :score => { :id => options[:score].id, :points => options[:score].points, :questions => options[:score].questions },
         :current => @current,
         :limit => @limit,
@@ -96,7 +96,7 @@ class VocabularyTest < LanguageTest
       end
       xml.next_question do 
         xml.tag!(:id, current_question.id)
-        xml.tag!(:type, current_question.class_type)
+        xml.tag!(:type, current_question.kind)
         xml.tag!(:word, current_question.word)
         xml.tag!(:gender, current_question.gender)
       end

@@ -105,18 +105,18 @@ class Vocabulary < ActiveRecord::Base
   def apply_type_to_translations
     translations.each do |translation|
       translation.patterns.clear unless translation.patterns.blank?
-      translation.class_type = self.class_type
+      translation.kind = self.kind
       translation.save
     end
   end
   
   # Set method for re-casting vocabulary type
-  def class_type=(value)
+  def kind=(value)
     self[:type] = value == "Vocabulary" ? nil : value
   end
 
   # Get method for vocabulary type
-  def class_type
+  def kind
     return self[:type] ? self[:type] : "Vocabulary"
   end
   
