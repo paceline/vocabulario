@@ -13,6 +13,9 @@ class Language < Vocabulary
   has_many :verbs, :foreign_key => 'language_id', :class_name => 'Verb', :dependent => :delete_all, :order => 'word'
   has_many :vocabularies, :foreign_key => 'language_id', :class_name => 'Vocabulary', :dependent => :delete_all, :order => 'word'
   
+  # Associations - Get lists
+  has_many :lists, :foreign_key => 'language_from_id'
+  
   # Features
   has_permalink :name, :update => true
   

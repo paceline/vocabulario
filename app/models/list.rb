@@ -21,7 +21,7 @@ class List < ActiveRecord::Base
   default_scope order('`lists`.`name`')
   
   # Find public lists
-  def self.find_public(user = nil)
+  def self.find_accessible(user = nil)
     if user
       find(:all, :conditions => ['public = ? OR user_id = ?', true, user.id])
     else

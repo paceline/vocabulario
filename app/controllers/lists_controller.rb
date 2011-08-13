@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   # Filters
   before_filter :browser_required, :except => [:index, :show, :tense, :translations]
   before_filter :login_required, :except => [:index, :show, :sort, :tense]
-  #before_filter :authorization_for_web_services_required, :only => [:index, :show]
+  before_filter :authorization_for_web_services_required, :only => [:index, :show]
   
   # Creates a new list
   def create
@@ -43,9 +43,12 @@ class ListsController < ApplicationController
   #   /lists.xml|json (No oauth required)
   #   /users/#{id|permalink}/lists.xml|json (Oauth required)
   def index
-    @lists = params.key?(:user_id) && current_user && (params[:user_id].to_i == current_user.id || params[:user_id] == current_user.permalink) ? current_user.lists : List.find_public(current_user)
     respond_to do |format|
-      format.html { redirect_to community_path }
+      format.html {
+        @users = User.all
+        @languages = Language.list
+      }
+      @lists = params.key?(:user_id) && current_user && (params[:user_id].to_i == current_user.id || params[:user_id] == current_user.permalink) ? current_user.lists : List.find_accessible(current_user)
       format.json { render :json => @lists.to_json(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :encrypted_password, :email, :user_id], :include => { :language_from => { :only => [:id, :word] }, :language_to => { :only => [:id, :word] }, :user => { :only => [:id, :name] }}, :methods => :size) }
       format.xml { render :xml => @lists.to_xml(:except => [:all_or_any, :language_from_id, :language_to_id, :time_unit, :time_value, :encrypted_password, :email, :user_id], :include => { :language_from => { :only => [:id, :word] }, :language_to => { :only => [:id, :word] }, :user => { :only => [:id, :name] }}, :methods => :size) }
     end

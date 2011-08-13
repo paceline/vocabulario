@@ -2,7 +2,9 @@
 %html
   %head
     %title VOCABULARIO - A simple, semi-social vocabulary trainer
-    = ENV['RAILS_ENV'] == 'production' ? javascript_auto_include_tag(:defaults, 'tracker.js', :pattern => ':controller') : javascript_auto_include_tag(:defaults, :pattern => ':controller')
+    %link{:rel => "icon", :href => "/favicon.ico", :type => "image/x-icon"}
+    %link{:rel => "shortcut icon", :href => "/favicon.ico", :type => "image/x-icon"}
+    = Rails.env == 'production' ? javascript_auto_include_tag(:defaults, 'tracker.js', :pattern => ':controller') : javascript_auto_include_tag(:defaults, :pattern => ':controller')
     = yield :custom_includes
     = stylesheet_link_tag 'default'
     = stylesheet_link_tag 'print', :media => 'print'
@@ -11,7 +13,7 @@
     .container
       #header
         .navigation.no-padding= link_to "Wiki", '/wiki/home'
-        .navigation= link_to "Community", community_path
+        .navigation= link_to "Lists", lists_path
         .navigation= link_to "Vocabularies", vocabularies_path
         .navigation= link_to "Test Center", test_path
         .navigation= link_to "Home", "/"

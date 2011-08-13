@@ -4,7 +4,6 @@ Vocabulario::Application.routes.draw do
   
   # User and login stuff
   devise_for :users
-  match '/community' => 'users#index', :as => :community
   match '/lists/:list_id/test' => 'scores#new', :as => :test_from_list
   match '/wiki/:path/test' => 'scores#new', :as => :test_from_page
   match '/test' => 'scores#new', :as => :test

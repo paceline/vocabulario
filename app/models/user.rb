@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   validates :email, :presence => true
   validates :name, :presence => true, :uniqueness => true, :length => { :minimum => 1, :maximum => 100 }
   
+  # Defaults
+  default_scope order('`users`.`name`')
+  
   # Statistics - Average score
   def average_score
     return self.scores.average('points / questions * 100')

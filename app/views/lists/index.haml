@@ -1,0 +1,24 @@
+- content_for :sidebar do
+  = render :partial => 'lists/manage'
+  = render :partial => 'shared/stat_widget'
+
+- content_for :notice do
+  %h1 Lists
+  %p Check them out our vocabulary lists. They're great for studying before a test.
+
+.content
+  - @languages.each do |language|
+    - unless language.lists.blank?
+      %h1= language.word
+      %ul.inline
+        - language.lists.each do |list|
+          %li= link_to(list.name, list_path(list.permalink))
+      %br
+
+.content
+  %h1 Users
+  %p A list of this very exclusive sites' current members.
+  %br
+    - @users.each do |user|
+      = render user
+

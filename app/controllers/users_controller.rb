@@ -20,10 +20,9 @@ class UsersController < ApplicationController
   # API information - 
   #   /users.xml|json (Oauth required)
   def index
-    @users = User.find(:all, :order => 'name')
-    @lists = List.find_public(current_user)
+    @users = User.all
     respond_to do |format|
-      format.html
+      format.html { redirect_to lists_path }
       format.json { render :json => @users.to_json(:except => [:encrypted_password, :email]) }
       format.xml { render :xml => @users.to_xml(:except => [:encrypted_password, :email]) }
     end

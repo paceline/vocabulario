@@ -9,7 +9,7 @@ class ScoresController < ApplicationController
     @score = Score.new
     @menu = params[:menu]
     if params[:menu] == '2' || params[:list_id]
-      @lists = List.find_public(current_user)
+      @lists = List.find_accessible(current_user)
       @list = params[:list_id] ? List.find_by_id_or_permalink(params[:list_id]) : @lists.first
     else
       @languages = Language.list
