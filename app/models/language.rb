@@ -33,7 +33,7 @@ class Language < Vocabulary
   
   # Get all tags for current language
   def tags_for_language
-    Tag.joins('LEFT JOIN taggings ON taggings.tag_id = tags.id LEFT JOIN vocabularies ON taggings.taggable_id = vocabularies.id').where(['vocabularies.language_id = ?', self.id]).group('tags.id').order('tags.name')
+    Tag.joins('LEFT JOIN taggings ON taggings.tag_id = tags.id LEFT JOIN vocabularies ON taggings.taggable_id = vocabularies.id').where(['vocabularies.language_id = ?', self.id]).group('tags.id').order('tags.name').to_a
   end
   
   # Get only vocabularies with translations to this language

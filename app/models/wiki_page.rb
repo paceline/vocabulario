@@ -1,3 +1,5 @@
+require 'sanitize'
+
 class WikiPage < ActiveRecord::Base
 
   # Import irwi features
@@ -7,19 +9,9 @@ class WikiPage < ActiveRecord::Base
   # Associations
   belongs_to :language
   
-  # Get most popular language
-  def guess_second_language
-    if language
-      vocabularies = "(#{Vocabulary.find_tagged_with(tags, :match_all => false, :conditions => "language_id = #{language_id}").collect { |v| v.id }.join(",")})"
-      Vocabulary.first(:conditions => "id IN (SELECT vocabularies.language_id FROM vocabularies LEFT JOIN translations ON (vocabulary1_id = vocabularies.id OR vocabulary1_id = vocabularies.id) WHERE (vocabulary1_id IN #{vocabularies} OR vocabulary2_id IN #{vocabularies}) GROUP BY vocabularies.language_id ORDER BY COUNT(*))")
-    else
-      return nil
-    end
-  end
-  
   # Show preview of page content
   def preview
-    content[0..120]
+    Sanitize.clean(RedCloth.new(content).to_html.gsub('[[','').gsub(']]',''))[0..200] + '...'
   end
 
   # Return updates for timline

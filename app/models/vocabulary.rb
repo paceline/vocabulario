@@ -52,7 +52,7 @@ class Vocabulary < ActiveRecord::Base
   
   # Count self grouped by language
   def self.count_by_language
-    count(:include => 'language', :group => 'languages_vocabularies.permalink', :order => 'COUNT(*) DESC')
+    with_exclusive_scope { count(:include => 'language', :group => 'languages_vocabularies.permalink', :order => 'count_id DESC') }
   end
   
   # Imports csv string

@@ -13,14 +13,14 @@ class ScoresController < ApplicationController
       @list = params[:list_id] ? List.find_by_id_or_permalink(params[:list_id]) : @lists.first
     else
       @languages = Language.list
+      test_from = user_signed_in? && current_user.defaults? ? current_user.default_from : @languages[1].id
       if params.key?(:path)
         page = WikiPage.find_by_path(params[:path])
-        second_language = page.guess_second_language
-        @tags = page.language.tags_for_language & second_language.tags_for_language
-        @selected = { :test_to => page.language_id, :test_from => second_language.id, :test_tags => page.tags.collect { |t| t.name } }
+        @tags = page.language.tags_for_language & Language.find(test_from).tags_for_language
+        @selected = { :test_from => test_from, :test_to => page.language.id, :test_tags => page.tags.collect { |t| t.name } }
       else
-        @selected = { :test_to => (user_signed_in? && current_user.defaults? ? current_user.default_to : @languages[0].id), :test_from => (user_signed_in? && current_user.defaults? ? current_user.default_from : @languages[1].id), :test_tags => nil }
-        @tags = user_signed_in? && current_user.defaults? ? Language.find(current_user.default_to).tags_for_language & Language.find(current_user.default_from).tags_for_language : Tag.all
+        @selected = { :test_to => (user_signed_in? && current_user.defaults? ? current_user.default_to : @languages[0].id), :test_from => test_from, :test_tags => nil }
+        @tags = Language.find(test_from).tags_for_language & Language.find(user_signed_in? && current_user.defaults? ? current_user.default_to : @languages[0].id).tags_for_language
       end
     end
     respond_to do |format|
