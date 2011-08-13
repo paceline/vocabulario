@@ -18,7 +18,7 @@ gem 'gravtastic'
 gem 'haml'
 gem 'irwi', '= 0.4.1'
 gem 'RedCloth'
-gem 'will_paginate', '>= 3.0.beta'
+gem 'will_paginate', '= 3.0.pre4'
 
 # Own gems
 gem 'javascript_auto_include', '>= 0.1.0'

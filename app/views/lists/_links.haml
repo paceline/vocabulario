@@ -1,13 +1,7 @@
 %li= link_to('Print list', list_path(@list.permalink), :class => 'print')
-
-- if @list.verb?
-  
-  %li= link_to('Feed', feed_list_with_tense_path(:id => @list.permalink, :tense_id => @tense_id, :format => :atom))
-  %li= link_to('Export as JSON', list_path(@list.permalink, :format => :json))
-  %li= link_to('Export as XML', list_path(@list.permalink, :format => :xml))
-
-- else
-
-  %li= link_to('Feed', list_path(@list.permalink, :format => :atom))
-  %li= link_to('Export as JSON', list_path(@list.permalink, :format => :json))
-  %li= link_to('Export as XML', list_path(@list.permalink, :format => :xml)) 
+%li
+  - if @list.verb?
+    = link_to('Feed', feed_list_with_tense_path(:id => @list.permalink, :tense_id => @tense_id, :format => :atom))
+  - else
+    = link_to('Feed', list_path(@list.permalink, :format => :atom))
+%li= link_to('API', '/wiki/api')
