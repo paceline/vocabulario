@@ -18,18 +18,13 @@ document.observe("dom:loaded", function() {
 
 // Append or replace language prefix when adding a new wiki page
 
-function appendOrReplace(dom_id, text, delimiter) {
-  var old_value = $(dom_id).getValue();
-  var pattern = new RegExp('^.*' + delimiter);
-  if (old_value.match(pattern)) {
-    if (text.length > 0) {
-      $(dom_id).setValue(old_value.replace(pattern, text + delimiter)); 
-    }
-    else {
-      $(dom_id).setValue(old_value.replace(pattern, '')); 
-    }
+function appendOrReplace(dom_id, index, choices) {
+  var old_value = $(dom_id).getValue().toLowerCase().replace(/ /g, '-');
+  var pattern = new RegExp('^(' + choices.join('|') + ')-');
+  if (pattern.test(old_value)) {
+    $(dom_id).setValue(old_value.replace(pattern, (index == '') ? '' : choices[index] + '-'));
   }
   else {
-    $(dom_id).setValue(text + delimiter + old_value); 
+    $(dom_id).setValue(choices[index] + '-' + old_value);
   }
 }

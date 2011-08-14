@@ -56,9 +56,9 @@ class Vocabulary < ActiveRecord::Base
   end
   
   # Imports csv string
-  def self.import(data, language, user, tags, new_tags)
+  def self.import(data, language, user, tags = [], new_tags = [])
     temp = new({ :word => data, :user_id => user.id })
-    temp.language = language
+    temp.language = language.class == String ? Language.find(language) : language
     vocabulary = find_by_word_and_language_id(temp.name, temp.language_id) || temp
     vocabulary.tag_list = (vocabulary.tag_list + tags).uniq unless tags.blank?
     vocabulary.tag_list = (vocabulary.tag_list + new_tags.split(',')).uniq unless new_tags.blank?

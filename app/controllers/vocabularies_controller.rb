@@ -63,23 +63,15 @@ class VocabulariesController < ApplicationController
   def create
     if params[:translation]
       @vocabulary = Vocabulary.find(params[:translation][:vocabulary2_id])
-      translation = Vocabulary.find_by_word_and_language_id(params[:vocabulary][:word], params[:vocabulary][:language_id]) || Object.const_get(@vocabulary.class.to_s).new(params[:vocabulary])
-      translation.user = current_user
-      translation.tag_list = (@vocabulary.tag_list + translation.tag_list).uniq
+      translation = Object.const_get(@vocabulary.language? ? 'Noun' : @vocabulary.class.to_s).import(params[:vocabulary][:word], params[:vocabulary][:language_id], current_user, @vocabulary.tag_list)
       @vocabulary.translation_to << translation
       render 'create', :layout => false
     else
       params[:vocabulary].delete(:gender) if params[:vocabulary][:gender].blank?
       type = params[:vocabulary][:type].blank? ? 'Vocabulary' : params[:vocabulary].delete(:type)
-      @vocabulary = Object.const_get(type).new(params[:vocabulary])
-      if @vocabulary.valid? && @vocabulary.errors.empty?
-        @vocabulary.user = current_user
-        @vocabulary.save
-        flash[:notice] = "\"#{@vocabulary.word}\" has been added to the database."
-        redirect_to vocabulary_path(@vocabulary.permalink)
-      else
-        render :action => 'new'
-      end
+      @vocabulary = Object.const_get(type).import(params[:vocabulary][:word], params[:vocabulary][:language_id], current_user)
+      flash[:notice] = "\"#{@vocabulary.word}\" has been added to the database (if it didn't already exist)"
+      redirect_to vocabulary_path(@vocabulary.permalink)
     end
   end
   

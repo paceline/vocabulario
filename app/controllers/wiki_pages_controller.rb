@@ -33,14 +33,12 @@ class WikiPagesController < ApplicationController
   
   # Insert prefix before path
   def prefix
-    unless params[:language_id].blank?
-      language = Language.find(params[:language_id])
-      prefix = (language.translations.all(language.id).first || language).permalink
-    end
+    languages = Language.list_native
+    language = Language.find(params[:language_id]) unless params[:language_id].blank?
     respond_to do |format|
       format.js {
         render :update do |page|
-          page << "appendOrReplace('path', '#{prefix ? prefix : ""}', '-')"
+          page << "appendOrReplace('path', #{language ? languages.index((language.translations.all(language.id).first || language).permalink) : "''"}, ['#{languages.join("','")}'])"
         end
       }
     end

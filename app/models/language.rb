@@ -31,6 +31,15 @@ class Language < Vocabulary
     return conditions.empty? ? all : where(conditions)
   end
   
+  # List languages in their respective native tongues
+  def self.list_native
+    list = []
+    all.each do |language|
+       list << (language.translations.all(language.id).first || language).permalink
+    end
+    return list
+  end
+  
   # Get all tags for current language
   def tags_for_language
     Tag.joins('LEFT JOIN taggings ON taggings.tag_id = tags.id LEFT JOIN vocabularies ON taggings.taggable_id = vocabularies.id').where(['vocabularies.language_id = ?', self.id]).group('tags.id').order('tags.name').to_a

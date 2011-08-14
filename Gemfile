@@ -18,6 +18,7 @@ gem 'gravtastic'
 gem 'haml'
 gem 'irwi', '= 0.4.1'
 gem 'RedCloth'
+gem 'sanitize'
 gem 'will_paginate', '= 3.0.pre4'
 
 # Own gems

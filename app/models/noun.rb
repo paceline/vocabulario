@@ -4,7 +4,7 @@ class Noun < Vocabulary
   has_permalink :name, :update => true
   
   # Supported articles
-  ARTICLES = ["la","le","el","il","l'","lo","i","der","die","das","the","les"]
+  ARTICLES = ["la ","le ","el ","il ","l'","lo ","i ","der ","die ","das ","the ","les ","los ","las "]
   
   # Automatically interpret word
   def word=(value)
@@ -12,7 +12,7 @@ class Noun < Vocabulary
       write_attribute(:gender, tmp[tmp.size-1].strip)
       write_attribute(:word, tmp[0..tmp.size-2].join(',').strip)
     elsif (article = find_matching_articles(value))
-      write_attribute(:gender, article)
+      write_attribute(:gender, article.strip)
       write_attribute(:word, value[article.size..value.size-1].strip)
     else
       write_attribute(:word, value)

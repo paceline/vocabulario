@@ -10,7 +10,7 @@ class List < ActiveRecord::Base
   belongs_to :language_from, :class_name => 'Language'
   belongs_to :language_to, :class_name => 'Language'
   belongs_to :user
-  has_many :vocabulary_lists, :dependent => :destroy, :order => [:position,:word]
+  has_many :vocabulary_lists, :dependent => :destroy
   has_many :vocabularies, :through => :vocabulary_lists, :order => [:position,:word]
   
   # Validations
