@@ -1,12 +1,11 @@
-- content_for :custom_includes do
-  %link{ :href => user_timeline_path(@user.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+- content_for :title, "Edit profile"
 
-- content_for :notice do
-  %h1 Edit profile
-  
 - content_for :sidebar do
-  .tabs.green
-    %h1 Cancel my account
+  .bg
+    .bl
+      .br
+        .tl
+          .tr Cancel my account
   Unhappy? Click
   = link_to "here", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete
   to cancel your account

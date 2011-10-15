@@ -1,9 +1,7 @@
+- content_for :title, @pattern.name
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-
-- content_for :notice do
-  %h1= @pattern.name
-  %p A conjugation pattern
 
 .content
   = link_to 'New rule', new_pattern_rule_path(@pattern)

@@ -1,10 +1,8 @@
+- content_for :title, "Import CSV data"
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
 
-- content_for :notice do
-  %h1 Import CSV data
-  %p Just try it out and see what happens!
-  
 .content
   = form_for :vocabulary, :url => import_vocabularies_path, :remote => true, :method => :post do |f|
     %p

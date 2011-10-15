@@ -1,12 +1,11 @@
+- content_for :title, "New wiki page"
+
 - content_for :custom_includes do
   = stylesheet_link_tag 'wiki', :media => 'all'
   
 - content_for :sidebar do
   = render :partial => 'wiki_pages/manage'
   = render :partial => 'base_wiki_pages/tagcloud'
-
-- content_for :notice do
-  %h1 New wiki page
 
 - if params[:preview]
   .wiki_content

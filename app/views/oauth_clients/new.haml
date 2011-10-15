@@ -1,6 +1,4 @@
-- content_for :notice do
-  %h1 New application
-  %p Register your app to access the vocabulario api
+- content_for :title, "New application"
   
 = semantic_form_for @client_application, :url => oauth_clients_path do |form|
   = form.error_messages

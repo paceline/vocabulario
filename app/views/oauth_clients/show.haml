@@ -1,8 +1,4 @@
-- content_for :notice do
-  %h1
-    OAuth settings for
-    = "\"#{@client_application.name}\""
-  %p OAuth details for your application
+- content_for :title, "OAuth settings for #{@client_application.name}"
 
 .content
   %p

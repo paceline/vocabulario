@@ -1,7 +1,10 @@
 - if user_signed_in?
   .content
-    .tabs.green
-      %h1 Manage lists
+    .bg
+      .bl
+        .br
+          .tl
+            .tr Manage lists
     %p
       = link_to('Add', new_user_list_path(current_user.permalink))
       - if @list && !@list.new_record? && @list.user == current_user

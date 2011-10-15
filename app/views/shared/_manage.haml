@@ -1,8 +1,11 @@
 - if user_signed_in?
 
   .content
-    .tabs.green
-      %h1 Manage stuff
+    .bg
+      .bl
+        .br
+          .tl
+            .tr Manage stuff
     %ul#manage
       %li.menu
         = link_to_function "Add", "toggleMenu('add',#{detect_elements})"

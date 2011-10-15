@@ -1,8 +1,5 @@
-- content_for :notice do
-  %h1 Authorization request
-  %p
-    = @token.client_application.name
-    would like to get access to your account data
+- content_for :title, "Authorization request"
+
 %p
   Would you like to authorize
   = link_to @token.client_application.name,@token.client_application.url

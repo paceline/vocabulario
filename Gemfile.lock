@@ -123,7 +123,7 @@ GEM
     tzinfo (0.3.29)
     warden (1.0.5)
       rack (>= 1.0)
-    will_paginate (3.0.pre4)
+    will_paginate (3.0.2)
 
 PLATFORMS
   ruby
@@ -146,4 +146,4 @@ DEPENDENCIES
   rails (~> 3.0.1)
   sanitize
   test-unit
-  will_paginate (= 3.0.pre4)
+  will_paginate (>= 3.0.0)

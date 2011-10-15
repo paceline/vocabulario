@@ -1,9 +1,7 @@
+- content_for :title, "New vocabulary"
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-
-- content_for :notice do
-  %h1= "New #{params[:type] ? 'language' : 'vocabulary'}"
-  %p= "Fill out the form below to submit a new #{params[:type] ? 'language' : 'vocabulary'}."
 
 .content
   = error_messages_for :vocabulary

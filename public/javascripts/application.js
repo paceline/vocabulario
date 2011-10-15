@@ -5,8 +5,8 @@
 // Run highlight function when appropriate
 
 document.observe("dom:loaded", function() {
-  if ($('notice').visible() && $('notice').childElements().first().identify().startsWith('flash_')) {
-    highlightNotice();
+  if ($('notice').visible()) {
+    closeNotice();
   }
 })
 
@@ -15,7 +15,14 @@ document.observe("dom:loaded", function() {
 
 function highlightNotice() {
 	$('notice').show();
-	setTimeout("new Effect.BlindUp('notice')",3000);
+}
+function closeNotice() {
+  $$('a.close').each(function(item) {
+    $(item).observe('click', function(event) { 
+      new Effect.BlindUp($(item).up().up().up().up().up());
+      Event.stop(event);
+    });
+  });
 }
 
 
@@ -115,11 +122,12 @@ function toggleMenu(dom_id, elements) {
 function activateTab(no) {
   if($('tab_browser') != undefined) { $('tab_browser').hide(); }
   $('tab_' + no + '_link').addClassName('active');
-  if($('tab_browser') != undefined) { new Effect.BlindDown('tab_browser'); }
+  if($('tab_browser') != undefined) { new Effect.Appear('tab_browser'); }
 }
 
 function deactivateTab(length) {
-  for(i=0; i<length; i++) { $('tab_' + i + '_link').className = 'tab_link' };
+  $('tab_0_link').className = 'tab_link first';
+  for(i=1; i<length; i++) { $('tab_' + i + '_link').className = 'tab_link' };
 }
 
 
@@ -282,7 +290,7 @@ function enableEndlessPage(results_dom_id, element_class) {
 
 function loadRemainingItems(results_dom_id, element_class){
   // infer url from browser location
-  var url = (window.location.href.split('/').last() === '') ? '/status.js' : window.location.href + '.js';
+  var url = (window.location.href.split('/').last() === '') ? '/vocabularies.js' : window.location.href + '.js';
   // compute amount of page below the current scroll position
   var remaining = ($(results_dom_id).viewportOffset()[1] + $(results_dom_id).getHeight()) - Position.GetWindowSize().height;
   // compute height of bottom element

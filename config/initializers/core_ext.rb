@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class Array
   
   # Fetches one or more objects from an array based on given attribute and value (e.g. :id, 1)

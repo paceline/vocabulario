@@ -1,11 +1,7 @@
+- content_for :title, @person.pronoun
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-
-.content
-  %h1= @person.pronoun
-  A set of
-  = @person.language.word
-  pronouns
 
 .content
   %table

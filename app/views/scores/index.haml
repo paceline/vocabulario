@@ -1,12 +1,14 @@
+- content_for :title, "Top scores"
+
 - content_for :sidebar do
   .content
-    .tabs.green
-      %h1 Better than them?
+    .bg
+      .bl
+        .br
+          .tl
+            .tr Better than them?
     %p Well, you can prove it right now.
     %p <a href="/test">Click here</a> to get started and show 'em.
-
-- content_for :notice do
-  %h1 Top Scores
 
 %ol#scores
   - @scores.each do |score|

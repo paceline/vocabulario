@@ -18,9 +18,9 @@ class SmartVocabularyList < List
     end
     
     if tag_list.blank?
-      Vocabulary.find(:all, :joins => 'LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)', :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
+      Vocabulary.unscoped.joins('LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)').where(conditions.join(' AND ')).order(order.reverse.join(', '))
     else
-      Vocabulary.find_tagged_with(tags, :match_all => all_or_any, :joins => 'LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)', :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
+      Vocabulary.unscoped.find_tagged_with(tags, :match_all => all_or_any, :joins => 'LEFT JOIN translations ON (translations.vocabulary1_id = vocabularies.id OR translations.vocabulary2_id = vocabularies.id)', :conditions => conditions.join(' AND '), :order => order.reverse.join(', '))
     end
   end
 

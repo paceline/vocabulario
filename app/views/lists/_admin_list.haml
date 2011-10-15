@@ -21,4 +21,4 @@
   %li#dropzone
     %ul.inline
       %li Drop vocabularies here to start a list
-  = drop_receiving_element "dropzone", :accept => 'draggable', :hoverclass => 'over_receiving_element', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1]"
+  = drop_receiving_element "dropzone", :accept => 'draggable', :url => newitem_list_path(@list), :with => "'vocabulary_id=' + element.id.split('_')[1]"

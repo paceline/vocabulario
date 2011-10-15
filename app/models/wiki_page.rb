@@ -14,15 +14,4 @@ class WikiPage < ActiveRecord::Base
     Sanitize.clean(RedCloth.new(content).to_html.gsub('[[','').gsub(']]',''))[0..200] + '...'
   end
 
-  # Return updates for timline
-  def updates_for_timeline
-    Status[
-      :id => id,
-      :text => "added the new wiki page \"#{title}\"",
-      :created_at => created_at,
-      :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/wiki/#{path}",
-      :user => creator.to_hash
-    ]
-  end
-
 end

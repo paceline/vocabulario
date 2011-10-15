@@ -1,11 +1,7 @@
+- content_for :title, "Wiki pages tagged with #{params[:id]}"
+
 - content_for :sidebar do
   = render :partial => 'base_wiki_pages/tagcloud'
-
-- content_for :notice do
-  %h1 Wiki pages
-  %p
-    Pages tagged with
-    = link_to params[:id], wiki_by_tag_path(params[:id])
 
 .content
   %h2 Search results

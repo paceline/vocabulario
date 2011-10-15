@@ -48,14 +48,4 @@ class Score < ActiveRecord::Base
     [((total - 1) / 25) + 1, 1].max 
   end
   
-  # Return updates for timline
-  def updates_for_timeline
-    Status[
-      :id => id,
-      :text => "got #{'%.1f' % ratio}% right on a #{questions} question " + (test_type == 'VocabularyTest' ? "#{language_from.word} to #{language_to.word} vocabulary test" : "conjugation test in #{language_from.word}"),
-      :created_at => created_at,
-      :user => (user ? user.to_hash : "")
-    ]
-  end
-  
 end

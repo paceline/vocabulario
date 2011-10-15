@@ -88,7 +88,7 @@ class VocabulariesController < ApplicationController
   # API information - 
   #   /vocabularies.xml|json (No Oauth required)
   def index
-    @vocabularies_list = params[:language] ? Vocabulary.find(:all, :order => 'word', :conditions => ['language_id != ?',params[:language]]) : Vocabulary.find(:all, :order => 'word')
+    @vocabularies_list = params[:language] ? Vocabulary.where(['language_id != ?',params[:language]]) : Vocabulary.all
     @page = params.key?(:last) ? params[:last].to_i + 1 : (params.key?(:page) ? params[:page] : 1)
     @vocabularies = @vocabularies_list.paginate :page => @page, :per_page => Vocabulary.per_page
     respond_to do |format|
@@ -317,10 +317,16 @@ class VocabulariesController < ApplicationController
             render 'vocabularies/index'
           }
           format.js {
-            @last = params[:last].to_i
-            @vocabularies = @vocabularies_list.paginate :page => @last + 1, :per_page => Vocabulary.per_page     
-            @page = @last + 1
-            @vocabularies.empty? ? render(:nothing => true) : render(:partial => 'vocabularies/vocabularies', :object => @vocabularies, :locals => {:page => @page})
+            @page = params.key?(:last) ? params[:last].to_i + 1 : (params.key?(:page) ? params[:page] : 1)
+            @vocabularies = @vocabularies_list.paginate :page => @page, :per_page => Vocabulary.per_page
+            if @vocabularies.empty?
+              render(:nothing => true)
+            else
+              render :update do |page|
+                page.insert_html :bottom, 'vocabulary_results', render(:partial => 'vocabularies', :object => @vocabularies, :locals => {:page => @page})
+                page.replace_html 'pagination', will_paginate(@vocabularies)
+              end
+            end
           }
           format.json { render :json => @vocabularies.to_json(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }
           format.xml { render :xml => @vocabularies.to_xml(:except => [:user_id, :language_id], :include => { :language => { :only => [:id, :word] } }) }

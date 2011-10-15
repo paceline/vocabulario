@@ -1,3 +1,5 @@
+- content_for :title, "Print list"
+
 %h1= @list.name + (@list.verb? ? " (in #{ConjugationTime.find(@tense_id).name})" : "")
 %p
   A Vocabulario list by

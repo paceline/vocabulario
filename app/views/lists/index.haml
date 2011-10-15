@@ -1,10 +1,8 @@
+- content_for :title, "Lists"
+
 - content_for :sidebar do
   = render :partial => 'lists/manage'
   = render :partial => 'shared/stat_widget'
-
-- content_for :notice do
-  %h1 Lists
-  %p Check them out our vocabulary lists. They're great for studying before a test.
 
 .content
   - @languages.each do |language|

@@ -1,9 +1,0 @@
-- @timeline_results.each do |status|
-  %li{ :class => "status page-#{@page}" }
-    %ul.inline
-      %li.highlight= "#{distance_of_time_in_words(status[:created_at], Time.now).capitalize} ago"
-      %li
-        = status[:user].blank? ? link_to("Guest", sign_up_url) : link_to(status[:user][:name], status[:user][:url])
-        = status[:text]
-      - if status.key?(:url)
-        %li= link_to('More', status[:url])

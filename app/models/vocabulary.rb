@@ -153,17 +153,6 @@ class Vocabulary < ActiveRecord::Base
     result.collect { |r| { :id => r.id, :word => r.word, :language => { :id => r.language.id, :word => r.language.word } } }
   end
   
-  # Return updates for timline
-  def updates_for_timeline
-     Status[
-       :id => 1,
-       :text => "added the new #{language.word} vocabulary \"#{word}\"",
-       :created_at => created_at,
-       :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/vocabularies/#{permalink}",
-       :user => user.to_hash
-     ]
-  end
-  
   private
     def apply_user_defaults
       if new_record? && user

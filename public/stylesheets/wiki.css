@@ -13,10 +13,10 @@
   padding: 0px;
 }
 
-.wiki_content, .wiki_diff, .wiki_history, .wiki_form { border: 4px solid #000; }
-
 .wiki_content a, .wiki_form a { background-color: #EEE; padding: .1em; color: #666; }
-.wiki_page_actions a { color: #02B8EA; background-color: #FFF; padding: 0px; }
+.wiki_content a:hover, .wiki_form a:hover { border: none; background-color: #666; color: #EEE; }
+.wiki_page_actions a { color: #02B8EA; background-color: #FFF; }
+.wiki_page_actions a:hover { color: #FFF; background-color: #02B8EA; }
 
 .wiki_diff,
 .wiki_history {
@@ -35,8 +35,7 @@
 
 .wiki_content, .wiki_form {
   display: block;
-  margin: 35px 0 25px 0;
-  padding: 15px;
+  padding: 35px 25px 15px 25px;
 }
 
 .wiki_form p {
@@ -87,11 +86,3 @@
 .wiki_content ul li, .wiki_content ol li { margin: 0; padding: 5px 0 5px 0; }
 
 .wiki_content p { margin: 10px 0 10px 0; }
-
-ul.wiki_page_actions {
-  font-family: Helvetica, Geneva, 'Lucida Grande';
-  font-size: .8em;
-  float: right;
-  margin: -5px -5px 0 0;
-}
-ul.wiki_page_actions li { padding-left: 10px; }

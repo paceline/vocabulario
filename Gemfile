@@ -19,7 +19,7 @@ gem 'haml'
 gem 'irwi', '= 0.4.1'
 gem 'RedCloth'
 gem 'sanitize'
-gem 'will_paginate', '= 3.0.pre4'
+gem 'will_paginate', '>= 3.0.0'
 
 # Own gems
 gem 'javascript_auto_include', '>= 0.1.0'

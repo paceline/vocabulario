@@ -1,3 +1,5 @@
+- content_for :title, @page.title
+
 - content_for :custom_includes do
   = stylesheet_link_tag 'wiki', :media => 'all'
 
@@ -9,9 +11,8 @@
 = render :partial => 'shared/taglist', :object => @page
 
 .wiki_content
-  = wiki_page_actions
   = wiki_content @page.content.html_safe
-= wiki_page_info
+= wiki_page_actions
   
 - unless @page.tag_list.blank?
   %h3.no-print Related vocabularies

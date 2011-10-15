@@ -19,10 +19,6 @@ Vocabulario::Application.routes.draw do
   # List aliases
   match '/lists/:id/feed/:tense_id' => 'lists#show', :as => :feed_list_with_tense
   
-  # Timeline aliases
-  match '/timeline' => 'status#index', :as => :timeline
-  match '/users/:user_id/timeline' => 'status#index', :as => :user_timeline
-  
   # Oauth stuff
   resources :oauth_clients
   match '/oauth/test_request',  :to => 'oauth#test_request',  :as => :test_request
@@ -104,12 +100,6 @@ Vocabulario::Application.routes.draw do
   end
   
   resources :statistics
-  
-  resources :status do 
-    collection do
-      get 'user_timeline'
-    end
-  end
     
   resources :users do
     collection do
@@ -145,5 +135,5 @@ Vocabulario::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "status#index"
+  root :to => "vocabularies#index"
 end

@@ -1,16 +1,15 @@
-- content_for :custom_includes do
-  %link{ :href => user_timeline_path(@user.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
+- content_for :title, "#{@user.name}'s profile"
 
 - content_for :sidebar do
   - if signed_in_as_admin? && @user != current_user
     .content
-      .tabs.green
-        %h1 Admin stuff
+      .bg
+        .bl
+          .br
+            .tl
+              .tr Admin stuff
       %ul
         %li= link_to('Make admin', admin_user_path(@user), :confirm => 'Are you sure? You can only reverse this by directly editing the database record.', :method => :put) unless @user.admin?
-
-- content_for :notice do
-  %h1 User profile
 
 .content
   = image_tag @user.gravatar_url, :class => 'gravatar_big'

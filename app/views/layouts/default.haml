@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title VOCABULARIO - A simple, semi-social vocabulary trainer
+    %title= "VOCABULARIO - #{yield(:title).blank? ? "A simple, semi-social vocabulary trainer" : yield(:title)}"
     %link{:rel => "icon", :href => "/favicon.ico", :type => "image/x-icon"}
     %link{:rel => "shortcut icon", :href => "/favicon.ico", :type => "image/x-icon"}
     = Rails.env == 'production' ? javascript_auto_include_tag(:defaults, 'tracker.js', :pattern => ':controller') : javascript_auto_include_tag(:defaults, :pattern => ':controller')
@@ -10,39 +10,43 @@
     = stylesheet_link_tag 'print', :media => 'print'
     = csrf_meta_tag
   %body
-    .container
-      #header
-        .navigation.no-padding= link_to "Wiki", '/wiki/home'
-        .navigation= link_to "Lists", lists_path
-        .navigation= link_to "Vocabularies", vocabularies_path
-        .navigation= link_to "Test Center", test_path
-        .navigation= link_to "Home", "/"
-        .navigation.no-floater= link_to "VOCABULARIO - a simple vocablary trainer", "/"
-      - unless !flash.empty? || !yield(:notice).blank?
-        #notice{ :style => "display: none;" }
-      - else
-        #notice
-          - unless flash.empty?
-            = render :partial => 'layouts/flashes'
-          - else
-            .notice= yield(:notice)
-      #sidebar
-        #user_bar.content
-          - if user_signed_in?
-            .tabs.green
-              %h1= "Hello, #{current_user.name}"
-            = image_tag current_user.gravatar_url, :class => 'gravatar'
-            %ul
-              %li= link_to('Applications', oauth_clients_path)
-              %li= link_to('Profile', edit_user_registration_path, { :title => 'Profile' })
-              %li= link_to('Log out', destroy_user_session_path, { :method => 'delete', :title => 'Log out' })
-          - else
-            .tabs.green
-              %h1 Hello, Guest
-            = image_tag 'no_avatar.png', :class => 'gravatar'
-            %ul
-              %li= link_to 'Log in',  new_user_session_path,  { :title => 'Log in' }
-              %li= link_to 'Sign up', new_user_registration_path, { :title => 'Create an account' }
-        = yield :sidebar
-      #main= yield
-      #footer Powered by <a href="http://github.com/paceline/vocabulario">Vocabulario</a>, created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>
+    #header
+      .navigation= $CONTROLLER == 'wiki_pages' ? link_to("Wiki", '/wiki/home', :class => 'active') : link_to("Wiki", '/wiki/home')
+      .navigation= $CONTROLLER == 'lists' ? link_to("Lists", lists_path, :class => 'active') : link_to("Lists", lists_path)
+      .navigation= $CONTROLLER == 'scores' ? link_to("Test Center", test_path, :class => 'active') : link_to("Test Center", test_path)
+      .navigation= ['lists','scores','wiki_pages'].include?($CONTROLLER) ? link_to("Vocabularies", vocabularies_path) : link_to("Vocabularies", vocabularies_path, :class => 'active')
+      .navigation.no-floater= link_to image_tag('logo.png'), "/"
+    #notice{ :style => "display: #{flash.empty? && yield(:notice).blank? ? "none" : "block" };" }
+      = render :partial => 'layouts/flashes', :object => yield(:notice)
+    #sidebar
+      #user_bar
+        - if user_signed_in?
+          .bg
+            .bl
+              .br
+                .tl
+                  .tr= "Hello, #{current_user.name}"
+          = image_tag current_user.gravatar_url, :class => 'gravatar'
+          %ul
+            %li= link_to('Applications', oauth_clients_path)
+            %li= link_to('Profile', edit_user_registration_path, { :title => 'Profile' })
+            %li= link_to('Log out', destroy_user_session_path, { :method => 'delete', :title => 'Log out' })
+        - else
+          .bg
+            .bl
+              .br
+                .tl
+                  .tr Hello, Guest
+          = image_tag 'no_avatar.png', :class => 'gravatar'
+          %ul
+            %li= link_to 'Log in',  new_user_session_path,  { :title => 'Log in' }
+            %li= link_to 'Sign up', new_user_registration_path, { :title => 'Create an account' }
+      = yield :sidebar
+    #main= yield
+    #footer
+      %ul
+        %li= link_to 'API', '/wiki/api'
+        %li= link_to 'Mobile', '/wiki/vocabulario-for-your-mobile'
+        %li= link_to 'Source Code', 'http://github.com/paceline/vocabulario'
+      %p Created by <a href="http://ulfmoehring.net">Ulf M&ouml;hring</a>
+    

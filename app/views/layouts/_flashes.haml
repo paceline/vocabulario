@@ -1,4 +1,20 @@
-- flash.each do |key, value|
-  %div{:id => "flash_#{key}", :class => key }
-    %h1= interpret_flash_key(key)
-    %p= value.html_safe
+- unless flash.empty?
+  - flash.each do |key, value|
+    %div{:id => "flash_#{key}", :class => "bg#{ "_alert" if key == :alert}" }
+      %div{:class => "bl#{ "_alert" if key == :alert}" }
+        %div{:class => "br#{ "_alert" if key == :alert}" }
+          %div{:class => "tl#{ "_alert" if key == :alert}" }
+            %div{:class => "tr#{ "_alert" if key == :alert}" }
+              <a class="close" href="">X</a>
+              %p
+                %em= interpret_flash_key(key) + " -"
+                = value.html_safe 
+- else
+  .bg
+    .bl
+      .br
+        .tl
+          .tr
+            <a class="close" href="">X</a>
+            = flashes.html_safe
+

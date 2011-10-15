@@ -1,12 +1,18 @@
 - if score.new_record?
-  .tabs.green
-    %h1 Top Scores
+  .bg
+    .bl
+      .br
+        .tl
+          .tr Top Scores
   %p
     Wanna see how the others did?
     = link_to("Check out", scores_path)
     the top scores.
   
 - else
-  .tabs.green
-    %h1 Your score
+  .bg
+    .bl
+      .br
+        .tl
+          .tr Your score
   %p= "#{number_to_percentage(score.ratio, :precision => 0)} (#{score.points} for #{score.questions})"

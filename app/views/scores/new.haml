@@ -1,12 +1,10 @@
+- content_for :title, "Test Center"
+
 - content_for :sidebar do
   #test_score.content= render(@score)
 
-- content_for :notice do
-  %h1 Test Center
-  %p To take a vocabulary or conjugation test fill out the form below!
-
 #test_tabs.tabs
-  #tab_0_link{ :class => (params[:list_id] ? "tab_link" : "tab_link active") }= link_to "Vocabulary test", new_score_path(:menu => 0), :remote => true, :id => 'tab_0'
+  #tab_0_link{ :class => (params[:list_id] ? "tab_link first" : "tab_link active first") }= link_to "Vocabulary test", new_score_path(:menu => 0), :remote => true, :id => 'tab_0'
   #tab_1_link.tab_link= link_to "Conjugation test", new_score_path(:menu => 1), :remote => true, :id => 'tab_1'
   #tab_2_link{ :class => (params[:list_id] ? "tab_link active" : "tab_link") }= link_to "Start from list", new_score_path(:menu => 2), :remote => true, :id => 'tab_2'
 

@@ -1,8 +1,13 @@
+- content_for :title, @vocabulary.name
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
   .content
-    .tabs.green
-      %h1 Export
+    .bg
+      .bl
+        .br
+          .tl
+            .tr Export
     %ul
       %li= link_to('Vocabulary as JSON', vocabulary_path(:format => :json))
       %li= link_to('Vocabulary as XML', vocabulary_path(:format => :xml))
@@ -12,7 +17,7 @@
   = render :partial => 'shared/taglist', :object => @vocabulary
 
 .tabs
-  #tab_0_link.tab_link.active= link_to "Overview", vocabulary_path(@vocabulary.permalink, :menu => 0), :remote => true, :id => 'tab_0'
+  #tab_0_link.tab_link.active.first= link_to "Overview", vocabulary_path(@vocabulary.permalink, :menu => 0), :remote => true, :id => 'tab_0'
   - if @vocabulary.verb? && user_signed_in?
     #tab_1_link.tab_link= link_to "Conjugations", vocabulary_path(@vocabulary.permalink, :menu => 1), :remote => true, :id => 'tab_1'
   - else

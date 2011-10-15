@@ -1,16 +1,14 @@
+- content_for :title, "Tenses"
+
 - content_for :custom_includes do
   = javascript_include_tag '/tenses/tabs.js'
 
 - content_for :sidebar do
   = render :partial => 'shared/manage'
 
-- content_for :notice do
-  %h1 Explore Tenses
-  %p= "There are currently #{ConjugationTime.count} tenses in the database."
-
 .tabs
   - @languages.each do |l|
-    %div{ :id => "tab_#{@languages.index(l)}_link", :class => set_link_class(@languages.index(l),@active) }= link_to l.word, tab_tenses_path(:menu => @languages.index(l)), :remote => true, :id => "tab_#{@languages.index(l)}"
+    %div{ :id => "tab_#{@languages.index(l)}_link", :class => set_link_class(@languages.index(l),@active,@languages.index(l)) }= link_to l.word, tab_tenses_path(:menu => @languages.index(l)), :remote => true, :id => "tab_#{@languages.index(l)}"
 
 #tab_browser.content
   = render :partial => "conjugation_times/list"

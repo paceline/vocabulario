@@ -1,18 +1,19 @@
+- content_for :title, "#{@list.name} by #{@list.user.name}"
+
 - content_for :custom_includes do
   %link{ :href => list_path(@list.permalink, :format => 'atom'), :rel => 'alternate', :type => 'application/atom+xml' }
 
 - content_for :sidebar do
   - if @list.static? && current_user == @list.user
     .content
-      .tabs.green
-        %h1 Search & drag
+      .bg
+        .bl
+          .br
+            .tl
+              .tr Search & drag
       = text_field :vocabulary, :word, :size => 15
       #search_and_drag
   =  render :partial => 'list'
-  
-- content_for :notice do
-  %h1= @list.name
-  %p= "This is #{@list.public?} list has been created by #{link_to(@list.user.name, user_path(@list.user.permalink))}.".html_safe
 
 - if @list.smart? && !@vocabularies.blank?
   %ul#order.inline

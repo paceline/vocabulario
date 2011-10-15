@@ -1,8 +1,4 @@
-- content_for :notice do
-  %h1 Sign up
-  %p
-    Already have an account? Click here to
-    = link_to "log in", "/login"
+- content_for :title, "Sign up"
 
 = semantic_form_for @user do |form|
   = render :partial => "inputs", :locals => { :form => form }

@@ -1,9 +1,7 @@
+- content_for :title, "New tense"
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-
-- content_for :notice do
-  %h1 Add new tense
-  %p Add a new tense (such as present, future)
 
 .content
   = error_messages_for :time

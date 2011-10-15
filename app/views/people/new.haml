@@ -1,9 +1,7 @@
+- content_for :title, "New pronouns"
+
 - content_for :sidebar do
   = render(:partial => 'shared/manage')
-  
-- content_for :notice do
-  %h1 New pronouns
-  %p Add a new set of pronouns
 
 .content
   = error_messages_for :person

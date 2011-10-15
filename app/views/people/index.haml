@@ -1,12 +1,7 @@
+- content_for :title, "Explore Pronouns"
+
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-
-- content_for :notice do
-  %h1 Explore Pronouns
-  %p
-    There are currently
-    = Person.count
-    sets of pronouns in the database.
 
 - @languages.each do |l|
   .content

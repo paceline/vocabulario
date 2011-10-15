@@ -1,6 +1,7 @@
-- content_for :notice do
-  %h1 Change your password
-  %p Your password has been reset. Choose a new password below.
+- content_for :title, "Change your password"
+
+%h1 Change your password
+%p Your password has been reset. Choose a new password below.
   
 = semantic_form_for(:user, :url => user_password_path(@user, :token => @user.confirmation_token), :html => { :method => :put }) do |form|
   = form.error_messages

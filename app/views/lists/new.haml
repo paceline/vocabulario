@@ -1,9 +1,7 @@
+- content_for :title, "New list"
+
 - content_for :sidebar do
   =  render :partial => 'list'
-  
-- content_for :notice do
-  %h1 New list
-  %p Make a list of vocabularies you want to study
   
 = semantic_form_for @list, :url => lists_path do |form|
   = form.error_messages

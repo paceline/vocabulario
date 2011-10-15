@@ -78,17 +78,6 @@ class List < ActiveRecord::Base
     return new_list
   end
   
-  # Return updates for timline
-  def updates_for_timeline
-    Status[
-      :id => id,
-      :text => "created a new vocabulary list \"#{name}\"",
-      :created_at => created_at,
-      :url => "http://#{::Rails.configuration.action_mailer.default_url_options[:host]}/lists/#{permalink}",
-      :user => user.to_hash
-    ]
-  end
-  
   # Make current list available 
   def self.current
     Thread.current[:list]
