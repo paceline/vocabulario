@@ -72,10 +72,9 @@ class List < ActiveRecord::Base
   def vocabularies_to_translations
     new_list = []
     vocabularies.each do |v|
-      translations = v.translations.all(language_to_id)
-      new_list << translations[rand(translations.size-1)]
+      new_list += v.translations.all(language_to_id)
     end
-    return new_list
+    return new_list.uniq
   end
   
   # Make current list available 

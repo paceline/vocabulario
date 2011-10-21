@@ -1,5 +1,11 @@
 = @page == 0 ? javascript_tag("live_search = true;") : javascript_tag("live_search = false;")
-- vocabularies.each do |vocabulary|
+- unless @page > 1
+  #counter
+    %p
+      (Found
+      = number_with_precision((@vocabularies_list ? @vocabularies_list : @vocabularies).size, :precision => 0, :delimiter => ',')
+      vocabularies)
+- @vocabularies.each do |vocabulary|
   %li{ :class => "vocabulary page-#{@page}", :id => "vocabulary-#{@page}" }
     - if @search
       = link_to vocabulary.name.sub(@search,"<b>#{@search}</b>").html_safe, vocabulary_path(vocabulary.permalink)

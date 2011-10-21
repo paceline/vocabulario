@@ -18,7 +18,6 @@ module ApplicationHelper
   def update_notice
     page.replace_html :notice, render(:partial => 'layouts/flashes')
     page.show :notice
-    page.visual_effect :highlight, 'notice'
   end
   
   def set_link_class(action,active=0,first=0)

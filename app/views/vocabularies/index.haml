@@ -11,8 +11,7 @@
   #tab_2_link{ :class => ($ACTION == 'by_tag' ? "tab_link active" : "tab_link") }= link_to "By tag", vocabularies_path(:menu => 2), :remote => true, :id => 'tab_2'
   #tab_3_link{ :class => ($ACTION == 'by_type' ? "tab_link active" : "tab_link") }= link_to "By type", vocabularies_path(:menu => 3), :remote => true, :id => 'tab_3'
 
-#tab_browser.content
-  = render :partial => "vocabularies/#{map_action($ACTION)}"
+#tab_browser= render :partial => "vocabularies/#{map_action($ACTION)}"
 
 .content
   %ul#vocabulary_results.inline

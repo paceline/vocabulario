@@ -249,12 +249,13 @@ class VocabulariesController < ApplicationController
     @search = params[:word]
     if @search.blank?
       @page = 1
-      @vocabularies = Vocabulary.paginate :all, :order => 'word', :page => params[:page], :per_page => Vocabulary.per_page
+      @vocabularies_list = Vocabulary.all
+      @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => Vocabulary.per_page
     else
       @page = 0
-      @vocabularies = Vocabulary.find :all, :conditions => ['word LIKE ?',"%#{@search}%"], :order => 'word'
+      @vocabularies = Vocabulary.where(['word LIKE ?',"%#{@search}%"])
     end
-    @vocabularies.blank? ? render(:nothing => true) : render(:partial => 'vocabularies/vocabularies', :object => @vocabularies, :locals => {:page => @page})
+    @vocabularies.blank? ? render(:nothing => true) : render(:partial => 'vocabularies/vocabularies')
   end
   
   # Display paged list of vocabularies with correspoding language
