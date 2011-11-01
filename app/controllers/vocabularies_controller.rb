@@ -246,14 +246,14 @@ class VocabulariesController < ApplicationController
   
   # Live search of the vocabularies database
   def live
-    @search = params[:word]
-    if @search.blank?
+    if params[:word].blank?
       @page = 1
       @vocabularies_list = Vocabulary.all
       @vocabularies = @vocabularies_list.paginate :page => params[:page], :per_page => Vocabulary.per_page
     else
       @page = 0
-      @vocabularies = Vocabulary.where(['word LIKE ?',"%#{@search}%"])
+      @vocabularies = Vocabulary.search_for(params[:word])
+      @search = params[:word].include?(':') ? params[:word].split(':')[1] : params[:word]
     end
     @vocabularies.blank? ? render(:nothing => true) : render(:partial => 'vocabularies/vocabularies')
   end
@@ -275,10 +275,10 @@ class VocabulariesController < ApplicationController
   def by_tag
     if params[:id] == 'untagged'
       @tag = 'Untagged'
-      @vocabularies_list = Vocabulary.find :all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :group => 'vocabularies.id', :having => 'COUNT(taggings.id) = 0', :order => 'word'
+      @vocabularies_list = Vocabulary.find :all, :joins => 'LEFT JOIN taggings ON taggings.taggable_id = vocabularies.id', :group => 'vocabularies.id', :having => 'COUNT(taggings.id) = 0'
     else
       @tag = Tag.find_by_id_or_permalink(params[:id])
-      @vocabularies_list = Vocabulary.find :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ], :order => 'word'
+      @vocabularies_list = Vocabulary.find :all, :conditions => ['taggings.tag_id = ?', @tag.id], :include => [ :taggings ]
     end
     respond
   end
@@ -289,7 +289,7 @@ class VocabulariesController < ApplicationController
   #   /vocabularies/by_type/#{type}.xml|json (No oauth required)
   def by_type
     conditions = params[:id] == "other" ? "type IS NULL" : "type = '#{params[:id]}'"
-    @vocabularies_list = Vocabulary.find :all, :conditions => conditions, :order => 'word'
+    @vocabularies_list = Vocabulary.find :all, :conditions => conditions
     respond
   end
   
@@ -299,7 +299,7 @@ class VocabulariesController < ApplicationController
   #   /vocabularies/by_user/#{id|permalink}.xml|json (No oauth required)
   def by_user
     @user = User.find_by_id_or_permalink(params[:id])
-    @vocabularies_list = Vocabulary.find_by_user_id @user.id, :order => 'word'
+    @vocabularies_list = Vocabulary.find_by_user_id @user.id
     respond
   end
   

@@ -1,4 +1,4 @@
-= @page == 0 ? javascript_tag("live_search = true;") : javascript_tag("live_search = false;")
+= @page == 0 ? javascript_tag("live_search = true; $('pagination').hide();") : javascript_tag("live_search = false; $('pagination').show();")
 - unless @page > 1
   #counter
     %p

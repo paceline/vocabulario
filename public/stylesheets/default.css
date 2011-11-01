@@ -388,11 +388,15 @@ ul.menuitems { padding: .25em 0 0 0; }
 
 /* "Forms"
    ======= */
+   
+input[type="text"].blank {
+  color: #CCC;
+}
 
 #tab_browser input#vocabulary_word {
   width: 550px;
   background:#fff;
-  font-size: 1.2em;
+  font-size: 1.15em;
   padding: .4em;
   border-top:1px solid #CCCCCC;
   border-left:1px solid #CCCCCC;
@@ -564,7 +568,7 @@ a.edit_link, input[type="submit"].grey { margin-left: 3px; padding: .25em; }
 /* "Forms" -> "Regex tester"
    ============================ */
 
-#regex { background-color: #DED; margin: -8px 0 40px 0; }
+#regex { margin: -8px 0 20px 0; }
    
 #regex_input form { float: left; }
 
@@ -574,7 +578,7 @@ form.test_rule input, #modified_verb {
 }
 
 form.test_rule input { 
-  margin: 17px 25px 25px 25px;
+  margin: 17px 25px 25px 0px;
   padding: .2em;
 }
 

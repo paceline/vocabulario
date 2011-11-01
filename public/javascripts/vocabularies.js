@@ -30,7 +30,8 @@ document.observe("dom:loaded", function() {
 function observeDefault() {
   discoverEditables();
   if ($('vocabulary_word') != undefined && $('vocabulary_results') != undefined) {
-    startObservingFrequently('vocabulary_word','vocabulary_results',0.5,'/vocabularies/live','word');
+    startObservingFrequently('vocabulary_word','vocabulary_results',2,'/vocabularies/live','word');
+    enableResetInputBox();
   }
   enableEndlessPage('vocabulary_results','vocabulary');
 }

@@ -1,9 +1,6 @@
 - content_for :sidebar do
   = render :partial => 'shared/manage'
-  - if user_signed_in?
-    #list_stuff= render :partial => 'lists/list'
-  - else
-    = render :partial => 'shared/stat_widget'
+  = render :partial => 'shared/stat_widget'
 
 .tabs
   #tab_0_link{ :class => ($ACTION == 'index' ? "first active" : "first") }= link_to "Live search", vocabularies_path(:menu => 0), :remote => true, :id => 'tab_0'

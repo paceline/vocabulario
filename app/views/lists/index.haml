@@ -1,8 +1,7 @@
 - content_for :title, "Lists"
 
 - content_for :sidebar do
-  = render :partial => 'lists/manage'
-  = render :partial => 'shared/stat_widget'
+  = render :partial => 'lists/list'
 
 .content
   - @languages.each do |language|

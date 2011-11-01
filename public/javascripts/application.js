@@ -191,18 +191,20 @@ function startObserving(dom_id, path, highlight, attr_name, optional) {
 
 function startObservingFrequently(dom_id, target_id, timer, path, attr_name, snippet) {
   new Form.Element.Observer(dom_id, timer, function(element, value) {
-    params = (attr_name === undefined) ? dom_id + '=' + encodeURIComponent(value) : attr_name + '=' + encodeURIComponent(value);
-    params = (snippet === undefined) ? params : params + '&' + eval(snippet);
-    if ($(target_id) != undefined) { $(target_id).hide(); };
-    if ($('loading') != undefined) { $('loading').show(); };
-    new Ajax.Updater(target_id, path, {
-      asynchronous:true, evalScripts:true,
-      onLoaded:function(request) {
-        if ($('loading') != undefined) { $('loading').hide(); };
-        if ($(target_id) != undefined) { $(target_id).show(); };
-      },
-      parameters: params
-    });
+    if (value.length > 1) {
+      params = (attr_name === undefined) ? dom_id + '=' + encodeURIComponent(value) : attr_name + '=' + encodeURIComponent(value);
+      params = (snippet === undefined) ? params : params + '&' + eval(snippet);
+      if ($(target_id) != undefined) { $(target_id).hide(); };
+      if ($('loading') != undefined) { $('loading').show(); };
+      new Ajax.Updater(target_id, path, {
+        asynchronous:true, evalScripts:true,
+        onLoaded:function(request) {
+          if ($('loading') != undefined) { $('loading').hide(); };
+          if ($(target_id) != undefined) { $(target_id).show(); };
+        },
+        parameters: params
+      });
+    };
   });
 }
 
@@ -315,6 +317,20 @@ function enablePrinting() {
     $(item).observe('click', function(event) { 
       window.print();
       Event.stop(event);
+    });
+  });
+}
+
+
+// Enable reset input box
+
+function enableResetInputBox() {
+  $$('input[type="text"]').each(function(item) {
+    $(item).observe('click', function(event) {
+      if ($(item).classNames().toArray()[0] == 'blank') {
+        $(item).value = '';
+        $(item).removeClassName('blank');
+      }
     });
   });
 }

@@ -13,4 +13,12 @@ module VocabulariesHelper
     return max_length
   end
   
+  def random_hint
+    case rand(4)
+      when 0 then "german:bauer"
+      when 1 then "translate:bauer"
+      when 2 then "noun:bauer"
+      when 3 then "Lezione 5:bauer"
+    end
+  end
 end

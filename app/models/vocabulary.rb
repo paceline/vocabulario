@@ -66,6 +66,26 @@ class Vocabulary < ActiveRecord::Base
     return vocabulary
   end
   
+  # Searches for vocabulary
+  def self.search_for(term)
+    input = term.split(':')
+    if input.size > 1
+      case 
+        when input[0].strip.match(/^translate/) 
+          return where(['word LIKE ?',"%#{input[1].strip}%"]).collect { |w| w.translations.all }.flatten.uniq
+        when input[0].strip.capitalize.match(Regexp.new("^(#{Language.list.collect { |l| l.name }.join('|')})"))
+          return where(['word LIKE ? AND language_id = ?', "%#{input[1].strip}%", Language.where(["permalink = ?", input[0].strip.downcase]).first.id])
+        when input[0].strip.capitalize.match(Regexp.new("^(#{TYPES[0..TYPES.size-2].join('|')})"))
+          return where(['word LIKE ? AND type = ?', "%#{input[1].strip}%", input[0].strip.capitalize])
+        else
+          tag = Tag.find_by_name(input[0].strip)
+          return includes(:taggings).where(['word LIKE ? AND taggings.tag_id = ?', "%#{input[1].strip}%", tag.id]) if tag
+      end
+    else
+      return where(['word LIKE ?',"%#{term}%"])
+    end
+  end
+  
   # Adds vocabulary to list
   def add_to_list(list_id, position = 1)
     lister = self.vocabulary_lists.build({ :list_id => list_id })
