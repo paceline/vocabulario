@@ -334,3 +334,10 @@ function enableResetInputBox() {
     });
   });
 }
+
+
+// Manage input focus
+
+function focusOnFirstInput() {
+  $$('form:first')[0].findFirstElement().focus();
+}

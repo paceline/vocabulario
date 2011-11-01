@@ -58,9 +58,9 @@ function observeSetDefaults() {
 }
 
 
-// Re-interpret tab press
+// Manage input focus
 
-function redirectTabPress() {
+function manageTabKey() {
   Event.observe(document, "keydown", function(event) {
     if (event.keyCode == Event.KEY_TAB) {
       var current_no = parseInt(document.activeElement.id.split('_')[1]);

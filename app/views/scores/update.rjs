@@ -8,4 +8,4 @@ page.replace_html 'test_pane', render(@test)
 page.replace_html 'test_score', render(@score)
 page.update_notice
 page.visual_effect :highlight, 'test_score'
-page << "closeNotice(); redirectTabPress();"
+page << "closeNotice(); focusOnFirstInput();"

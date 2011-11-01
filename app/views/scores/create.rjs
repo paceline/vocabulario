@@ -4,4 +4,4 @@ page.replace_html 'test_pane', render(@test)
 page.visual_effect :highlight, 'test_pane'
 page.replace_html 'test_score', render(@score)
 page.visual_effect :highlight, 'test_score'
-page << "redirectTabPress();"
+page << "focusOnFirstInput(); manageTabKey();"
