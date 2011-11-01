@@ -8,7 +8,7 @@
   #tab_1_link.tab_link= link_to "Conjugation test", new_score_path(:menu => 1), :remote => true, :id => 'tab_1'
   #tab_2_link{ :class => (params[:list_id] ? "tab_link active" : "tab_link") }= link_to "Start from list", new_score_path(:menu => 2), :remote => true, :id => 'tab_2'
 
-#error_pane.tab_content_pane{:style => 'display:none'}
+#error_pane{:style => 'display:none'}
 
 #test_pane.tab_content_pane
   = params[:list_id] ? render(:partial => 'new_test_tab_2') : render(:partial => 'new_test_tab_0')

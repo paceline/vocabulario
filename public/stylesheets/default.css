@@ -159,7 +159,7 @@ a.active, .active a { color: #02B8EA }
 /* "Main" -> "Test section"
    ======================== */
 
-#error_pane { background-color: #C66; padding-bottom: 20px; margin-bottom: 40px; }
+#error_pane { margin-bottom: 50px; }
 
 #error_pane em { color: #C66; background: none; font-weight: bold; padding: 0; }
 

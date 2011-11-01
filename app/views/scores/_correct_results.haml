@@ -1,16 +1,16 @@
 %table
   %tr
-    %th I
+    %th= @score.personal_pronouns[0]
     %td= wrap_wrong_answers(@correct_results[0], @results[0]).html_safe
-    %th We
+    %th= @score.personal_pronouns[3]
     %td= wrap_wrong_answers(@correct_results[3], @results[3]).html_safe
   %tr
-    %th You
+    %th= @score.personal_pronouns[1]
     %td= wrap_wrong_answers(@correct_results[1], @results[1]).html_safe
-    %th You
+    %th= @score.personal_pronouns[4]
     %td= wrap_wrong_answers(@correct_results[4], @results[4]).html_safe
   %tr
-    %th He/She/It</th>
+    %th= @score.personal_pronouns[2]
     %td= wrap_wrong_answers(@correct_results[2], @results[2]).html_safe
-    %th They
+    %th= @score.personal_pronouns[5]
     %td= wrap_wrong_answers(@correct_results[5], @results[5]).html_safe
