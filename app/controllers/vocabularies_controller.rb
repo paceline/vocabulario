@@ -255,7 +255,7 @@ class VocabulariesController < ApplicationController
       @vocabularies = Vocabulary.search_for(params[:word])
       @search = params[:word].include?(':') ? params[:word].split(':')[1] : params[:word]
     end
-    @vocabularies.blank? ? render(:nothing => true) : render(:partial => 'vocabularies/vocabularies')
+    @vocabularies.blank? ? render(:partial => 'vocabularies/empty') : render(:partial => 'vocabularies/vocabularies')
   end
   
   # Display paged list of vocabularies with correspoding language
