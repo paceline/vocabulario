@@ -34,5 +34,4 @@ module ApplicationHelper
     end
     select(object, method, collection, selected)
   end
-  
 end

@@ -17,7 +17,6 @@
             - if @vocabulary && !@vocabulary.new_record?
               %li= link_to 'New translation', edit_vocabulary_path(@vocabulary.permalink)
             %li= link_to 'New language', new_vocabulary_path(:type => 'Language')
-            %li= link_to 'New set of pronouns', new_pronoun_path
             %li= link_to 'New tense', new_tense_path
             %li= link_to 'Import vocabularies', import_vocabularies_path
         
@@ -38,8 +37,6 @@
         - else
           %p Delete
     %p
-      = link_to('Pronouns', pronouns_path)
-      |
       = link_to('Tenses', tenses_path)
       |
       = link_to('Vocabularies', vocabularies_path)

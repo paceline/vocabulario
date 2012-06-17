@@ -1,0 +1,9 @@
+it:
+  scores:
+    create:
+      first_person_singular: io
+      second_person_singular: tu
+      third_person_singular: lui/lei/Lei
+      first_person_plural: noi
+      second_person_plural: voi
+      third_person_plural: loro

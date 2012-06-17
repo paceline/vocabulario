@@ -6,7 +6,6 @@ class Language < Vocabulary
   
   # Associations - Times for conjugations
   has_many :conjugation_times, :order => 'name', :dependent => :delete_all
-  has_many :people
   
   # Associations - Determine vocabularies for every lanugage
   has_many :nouns, :foreign_key => 'language_id', :class_name => 'Noun', :dependent => :delete_all, :order => 'word'
@@ -18,14 +17,7 @@ class Language < Vocabulary
   
   # Features
   has_permalink :name, :update => true
-  
-  # Determine pronouns
-  Person::SUPPORTED_PRONOUNS.each do |type|
-    define_method "#{type}_pronouns" do
-      people.find :first, :conditions => { :pronoun => type }
-    end
-  end
-  
+    
   # Return languages currently supported
   def self.list(conditions = "")
     return conditions.empty? ? all : where(conditions)

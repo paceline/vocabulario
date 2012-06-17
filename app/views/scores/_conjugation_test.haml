@@ -5,19 +5,19 @@
     %p
       %table
         %tr
-          %th= @score.personal_pronouns[0]
+          %th= t 'scores.create.first_person_singular', :locale => @score.language_from.locale
           %td= text_field_tag 'answers[0]', '', :size => 15
-          %th= @score.personal_pronouns[3]
+          %th= t 'scores.create.first_person_plural', :locale => @score.language_from.locale
           %td= text_field_tag 'answers[3]', '', :size => 15
         %tr
-          %th= @score.personal_pronouns[1]
+          %th= t 'scores.create.second_person_singular', :locale => @score.language_from.locale
           %td= text_field_tag 'answers[1]', '', :size => 15
-          %th= @score.personal_pronouns[4]
+          %th= t 'scores.create.second_person_plural', :locale => @score.language_from.locale
           %td= text_field_tag 'answers[4]', '', :size => 15
         %tr
-          %th= @score.personal_pronouns[2]
+          %th= t 'scores.create.third_person_singular', :locale => @score.language_from.locale
           %td= text_field_tag 'answers[2]', '', :size => 15
-          %th= @score.personal_pronouns[5]
+          %th= t 'scores.create.third_person_plural', :locale => @score.language_from.locale
           %td= text_field_tag 'answers[5]', '', :size => 15
     %p= submit_tag('Go')
 

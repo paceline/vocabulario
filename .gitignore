@@ -7,7 +7,7 @@ Capfile
 config/database.yml
 config/deploy.rb
 config/deploy/*
-config/initializers/site_keys.rb
+config/initializers/secret_token.rb
 log/*.log
 db/*.db
 tmp/*/*

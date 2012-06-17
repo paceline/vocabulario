@@ -1,0 +1,9 @@
+de:
+  scores:
+    create:
+      first_person_singular: ich
+      second_person_singular: du
+      third_person_singular: er/sie/es
+      first_person_plural: wir
+      second_person_plural: ihr
+      third_person_plural: sie

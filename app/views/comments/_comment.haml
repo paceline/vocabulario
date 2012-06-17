@@ -5,6 +5,6 @@
     - if comment.user
       = link_to comment.user.name, comment.user.profile_url
     - else
-      = link_to 'Guest', sign_up_url
+      = link_to 'Guest', new_user_registration_path, { :title => 'Create an account' }
     says:
-  = comment.text.html_safe
+  = RedCloth.new(comment.text).to_html.html_safe

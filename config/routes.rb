@@ -88,8 +88,6 @@ Vocabulario::Application.routes.draw do
     resources :scores
   end
   
-  resources :pronouns, :controller => 'people', :as => 'pronouns'
-  
   resources :scores do
     collection do
       get 'change_test_type'

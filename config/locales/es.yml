@@ -1,0 +1,9 @@
+es:
+  scores:
+    create:
+      first_person_singular: yo
+      second_person_singular: tu
+      third_person_singular: él/ella/Usted
+      first_person_plural: nostros/-as
+      second_person_plural: vostros/-as
+      third_person_plural: ellos/ellas/Ustedes

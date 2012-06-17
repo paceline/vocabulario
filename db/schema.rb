@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -107,19 +108,6 @@ ActiveRecord::Schema.define(:version => 20110731160135) do
   add_index "patterns_verbs", ["pattern_id"], :name => "index_patterns_verbs_on_pattern_id"
   add_index "patterns_verbs", ["verb_id"], :name => "index_patterns_verbs_on_verb_id"
 
-  create_table "people", :force => true do |t|
-    t.integer  "language_id"
-    t.string   "first_person_singular",  :limit => 50
-    t.string   "second_person_singular", :limit => 50
-    t.string   "third_person_singular",  :limit => 50
-    t.string   "first_person_plural",    :limit => 50
-    t.string   "second_person_plural",   :limit => 50
-    t.string   "third_person_plural",    :limit => 50
-    t.string   "pronoun",                :limit => 50
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "rules", :force => true do |t|
     t.string "name"
     t.string "find"
@@ -150,18 +138,6 @@ ActiveRecord::Schema.define(:version => 20110731160135) do
   create_table "tags", :force => true do |t|
     t.string "name"
     t.string "permalink"
-  end
-
-  create_table "transformations", :force => true do |t|
-    t.string   "type",                :limit => 50
-    t.integer  "vocabulary_id"
-    t.integer  "position"
-    t.integer  "pattern_start"
-    t.integer  "pattern_end"
-    t.integer  "insert_before"
-    t.boolean  "include_white_space",               :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "translations", :id => false, :force => true do |t|
@@ -198,12 +174,13 @@ ActiveRecord::Schema.define(:version => 20110731160135) do
   create_table "vocabularies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "language_id"
+    t.string   "type"
     t.string   "word"
     t.string   "gender",      :limit => 10, :default => "N/A"
     t.string   "permalink"
+    t.string   "locale",      :limit => 5
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "type",        :limit => 25
   end
 
   add_index "vocabularies", ["permalink"], :name => "index_vocabularies_on_permalink"

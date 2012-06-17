@@ -17,3 +17,8 @@
     = in_place_input @vocabulary, :gender
   - else
     N/A
+
+- if @vocabulary.class == Language
+  .content
+    %h2 Locale
+    = in_place_input @vocabulary, :locale
