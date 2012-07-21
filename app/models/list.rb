@@ -3,7 +3,7 @@ class List < ActiveRecord::Base
   # Features
   acts_as_taggable
   attr_reader :max_translations
-  has_permalink :name, :update => true
+  permalink :name
   TIMEUNITS = ['days','weeks','months']
   
   # Associations

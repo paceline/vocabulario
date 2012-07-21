@@ -1,7 +1,7 @@
 class StaticVerbList < List
   
   # Features
-  has_permalink :name, :update => true
+  permalink :name
   
   # Get the ids of vocabularies on list
   def ids

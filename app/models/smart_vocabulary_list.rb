@@ -1,7 +1,7 @@
 class SmartVocabularyList < List
   
   # Features
-  has_permalink :name, :update => true
+  permalink :name
   
   # Returns vocabularies associated with list
   def vocabularies(custom_attribute = "", custom_order = "")

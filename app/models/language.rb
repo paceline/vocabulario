@@ -16,7 +16,7 @@ class Language < Vocabulary
   has_many :lists, :foreign_key => 'language_from_id'
   
   # Features
-  has_permalink :name, :update => true
+  permalink :word
     
   # Return languages currently supported
   def self.list(conditions = "")

@@ -5,16 +5,6 @@ GIT
     acts_as_taggable_on_steroids (1.2)
       activerecord (>= 3.0)
 
-GIT
-  remote: git://github.com/paceline/permalink_fu.git
-  revision: 17caa7e4aca06e231d436e29d216b2c9df9e736c
-  specs:
-    permalink_fu (1.1.0)
-      activerecord (>= 2.3.5)
-      activerecord (>= 2.3.5)
-      activesupport (>= 2.3.5)
-      activesupport (>= 2.3.5)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -100,6 +90,7 @@ GEM
       faraday (~> 0.7)
       multi_json (~> 1.0)
     orm_adapter (0.0.7)
+    permalink (1.2.1)
     polyglot (0.3.3)
     rack (1.2.5)
     rack-mount (0.6.14)
@@ -153,7 +144,7 @@ DEPENDENCIES
   mysql2 (~> 0.2.7)
   oauth (>= 0.4.4)
   oauth-plugin (>= 0.4.0.pre5)
-  permalink_fu!
+  permalink
   rails (~> 3.0.1)
   sanitize
   test-unit

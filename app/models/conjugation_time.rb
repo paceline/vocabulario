@@ -10,7 +10,7 @@ class ConjugationTime < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => {:scope => 'language_id', :message => 'already exists in database'}
   
   # Features
-  has_permalink :name, :update => true
+  permalink :name
   
   # Get verbs with certain tags only
   def verbs_tagged_with(all_or_any, tags)

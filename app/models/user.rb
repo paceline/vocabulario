@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   include Gravtastic
   gravtastic :size => 75
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :default_to, :default_from, :permalink, :admin, :id
-  has_permalink :name
+  permalink :name
   
   # Associations
   has_many :comments

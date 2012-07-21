@@ -17,13 +17,13 @@ gem 'formtastic', '~> 1.2.0'
 gem 'gravtastic'
 gem 'haml'
 gem 'irwi', '= 0.4.1'
+gem 'permalink'
 gem 'RedCloth'
 gem 'sanitize'
 gem 'will_paginate', '>= 3.0.0'
 
 # Own gems
 gem 'javascript_auto_include', '>= 0.1.0'
-gem 'permalink_fu', :git => 'git://github.com/paceline/permalink_fu.git'
 gem 'acts_as_taggable_on_steroids',  :git => 'git://github.com/paceline/acts_as_taggable_on_steroids.git'
 
 # Testing

@@ -1,10 +1,10 @@
 class Noun < Vocabulary
   
   # Features
-  has_permalink :name, :update => true
+  permalink :word
   
   # Supported articles
-  ARTICLES = ["la ","le ","el ","il ","l'","lo ","i ","der ","die ","das ","the ","les ","los ","las "]
+  ARTICLES = ["la ","le ","el ","il ","l'","lo ","i ","der ","die ","das ","the ","les ","los ","las ","a ","o "]
   
   # Automatically interpret word
   def word=(value)

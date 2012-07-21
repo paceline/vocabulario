@@ -2,7 +2,7 @@ class Vocabulary < ActiveRecord::Base
   
   # Features
   acts_as_taggable
-  has_permalink :name, :update => true
+  permalink :word
   attr_accessor :copy_tags
   cattr_reader :per_page
   @@per_page = 250
